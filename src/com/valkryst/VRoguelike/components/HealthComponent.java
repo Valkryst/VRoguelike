@@ -5,7 +5,7 @@ import lombok.Getter;
 
 public class HealthComponent extends Component {
     /** The current health. */
-    @Getter public int currentHealth;
+    @Getter public int curHealth;
     /** The maximum health. */
     @Getter public int maxHealth;
 
@@ -15,15 +15,19 @@ public class HealthComponent extends Component {
      * @param maxHealth
      *        The maximum health.
      */
-    public HealthComponent(final int maxHealth) {
-        this.currentHealth = maxHealth;
+    public HealthComponent(int maxHealth) {
+        if (maxHealth < 1) {
+            maxHealth = 1;
+        }
+
+        this.curHealth = maxHealth;
         this.maxHealth = maxHealth;
     }
 
     @Override
     public String toString() {
         String res = getClass().getSimpleName() + ":";
-        res += "\n\tCurrent Health:\t" + currentHealth;
+        res += "\n\tCurrent Health:\t" + curHealth;
         res += "\n\tMaximum Health:\t" + maxHealth;
         return res;
     }
@@ -39,7 +43,7 @@ public class HealthComponent extends Component {
         }
 
         final HealthComponent otherComp = (HealthComponent) otherObj;
-        boolean isEqual = currentHealth == otherComp.getCurrentHealth();
+        boolean isEqual = curHealth == otherComp.getCurHealth();
         isEqual &= maxHealth == otherComp.getMaxHealth();
 
         return isEqual;
@@ -47,7 +51,7 @@ public class HealthComponent extends Component {
 
     @Override
     public String toJson() {
-        return "{\"currentHealth\":" + currentHealth + ",\"maxHealth\":" + maxHealth + "}";
+        return "{\"curHealth\":" + curHealth + ",\"maxHealth\":" + maxHealth + "}";
     }
 
     /**
@@ -58,16 +62,16 @@ public class HealthComponent extends Component {
      *
      * If the value is below 0, then the current health is set to 0.
      *
-     * @param currentHealth
+     * @param curHealth
      *        The new current health.
      */
-    public void setCurrentHealth(final int currentHealth) {
-        if (currentHealth > maxHealth) {
-            this.currentHealth = maxHealth;
-        } else if (currentHealth < 0) {
-            this.currentHealth = 0;
+    public void setCurrentHealth(final int curHealth) {
+        if (curHealth > maxHealth) {
+            this.curHealth = maxHealth;
+        } else if (curHealth < 0) {
+            this.curHealth = 0;
         } else {
-            this.currentHealth = currentHealth;
+            this.curHealth = curHealth;
         }
     }
 }
