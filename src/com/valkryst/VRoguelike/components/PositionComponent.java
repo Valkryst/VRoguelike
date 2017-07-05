@@ -10,6 +10,11 @@ public class PositionComponent extends Component {
     /** The y-axis coordinate. */
     @Getter @Setter private int y;
 
+    public PositionComponent(final int x, final int y) {
+        this.x = x;
+        this.y = y;
+    }
+
     @Override
     public String toString() {
         String res = getClass().getSimpleName() + ":";
@@ -20,7 +25,7 @@ public class PositionComponent extends Component {
 
     @Override
     public boolean equals(final Object otherObj) {
-        if (otherObj instanceof HealthComponent == false) {
+        if (otherObj instanceof PositionComponent == false) {
             return false;
         }
 
