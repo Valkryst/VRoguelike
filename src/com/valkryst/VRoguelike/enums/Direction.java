@@ -3,10 +3,11 @@ package com.valkryst.VRoguelike.enums;
 import lombok.Getter;
 
 public enum Direction {
-    NORTH(0),
-    SOUTH(1),
-    EAST(2),
-    WEST(3);
+    NONE(0),
+    NORTH(1),
+    SOUTH(2),
+    EAST(3),
+    WEST(4);
 
     /** The numeric representation of a Direction. */
     @Getter private final int value;
