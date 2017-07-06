@@ -32,13 +32,25 @@ public class StatComponent extends Component {
      * @param minValue
      *        The minimum value.
      */
-    public StatComponent(final String name, final int maxValue, final int currValue, final int minValue) {
+    public StatComponent(final String name, int maxValue, int currValue, int minValue) {
         if (name == null) {
             throw new IllegalArgumentException("A stat cannot have a null name.");
         }
 
         if (name.isEmpty()) {
             throw new IllegalArgumentException("A stat cannot have an empty name.");
+        }
+
+        if (maxValue < minValue) {
+            maxValue = minValue;
+        }
+
+        if (currValue > maxValue) {
+            currValue = maxValue;
+        }
+
+        if (currValue < minValue) {
+            currValue = minValue;
         }
 
         this.name = name;
