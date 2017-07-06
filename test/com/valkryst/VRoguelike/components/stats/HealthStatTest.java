@@ -1,4 +1,4 @@
-package com.valkryst.VRoguelike.components;
+package com.valkryst.VRoguelike.components.stats;
 
 import com.valkryst.VRoguelike.components.stats.HealthStat;
 import org.junit.Assert;
