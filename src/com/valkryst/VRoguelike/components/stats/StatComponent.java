@@ -2,20 +2,19 @@ package com.valkryst.VRoguelike.components.stats;
 
 import com.valkryst.VECS.Component;
 import lombok.Getter;
-import lombok.Setter;
 
 public class StatComponent extends Component {
     /** The name of the stat. */
     @Getter private final String name;
 
     /** The maximum value. */
-    @Getter @Setter private int maxValue;
+    @Getter private int maxValue;
 
     /** The current value. */
-    @Getter @Setter private int currValue;
+    @Getter private int currValue;
 
     /** The minimum value. */
-    @Getter @Setter private int minValue;
+    @Getter private int minValue;
 
     /**
      * Constructs a new StatComponent.
@@ -63,9 +62,9 @@ public class StatComponent extends Component {
     public String toString() {
         String res = getClass().getSimpleName() + ":";
         res += "\n\tName:\t" + name;
-        res += "\n\tMaximum Value:\t" + currValue;
-        res += "\n\tCurrent Value:\t" + currValue;
-        res += "\n\tMinimum Value:\t" + currValue;
+        res += "\n\tMaximum " + name + ":\t" + currValue;
+        res += "\n\tCurrent \" + name + \":\t" + currValue;
+        res += "\n\tMinimum \" + name + \":\t" + currValue;
         return res;
     }
 
