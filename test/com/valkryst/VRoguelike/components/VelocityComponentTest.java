@@ -58,8 +58,14 @@ public class VelocityComponentTest {
     }
 
     @Test
-    public void testEquals_withNonEqualObjects() {
+    public void testEquals_withNonEqualSpeed() {
         final VelocityComponent componentB = new VelocityComponent(456, Direction.SOUTH);
+        Assert.assertNotEquals(component, componentB);
+    }
+
+    @Test
+    public void testEquals_withNonEqualDirection() {
+        final VelocityComponent componentB = new VelocityComponent(123, Direction.NORTH);
         Assert.assertNotEquals(component, componentB);
     }
 
