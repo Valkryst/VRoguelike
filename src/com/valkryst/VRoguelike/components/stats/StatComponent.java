@@ -4,12 +4,18 @@ import com.valkryst.VECS.Component;
 import lombok.Getter;
 import lombok.Setter;
 
-public class StatComponent<T extends Number> extends Component {
+public class StatComponent extends Component {
     /** The name of the stat. */
     @Getter private final String name;
 
+    /** The maximum value. */
+    @Getter @Setter private int maxValue;
+
     /** The current value. */
-    @Getter @Setter private T currValue;
+    @Getter @Setter private int currValue;
+
+    /** The minimum value. */
+    @Getter @Setter private int minValue;
 
     /**
      * Constructs a new StatComponent.
@@ -17,10 +23,16 @@ public class StatComponent<T extends Number> extends Component {
      * @param name
      *        The name of the stat.
      *
+     * @param maxValue
+     *        The maximum value.
+     *
      * @param currValue
      *        The current value.
+     *
+     * @param minValue
+     *        The minimum value.
      */
-    public StatComponent(final String name, final T currValue) {
+    public StatComponent(final String name, final int maxValue, final int currValue, final int minValue) {
         if (name == null) {
             throw new IllegalArgumentException("A stat cannot have a null name.");
         }
@@ -29,19 +41,19 @@ public class StatComponent<T extends Number> extends Component {
             throw new IllegalArgumentException("A stat cannot have an empty name.");
         }
 
-        if (currValue == null) {
-            throw new IllegalArgumentException("A stat cannot have null as a current value.");
-        }
-
         this.name = name;
+        this.maxValue = maxValue;
         this.currValue = currValue;
+        this.minValue = minValue;
     }
 
     @Override
     public String toString() {
         String res = getClass().getSimpleName() + ":";
         res += "\n\tName:\t" + name;
+        res += "\n\tMaximum Value:\t" + currValue;
         res += "\n\tCurrent Value:\t" + currValue;
+        res += "\n\tMinimum Value:\t" + currValue;
         return res;
     }
 
@@ -58,12 +70,14 @@ public class StatComponent<T extends Number> extends Component {
         final StatComponent otherComp = (StatComponent) otherObj;
 
         boolean isEqual = name.equals(otherComp.getName());
-        isEqual &= currValue.equals(otherComp.getCurrValue());
+        isEqual &= maxValue == otherComp.getMaxValue();
+        isEqual &= currValue == otherComp.getCurrValue();
+        isEqual &= minValue == otherComp.getMinValue();
         return isEqual;
     }
 
     @Override
     public String toJson() {
-        return "{\"name\":" + name + ",\"currValue\":" + currValue + "}";
+        return "{\"name\":" + name + ",\"maxValue\":" + maxValue + ",\"currValue\":" + currValue + ",\"minValue\":" + minValue +"}";
     }
 }
