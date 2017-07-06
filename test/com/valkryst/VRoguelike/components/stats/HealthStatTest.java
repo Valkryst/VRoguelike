@@ -5,6 +5,6 @@ import org.junit.Test;
 public class HealthStatTest {
     @Test
     public void testConstructor() {
-        new HealthStat(123);
+        new HealthStat(5);
     }
 }
