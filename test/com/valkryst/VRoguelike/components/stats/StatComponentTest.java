@@ -7,36 +7,31 @@ import org.junit.Test;
 import java.awt.*;
 
 public class StatComponentTest {
-    private StatComponent<Integer> component;
+    private StatComponent component;
 
     @Before
     public void initializeComponent() {
-        component = new StatComponent<>("Test", 123);
+        component = new StatComponent("Test", 3, 2, 1);
     }
 
     @Test
     public void testConstructor_withValidParams() {
-        new StatComponent<>("Test", 123);
+        new StatComponent("Test", 3, 2, 1);
     }
 
     @Test(expected=IllegalArgumentException.class)
     public void testConstructor_withNullName() {
-        new StatComponent<>(null, 123);
+        new StatComponent(null, 3, 2, 1);
     }
 
     @Test(expected=IllegalArgumentException.class)
     public void testConstructor_withEmptyName() {
-        new StatComponent<>("", 123);
-    }
-
-    @Test(expected=IllegalArgumentException.class)
-    public void testConstructor_withNullCurrentValue() {
-        new StatComponent<>("Test", null);
+        new StatComponent("", 3, 2, 1);
     }
 
     @Test
     public void testToString() {
-        final String expected = "StatComponent:\n\tName:\tTest\n\tCurrent Value:\t123";
+        final String expected = "StatComponent:\n\tName:\tTest\n\tMaximum Value:\t3\n\tCurrent Value:\t2\n\tMinimum Value:\t1";
         Assert.assertEquals(expected, component.toString());
     }
 
@@ -52,25 +47,25 @@ public class StatComponentTest {
 
     @Test
     public void testEquals_withEqualObject() {
-        final StatComponent<Integer> componentB = new StatComponent<>("Test", 123);
+        final StatComponent componentB = new StatComponent("Test", 3, 2, 1);
         Assert.assertEquals(component, componentB);
     }
 
     @Test
     public void testEquals_withNonEqualName() {
-        final StatComponent<Integer> componentB = new StatComponent<>("Test2", 123);
+        final StatComponent componentB = new StatComponent("Test2", 3, 2, 1);
         Assert.assertNotEquals(component, componentB);
     }
 
     @Test
     public void testEquals_withNonEqualCurrentValue() {
-        final StatComponent<Integer> componentB = new StatComponent<>("Test", 456);
+        final StatComponent componentB = new StatComponent("Test", 3, 2, 1);
         Assert.assertNotEquals(component, componentB);
     }
 
     @Test
     public void testToJson() {
-        final String expected = "{\"name\":Test,\"currValue\":123}";
+        final String expected = "{\"name\":Test,\"maxValue\":3,\"currValue\":2,\"minValue\":1}";
         Assert.assertEquals(expected, component.toJson());
     }
 }
