@@ -76,8 +76,20 @@ public class StatComponentTest {
     }
 
     @Test
+    public void testEquals_withNonEqualMaxValue() {
+        final StatComponent componentB = new StatComponent("Test", 4, 2, 1);
+        Assert.assertNotEquals(component, componentB);
+    }
+
+    @Test
     public void testEquals_withNonEqualCurrentValue() {
-        final StatComponent componentB = new StatComponent("Test", 3, 2, 1);
+        final StatComponent componentB = new StatComponent("Test", 3, 1, 1);
+        Assert.assertNotEquals(component, componentB);
+    }
+
+    @Test
+    public void testEquals_withNonEqualMinValue() {
+        final StatComponent componentB = new StatComponent("Test", 3, 2, 2);
         Assert.assertNotEquals(component, componentB);
     }
 
