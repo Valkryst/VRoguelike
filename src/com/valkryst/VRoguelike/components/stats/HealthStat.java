@@ -2,7 +2,7 @@ package com.valkryst.VRoguelike.components.stats;
 
 public class HealthStat extends StatComponent {
     /**
-     * Constructs a new HealthComponent.
+     * Constructs a new HealthStat.
      *
      * @param currValue
      *        The current and maximum health value.
