@@ -57,8 +57,14 @@ public class StatComponentTest {
     }
 
     @Test
-    public void testEquals_withUnequalObject() {
+    public void testEquals_withNonEqualName() {
         final StatComponent<Integer> componentB = new StatComponent<>("Test2", 123);
+        Assert.assertNotEquals(component, componentB);
+    }
+
+    @Test
+    public void testEquals_withNonEqualCurrentValue() {
+        final StatComponent<Integer> componentB = new StatComponent<>("Test", 456);
         Assert.assertNotEquals(component, componentB);
     }
 
