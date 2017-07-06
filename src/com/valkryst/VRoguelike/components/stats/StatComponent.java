@@ -93,14 +93,24 @@ public class StatComponent extends Component {
     }
 
     /**
-     * Sets the new current health.
+     * Sets the new current value.
      *
-     * If the value exceeds the maxHealth, then the current health is set
-     * to the maxHealth.
+     * If the value exceeds the maximum, then the current value is set
+     * to the maximum.
      *
-     * If the value is below 0, then the current health is set to 0.
+     * If the value is below the minimum, then the current value is set
+     * to the minimum.
      *
-     * @param curHealth
-     *        The new current health.
+     * @param currValue
+     *        The new current value.
      */
+    public void setCurrValue(final int currValue) {
+        if (currValue > maxValue) {
+            this.currValue = maxValue;
+        } else if (currValue < minValue) {
+            this.currValue = minValue;
+        } else {
+            this.currValue = currValue;
+        }
+    }
 }
