@@ -98,4 +98,22 @@ public class StatComponentTest {
         final String expected = "{\"name\":Test,\"maxValue\":3,\"currValue\":2,\"minValue\":1}";
         Assert.assertEquals(expected, component.toJson());
     }
+
+    @Test
+    public void testSetCurrValue_withValueGreaterThanMaximum() {
+        component.setCurrValue(component.getMaxValue() + 1);
+        Assert.assertEquals(component.getMaxValue(), component.getCurrValue());
+    }
+
+    @Test
+    public void testSetCurrValue_withValueLessThanMinimum() {
+        component.setCurrValue(component.getMinValue() - 1);
+        Assert.assertEquals(component.getMinValue(), component.getCurrValue());
+    }
+
+    @Test
+    public void testSetCurrValue_withValueBetweenMaxAndMin() {
+        component.setCurrValue(component.getMaxValue());
+        Assert.assertEquals(component.getMaxValue(), component.getCurrValue());
+    }
 }
