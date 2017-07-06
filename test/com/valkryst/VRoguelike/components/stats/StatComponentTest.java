@@ -49,7 +49,7 @@ public class StatComponentTest {
 
     @Test
     public void testToString() {
-        final String expected = "StatComponent:\n\tName:\tTest\n\tMaximum Value:\t3\n\tCurrent Value:\t2\n\tMinimum Value:\t1";
+        final String expected = "StatComponent:\n\tName:\tTest\n\tMaximum Test:\t3\n\tCurrent Test:\t2\n\tMinimum Test:\t1";
         Assert.assertEquals(expected, component.toString());
     }
 
