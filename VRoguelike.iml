@@ -13,23 +13,10 @@
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.12" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.16.16" level="project" />
-    <orderEntry type="module-library">
-      <library name="Maven: com.valkryst:VTerminal:1.0">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/VTerminal.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Maven: com.valkryst:VECS:1.0-SNAPSHOT">
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/lib/VECS.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
+    <orderEntry type="library" name="Maven: com.github.Valkryst:VTerminal:1.0.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-core:2.5" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.logging.log4j:log4j-api:2.5" level="project" />
+    <orderEntry type="library" name="Maven: com.github.Valkryst:VRadio:b368789" level="project" />
+    <orderEntry type="library" name="Maven: com.github.Valkryst:VECS:1.0.0-SNAPSHOT" level="project" />
   </component>
 </module>
