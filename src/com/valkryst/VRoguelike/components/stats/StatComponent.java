@@ -62,9 +62,9 @@ public class StatComponent extends Component {
     public String toString() {
         String res = getClass().getSimpleName() + ":";
         res += "\n\tName:\t" + name;
-        res += "\n\tMaximum " + name + ":\t" + currValue;
+        res += "\n\tMaximum " + name + ":\t" + maxValue;
         res += "\n\tCurrent " + name + ":\t" + currValue;
-        res += "\n\tMinimum " + name + ":\t" + currValue;
+        res += "\n\tMinimum " + name + ":\t" + minValue;
         return res;
     }
 
