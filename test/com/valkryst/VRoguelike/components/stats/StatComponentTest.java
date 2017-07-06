@@ -30,6 +30,24 @@ public class StatComponentTest {
     }
 
     @Test
+    public void testConstructor_withCurrentValueLessThanMinimum() {
+        final StatComponent component = new StatComponent("Test", 3, 0, 1);
+        Assert.assertEquals(1, component.getCurrValue());
+    }
+
+    @Test
+    public void testConstructor_withCurrentValueGreaterThanMaximum() {
+        final StatComponent component = new StatComponent("Test", 3, 4, 1);
+        Assert.assertEquals(3, component.getCurrValue());
+    }
+
+    @Test
+    public void testConstructor_withMaxValueLessThanMinimum() {
+        final StatComponent component = new StatComponent("Test", 0, 2, 1);
+        Assert.assertEquals(1, component.getMaxValue());
+    }
+
+    @Test
     public void testToString() {
         final String expected = "StatComponent:\n\tName:\tTest\n\tMaximum Value:\t3\n\tCurrent Value:\t2\n\tMinimum Value:\t1";
         Assert.assertEquals(expected, component.toString());
