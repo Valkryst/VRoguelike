@@ -1,40 +1,39 @@
-package com.valkryst.VRoguelike.components;
+package com.valkryst.VRoguelike.components.stats;
 
-import com.valkryst.VECS.Component;
 import lombok.Getter;
 
-public class HealthComponent extends Component {
-    /** The current health. */
-    @Getter public int curHealth;
+public class HealthStat extends StatComponent<Integer> {
     /** The maximum health. */
     @Getter public int maxHealth;
 
     /**
      * Constructs a new HealthComponent.
      *
-     * @param maxHealth
-     *        The maximum health.
+     * @param currValue
+     *        The current and maximum health value.
      */
-    public HealthComponent(int maxHealth) {
-        if (maxHealth < 1) {
-            maxHealth = 1;
+    public HealthStat(final int currValue) {
+        super("Health", currValue);
+
+        if (super.getCurrValue() < 1) {
+            super.setCurrValue(1);
         }
 
-        this.curHealth = maxHealth;
-        this.maxHealth = maxHealth;
+        this.maxHealth = super.getCurrValue();
     }
 
     @Override
     public String toString() {
         String res = getClass().getSimpleName() + ":";
-        res += "\n\tCurrent Health:\t" + curHealth;
+        res += "\n\tName:\t" + super.getName();
+        res += "\n\tCurrent Health:\t" + super.getCurrValue();
         res += "\n\tMaximum Health:\t" + maxHealth;
         return res;
     }
 
     @Override
     public boolean equals(final Object otherObj) {
-        if (otherObj instanceof HealthComponent == false) {
+        if (otherObj instanceof HealthStat == false) {
             return false;
         }
 
@@ -42,16 +41,16 @@ public class HealthComponent extends Component {
             return true;
         }
 
-        final HealthComponent otherComp = (HealthComponent) otherObj;
-        boolean isEqual = curHealth == otherComp.getCurHealth();
-        isEqual &= maxHealth == otherComp.getMaxHealth();
+        final HealthStat otherComp = (HealthStat) otherObj;
 
+        boolean isEqual = super.equals(otherObj);
+        isEqual &= maxHealth == otherComp.getMaxHealth();
         return isEqual;
     }
 
     @Override
     public String toJson() {
-        return "{\"curHealth\":" + curHealth + ",\"maxHealth\":" + maxHealth + "}";
+        return "{\"name\":" + super.getName() + ",\"curHealth\":" + super.getCurrValue() + ",\"maxHealth\":" + maxHealth + "}";
     }
 
     /**
@@ -67,11 +66,11 @@ public class HealthComponent extends Component {
      */
     public void setCurrentHealth(final int curHealth) {
         if (curHealth > maxHealth) {
-            this.curHealth = maxHealth;
+            super.setCurrValue(maxHealth);
         } else if (curHealth < 0) {
-            this.curHealth = 0;
+            super.setCurrValue(0);
         } else {
-            this.curHealth = curHealth;
+            super.setCurrValue(curHealth);
         }
     }
 }
