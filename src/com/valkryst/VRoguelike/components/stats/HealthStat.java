@@ -8,6 +8,6 @@ public class HealthStat extends StatComponent {
      *        The current and maximum health value.
      */
     public HealthStat(final int currValue) {
-        super("Health", currValue, currValue, 0);
+        super("Health", currValue, currValue, 1);
     }
 }
