@@ -63,8 +63,8 @@ public class StatComponent extends Component {
         String res = getClass().getSimpleName() + ":";
         res += "\n\tName:\t" + name;
         res += "\n\tMaximum " + name + ":\t" + currValue;
-        res += "\n\tCurrent \" + name + \":\t" + currValue;
-        res += "\n\tMinimum \" + name + \":\t" + currValue;
+        res += "\n\tCurrent " + name + ":\t" + currValue;
+        res += "\n\tMinimum " + name + ":\t" + currValue;
         return res;
     }
 
@@ -91,4 +91,16 @@ public class StatComponent extends Component {
     public String toJson() {
         return "{\"name\":" + name + ",\"maxValue\":" + maxValue + ",\"currValue\":" + currValue + ",\"minValue\":" + minValue +"}";
     }
+
+    /**
+     * Sets the new current health.
+     *
+     * If the value exceeds the maxHealth, then the current health is set
+     * to the maxHealth.
+     *
+     * If the value is below 0, then the current health is set to 0.
+     *
+     * @param curHealth
+     *        The new current health.
+     */
 }
