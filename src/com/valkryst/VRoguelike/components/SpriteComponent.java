@@ -7,8 +7,6 @@ import com.valkryst.VTerminal.AsciiCharacter;
 import com.valkryst.VTerminal.component.Layer;
 import lombok.Getter;
 
-import java.awt.*;
-
 public class SpriteComponent extends Component implements Receiver<PositionComponent> {
     /** The sprite. */
     @Getter private final Sprite sprite;
