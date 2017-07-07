@@ -2,6 +2,7 @@ package com.valkryst.VRoguelike.components;
 
 
 import com.valkryst.VECS.Component;
+import com.valkryst.VRadio.Radio;
 import com.valkryst.VRadio.Receiver;
 import com.valkryst.VRoguelike.enums.Direction;
 import lombok.Getter;
@@ -14,7 +15,9 @@ public class VelocityComponent extends Component implements Receiver<KeyEvent> {
     /** The speed. */
     @Getter private int speed = 0;
     /** The direction of travel. */
-    @Getter @Setter private Direction direction = Direction.NONE;
+    @Getter private Direction direction = Direction.NONE;
+
+    @Getter private final Radio<VelocityComponent> radio = new Radio<>();
 
     /** Constructs a new VelocityComponent. */
     public VelocityComponent() {}
@@ -120,6 +123,21 @@ public class VelocityComponent extends Component implements Receiver<KeyEvent> {
             this.speed = 0;
         } else {
             this.speed = speed;
+        }
+
+        radio.transmit("VELOCITY_CHANGED", this);
+    }
+
+    /**
+     * Sets the new direction.
+     *
+     * @param direction
+     *        The new direction.
+     */
+    public void setDirection(final Direction direction) {
+        if (direction != null) {
+            this.direction = direction;
+            radio.transmit("VELOCITY_CHANGED", this);
         }
     }
 }
