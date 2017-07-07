@@ -40,6 +40,7 @@ public class InputComponent extends Component implements KeyListener {
 
     @Override
     public String toJson() {
+        // todo Implement.
         throw new UnsupportedOperationException("Function not implemented.");
     }
 
