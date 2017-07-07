@@ -23,7 +23,7 @@ public class PositionComponent extends Component {
      *        The y-axis coordinate.
      */
     public PositionComponent(final int x, final int y) {
-        new Point(x, y);
+        point = new Point(x, y);
     }
 
     @Override
