@@ -17,6 +17,20 @@ public class InputComponent extends Component implements KeyListener {
         radio = new Radio<>();
     }
 
+    /**
+     * Constructs a new InputComponent.
+     *
+     * @param radio
+     *        The radio.
+     */
+    public InputComponent(final Radio<KeyEvent> radio) {
+        if (radio == null) {
+            throw new IllegalArgumentException();
+        }
+
+        this.radio = radio;
+    }
+
     @Override
     public String toString() {
         String res = getClass().getSimpleName() + ":";
@@ -42,20 +56,6 @@ public class InputComponent extends Component implements KeyListener {
     public String toJson() {
         // todo Implement.
         throw new UnsupportedOperationException("Function not implemented.");
-    }
-
-    /**
-     * Constructs a new InputComponent.
-     *
-     * @param radio
-     *        The radio.
-     */
-    public InputComponent(final Radio<KeyEvent> radio) {
-        if (radio == null) {
-            throw new IllegalArgumentException();
-        }
-
-        this.radio = radio;
     }
 
     @Override
