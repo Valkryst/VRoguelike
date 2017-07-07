@@ -27,10 +27,14 @@ public class SpriteComponent extends Component {
             throw new IllegalArgumentException("A SpriteComponent cannot have a null Sprite.");
         }
 
+        if (position == null) {
+            throw new IllegalArgumentException("A SpriteComponent cannot have a null position.");
+        }
+
         this.sprite = sprite;
         layer = new Layer(position.getX(), position.getY(), 1, 1);
 
-        final AsciiCharacter character = layer.getStrings()[0].getCharacters()[1];
+        final AsciiCharacter character = layer.getStrings()[0].getCharacters()[0];
         character.setCharacter(sprite.getCharacter());
         character.setBackgroundColor(sprite.getBackgroundColor());
         character.setForegroundColor(sprite.getForegroundColor());
