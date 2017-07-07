@@ -86,27 +86,31 @@ public class VelocityComponent extends Component implements Receiver<KeyEvent> {
         }
 
         // Set direction:
-        switch (data.getKeyCode()) {
-            case KeyEvent.VK_UP:
-            case KeyEvent.VK_W: {
-                direction = Direction.NORTH;
-                break;
+        if (event.equals("KEY_PRESSED") || event.equals("KEY_RELEASED")) {
+            switch (data.getKeyCode()) {
+                case KeyEvent.VK_UP:
+                case KeyEvent.VK_W: {
+                    direction = Direction.NORTH;
+                    break;
+                }
+                case KeyEvent.VK_DOWN:
+                case KeyEvent.VK_S: {
+                    direction = Direction.SOUTH;
+                    break;
+                }
+                case KeyEvent.VK_LEFT:
+                case KeyEvent.VK_A: {
+                    direction = Direction.WEST;
+                    break;
+                }
+                case KeyEvent.VK_RIGHT:
+                case KeyEvent.VK_D: {
+                    direction = Direction.EAST;
+                    break;
+                }
             }
-            case KeyEvent.VK_DOWN:
-            case KeyEvent.VK_S: {
-                direction = Direction.SOUTH;
-                break;
-            }
-            case KeyEvent.VK_LEFT:
-            case KeyEvent.VK_A: {
-                direction = Direction.WEST;
-                break;
-            }
-            case KeyEvent.VK_RIGHT:
-            case KeyEvent.VK_D: {
-                direction = Direction.EAST;
-                break;
-            }
+        } else {
+            direction = Direction.NONE;
         }
 
         radio.transmit("VELOCITY_CHANGED", this);
