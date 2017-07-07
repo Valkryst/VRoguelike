@@ -62,8 +62,7 @@ public class SpriteComponent extends Component {
 
         final SpriteComponent otherComp = (SpriteComponent) otherObj;
         boolean isEqual = sprite == otherComp.getSprite();
-        //isEqual &= layer.equals(otherComp.getLayer());
-        // todo Uncomment above line when the Layer class has an equals method.
+        isEqual &= layer.equals(otherComp.getLayer());
 
         return isEqual;
     }
