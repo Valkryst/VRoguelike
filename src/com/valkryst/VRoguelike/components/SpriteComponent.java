@@ -9,7 +9,7 @@ import lombok.Getter;
 
 import java.awt.*;
 
-public class SpriteComponent extends Component implements Receiver<Point> {
+public class SpriteComponent extends Component implements Receiver<PositionComponent> {
     /** The sprite. */
     @Getter private final Sprite sprite;
 
@@ -76,10 +76,10 @@ public class SpriteComponent extends Component implements Receiver<Point> {
     }
 
     @Override
-    public void receive(final String event, final Point data) {
+    public void receive(final String event, final PositionComponent data) {
         if (event.equals("MOVED")) {
-            layer.setColumnIndex(data.x);
-            layer.setRowIndex(data.y);
+            layer.setColumnIndex(data.getX());
+            layer.setRowIndex(data.getY());
         }
     }
 }
