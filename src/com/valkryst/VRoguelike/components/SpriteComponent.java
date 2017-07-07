@@ -1,12 +1,15 @@
 package com.valkryst.VRoguelike.components;
 
 import com.valkryst.VECS.Component;
+import com.valkryst.VRadio.Receiver;
 import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VTerminal.AsciiCharacter;
 import com.valkryst.VTerminal.component.Layer;
 import lombok.Getter;
 
-public class SpriteComponent extends Component {
+import java.awt.*;
+
+public class SpriteComponent extends Component implements Receiver<Point> {
     /** The sprite. */
     @Getter private final Sprite sprite;
 
@@ -70,5 +73,13 @@ public class SpriteComponent extends Component {
     @Override
     public String toJson() {
         return "{\"sprite\":" + sprite.name() + "}";
+    }
+
+    @Override
+    public void receive(final String event, final Point data) {
+        if (event.equals("MOVED")) {
+            layer.setColumnIndex(data.x);
+            layer.setRowIndex(data.y);
+        }
     }
 }
