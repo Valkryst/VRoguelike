@@ -60,21 +60,23 @@ public class PositionComponent extends Component implements Receiver<VelocityCom
     @Override
     public void receive(final String event, final VelocityComponent data) {
         if (event.equals("VELOCITY_CHANGED")) {
+            final int speed = data.getSpeed();
+
             switch (data.getDirection()) {
                 case NORTH: {
-                    setY(getY() - 1);
+                    setY(getY() - speed);
                     break;
                 }
                 case SOUTH: {
-                    setY(getY() + 1);
+                    setY(getY() + speed);
                     break;
                 }
                 case EAST: {
-                    setX(getX() + 1);
+                    setX(getX() + speed);
                     break;
                 }
                 case WEST: {
-                    setX(getX() - 1);
+                    setX(getX() - speed);
                     break;
                 }
             }
