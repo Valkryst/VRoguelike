@@ -2,16 +2,17 @@ package com.valkryst.VRoguelike.components;
 
 import com.valkryst.VECS.Component;
 import com.valkryst.VRadio.Radio;
+import com.valkryst.VRadio.Receiver;
 import lombok.Getter;
 
 import java.awt.Point;
 
-public class PositionComponent extends Component {
+public class PositionComponent extends Component implements Receiver<VelocityComponent> {
     /** The position. */
     private Point point;
 
     /** The radio. */
-    @Getter private final Radio<Point> radio = new Radio<>();
+    @Getter private final Radio<PositionComponent> radio = new Radio<>();
 
     /**
      * Constructs a new PositionComponent.
@@ -56,6 +57,30 @@ public class PositionComponent extends Component {
         return "{\"x\":" + point.x + ",\"y\":" + point.y + "}";
     }
 
+    @Override
+    public void receive(final String event, final VelocityComponent data) {
+        if (event.equals("MOVED")) {
+            switch (data.getDirection()) {
+                case NORTH: {
+                    setY(getY() - 1);
+                    break;
+                }
+                case SOUTH: {
+                    setY(getY() + 1);
+                    break;
+                }
+                case EAST: {
+                    setX(getX() + 1);
+                    break;
+                }
+                case WEST: {
+                    setX(getX() - 1);
+                    break;
+                }
+            }
+        }
+    }
+
     /**
      * Retrieves the x-axis coordinate.
      *
@@ -84,7 +109,7 @@ public class PositionComponent extends Component {
      */
     public void setX(final int x) {
         point.setLocation(x, point.y);
-        radio.transmit("MOVED", point);
+        radio.transmit("MOVED", this);
     }
 
     /**
@@ -95,6 +120,6 @@ public class PositionComponent extends Component {
      */
     public void setY(final int y) {
         point.setLocation(point.x, y);
-        radio.transmit("MOVED", point);
+        radio.transmit("MOVED", this);
     }
 }
