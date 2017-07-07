@@ -1,6 +1,5 @@
 package com.valkryst.VRoguelike.components;
 
-import com.valkryst.VRoguelike.enums.Direction;
 import com.valkryst.VRoguelike.enums.Sprite;
 import org.junit.Assert;
 import org.junit.Before;
@@ -66,14 +65,11 @@ public class SpriteComponentTest {
         Assert.assertNotEquals(component, componentB);
     }
 
-    // todo Uncomment when the Layer class has an equals method.
-    /*
     @Test
     public void testEquals_withNonEqualPosition() {
         final SpriteComponent componentB = new SpriteComponent(Sprite.DIRT, new PositionComponent(11, 10));
         Assert.assertNotEquals(component, componentB);
     }
-    */
 
     @Test
     public void testToJson() {
