@@ -108,6 +108,8 @@ public class VelocityComponent extends Component implements Receiver<KeyEvent> {
                 break;
             }
         }
+
+        radio.transmit("VELOCITY_CHANGED", this);
     }
 
     /**
