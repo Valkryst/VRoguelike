@@ -8,6 +8,6 @@ public class StrengthStat extends StatComponent {
      *        The current value.
      */
     public StrengthStat(final int currValue) {
-        super("Strength", 100, currValue, 1);
+        super("Strength", 100, currValue, 0);
     }
 }
