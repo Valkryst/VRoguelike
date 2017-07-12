@@ -24,7 +24,7 @@ public enum Sprite {
     }
 
     public void draw(final Panel panel, final int columnIndex, final int rowIndex) {
-        panel.getCurrentScreen().getCharacterAt(columnIndex, rowIndex)
+        panel.getScreen().getCharacterAt(columnIndex, rowIndex)
              .ifPresent(c -> {
                  c.setCharacter(character);
                  c.setBackgroundColor(backgroundColor);
