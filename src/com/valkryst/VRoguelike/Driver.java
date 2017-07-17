@@ -1,8 +1,8 @@
 package com.valkryst.VRoguelike;
 
-import com.valkryst.VRoguelike.entities.Entity;
-import com.valkryst.VRoguelike.entities.Player;
-import com.valkryst.VRoguelike.entities.Tile;
+import com.valkryst.VRoguelike.entity.Entity;
+import com.valkryst.VRoguelike.entity.Player;
+import com.valkryst.VRoguelike.entity.Tile;
 import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.Panel;
@@ -39,7 +39,7 @@ public class Driver {
 
         final Map map = new Map(tiles);
 
-        // Initialize entities:
+        // Initialize entity:
         final Entity player = new Player(25, 12, Sprite.PLAYER);
         player.show(panel);
 

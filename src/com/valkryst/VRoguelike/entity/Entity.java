@@ -1,7 +1,7 @@
-package com.valkryst.VRoguelike.entities;
+package com.valkryst.VRoguelike.entity;
 
-import com.valkryst.VRoguelike.actions.Action;
-import com.valkryst.VRoguelike.actions.MoveAction;
+import com.valkryst.VRoguelike.action.Action;
+import com.valkryst.VRoguelike.action.MoveAction;
 import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.AsciiCharacter;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class Entity {
-    /** The actions to perform. */
+    /** The action to perform. */
     private final List<Action> actions = new LinkedList<>();
 
     /** The layer-component on which the entity is drawn. */

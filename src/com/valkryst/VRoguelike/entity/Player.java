@@ -1,6 +1,6 @@
-package com.valkryst.VRoguelike.entities;
+package com.valkryst.VRoguelike.entity;
 
-import com.valkryst.VRoguelike.actions.MoveAction;
+import com.valkryst.VRoguelike.action.MoveAction;
 import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VTerminal.Panel;
 

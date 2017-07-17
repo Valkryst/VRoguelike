@@ -1,4 +1,4 @@
-package com.valkryst.VRoguelike.entities;
+package com.valkryst.VRoguelike.entity;
 
 import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VTerminal.AsciiString;
