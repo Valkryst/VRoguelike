@@ -61,11 +61,17 @@ public class Entity {
      *
      * @param action
      *        The action.
+     *
+     * @return
+     *        If the action was added.
      */
-    public void addAction(final Action action) {
+    public boolean addAction(final Action action) {
         if (action != null) {
             actions.add(action);
+            return true;
         }
+
+        return false;
     }
 
     /**
@@ -76,9 +82,13 @@ public class Entity {
      *
      * @param dy
      *        The change in y-axis position.
+     *
+     * @return
+     *        If the action was created and added.
      */
-    public void move(final int dx, final int dy) {
+    public boolean move(final int dx, final int dy) {
         actions.add(new MoveAction(dx, dy));
+        return true;
     }
 
     /**
@@ -86,11 +96,17 @@ public class Entity {
      *
      * @param panel
      *        The panel.
+     *
+     * @return
+     *        If the entity was shown.
      */
-    public void show(final Panel panel) {
+    public boolean show(final Panel panel) {
         if (panel != null) {
             panel.addComponent(layer);
+            return true;
         }
+
+        return false;
     }
 
     /**
@@ -98,11 +114,17 @@ public class Entity {
      *
      * @param panel
      *        The panel.
+     *
+     * @return
+     *        If the entity was hidden.
      */
-    public void hide(final Panel panel) {
+    public boolean hide(final Panel panel) {
         if (panel != null) {
             panel.removeComponent(layer);
+            return true;
         }
+
+        return false;
     }
 
     /**

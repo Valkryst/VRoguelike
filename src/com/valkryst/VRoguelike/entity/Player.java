@@ -29,10 +29,18 @@ public class Player extends Entity implements KeyListener {
      *
      * @param panel
      *        The panel.
+     *
+     * @return
+     *        If the entity was shown.
      */
-    public void show(final Panel panel) {
-        super.show(panel);
-        panel.addKeyListener(this);
+    public boolean show(final Panel panel) {
+        if (panel != null) {
+            if (super.show(panel)) {
+                panel.addKeyListener(this);
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -40,10 +48,19 @@ public class Player extends Entity implements KeyListener {
      *
      * @param panel
      *        The panel.
+     *
+     * @return
+     *        If the entity was shown.
      */
-    public void hide(final Panel panel) {
-        super.show(panel);
-        panel.removeKeyListener(this);
+    public boolean hide(final Panel panel) {
+        if (panel != null) {
+            if (super.show(panel)) {
+                panel.removeKeyListener(this);
+                return true;
+            }
+        }
+
+        return false;
     }
 
     @Override
