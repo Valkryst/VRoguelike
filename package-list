@@ -1,4 +1,5 @@
-com.valkryst.VRoguelike.components
-com.valkryst.VRoguelike.components.stats
-com.valkryst.VRoguelike.entities
+com.valkryst.VRoguelike
+com.valkryst.VRoguelike.action
+com.valkryst.VRoguelike.entity
 com.valkryst.VRoguelike.enums
+com.valkryst.VRoguelike.world
