@@ -47,12 +47,12 @@ public class MoveActionTest {
     }
     */
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected=NullPointerException.class)
     public void testPerform_withNullMap() {
         moveAction.perform(null, entity);
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test(expected=NullPointerException.class)
     public void testPerform_withNullEntity() {
         moveAction.perform(map, null);
     }
