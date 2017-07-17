@@ -29,6 +29,14 @@ public class MoveAction implements Action {
 
     @Override
     public void perform(final Map map, final Entity entity) {
+        if (map == null) {
+            throw new IllegalArgumentException("The map cannot be null.");
+        }
+
+        if (entity == null) {
+            throw new IllegalArgumentException("The entity cannot be null.");
+        }
+
         // Get curr/new position:
         final Layer layer = entity.getLayer();
         final int curX = layer.getColumnIndex();
