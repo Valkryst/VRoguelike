@@ -17,11 +17,11 @@ public class Entity {
     /** The actions to perform. */
     private final List<Action> actions = new LinkedList<>();
 
-    /** The layer-component on which the Entity is drawn. */
+    /** The layer-component on which the entity is drawn. */
     @Getter private Layer layer;
 
     /**
-     * Creates a new Entity.
+     * Creates a new entity.
      *
      * @param x
      *        The x-axis position.
@@ -38,10 +38,10 @@ public class Entity {
     }
 
     /**
-     * Updates the Entity.
+     * Updates the entity.
      *
      * @param map
-     *        The map that the Entity exists on.
+     *        The map that the entity exists on.
      */
     public void update(final Map map) {
         actions.forEach(action -> action.perform(map, this));
@@ -49,7 +49,7 @@ public class Entity {
     }
 
     /**
-     * Adds an action to the Entity.
+     * Adds an action to the entity.
      *
      * @param action
      *        The action.
@@ -59,7 +59,7 @@ public class Entity {
     }
 
     /**
-     * Adds a move action to the Entity.
+     * Adds a move action to the entity.
      *
      * @param dx
      *        The change in x-axis position.
@@ -72,7 +72,7 @@ public class Entity {
     }
 
     /**
-     * Adds an Entity to a panel, effectively 'showing' the Entity.
+     * Adds an entity to a panel, effectively 'showing' the entity.
      *
      * @param panel
      *        The panel.
@@ -82,7 +82,7 @@ public class Entity {
     }
 
     /**
-     * Removes an Entity from a panel, effectively 'hiding' the Entity.
+     * Removes an entity from a panel, effectively 'hiding' the entity.
      *
      * @param panel
      *        The panel.
@@ -92,10 +92,10 @@ public class Entity {
     }
 
     /**
-     * Sets a new Sprite for the Entity,
+     * Sets a new sprite for the entity,
      *
      * @param sprite
-     *        The Sprite.
+     *        The sprite.
      */
     public void setSprite(final Sprite sprite) {
         final Optional<AsciiCharacter> optChar = layer.getCharacterAt(0, 0);
