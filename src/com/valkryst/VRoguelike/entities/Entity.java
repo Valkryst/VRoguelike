@@ -21,7 +21,7 @@ public class Entity {
     @Getter private Layer layer;
 
     /**
-     * Creates a new entity.
+     * Constructs a new entity.
      *
      * @param x
      *        The x-axis position.
