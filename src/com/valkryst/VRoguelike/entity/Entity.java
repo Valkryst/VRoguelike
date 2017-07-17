@@ -33,6 +33,10 @@ public class Entity {
      *        The sprite.
      */
     public Entity(final int x, final int y, final Sprite sprite) {
+        if (sprite == null) {
+            throw new NullPointerException("The sprite cannot be null.");
+        }
+
         layer = new Layer(x, y, 1, 1);
         setSprite(sprite);
     }
@@ -44,6 +48,10 @@ public class Entity {
      *        The map that the entity exists on.
      */
     public void update(final Map map) {
+        if (map == null) {
+            throw new NullPointerException("The map cannot be null.");
+        }
+
         actions.forEach(action -> action.perform(map, this));
         actions.clear();
     }
@@ -55,7 +63,9 @@ public class Entity {
      *        The action.
      */
     public void addAction(final Action action) {
-        actions.add(action);
+        if (action != null) {
+            actions.add(action);
+        }
     }
 
     /**
@@ -78,7 +88,9 @@ public class Entity {
      *        The panel.
      */
     public void show(final Panel panel) {
-        panel.addComponent(layer);
+        if (panel != null) {
+            panel.addComponent(layer);
+        }
     }
 
     /**
@@ -88,7 +100,9 @@ public class Entity {
      *        The panel.
      */
     public void hide(final Panel panel) {
-        panel.removeComponent(layer);
+        if (panel != null) {
+            panel.removeComponent(layer);
+        }
     }
 
     /**
@@ -98,6 +112,10 @@ public class Entity {
      *        The sprite.
      */
     public void setSprite(final Sprite sprite) {
+        if (sprite == null) {
+            return;
+        }
+
         final Optional<AsciiCharacter> optChar = layer.getCharacterAt(0, 0);
 
         optChar.ifPresent(character -> {
