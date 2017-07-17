@@ -4,13 +4,14 @@ import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.entity.Tile;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.component.Layer;
+import lombok.Getter;
 
 
 public class MoveAction implements Action {
     /** The change in x-axis position. */
-    private final int dx;
+    @Getter private final int dx;
     /** The change in y-axis position. */
-    private final int dy;
+    @Getter private final int dy;
 
     /**
      * Constructs a new MoveAction.
