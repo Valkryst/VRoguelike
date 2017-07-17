@@ -30,7 +30,7 @@ public class Entity {
      *        The y-axis position.
      *
      * @param sprite
-     *        The Sprite.
+     *        The sprite.
      */
     public Entity(final int x, final int y, final Sprite sprite) {
         layer = new Layer(x, y, 1, 1);
