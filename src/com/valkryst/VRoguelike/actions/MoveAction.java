@@ -39,7 +39,7 @@ public class MoveAction implements Action {
         // Move to new position, if possible:
         final Tile tile = map.getTiles()[newX][newY];
 
-        if (tile.isBlockMovement() == false) {
+        if (tile.isSolid() == false) {
             layer.setColumnIndex(newX);
             layer.setRowIndex(newY);
         }
