@@ -1,7 +1,7 @@
-package com.valkryst.VRoguelike.entities;
+package com.valkryst.VRoguelike.entity;
 
-import com.valkryst.VRoguelike.actions.Action;
-import com.valkryst.VRoguelike.actions.MoveAction;
+import com.valkryst.VRoguelike.action.Action;
+import com.valkryst.VRoguelike.action.MoveAction;
 import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.AsciiCharacter;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class Entity {
-    /** The actions to perform. */
+    /** The action to perform. */
     private final List<Action> actions = new LinkedList<>();
 
     /** The layer-component on which the entity is drawn. */
@@ -33,6 +33,10 @@ public class Entity {
      *        The sprite.
      */
     public Entity(final int x, final int y, final Sprite sprite) {
+        if (sprite == null) {
+            throw new NullPointerException("The sprite cannot be null.");
+        }
+
         layer = new Layer(x, y, 1, 1);
         setSprite(sprite);
     }
@@ -44,6 +48,10 @@ public class Entity {
      *        The map that the entity exists on.
      */
     public void update(final Map map) {
+        if (map == null) {
+            throw new NullPointerException("The map cannot be null.");
+        }
+
         actions.forEach(action -> action.perform(map, this));
         actions.clear();
     }
@@ -53,9 +61,17 @@ public class Entity {
      *
      * @param action
      *        The action.
+     *
+     * @return
+     *        If the action was added.
      */
-    public void addAction(final Action action) {
-        actions.add(action);
+    public boolean addAction(final Action action) {
+        if (action != null) {
+            actions.add(action);
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -66,9 +82,13 @@ public class Entity {
      *
      * @param dy
      *        The change in y-axis position.
+     *
+     * @return
+     *        If the action was created and added.
      */
-    public void move(final int dx, final int dy) {
+    public boolean move(final int dx, final int dy) {
         actions.add(new MoveAction(dx, dy));
+        return true;
     }
 
     /**
@@ -76,9 +96,17 @@ public class Entity {
      *
      * @param panel
      *        The panel.
+     *
+     * @return
+     *        If the entity was shown.
      */
-    public void show(final Panel panel) {
-        panel.addComponent(layer);
+    public boolean show(final Panel panel) {
+        if (panel != null) {
+            panel.addComponent(layer);
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -86,9 +114,17 @@ public class Entity {
      *
      * @param panel
      *        The panel.
+     *
+     * @return
+     *        If the entity was hidden.
      */
-    public void hide(final Panel panel) {
-        panel.removeComponent(layer);
+    public boolean hide(final Panel panel) {
+        if (panel != null) {
+            panel.removeComponent(layer);
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -98,6 +134,10 @@ public class Entity {
      *        The sprite.
      */
     public void setSprite(final Sprite sprite) {
+        if (sprite == null) {
+            return;
+        }
+
         final Optional<AsciiCharacter> optChar = layer.getCharacterAt(0, 0);
 
         optChar.ifPresent(character -> {

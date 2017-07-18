@@ -1,16 +1,17 @@
-package com.valkryst.VRoguelike.actions;
+package com.valkryst.VRoguelike.action;
 
-import com.valkryst.VRoguelike.entities.Entity;
-import com.valkryst.VRoguelike.entities.Tile;
+import com.valkryst.VRoguelike.entity.Entity;
+import com.valkryst.VRoguelike.entity.Tile;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.component.Layer;
+import lombok.Getter;
 
 
 public class MoveAction implements Action {
     /** The change in x-axis position. */
-    private final int dx;
+    @Getter private final int dx;
     /** The change in y-axis position. */
-    private final int dy;
+    @Getter private final int dy;
 
     /**
      * Constructs a new MoveAction.
@@ -28,6 +29,14 @@ public class MoveAction implements Action {
 
     @Override
     public void perform(final Map map, final Entity entity) {
+        if (map == null) {
+            throw new NullPointerException("The map cannot be null.");
+        }
+
+        if (entity == null) {
+            throw new NullPointerException("The entity cannot be null.");
+        }
+
         // Get curr/new position:
         final Layer layer = entity.getLayer();
         final int curX = layer.getColumnIndex();

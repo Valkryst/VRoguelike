@@ -1,4 +1,4 @@
-package com.valkryst.VRoguelike.entities;
+package com.valkryst.VRoguelike.entity;
 
 import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VTerminal.AsciiString;
@@ -23,6 +23,10 @@ public class Tile {
      *        The sprite.
      */
     public Tile(final Sprite sprite) {
+        if (sprite == null) {
+            throw new NullPointerException("The sprite cannot be null.");
+        }
+
         this.sprite = sprite;
     }
 
@@ -38,7 +42,11 @@ public class Tile {
      * @param y
      *        The y-axis position of the tile.
      */
-    public void  placeOnScreen(final Screen screen, final int x, final int y) {
+    public void placeOnScreen(final Screen screen, final int x, final int y) {
+        if (screen == null) {
+            throw new NullPointerException("The screen cannot be null.");
+        }
+
         final AsciiString string = screen.getString(y);
         string.setCharacter(x, sprite.getCharacter());
         string.setBackgroundColor(sprite.getBackgroundColor(), new IntRange(x, x + 1));

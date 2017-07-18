@@ -1,6 +1,6 @@
-package com.valkryst.VRoguelike.actions;
+package com.valkryst.VRoguelike.action;
 
-import com.valkryst.VRoguelike.entities.Entity;
+import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.world.Map;
 
 public interface Action {

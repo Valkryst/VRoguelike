@@ -1,7 +1,7 @@
 package com.valkryst.VRoguelike.world;
 
-import com.valkryst.VRoguelike.entities.Entity;
-import com.valkryst.VRoguelike.entities.Tile;
+import com.valkryst.VRoguelike.entity.Entity;
+import com.valkryst.VRoguelike.entity.Tile;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ public class Map {
     /** The tiles. */
     @Getter private Tile[][] tiles;
 
-    /** The entities. */
+    /** The entity. */
     @Getter private List<Entity> entities = new ArrayList<>();
 
     /**
