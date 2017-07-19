@@ -45,7 +45,7 @@
         <dependency>
             <groupId>com.github.Valkryst</groupId>
             <artifactId>VTerminal</artifactId>
-            <version>1.6.1-SNAPSHOT</version>
+            <version>1.7.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
