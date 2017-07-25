@@ -8,12 +8,19 @@ import com.valkryst.VTerminal.AsciiCharacter;
 import com.valkryst.VTerminal.Panel;
 import com.valkryst.VTerminal.component.Layer;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
 public class Entity {
+    /** The name of the entity. */
+    @Getter @Setter private String name;
+
+    /** A description of the entity. */
+    @Getter @Setter private String description;
+
     /** The action to perform. */
     private final List<Action> actions = new LinkedList<>();
 
