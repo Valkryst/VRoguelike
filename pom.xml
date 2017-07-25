@@ -52,11 +52,6 @@
             <artifactId>VTerminal</artifactId>
             <version>1.7.1-SNAPSHOT</version>
         </dependency>
-        <dependency>
-            <groupId>com.github.Valkryst</groupId>
-            <artifactId>VECS</artifactId>
-            <version>653bc24767</version>
-        </dependency>
     </dependencies>
 
     <build>
