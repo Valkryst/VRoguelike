@@ -1,14 +1,18 @@
 package com.valkryst.VRoguelike.entity;
 
 import com.valkryst.VRoguelike.enums.Sprite;
+import com.valkryst.VRoguelike.item.EquipmentInventory;
 import com.valkryst.VRoguelike.stat.ResourceStatistic;
 import com.valkryst.VRoguelike.stat.Statistic;
+import lombok.Getter;
 
 import java.util.*;
 
 public class Creature extends Entity {
     /** The statistics. */
     private final Map<String, Statistic> statistics = new HashMap<>();
+    /** The equipment inventory. */
+    @Getter private final EquipmentInventory equipment = new EquipmentInventory();
 
     /**
      * Constructs a new Creature.
