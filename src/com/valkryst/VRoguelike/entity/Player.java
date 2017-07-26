@@ -19,6 +19,8 @@ public class Player extends Creature implements KeyListener {
      */
     public Player(final int x, final int y) {
         super(x, y, Sprite.PLAYER);
+        super.setName("Player");
+        super.setDescription("This is you.");
     }
 
     /**
