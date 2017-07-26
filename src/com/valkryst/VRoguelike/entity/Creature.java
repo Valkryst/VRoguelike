@@ -34,7 +34,7 @@ public class Creature extends Entity {
 
         addStatistic(xp);
         addStatistic(level);
-        addStatistic(new ResourceStatistic("Gold", 0, Integer.MAX_VALUE));
+        addStatistic(new ResourceStatistic("Gold", 0, 0, Integer.MAX_VALUE));
 
         addStatistic(new ResourceStatistic("Health", 0, 100));
         addStatistic(new Statistic("Strength", 1));
