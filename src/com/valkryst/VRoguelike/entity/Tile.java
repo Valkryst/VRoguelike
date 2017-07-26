@@ -15,6 +15,8 @@ public class Tile {
     @Getter @Setter private boolean solid = false;
     /** Whether or not the tile is transparent. */
     @Getter @Setter private boolean transparent = true;
+    /** Whether or not the tile is visible. */
+    @Getter @Setter private boolean visible = true;
 
     /**
      * Constructs a new Tile.
@@ -46,6 +48,8 @@ public class Tile {
         if (screen == null) {
             throw new NullPointerException("The screen cannot be null.");
         }
+
+        Sprite sprite = visible ? this.sprite : Sprite.DARKNESS;
 
         final AsciiString string = screen.getString(y);
         string.setCharacter(x, sprite.getCharacter());
