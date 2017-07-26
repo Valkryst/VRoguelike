@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public class EquipmentInventory {
     /** The equipped equipment. */
-    private final Map<EquipmentSlot, Item> equipment = new HashMap<>();
+    private final Map<EquipmentSlot, EquippableItem> equipment = new HashMap<>();
 
     /**
      * Retrieves the item in a specific slot.
@@ -18,7 +18,7 @@ public class EquipmentInventory {
      * @return
      *        The item in the slot, or nothing if no item was found.
      */
-    public Optional<Item> getItemInSlot(final EquipmentSlot slot) {
+    public Optional<EquippableItem> getItemInSlot(final EquipmentSlot slot) {
         Objects.requireNonNull(slot);
         return Optional.ofNullable(equipment.get(slot));
     }
@@ -32,7 +32,7 @@ public class EquipmentInventory {
      * @param item
      *        The item.
      */
-    public void setItemInSlot(final EquipmentSlot slot, final Item item) {
+    public void setItemInSlot(final EquipmentSlot slot, final EquippableItem item) {
         Objects.requireNonNull(slot);
         equipment.put(slot, item);
     }
