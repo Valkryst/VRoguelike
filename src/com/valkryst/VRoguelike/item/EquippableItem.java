@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class EquippableItem extends Item {
     /** The slot. */
-    @Getter private final ItemSlot slot;
+    @Getter private final EquipmentSlot slot;
 
     /**
      * Constructs a new EquippableItem.
@@ -25,7 +25,7 @@ public class EquippableItem extends Item {
      * @throws NullPointerException
      *        If the slot is null.
      */
-    public EquippableItem(final String name, final String description, final ItemSlot slot) {
+    public EquippableItem(final String name, final String description, final EquipmentSlot slot) {
         super(name, description);
 
         Objects.requireNonNull(slot);
@@ -50,7 +50,7 @@ public class EquippableItem extends Item {
      * @throws NullPointerException
      *        If the slot is null.
      */
-    public EquippableItem(final String name, final String description, final List<Statistic> statistics, final ItemSlot slot) {
+    public EquippableItem(final String name, final String description, final List<Statistic> statistics, final EquipmentSlot slot) {
         super(name, description, statistics);
 
         Objects.requireNonNull(slot);

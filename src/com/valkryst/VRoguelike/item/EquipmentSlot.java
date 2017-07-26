@@ -1,6 +1,6 @@
 package com.valkryst.VRoguelike.item;
 
-public enum ItemSlot {
+public enum EquipmentSlot {
     HEAD,
     NECK,
     BACK,
