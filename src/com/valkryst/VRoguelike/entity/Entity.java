@@ -3,6 +3,7 @@ package com.valkryst.VRoguelike.entity;
 import com.valkryst.VRoguelike.action.Action;
 import com.valkryst.VRoguelike.action.MoveAction;
 import com.valkryst.VRoguelike.enums.Sprite;
+import com.valkryst.VRoguelike.item.Item;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.AsciiCharacter;
 import com.valkryst.VTerminal.Panel;
@@ -12,6 +13,7 @@ import lombok.Setter;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 public class Entity {
@@ -22,7 +24,7 @@ public class Entity {
     @Getter @Setter private String description = "This is an unnamed Entity.";
 
     /** The action to perform. */
-    private final List<Action> actions = new LinkedList<>();
+    @Getter private final List<Action> actions = new LinkedList<>();
 
     /** The layer-component on which the entity is drawn. */
     @Getter private Layer layer;
@@ -46,6 +48,48 @@ public class Entity {
 
         layer = new Layer(x, y, 1, 1);
         setSprite(sprite);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Entity:");
+        sb.append("\n\tName:\t").append(name);
+        sb.append("\n\tDescription:\t").append(description);
+        sb.append("\n\tAction Queue:");
+
+        for (final Action action : actions) {
+            sb.append("\n\t\t").append(action.getClass().getSimpleName());
+        }
+
+        String tmp = "\t" + layer.toString();
+        sb.append(tmp.replace("\n\t", "\n\t\t"));
+
+        return sb.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(name) + Objects.hashCode(description) + Objects.hashCode(actions) + Objects.hashCode(layer);
+    }
+
+    @Override
+    public boolean equals(final Object otherObj) {
+        if (otherObj instanceof Entity == false) {
+            return false;
+        }
+
+        if (otherObj == this) {
+            return true;
+        }
+
+        final Entity otherEntity = (Entity) otherObj;
+
+        boolean isEqual = Objects.equals(name, otherEntity.getName());
+        isEqual &= Objects.equals(description, otherEntity.getDescription());
+        isEqual &= Objects.equals(actions, otherEntity.getActions());
+        isEqual &= Objects.equals(layer, otherEntity.getLayer());
+        return isEqual;
     }
 
     /**
