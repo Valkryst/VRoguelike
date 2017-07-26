@@ -56,4 +56,42 @@ public class EquippableItem extends Item {
         Objects.requireNonNull(slot);
         this.slot = slot;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("EquippableItem:");
+        sb.append("\n\tName:\t").append(super.getName());
+        sb.append("\n\tDescription:\t").append(super.getDescription());
+        sb.append("\n\tSlot:\t").append(slot.name());
+
+        for (final Statistic statistic : super.getStatistics().values()) {
+            final String temp = "\t" + statistic.toString();
+            sb.append(temp.replace("\n\t", "\n\t\t"));
+        }
+
+        return sb.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode() + Objects.hashCode(slot);
+    }
+
+    @Override
+    public boolean equals(final Object otherObj) {
+        if (otherObj instanceof EquippableItem == false) {
+            return false;
+        }
+
+        if (otherObj == this) {
+            return true;
+        }
+
+        final EquippableItem otherItm = (EquippableItem) otherObj;
+
+        boolean isEqual = super.equals(otherObj);
+        isEqual &= Objects.equals(slot, otherItm.getSlot());
+        return isEqual;
+    }
 }
