@@ -16,12 +16,9 @@ public class Player extends Creature implements KeyListener {
      *
      * @param y
      *        The y-axis position.
-     *
-     * @param sprite
-     *        The sprite.
      */
-    public Player(final int x, final int y, final Sprite sprite) {
-        super(x, y, sprite);
+    public Player(final int x, final int y) {
+        super(x, y, Sprite.PLAYER);
     }
 
     /**
