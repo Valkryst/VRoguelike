@@ -22,6 +22,9 @@ public class ResourceStatistic extends Statistic {
      *
      * @param minimum
      *        The minimum value.
+     *
+     * @throws IllegalArgumentException
+     *        If the maximum is less than the minimum.
      */
     public ResourceStatistic(final String name, final int minimum, final int maximum) {
         super(name, maximum);
@@ -29,6 +32,36 @@ public class ResourceStatistic extends Statistic {
         if (maximum < minimum) {
             throw new IllegalArgumentException("The maximum (" + maximum + ") cannot be less than the minimum("
                                                + minimum + ").");
+        }
+
+        this.maximum = maximum;
+        this.minimum = minimum;
+    }
+
+    /**
+     * Constructs a new ResourceStatistic.
+     *
+     * @param name
+     *        The name of the statistic.
+     *
+     * @param value
+     *        The value.
+     *
+     * @param minimum
+     *        The minimum value.
+     *
+     * @param maximum
+     *        The maximum value.
+     *
+     * @throws IllegalArgumentException
+     *        If the maximum is less than the minimum.
+     */
+    public ResourceStatistic(final String name, final int value, final int minimum, final int maximum) {
+        super(name, value);
+
+        if (maximum < minimum) {
+            throw new IllegalArgumentException("The maximum (" + maximum + ") cannot be less than the minimum("
+                    + minimum + ").");
         }
 
         this.maximum = maximum;
