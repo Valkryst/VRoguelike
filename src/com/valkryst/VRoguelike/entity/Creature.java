@@ -43,7 +43,14 @@ public class Creature extends Entity {
         addStatistic(new Statistic("Strength", 1));
         addStatistic(new Statistic("Defense", 1));
 
-        // Stat Update Funcs:
+        // Level When XP Full:
+        xp.setOnChange(() -> {
+            if (xp.getValue() == xp.getMaximum()) {
+                level.setValue(level.getValue() + 1);
+            }
+        });
+
+        // Set New XP Goal on Levelup:
         level.setOnChange(() -> {
             double newXp = 100;
 
