@@ -5,20 +5,35 @@ import org.junit.Test;
 
 public class StatisticTest {
     @Test
-    public void testConstructor_withValidInput() {
+    public void testConstructor_twoParams_withValidInput() {
         final Statistic statistic = new Statistic("TestStat", 123);
         Assert.assertEquals("TestStat", statistic.getName());
         Assert.assertEquals(123, statistic.getValue());
     }
 
     @Test(expected=NullPointerException.class)
-    public void testConstructor_withNullName() {
+    public void testConstructor_twoParams_withNullName() {
         new Statistic(null, 123);
     }
 
     @Test(expected=IllegalArgumentException.class)
-    public void testConstructor_withEmptyName() {
+    public void testConstructor_twoParams_withEmptyName() {
         new Statistic("", 123);
+    }
+
+    @Test
+    public void testConstructor_threeParams_withValidInput() {
+        final Runnable runnable = () -> {};
+
+        final Statistic statistic = new Statistic("TestStat", 123, runnable);
+        Assert.assertEquals("TestStat", statistic.getName());
+        Assert.assertEquals(123, statistic.getValue());
+        Assert.assertEquals(runnable, statistic.getOnChange());
+    }
+
+    @Test(expected=NullPointerException.class)
+    public void testConstructor_threeParams_withNullOnChange() {
+        new Statistic("TestStat", 123, null);
     }
 
     @Test
