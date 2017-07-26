@@ -36,7 +36,7 @@ public class Driver {
 
         for (int x = 0 ; x < tiles.length ; x++) {
             for (int y = 0 ; y < tiles[x].length ; y++) {
-                tiles[x][y] = new Tile(Sprite.DARK_WALL);
+                tiles[x][y] = new Tile(Sprite.WALL);
                 tiles[x][y].setSolid(true);
                 tiles[x][y].setTransparent(false);
                 tiles[x][y].placeOnScreen(panel.getScreen(), x, y);
