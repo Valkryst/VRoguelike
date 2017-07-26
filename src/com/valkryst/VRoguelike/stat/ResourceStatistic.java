@@ -23,7 +23,7 @@ public class ResourceStatistic extends Statistic {
      * @param minimum
      *        The minimum value.
      */
-    public ResourceStatistic(final String name, final int maximum, final int minimum) {
+    public ResourceStatistic(final String name, final int minimum, final int maximum) {
         super(name, maximum);
 
         if (maximum < minimum) {
