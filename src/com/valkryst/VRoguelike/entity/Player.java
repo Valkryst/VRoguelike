@@ -1,6 +1,7 @@
 package com.valkryst.VRoguelike.entity;
 
 import com.valkryst.VRoguelike.action.MoveAction;
+import com.valkryst.VRoguelike.action.UpdateLOS;
 import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VTerminal.Panel;
 
@@ -104,5 +105,6 @@ public class Player extends Creature implements KeyListener {
         }
 
         super.addAction(new MoveAction(dx, dy));
+        super.addAction(new UpdateLOS());
     }
 }
