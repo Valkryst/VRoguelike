@@ -18,7 +18,7 @@ public class Tile {
     /** Whether or not the tile has been seen before. */
     @Getter @Setter private boolean visited = false;
     /** Whether or not the tile is visible. */
-    @Getter @Setter private boolean visible = true;
+    @Getter @Setter private boolean visible = false;
 
     /**
      * Constructs a new Tile.
