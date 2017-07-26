@@ -65,10 +65,10 @@ public class Creature extends Entity {
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append("Creature").append(super.toString().substring(6));
-
+        sb.append("\tStatistics:\n");
         for (final Statistic statistic : statistics.values()) {
-            final String temp = "\t" + statistic.toString();
-            sb.append(temp.replace("\n\t", "\n\t\t"));
+            final String temp = "\t\t" + statistic.toString();
+            sb.append(temp.replace("\n\t", "\n\t\t\t")).append("\n");
         }
 
         return sb.toString();
