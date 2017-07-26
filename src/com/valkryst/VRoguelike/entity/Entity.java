@@ -3,7 +3,6 @@ package com.valkryst.VRoguelike.entity;
 import com.valkryst.VRoguelike.action.Action;
 import com.valkryst.VRoguelike.action.MoveAction;
 import com.valkryst.VRoguelike.enums.Sprite;
-import com.valkryst.VRoguelike.item.Item;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.AsciiCharacter;
 import com.valkryst.VTerminal.Panel;
@@ -58,12 +57,15 @@ public class Entity {
         sb.append("\n\tDescription:\t").append(description);
         sb.append("\n\tAction Queue:");
 
-        for (final Action action : actions) {
-            sb.append("\n\t\t").append(action.getClass().getSimpleName());
+        if (actions.size() == 0) {
+            sb.append("\tAction Queue is Empty\n");
+        } else {
+            for (final Action action : actions) {
+                sb.append("\n\t\t").append(action.getClass().getSimpleName());
+            }
         }
 
-        String tmp = "\t" + layer.toString();
-        sb.append(tmp.replace("\n\t", "\n\t\t"));
+        sb.append("\t").append(layer.toString().replace("\n\t", "\n\t\t\t")).append("\n");
 
         return sb.toString();
     }
