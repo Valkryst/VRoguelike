@@ -4,10 +4,7 @@ import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.stat.ResourceStatistic;
 import com.valkryst.VRoguelike.stat.Statistic;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 public class Creature extends Entity {
     /** The statistics. */
@@ -93,5 +90,10 @@ public class Creature extends Entity {
     public Optional<Statistic> getStatistic(final String name) {
         Objects.requireNonNull(name);
         return Optional.ofNullable(statistics.get(name));
+    }
+
+    /** @return An unmodifiable version of the statistics map. */
+    public Map<String, Statistic> getStatistics() {
+        return Collections.unmodifiableMap(statistics);
     }
 }
