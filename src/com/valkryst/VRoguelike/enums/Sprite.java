@@ -41,7 +41,7 @@ public enum Sprite {
         this.character = character;
         this.backgroundColor = backgroundColor;
         this.foregroundColor = foregroundColor;
-        darkBackgroundColor = ColorFunctions.shade(backgroundColor, 0.1);
-        darkForegroundColor = ColorFunctions.shade(foregroundColor, 0.1);
+        darkBackgroundColor = ColorFunctions.shade(backgroundColor, 0.5);
+        darkForegroundColor = ColorFunctions.shade(foregroundColor, 0.5);
     }
 }
