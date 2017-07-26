@@ -8,8 +8,7 @@ import java.awt.Color;
 public enum Sprite {
     DIRT('▒', new Color(0x452F09), new Color(0x372507)),
     GRASS('▒', new Color(0x3D4509), new Color(0x303707)),
-
-    DARK_WALL('#', new Color(0, 0, 100), new Color(0, 0, 100)),
+    WALL('#', new Color(0x494949), new Color(0x3C3C3C)),
 
     PLAYER('@', new Color(0, 0, 0 ,0), Color.GREEN),
     ENEMY('E', new Color(0, 0, 0, 0), Color.RED);
