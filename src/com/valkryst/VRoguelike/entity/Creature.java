@@ -64,7 +64,7 @@ public class Creature extends Entity {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append(super.toString());
+        sb.append("Creature").append(super.toString().substring(6));
 
         for (final Statistic statistic : statistics.values()) {
             final String temp = "\t" + statistic.toString();
