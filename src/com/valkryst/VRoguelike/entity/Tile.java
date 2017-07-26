@@ -52,7 +52,6 @@ public class Tile {
         }
 
         if (visited == false) {
-            sprite = Sprite.DARKNESS;
             final AsciiString string = screen.getString(y);
             string.setCharacter(x, Sprite.DARKNESS.getCharacter());
             string.setBackgroundColor(Sprite.DARKNESS.getBackgroundColor(), new IntRange(x, x + 1));
