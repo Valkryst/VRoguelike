@@ -12,6 +12,9 @@ public class Statistic {
     /** The value. */
     @Getter @Setter private int value;
 
+    /** The function to run whenever the value is changed. */
+    @Getter @Setter private Runnable onChange;
+
     /**
      * Constructs a new Statistic.
      *
@@ -36,6 +39,28 @@ public class Statistic {
 
         this.name = name;
         this.value = value;
+    }
+
+    /**
+     * Constructs a new Statistic.
+     *
+     * @param name
+     *        The name of the statistic.
+     *
+     * @param value
+     *        The value.
+     *
+     * @param onChange
+     *        The function to run whenever the value is changed.
+     *
+     * @throws NullPointerException
+     *        If onChange is null.
+     */
+    public Statistic(final String name, final int value, final Runnable onChange) {
+        this(name, value);
+
+        Objects.requireNonNull(onChange);
+        this.onChange = onChange;
     }
 
     @Override
@@ -63,5 +88,20 @@ public class Statistic {
         boolean isEqual = Objects.equals(name, otherSta.getName());
         isEqual &= Objects.equals(value, otherSta.getValue());
         return isEqual;
+    }
+
+    /**
+     * Sets the new value, then runs the onChange function if
+     * it is present.
+     *
+     * @param value
+     *        The new value.
+     */
+    public void setValue(final int value) {
+        this.value = value;
+
+        if (onChange != null) {
+            onChange.run();
+        }
     }
 }
