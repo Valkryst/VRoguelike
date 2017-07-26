@@ -7,7 +7,7 @@ import com.valkryst.VTerminal.Panel;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class Player extends Entity implements KeyListener {
+public class Player extends Creature implements KeyListener {
     /**
      * Constructs a new player.
      *
@@ -20,7 +20,7 @@ public class Player extends Entity implements KeyListener {
      * @param sprite
      *        The sprite.
      */
-    public Player(int x, int y, Sprite sprite) {
+    public Player(final int x, final int y, final Sprite sprite) {
         super(x, y, sprite);
     }
 
