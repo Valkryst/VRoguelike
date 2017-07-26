@@ -3,6 +3,8 @@ package com.valkryst.VRoguelike.stat;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Objects;
+
 public class ResourceStatistic extends Statistic {
     /** The maximum value. */
     @Getter @Setter private int maximum;
@@ -31,6 +33,37 @@ public class ResourceStatistic extends Statistic {
 
         this.maximum = maximum;
         this.minimum = minimum;
+    }
+
+    @Override
+    public String toString() {
+        String ret = super.toString();
+        ret += "\n\tMaximum Value:\t" + maximum;
+        ret += "\n\tMinimum Value:\t" + minimum;
+        return ret;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode() + Objects.hashCode(maximum) + Objects.hashCode(minimum);
+    }
+
+    @Override
+    public boolean equals(final Object otherObj) {
+        if (otherObj instanceof Statistic == false) {
+            return false;
+        }
+
+        if (otherObj == this) {
+            return true;
+        }
+
+        final ResourceStatistic otherSta = (ResourceStatistic) otherObj;
+
+        boolean isEqual = super.equals(otherObj);
+        isEqual &= Objects.equals(maximum, otherSta.getMaximum());
+        isEqual &= Objects.equals(minimum, otherSta.getMinimum());
+        return isEqual;
     }
 
     @Override
