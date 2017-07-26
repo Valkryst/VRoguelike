@@ -153,4 +153,12 @@ public class Entity {
             character.setBackgroundColor(sprite.getBackgroundColor());
         });
     }
+
+    public int getX() {
+        return layer.getColumnIndex();
+    }
+
+    public int getY() {
+        return layer.getRowIndex();
+    }
 }
