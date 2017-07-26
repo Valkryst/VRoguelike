@@ -4,11 +4,15 @@ import com.valkryst.VRoguelike.action.MoveAction;
 import com.valkryst.VRoguelike.action.UpdateLOS;
 import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VTerminal.Panel;
+import com.valkryst.VTerminal.component.Screen;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Objects;
 
 public class Player extends Creature implements KeyListener {
+    private final Screen screen;
+
     /**
      * Constructs a new player.
      *
@@ -17,11 +21,18 @@ public class Player extends Creature implements KeyListener {
      *
      * @param y
      *        The y-axis position.
+     *
+     * @param screen
+     *        The screen.
      */
-    public Player(final int x, final int y) {
+    public Player(final int x, final int y, final Screen screen) {
         super(x, y, Sprite.PLAYER);
+
+        Objects.requireNonNull(screen);
+
         super.setName("Player");
         super.setDescription("This is you.");
+        this.screen = screen;
     }
 
     @Override
@@ -105,6 +116,6 @@ public class Player extends Creature implements KeyListener {
         }
 
         super.addAction(new MoveAction(dx, dy));
-        super.addAction(new UpdateLOS());
+        super.addAction(new UpdateLOS(screen, 4));
     }
 }
