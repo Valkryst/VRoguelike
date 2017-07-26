@@ -28,6 +28,9 @@ public class Creature extends Entity {
     public Creature(final int x, final int y, final Sprite sprite) {
         super(x, y, sprite);
 
+        this.setName("Creature");
+        this.setDescription("This is an unnamed creature.");
+
         addStatistic(new ResourceStatistic("Health", 0, 100));
         addStatistic(new Statistic("Strength", 1));
         addStatistic(new Statistic("Defense", 1));

@@ -16,10 +16,10 @@ import java.util.Optional;
 
 public class Entity {
     /** The name of the entity. */
-    @Getter @Setter private String name;
+    @Getter @Setter private String name = "Entity";
 
     /** A description of the entity. */
-    @Getter @Setter private String description;
+    @Getter @Setter private String description = "This is an unnamed Entity.";
 
     /** The action to perform. */
     private final List<Action> actions = new LinkedList<>();
