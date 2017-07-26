@@ -37,4 +37,31 @@ public class Statistic {
         this.name = name;
         this.value = value;
     }
+
+    @Override
+    public String toString() {
+        return name + ":\n" + "\tValue:\t" + value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(name) + Objects.hashCode(value);
+    }
+
+    @Override
+    public boolean equals(final Object otherObj) {
+        if (otherObj instanceof Statistic == false) {
+            return false;
+        }
+
+        if (otherObj == this) {
+            return true;
+        }
+
+        final Statistic otherSta = (Statistic) otherObj;
+
+        boolean isEqual = Objects.equals(name, otherSta.getName());
+        isEqual &= Objects.equals(value, otherSta.getValue());
+        return isEqual;
+    }
 }
