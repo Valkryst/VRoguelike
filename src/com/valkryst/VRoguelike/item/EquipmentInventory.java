@@ -31,9 +31,19 @@ public class EquipmentInventory {
      *
      * @param item
      *        The item.
+     *
+     * @throws java.lang.IllegalArgumentException
+     *        If the slot to equip to, and the item's slot type, do
+     *        not match.
      */
     public void setItemInSlot(final EquipmentSlot slot, final EquippableItem item) {
         Objects.requireNonNull(slot);
+
+        if (item.getSlot() != slot) {
+            throw new IllegalArgumentException("The slot to equip to, and the item's slot type, do not match.\n\t"
+                                               + item.toString().replace("\n\t", "\n\t\t"));
+        }
+
         equipment.put(slot, item);
     }
 }
