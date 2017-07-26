@@ -10,5 +10,7 @@ public enum ItemSlot {
     HANDS,
     WAIST,
     LEGS,
-    FEET;
+    FEET,
+    MAIN_HAND,
+    OFF_HAND;
 }
