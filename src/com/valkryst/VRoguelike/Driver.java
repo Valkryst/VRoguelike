@@ -1,6 +1,6 @@
 package com.valkryst.VRoguelike;
 
-import com.valkryst.VRoguelike.entity.Entity;
+import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.entity.Player;
 import com.valkryst.VRoguelike.entity.Tile;
 import com.valkryst.VRoguelike.enums.Sprite;
@@ -46,10 +46,10 @@ public class Driver {
         final Map map = new Map(tiles);
 
         // Initialize entity:
-        final Entity player = new Player(25, 12);
+        final Player player = new Player(25, 12);
         player.show(panel);
 
-        final Entity npc = new Entity(40, 15, Sprite.ENEMY);
+        final Creature npc = new Creature(40, 15, Sprite.ENEMY);
         npc.show(panel);
 
         map.addEntity(player);
