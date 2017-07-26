@@ -24,6 +24,31 @@ public class Player extends Creature implements KeyListener {
     }
 
     @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Player").append(super.toString().substring(6));
+        return sb.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(final Object otherObj) {
+        if (otherObj instanceof Player == false) {
+            return false;
+        }
+
+        if (otherObj == this) {
+            return true;
+        }
+
+        return super.equals(otherObj);
+    }
+
+    @Override
     public boolean show(final Panel panel) {
         if (panel != null) {
             if (super.show(panel)) {
