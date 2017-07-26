@@ -10,10 +10,16 @@ import com.valkryst.VTerminal.builder.PanelBuilder;
 import com.valkryst.VTerminal.component.Screen;
 import com.valkryst.VTerminal.font.Font;
 import com.valkryst.VTerminal.font.FontLoader;
+import com.valkryst.generator.MarkovNameGenerator;
 
 import java.awt.Rectangle;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Driver {
     public static void main(String[] args) throws IOException, URISyntaxException, InterruptedException {
@@ -40,7 +46,7 @@ public class Driver {
         final Map map = new Map(tiles);
 
         // Initialize entity:
-        final Entity player = new Player(25, 12, Sprite.PLAYER);
+        final Entity player = new Player(25, 12);
         player.show(panel);
 
         final Entity npc = new Entity(40, 15, Sprite.ENEMY);
@@ -48,6 +54,24 @@ public class Driver {
 
         map.addEntity(player);
         map.addEntity(npc);
+
+        // Initialize entity names:
+        final ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+        final InputStream is = classloader.getResourceAsStream("Human/Viking/Male.txt");
+        final BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        final List<String> trainingNames = new ArrayList<>();
+        String line = "";
+
+        while ((line = br.readLine()) != null) {
+            trainingNames.add(line);
+        }
+
+        final MarkovNameGenerator nameGenerator = new MarkovNameGenerator(trainingNames);
+
+        player.setName(nameGenerator.generateName(6));
+        npc.setName(nameGenerator.generateName(6));
+
+        System.out.println(player.getName() + " " + npc.getName());
 
         // Create rooms:
         createRoom(panel, tiles, new Rectangle(20, 5, 10, 15));
