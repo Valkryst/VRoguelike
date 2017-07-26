@@ -31,13 +31,30 @@ public class Creature extends Entity {
         this.setName("Creature");
         this.setDescription("This is an unnamed creature.");
 
-        addStatistic(new ResourceStatistic("XP", 0, 83));
-        addStatistic(new Statistic("Level", 1));
+        // Set Stats:
+        final ResourceStatistic xp = new ResourceStatistic("XP", 0, 83);
+        final ResourceStatistic level = new ResourceStatistic("Level", 1, 200);
+
+        addStatistic(xp);
+        addStatistic(level);
         addStatistic(new ResourceStatistic("Gold", 0, Integer.MAX_VALUE));
 
         addStatistic(new ResourceStatistic("Health", 0, 100));
         addStatistic(new Statistic("Strength", 1));
         addStatistic(new Statistic("Defense", 1));
+
+        // Stat Update Funcs:
+        level.setOnChange(() -> {
+            double newXp = 100;
+
+            for (int i = 1 ; i < level.getValue() ; i++) {
+                newXp += newXp * 0.089;
+            }
+
+            xp.setMinimum(0);
+            xp.setValue(0);
+            xp.setMaximum((int) newXp);
+        });
     }
 
     /**
