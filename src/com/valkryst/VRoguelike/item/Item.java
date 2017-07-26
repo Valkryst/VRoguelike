@@ -104,8 +104,7 @@ public class Item {
 
         final Item otherItm = (Item) otherObj;
 
-        boolean isEqual = super.equals(otherObj);
-        isEqual &= Objects.equals(name, otherItm.getName());
+        boolean isEqual = Objects.equals(name, otherItm.getName());
         isEqual &= Objects.equals(description, otherItm.getDescription());
         isEqual &= Objects.equals(statistics, otherItm.getStatistics());
         return isEqual;
