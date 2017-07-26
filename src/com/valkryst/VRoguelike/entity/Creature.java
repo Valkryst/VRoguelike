@@ -61,6 +61,41 @@ public class Creature extends Entity {
         });
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append(super.toString());
+
+        for (final Statistic statistic : statistics.values()) {
+            final String temp = "\t" + statistic.toString();
+            sb.append(temp.replace("\n\t", "\n\t\t"));
+        }
+
+        return sb.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode() + Objects.hashCode(statistics);
+    }
+
+    @Override
+    public boolean equals(final Object otherObj) {
+        if (otherObj instanceof Entity == false) {
+            return false;
+        }
+
+        if (otherObj == this) {
+            return true;
+        }
+
+        final Creature otherCreature = (Creature) otherObj;
+
+        boolean isEqual = super.equals(otherObj);
+        isEqual &= Objects.equals(statistics, otherCreature.getStatistics());
+        return isEqual;
+    }
+
     /**
      * Adds a statistic to the Entity.
      *
