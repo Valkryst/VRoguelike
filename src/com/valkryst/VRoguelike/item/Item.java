@@ -72,6 +72,45 @@ public class Item {
         }
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append("Item:");
+        sb.append("\n\tName:\t").append(name);
+        sb.append("\n\tDescription:\t").append(description);
+
+        for (final Statistic statistic : statistics.values()) {
+            final String temp = "\t" + statistic.toString();
+            sb.append(temp.replace("\n\t", "\n\t\t"));
+        }
+
+        return sb.toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(name) + Objects.hashCode(description) + Objects.hashCode(statistics);
+    }
+
+    @Override
+    public boolean equals(final Object otherObj) {
+        if (otherObj instanceof Item == false) {
+            return false;
+        }
+
+        if (otherObj == this) {
+            return true;
+        }
+
+        final Item otherItm = (Item) otherObj;
+
+        boolean isEqual = super.equals(otherObj);
+        isEqual &= Objects.equals(name, otherItm.getName());
+        isEqual &= Objects.equals(description, otherItm.getDescription());
+        isEqual &= Objects.equals(statistics, otherItm.getStatistics());
+        return isEqual;
+    }
+
     /**
      * Adds a statistic to the Item.
      *
@@ -101,5 +140,10 @@ public class Item {
     public Optional<Statistic> getStatistic(final String name) {
         Objects.requireNonNull(name);
         return Optional.ofNullable(statistics.get(name));
+    }
+
+    /** @return An unmodifiable version of the statistics map. */
+    public Map<String, Statistic> getStatistics() {
+        return Collections.unmodifiableMap(statistics);
     }
 }
