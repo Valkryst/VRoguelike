@@ -31,7 +31,7 @@ public class Creature extends Entity {
         this.setName("Creature");
         this.setDescription("This is an unnamed creature.");
 
-        addStatistic(new ResourceStatistic("XP", 0, 100));
+        addStatistic(new ResourceStatistic("XP", 0, 83));
         addStatistic(new Statistic("Level", 1));
         addStatistic(new ResourceStatistic("Gold", 0, Integer.MAX_VALUE));
 
