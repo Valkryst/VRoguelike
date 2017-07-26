@@ -23,15 +23,7 @@ public class Player extends Creature implements KeyListener {
         super.setDescription("This is you.");
     }
 
-    /**
-     * Adds the player to a panel, effectively 'showing' the player.
-     *
-     * @param panel
-     *        The panel.
-     *
-     * @return
-     *        If the entity was shown.
-     */
+    @Override
     public boolean show(final Panel panel) {
         if (panel != null) {
             if (super.show(panel)) {
@@ -42,15 +34,7 @@ public class Player extends Creature implements KeyListener {
         return false;
     }
 
-    /**
-     * Removes the player from a panel, effectively 'hiding' the player.
-     *
-     * @param panel
-     *        The panel.
-     *
-     * @return
-     *        If the entity was shown.
-     */
+    @Override
     public boolean hide(final Panel panel) {
         if (panel != null) {
             if (super.show(panel)) {
