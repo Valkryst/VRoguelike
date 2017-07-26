@@ -8,13 +8,16 @@ import org.junit.Test;
 import java.util.Optional;
 
 public class PlayerTest {
-    private final Player player = new Player(0, 0, Sprite.PLAYER);
+    private final Player player = new Player(0, 0);
 
     @Test
     public void testConstructor_withValidInput() {
-        final Player player = new Player(0, 1, Sprite.PLAYER);
-        Assert.assertEquals(0, player.getLayer().getColumnIndex());
-        Assert.assertEquals(1, player.getLayer().getRowIndex());
+        final Player player = new Player(0, 1);
+        Assert.assertEquals(0, player.getX());
+        Assert.assertEquals(1, player.getY());
+
+        Assert.assertEquals("Player", player.getName());
+        Assert.assertEquals("This is you.", player.getDescription());
 
         final Optional<AsciiCharacter> optChar = player.getLayer().getCharacterAt(0, 0);
         Assert.assertTrue(optChar.isPresent());
