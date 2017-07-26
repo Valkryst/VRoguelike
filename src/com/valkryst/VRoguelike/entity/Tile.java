@@ -15,6 +15,8 @@ public class Tile {
     @Getter @Setter private boolean solid = false;
     /** Whether or not the tile is transparent. */
     @Getter @Setter private boolean transparent = true;
+    /** Whether or not the tile has been seen before. */
+    @Getter @Setter private boolean visited = false;
     /** Whether or not the tile is visible. */
     @Getter @Setter private boolean visible = true;
 
@@ -49,11 +51,23 @@ public class Tile {
             throw new NullPointerException("The screen cannot be null.");
         }
 
-        Sprite sprite = visible ? this.sprite : Sprite.DARKNESS;
+        if (visited == false) {
+            sprite = Sprite.DARKNESS;
+            final AsciiString string = screen.getString(y);
+            string.setCharacter(x, Sprite.DARKNESS.getCharacter());
+            string.setBackgroundColor(Sprite.DARKNESS.getBackgroundColor(), new IntRange(x, x + 1));
+            string.setForegroundColor(Sprite.DARKNESS.getForegroundColor(), new IntRange(x, x + 1));
+        } else {
+            final AsciiString string = screen.getString(y);
+            string.setCharacter(x, sprite.getCharacter());
 
-        final AsciiString string = screen.getString(y);
-        string.setCharacter(x, sprite.getCharacter());
-        string.setBackgroundColor(sprite.getBackgroundColor(), new IntRange(x, x + 1));
-        string.setForegroundColor(sprite.getForegroundColor(), new IntRange(x, x + 1));
+            if (visible) {
+                string.setBackgroundColor(sprite.getBackgroundColor(), new IntRange(x, x + 1));
+                string.setForegroundColor(sprite.getForegroundColor(), new IntRange(x, x + 1));
+            } else {
+                string.setBackgroundColor(sprite.getDarkBackgroundColor(), new IntRange(x, x + 1));
+                string.setForegroundColor(sprite.getDarkForegroundColor(), new IntRange(x, x + 1));
+            }
+        }
     }
 }
