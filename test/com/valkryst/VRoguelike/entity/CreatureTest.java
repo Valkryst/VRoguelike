@@ -27,14 +27,24 @@ public class CreatureTest {
         Assert.assertEquals("Creature", creature.getName());
         Assert.assertEquals("This is an unnamed creature.", creature.getDescription());
 
+        // Ensure default statistics are present:
+        final Optional<Statistic> xp = creature.getStatistic("XP");
+        final Optional<Statistic> level = creature.getStatistic("Level");
+        final Optional<Statistic> gold = creature.getStatistic("Gold");
+
         final Optional<Statistic> health = creature.getStatistic("Health");
         final Optional<Statistic> strength = creature.getStatistic("Strength");
         final Optional<Statistic> defense = creature.getStatistic("Defense");
+
+        Assert.assertTrue(xp.isPresent());
+        Assert.assertTrue(level.isPresent());
+        Assert.assertTrue(gold.isPresent());
 
         Assert.assertTrue(health.isPresent());
         Assert.assertTrue(strength.isPresent());
         Assert.assertTrue(defense.isPresent());
 
+        // Ensure character sprite was correctly set:
         final Optional<AsciiCharacter> optChar = creature.getLayer().getCharacterAt(0, 0);
         Assert.assertTrue(optChar.isPresent());
         Assert.assertEquals(Sprite.ENEMY.getCharacter(), optChar.get().getCharacter());
