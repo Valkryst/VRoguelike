@@ -26,7 +26,7 @@ public class Player extends Creature implements KeyListener {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Player").append(super.toString().substring(6));
+        sb.append("Player").append(super.toString().substring(8));
         return sb.toString();
     }
 
