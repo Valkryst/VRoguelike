@@ -1,6 +1,6 @@
 package com.valkryst.VRoguelike.item;
 
-import com.valkryst.VRoguelike.stat.ResourceStatistic;
+import com.valkryst.VRoguelike.stat.LimitedStatistic;
 import com.valkryst.VRoguelike.stat.Statistic;
 import org.junit.Assert;
 import org.junit.Before;
@@ -115,7 +115,7 @@ public class ItemTest {
 
     @Test
     public void testAddStatistic_withValidResourceStatistic() {
-        final ResourceStatistic statistic = new ResourceStatistic("TestStat", 0, 100);
+        final LimitedStatistic statistic = new LimitedStatistic("TestStat", 0, 100);
         item.addStatistic(statistic);
 
         final Optional<Statistic> optStat = item.getStatistic("TestStat");

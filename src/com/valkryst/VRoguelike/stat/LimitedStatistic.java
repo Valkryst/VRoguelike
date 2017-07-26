@@ -5,7 +5,7 @@ import lombok.Setter;
 
 import java.util.Objects;
 
-public class ResourceStatistic extends Statistic {
+public class LimitedStatistic extends Statistic {
     /** The maximum value. */
     @Getter @Setter private int maximum;
     /** The minimum value. */
@@ -26,7 +26,7 @@ public class ResourceStatistic extends Statistic {
      * @throws IllegalArgumentException
      *        If the maximum is less than the minimum.
      */
-    public ResourceStatistic(final String name, final int minimum, final int maximum) {
+    public LimitedStatistic(final String name, final int minimum, final int maximum) {
         super(name, maximum);
 
         if (maximum < minimum) {
@@ -56,7 +56,7 @@ public class ResourceStatistic extends Statistic {
      * @throws IllegalArgumentException
      *        If the maximum is less than the minimum.
      */
-    public ResourceStatistic(final String name, final int value, final int minimum, final int maximum) {
+    public LimitedStatistic(final String name, final int value, final int minimum, final int maximum) {
         super(name, value);
 
         if (maximum < minimum) {
@@ -91,7 +91,7 @@ public class ResourceStatistic extends Statistic {
             return true;
         }
 
-        final ResourceStatistic otherSta = (ResourceStatistic) otherObj;
+        final LimitedStatistic otherSta = (LimitedStatistic) otherObj;
 
         boolean isEqual = super.equals(otherObj);
         isEqual &= Objects.equals(maximum, otherSta.getMaximum());

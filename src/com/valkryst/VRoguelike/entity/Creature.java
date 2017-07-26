@@ -2,7 +2,7 @@ package com.valkryst.VRoguelike.entity;
 
 import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.item.EquipmentInventory;
-import com.valkryst.VRoguelike.stat.ResourceStatistic;
+import com.valkryst.VRoguelike.stat.LimitedStatistic;
 import com.valkryst.VRoguelike.stat.Statistic;
 import lombok.Getter;
 
@@ -33,14 +33,14 @@ public class Creature extends Entity {
         this.setDescription("This is an unnamed creature.");
 
         // Set Stats:
-        final ResourceStatistic xp = new ResourceStatistic("XP", 0, 83);
-        final ResourceStatistic level = new ResourceStatistic("Level", 1, 1, 200);
+        final LimitedStatistic xp = new LimitedStatistic("XP", 0, 83);
+        final LimitedStatistic level = new LimitedStatistic("Level", 1, 1, 200);
 
         addStatistic(xp);
         addStatistic(level);
-        addStatistic(new ResourceStatistic("Gold", 0, 0, Integer.MAX_VALUE));
+        addStatistic(new LimitedStatistic("Gold", 0, 0, Integer.MAX_VALUE));
 
-        addStatistic(new ResourceStatistic("Health", 0, 100));
+        addStatistic(new LimitedStatistic("Health", 0, 100));
         addStatistic(new Statistic("Strength", 1));
         addStatistic(new Statistic("Defense", 1));
 

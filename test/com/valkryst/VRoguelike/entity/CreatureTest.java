@@ -1,7 +1,7 @@
 package com.valkryst.VRoguelike.entity;
 
 import com.valkryst.VRoguelike.enums.Sprite;
-import com.valkryst.VRoguelike.stat.ResourceStatistic;
+import com.valkryst.VRoguelike.stat.LimitedStatistic;
 import com.valkryst.VRoguelike.stat.Statistic;
 import com.valkryst.VTerminal.AsciiCharacter;
 import org.junit.Assert;
@@ -64,7 +64,7 @@ public class CreatureTest {
 
     @Test
     public void testAddStatistic_withValidResourceStatistic() {
-        final ResourceStatistic statistic = new ResourceStatistic("TestStat", 0, 100);
+        final LimitedStatistic statistic = new LimitedStatistic("TestStat", 0, 100);
         creature.addStatistic(statistic);
 
         final Optional<Statistic> optStat = creature.getStatistic("TestStat");
