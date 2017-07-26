@@ -61,10 +61,9 @@ public class Creature extends Entity {
      *
      * @throws NullPointerException
      *        If the name is null.
-     *        If the name is empty.
      */
     public Optional<Statistic> getStatistic(final String name) {
         Objects.requireNonNull(name);
-        return Optional.of(statistics.get(name));
+        return Optional.ofNullable(statistics.get(name));
     }
 }
