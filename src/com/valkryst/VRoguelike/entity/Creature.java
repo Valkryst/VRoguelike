@@ -30,7 +30,7 @@ public class Creature extends Entity {
 
         // Set Stats:
         final ResourceStatistic xp = new ResourceStatistic("XP", 0, 83);
-        final ResourceStatistic level = new ResourceStatistic("Level", 1, 200);
+        final ResourceStatistic level = new ResourceStatistic("Level", 1, 1, 200);
 
         addStatistic(xp);
         addStatistic(level);
