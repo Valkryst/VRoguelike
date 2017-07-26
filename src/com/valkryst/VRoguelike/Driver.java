@@ -7,7 +7,6 @@ import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.Panel;
 import com.valkryst.VTerminal.builder.PanelBuilder;
-import com.valkryst.VTerminal.component.Screen;
 import com.valkryst.VTerminal.font.Font;
 import com.valkryst.VTerminal.font.FontLoader;
 import com.valkryst.generator.MarkovNameGenerator;
@@ -60,7 +59,7 @@ public class Driver {
         final InputStream is = classloader.getResourceAsStream("Human/Viking/Male.txt");
         final BufferedReader br = new BufferedReader(new InputStreamReader(is));
         final List<String> trainingNames = new ArrayList<>();
-        String line = "";
+        String line;
 
         while ((line = br.readLine()) != null) {
             trainingNames.add(line);
@@ -69,7 +68,7 @@ public class Driver {
         final MarkovNameGenerator nameGenerator = new MarkovNameGenerator(trainingNames);
 
         player.setName(nameGenerator.generateName(6));
-        npc.setName(nameGenerator.generateName(6));
+        npc.setName(nameGenerator.generateName(8));
 
         System.out.println(player.getName() + " " + npc.getName());
 
@@ -86,7 +85,6 @@ public class Driver {
     }
 
     private static void createRoom(final Panel panel, final Tile[][] tiles, final Rectangle rectangle) {
-        final Screen screen = panel.getScreen();
         final int endX = rectangle.width + rectangle.x;
         final int endY = rectangle.height + rectangle.y;
 
