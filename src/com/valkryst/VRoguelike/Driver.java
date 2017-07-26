@@ -45,7 +45,7 @@ public class Driver {
         final Map map = new Map(tiles);
 
         // Initialize entity:
-        final Player player = new Player(25, 12);
+        final Player player = new Player(25, 12, panel.getScreen());
         player.show(panel);
 
         final Creature npc = new Creature(40, 15, Sprite.ENEMY);
