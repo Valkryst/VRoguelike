@@ -40,7 +40,7 @@ public class Statistic {
 
     @Override
     public String toString() {
-        return name + ":\n" + "\tValue:\t" + value;
+        return name + ":\n\tValue:\t" + value;
     }
 
     @Override
