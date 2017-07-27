@@ -5,7 +5,6 @@ import com.valkryst.VRoguelike.entity.builder.AbstractCreatureBuilder;
 import com.valkryst.VRoguelike.item.EquipmentInventory;
 import com.valkryst.VRoguelike.stat.Statistic;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Collections;
 import java.util.Map;
@@ -19,7 +18,7 @@ public class Creature extends Entity {
     @Getter private final EquipmentInventory equipment;
 
     /** A collection of all tiles that are currently visible to the creature. */
-    @Getter @Setter private LineOfSight lineOfSight;
+    @Getter private LineOfSight lineOfSight;
 
     /**
      * Constructs a new Creature.
