@@ -3,6 +3,8 @@ package com.valkryst.VRoguelike;
 import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.entity.Player;
 import com.valkryst.VRoguelike.entity.Tile;
+import com.valkryst.VRoguelike.entity.builder.CreatureBuilder;
+import com.valkryst.VRoguelike.entity.builder.PlayerBuilder;
 import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.Panel;
@@ -45,10 +47,10 @@ public class Driver {
         final Map map = new Map(tiles);
 
         // Initialize entity:
-        final Player player = new Player(25, 12, panel.getScreen());
+        final Player player = new PlayerBuilder().setX(25).setY(12).setScreen(panel.getScreen()).build();
         player.show(panel);
 
-        final Creature npc = new Creature(40, 15, Sprite.ENEMY);
+        final Creature npc = new CreatureBuilder().setX(26).setY(13).setSprite(Sprite.ENEMY).build();
         npc.show(panel);
 
         map.addEntity(player);
