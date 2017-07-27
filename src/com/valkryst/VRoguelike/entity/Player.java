@@ -1,7 +1,7 @@
 package com.valkryst.VRoguelike.entity;
 
 import com.valkryst.VRoguelike.action.MoveAction;
-import com.valkryst.VRoguelike.action.UpdateLOS;
+import com.valkryst.VRoguelike.action.UpdateLOSPosition;
 import com.valkryst.VRoguelike.entity.builder.AbstractPlayerBuilder;
 import com.valkryst.VTerminal.Panel;
 import com.valkryst.VTerminal.component.Screen;
@@ -104,6 +104,6 @@ public class Player extends Creature implements KeyListener {
         }
 
         super.addAction(new MoveAction(dx, dy));
-        super.addAction(new UpdateLOS(screen, 4));
+        super.addAction(new UpdateLOSPosition(screen, dx, dy));
     }
 }
