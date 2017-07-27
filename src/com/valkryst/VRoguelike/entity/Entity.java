@@ -2,6 +2,7 @@ package com.valkryst.VRoguelike.entity;
 
 import com.valkryst.VRoguelike.action.Action;
 import com.valkryst.VRoguelike.action.MoveAction;
+import com.valkryst.VRoguelike.entity.builder.EntityBuilder;
 import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.AsciiCharacter;
@@ -31,22 +32,19 @@ public class Entity {
     /**
      * Constructs a new entity.
      *
-     * @param x
-     *        The x-axis position.
+     * @param builder
+     *        The builder.
      *
-     * @param y
-     *        The y-axis position.
-     *
-     * @param sprite
-     *        The sprite.
+     * @throws NullPointerException
+     *        If the builder is null.
      */
-    public Entity(final int x, final int y, final Sprite sprite) {
-        if (sprite == null) {
-            throw new NullPointerException("The sprite cannot be null.");
-        }
+    public Entity(final EntityBuilder builder) {
+        Objects.requireNonNull(builder);
 
-        layer = new Layer(x, y, 1, 1);
-        setSprite(sprite);
+        name = builder.getName();
+        description = builder.getDescription();
+        layer = new Layer(builder.getX(), builder.getY(), 1, 1);
+        setSprite(builder.getSprite());
     }
 
     @Override
