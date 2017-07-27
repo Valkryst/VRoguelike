@@ -16,6 +16,9 @@ public class AbstractCreatureBuilder<B extends AbstractEntityBuilder<B>> extends
     /** The equipment inventory. */
     @Getter private EquipmentInventory equipment;
 
+    /** The line of sight radius. */
+    @Getter private int lineOfSightRadius;
+
     @Override
     public void reset() {
         super.reset();
@@ -23,6 +26,7 @@ public class AbstractCreatureBuilder<B extends AbstractEntityBuilder<B>> extends
         super.setDescription("This is an unnamed Creature.");
         statistics = new HashMap<>();
         equipment = new EquipmentInventory();
+        lineOfSightRadius = 4;
 
         // Set Stats:
         final LimitedStatistic xp = new LimitedStatistic("XP", 0, 83);
@@ -87,6 +91,20 @@ public class AbstractCreatureBuilder<B extends AbstractEntityBuilder<B>> extends
      */
     public B addEquipment(final EquipmentSlot slot, final EquippableItem item) {
         equipment.setItemInSlot(slot, item);
+        return (B) this;
+    }
+
+    /**
+     * Sets the line of sight radius.
+     *
+     * @param lineOfSightRadius
+     *        The line of sight radius.
+     *
+     * @return
+     *        This.
+     */
+    public B setLineOfSightRadius(final int lineOfSightRadius) {
+        this.lineOfSightRadius = lineOfSightRadius;
         return (B) this;
     }
 }
