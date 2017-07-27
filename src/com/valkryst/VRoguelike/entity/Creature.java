@@ -1,9 +1,11 @@
 package com.valkryst.VRoguelike.entity;
 
+import com.valkryst.VRoguelike.LineOfSight;
 import com.valkryst.VRoguelike.entity.builder.AbstractCreatureBuilder;
 import com.valkryst.VRoguelike.item.EquipmentInventory;
 import com.valkryst.VRoguelike.stat.Statistic;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Collections;
 import java.util.Map;
@@ -16,6 +18,9 @@ public class Creature extends Entity {
     /** The equipment inventory. */
     @Getter private final EquipmentInventory equipment;
 
+    /** A collection of all tiles that are currently visible to the creature. */
+    @Getter @Setter private LineOfSight lineOfSight;
+
     /**
      * Constructs a new Creature.
      *
@@ -26,6 +31,7 @@ public class Creature extends Entity {
         super(builder);
         statistics = builder.getStatistics();
         equipment = builder.getEquipment();
+        lineOfSight = new LineOfSight(this, builder.getLineOfSightRadius());
     }
 
     @Override
