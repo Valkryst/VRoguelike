@@ -4,6 +4,7 @@ import com.valkryst.VRoguelike.action.MoveAction;
 import com.valkryst.VRoguelike.entity.builder.EntityBuilder;
 import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.world.Map;
+import com.valkryst.VRoguelike.world.Tile;
 import com.valkryst.VTerminal.AsciiCharacter;
 import org.junit.Assert;
 import org.junit.Test;

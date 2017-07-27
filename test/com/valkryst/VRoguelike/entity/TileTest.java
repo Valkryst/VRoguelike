@@ -1,6 +1,7 @@
 package com.valkryst.VRoguelike.entity;
 
 import com.valkryst.VRoguelike.enums.Sprite;
+import com.valkryst.VRoguelike.world.Tile;
 import org.junit.Assert;
 import org.junit.Test;
 
