@@ -104,4 +104,14 @@ public class Creature extends Entity {
     public Map<String, Statistic> getStatistics() {
         return Collections.unmodifiableMap(statistics);
     }
+
+    /**
+     * Sets the sight radius.
+     *
+     * @param sightRadius
+     *        The sight radius.
+     */
+    public void setSightRadius(final int sightRadius) {
+        lineOfSight = new LineOfSight(this, sightRadius);
+    }
 }
