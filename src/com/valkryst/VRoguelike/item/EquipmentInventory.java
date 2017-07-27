@@ -32,7 +32,7 @@ public class EquipmentInventory {
      * @param item
      *        The item.
      *
-     * @throws java.lang.IllegalArgumentException
+     * @throws IllegalArgumentException
      *        If the slot to equip to, and the item's slot type, do
      *        not match.
      */
