@@ -2,7 +2,7 @@ package com.valkryst.VRoguelike.action;
 
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.entity.Player;
-import com.valkryst.VRoguelike.entity.Tile;
+import com.valkryst.VRoguelike.world.Tile;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.component.Screen;
 

@@ -2,7 +2,7 @@ package com.valkryst.VRoguelike;
 
 import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.entity.Player;
-import com.valkryst.VRoguelike.entity.Tile;
+import com.valkryst.VRoguelike.world.Tile;
 import com.valkryst.VRoguelike.entity.builder.CreatureBuilder;
 import com.valkryst.VRoguelike.entity.builder.PlayerBuilder;
 import com.valkryst.VRoguelike.enums.Sprite;

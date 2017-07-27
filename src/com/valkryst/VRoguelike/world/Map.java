@@ -1,7 +1,6 @@
 package com.valkryst.VRoguelike.world;
 
 import com.valkryst.VRoguelike.entity.Entity;
-import com.valkryst.VRoguelike.entity.Tile;
 import lombok.Getter;
 
 import java.util.ArrayList;
