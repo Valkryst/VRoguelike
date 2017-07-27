@@ -2,13 +2,12 @@ package com.valkryst.VRoguelike.entity;
 
 import com.valkryst.VRoguelike.action.MoveAction;
 import com.valkryst.VRoguelike.action.UpdateLOS;
-import com.valkryst.VRoguelike.enums.Sprite;
+import com.valkryst.VRoguelike.entity.builder.AbstractPlayerBuilder;
 import com.valkryst.VTerminal.Panel;
 import com.valkryst.VTerminal.component.Screen;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.Objects;
 
 public class Player extends Creature implements KeyListener {
     private final Screen screen;
@@ -16,23 +15,12 @@ public class Player extends Creature implements KeyListener {
     /**
      * Constructs a new player.
      *
-     * @param x
-     *        The x-axis position.
-     *
-     * @param y
-     *        The y-axis position.
-     *
-     * @param screen
-     *        The screen.
+     * @param builder
+     *        The builder.
      */
-    public Player(final int x, final int y, final Screen screen) {
-        super(x, y, Sprite.PLAYER);
-
-        Objects.requireNonNull(screen);
-
-        super.setName("Player");
-        super.setDescription("This is you.");
-        this.screen = screen;
+    public Player(final AbstractPlayerBuilder builder) {
+        super(builder);
+        screen = builder.getScreen();
     }
 
     @Override
