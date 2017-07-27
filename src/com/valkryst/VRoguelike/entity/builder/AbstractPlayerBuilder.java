@@ -6,7 +6,7 @@ import lombok.Getter;
 
 import java.util.Objects;
 
-public class AbstractPlayerBuilder<B extends AbstractCreatureBuilder<B>> extends AbstractCreatureBuilder<B> {
+public abstract class AbstractPlayerBuilder<B extends AbstractCreatureBuilder<B>> extends AbstractCreatureBuilder<B> {
     /** The screen. */
     @Getter private Screen screen;
 

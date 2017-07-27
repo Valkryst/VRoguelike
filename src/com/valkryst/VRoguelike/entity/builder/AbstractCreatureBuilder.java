@@ -10,7 +10,7 @@ import lombok.Getter;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AbstractCreatureBuilder<B extends AbstractEntityBuilder<B>> extends AbstractEntityBuilder<B> {
+public abstract class AbstractCreatureBuilder<B extends AbstractEntityBuilder<B>> extends AbstractEntityBuilder<B> {
     /** The statistics. */
     @Getter private Map<String, Statistic> statistics;
     /** The equipment inventory. */
