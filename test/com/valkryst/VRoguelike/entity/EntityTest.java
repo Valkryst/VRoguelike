@@ -1,6 +1,7 @@
 package com.valkryst.VRoguelike.entity;
 
 import com.valkryst.VRoguelike.action.MoveAction;
+import com.valkryst.VRoguelike.entity.builder.EntityBuilder;
 import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.AsciiCharacter;
@@ -11,7 +12,7 @@ import java.util.Optional;
 
 public class EntityTest {
     private final Map map = new Map(new Tile[10][10]);
-    private final Entity entity = new Entity(0, 0, Sprite.PLAYER);
+    private final Entity entity = new EntityBuilder().setX(0).setY(0).setSprite(Sprite.PLAYER).build();
 
     public EntityTest() {
         final Tile[][] tiles = map.getTiles();
@@ -25,20 +26,14 @@ public class EntityTest {
 
     @Test
     public void testConstructor_withValidInput() {
-        final Entity entity = new Entity(0, 1, Sprite.PLAYER);
         Assert.assertEquals(0, entity.getLayer().getColumnIndex());
-        Assert.assertEquals(1, entity.getLayer().getRowIndex());
+        Assert.assertEquals(0, entity.getLayer().getRowIndex());
 
         final Optional<AsciiCharacter> optChar = entity.getLayer().getCharacterAt(0, 0);
         Assert.assertTrue(optChar.isPresent());
         Assert.assertEquals(Sprite.PLAYER.getCharacter(), optChar.get().getCharacter());
         Assert.assertEquals(Sprite.PLAYER.getBackgroundColor(), optChar.get().getBackgroundColor());
         Assert.assertEquals(Sprite.PLAYER.getForegroundColor(), optChar.get().getForegroundColor());
-    }
-
-    @Test(expected=NullPointerException.class)
-    public void testConstructor_withNullSprite() {
-        new Entity(0, 0, null);
     }
 
     /* UNABLE TO RUN TEST - Requires a Panel for the Layer to be tested.

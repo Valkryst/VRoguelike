@@ -1,5 +1,6 @@
 package com.valkryst.VRoguelike.entity;
 
+import com.valkryst.VRoguelike.entity.builder.CreatureBuilder;
 import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.stat.LimitedStatistic;
 import com.valkryst.VRoguelike.stat.Statistic;
@@ -15,14 +16,13 @@ public class CreatureTest {
 
     @Before
     public void initializeCreature() {
-        creature = new Creature(0, 0, Sprite.ENEMY);
+        creature = new CreatureBuilder().setX(0).setY(0).setSprite(Sprite.ENEMY).build();
     }
 
     @Test
     public void testConstructor_withValidInput() {
-        final Creature creature = new Creature(0, 1, Sprite.ENEMY);
         Assert.assertEquals(0, creature.getX());
-        Assert.assertEquals(1, creature.getY());
+        Assert.assertEquals(0, creature.getY());
 
         Assert.assertEquals("Creature", creature.getName());
         Assert.assertEquals("This is an unnamed creature.", creature.getDescription());
