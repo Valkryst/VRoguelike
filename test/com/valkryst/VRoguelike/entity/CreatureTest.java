@@ -25,7 +25,7 @@ public class CreatureTest {
         Assert.assertEquals(0, creature.getY());
 
         Assert.assertEquals("Creature", creature.getName());
-        Assert.assertEquals("This is an unnamed creature.", creature.getDescription());
+        Assert.assertEquals("This is an unnamed Creature.", creature.getDescription());
 
         // Ensure default statistics are present:
         final Optional<Statistic> xp = creature.getStatistic("XP");
