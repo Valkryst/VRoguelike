@@ -48,7 +48,7 @@ public class UpdateLOSPosition implements Action {
         final Tile[][] tiles = map.getTiles();
         final Creature creature = (Creature) entity;
 
-        if (tiles[creature.getX()][creature.getY()].isSolid()) {
+        if (tiles[creature.getX() + dx][creature.getY() + dy].isSolid()) {
             return;
         }
 
