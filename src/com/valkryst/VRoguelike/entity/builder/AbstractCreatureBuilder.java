@@ -1,8 +1,8 @@
 package com.valkryst.VRoguelike.entity.builder;
 
-import com.valkryst.VRoguelike.item.EquipmentInventory;
-import com.valkryst.VRoguelike.item.EquipmentSlot;
-import com.valkryst.VRoguelike.item.EquippableItem;
+import com.valkryst.VRoguelike.item.equipment.EquipmentInventory;
+import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
+import com.valkryst.VRoguelike.item.equipment.EquippableItem;
 import com.valkryst.VRoguelike.stat.LimitedStatistic;
 import com.valkryst.VRoguelike.stat.Statistic;
 import lombok.Getter;

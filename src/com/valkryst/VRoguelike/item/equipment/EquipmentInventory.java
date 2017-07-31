@@ -1,4 +1,4 @@
-package com.valkryst.VRoguelike.item;
+package com.valkryst.VRoguelike.item.equipment;
 
 import java.util.HashMap;
 import java.util.Map;

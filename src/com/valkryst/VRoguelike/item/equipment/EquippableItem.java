@@ -1,5 +1,6 @@
-package com.valkryst.VRoguelike.item;
+package com.valkryst.VRoguelike.item.equipment;
 
+import com.valkryst.VRoguelike.item.Item;
 import com.valkryst.VRoguelike.stat.Statistic;
 import lombok.Getter;
 

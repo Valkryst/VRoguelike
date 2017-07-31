@@ -2,8 +2,8 @@ package com.valkryst.VRoguelike.action;
 
 import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.entity.Entity;
-import com.valkryst.VRoguelike.item.EquipmentSlot;
-import com.valkryst.VRoguelike.item.EquippableItem;
+import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
+import com.valkryst.VRoguelike.item.equipment.EquippableItem;
 import com.valkryst.VRoguelike.world.Map;
 import lombok.Getter;
 
