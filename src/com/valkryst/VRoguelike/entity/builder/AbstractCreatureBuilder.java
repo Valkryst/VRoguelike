@@ -1,5 +1,6 @@
 package com.valkryst.VRoguelike.entity.builder;
 
+import com.valkryst.VRoguelike.Race;
 import com.valkryst.VRoguelike.item.equipment.EquipmentInventory;
 import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
 import com.valkryst.VRoguelike.item.equipment.EquippableItem;
@@ -9,10 +10,15 @@ import lombok.Getter;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public abstract class AbstractCreatureBuilder<B extends AbstractEntityBuilder<B>> extends AbstractEntityBuilder<B> {
+    /** The race. */
+    @Getter private Race race;
+
     /** The statistics. */
     @Getter private Map<String, Statistic> statistics;
+
     /** The equipment inventory. */
     @Getter private EquipmentInventory equipment;
 
@@ -24,6 +30,7 @@ public abstract class AbstractCreatureBuilder<B extends AbstractEntityBuilder<B>
         super.reset();
         super.setName("Creature");
         super.setDescription("This is an unnamed Creature.");
+        race = null;
         statistics = new HashMap<>();
         equipment = new EquipmentInventory();
         lineOfSightRadius = 4;
@@ -59,6 +66,26 @@ public abstract class AbstractCreatureBuilder<B extends AbstractEntityBuilder<B>
             xp.setValue(0);
             xp.setMaximum((int) newXp);
         });
+    }
+
+    @Override
+    protected void checkState() {
+        checkState();
+        Objects.requireNonNull(race);
+    }
+
+    /**
+     * Sets the race.
+     *
+     * @param race
+     *        The race.
+     *
+     * @return
+     *        This.
+     */
+    public B setRace(final Race race) {
+        this.race = race;
+        return (B) this;
     }
 
     /**
