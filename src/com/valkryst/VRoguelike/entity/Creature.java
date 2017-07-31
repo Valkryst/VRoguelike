@@ -1,10 +1,12 @@
 package com.valkryst.VRoguelike.entity;
 
 import com.valkryst.VRoguelike.LineOfSight;
+import com.valkryst.VRoguelike.Race;
 import com.valkryst.VRoguelike.entity.builder.AbstractCreatureBuilder;
 import com.valkryst.VRoguelike.item.equipment.EquipmentInventory;
 import com.valkryst.VRoguelike.stat.Statistic;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Collections;
 import java.util.Map;
@@ -12,8 +14,12 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class Creature extends Entity {
+    /** The race. */
+    @Getter @Setter private Race race;
+
     /** The statistics. */
     private final Map<String, Statistic> statistics;
+
     /** The equipment inventory. */
     @Getter private final EquipmentInventory equipment;
 
@@ -28,6 +34,7 @@ public class Creature extends Entity {
      */
     public Creature(final AbstractCreatureBuilder builder) {
         super(builder);
+        race = builder.getRace();
         statistics = builder.getStatistics();
         equipment = builder.getEquipment();
         lineOfSight = new LineOfSight(this, builder.getLineOfSightRadius());
@@ -37,6 +44,8 @@ public class Creature extends Entity {
     public String toString() {
         final StringBuilder sb = new StringBuilder();
         sb.append("Creature").append(super.toString().substring(6));
+        sb.append("\tRace:\t").append(race.name()).append("\n");
+
         sb.append("\tStatistics:\n");
         for (final Statistic statistic : statistics.values()) {
             final String temp = "\t\t" + statistic.toString();
