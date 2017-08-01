@@ -10,5 +10,7 @@ public enum Tier {
     TIER7,
     TIER8,
     TIER9,
-    TIER10;
+    TIER10,
+    TIER11,
+    TIER12;
 }
