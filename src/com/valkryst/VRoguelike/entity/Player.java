@@ -3,15 +3,11 @@ package com.valkryst.VRoguelike.entity;
 import com.valkryst.VRoguelike.action.MoveAction;
 import com.valkryst.VRoguelike.action.UpdateLOSPosition;
 import com.valkryst.VRoguelike.entity.builder.AbstractPlayerBuilder;
-import com.valkryst.VTerminal.Panel;
-import com.valkryst.VTerminal.component.Screen;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class Player extends Creature implements KeyListener {
-    private final Screen screen;
-
     /**
      * Constructs a new player.
      *
@@ -20,7 +16,6 @@ public class Player extends Creature implements KeyListener {
      */
     public Player(final AbstractPlayerBuilder builder) {
         super(builder);
-        screen = builder.getScreen();
     }
 
     @Override
@@ -44,29 +39,6 @@ public class Player extends Creature implements KeyListener {
         }
 
         return super.equals(otherObj);
-    }
-
-    @Override
-    public boolean show(final Panel panel) {
-        if (panel != null) {
-            if (super.show(panel)) {
-                panel.addKeyListener(this);
-            }
-        }
-
-        return false;
-    }
-
-    @Override
-    public boolean hide(final Panel panel) {
-        if (panel != null) {
-            if (super.show(panel)) {
-                panel.removeKeyListener(this);
-                return true;
-            }
-        }
-
-        return false;
     }
 
     @Override
@@ -104,6 +76,6 @@ public class Player extends Creature implements KeyListener {
         }
 
         super.addAction(new MoveAction(dx, dy));
-        super.addAction(new UpdateLOSPosition(screen, dx, dy));
+        super.addAction(new UpdateLOSPosition(dx, dy));
     }
 }
