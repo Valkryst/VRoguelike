@@ -44,7 +44,7 @@ public class MoveAction implements Action {
         Objects.requireNonNull(entity);
 
         if (map.isPositionFree(x + dx, y + dy)) {
-            entity.getLayer().setColumnIndex(x + dy);
+            entity.getLayer().setColumnIndex(x + dx);
             entity.getLayer().setRowIndex(y + dy);
         }
     }
