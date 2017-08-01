@@ -1,6 +1,6 @@
 package com.valkryst.VRoguelike.entity.builder;
 
-import com.valkryst.VRoguelike.Race;
+import com.valkryst.VRoguelike.enums.Race;
 import com.valkryst.VRoguelike.item.equipment.EquipmentInventory;
 import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
 import com.valkryst.VRoguelike.item.equipment.EquippableItem;
@@ -70,7 +70,7 @@ public abstract class AbstractCreatureBuilder<B extends AbstractEntityBuilder<B>
 
     @Override
     protected void checkState() {
-        checkState();
+        super.checkState();
         Objects.requireNonNull(race);
     }
 
