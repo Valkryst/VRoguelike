@@ -1,12 +1,13 @@
 package com.valkryst.VRoguelike.entity;
 
 import com.valkryst.VRoguelike.action.Action;
+import com.valkryst.VRoguelike.action.HideAction;
 import com.valkryst.VRoguelike.action.MoveAction;
+import com.valkryst.VRoguelike.action.ShowAction;
 import com.valkryst.VRoguelike.entity.builder.AbstractEntityBuilder;
 import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.AsciiCharacter;
-import com.valkryst.VTerminal.Panel;
 import com.valkryst.VTerminal.component.Layer;
 import lombok.Getter;
 import lombok.Setter;
@@ -143,39 +144,25 @@ public class Entity {
     }
 
     /**
-     * Adds an entity to a panel, effectively 'showing' the entity.
-     *
-     * @param panel
-     *        The panel.
+     * Adds a show action to the entity.
      *
      * @return
-     *        If the entity was shown.
+     *        If the action was created and added.
      */
-    public boolean show(final Panel panel) {
-        if (panel != null) {
-            panel.addComponent(layer);
-            return true;
-        }
-
-        return false;
+    public boolean show() {
+        actions.add(new ShowAction());
+        return true;
     }
 
     /**
-     * Removes an entity from a panel, effectively 'hiding' the entity.
-     *
-     * @param panel
-     *        The panel.
+     * Adds a hide action to the entity.
      *
      * @return
-     *        If the entity was hidden.
+     *        If the action was created and added.
      */
-    public boolean hide(final Panel panel) {
-        if (panel != null) {
-            panel.removeComponent(layer);
-            return true;
-        }
-
-        return false;
+    public boolean hide() {
+        actions.add(new HideAction());
+        return true;
     }
 
     /**
