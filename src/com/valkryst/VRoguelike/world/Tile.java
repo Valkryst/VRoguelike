@@ -9,7 +9,7 @@ import lombok.Setter;
 
 public class Tile {
     /** The sprite. */
-    @Getter @Setter private Sprite sprite;
+    @Getter @Setter private Sprite sprite = Sprite.WALL;
 
     /** Whether or not the tile is solid. */
     @Getter @Setter private boolean solid = true;
@@ -19,6 +19,9 @@ public class Tile {
     @Getter @Setter private boolean visited = false;
     /** Whether or not the tile is visible. */
     @Getter @Setter private boolean visible = false;
+
+    /** Constructs a new Tile. */
+    public Tile() {}
 
     /**
      * Constructs a new Tile.
