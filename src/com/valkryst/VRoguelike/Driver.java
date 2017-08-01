@@ -1,26 +1,23 @@
 package com.valkryst.VRoguelike;
 
+import com.valkryst.VRoguelike.action.UpdateLOSPosition;
 import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.entity.Player;
-import com.valkryst.VRoguelike.world.Tile;
 import com.valkryst.VRoguelike.entity.builder.CreatureBuilder;
 import com.valkryst.VRoguelike.entity.builder.PlayerBuilder;
 import com.valkryst.VRoguelike.enums.Sprite;
-import com.valkryst.VRoguelike.world.Map;
+import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
+import com.valkryst.VRoguelike.item.equipment.Weapon;
+import com.valkryst.VRoguelike.screen.GameScreen;
+import com.valkryst.VRoguelike.world.Tile;
 import com.valkryst.VTerminal.Panel;
 import com.valkryst.VTerminal.builder.PanelBuilder;
 import com.valkryst.VTerminal.font.Font;
 import com.valkryst.VTerminal.font.FontLoader;
-import com.valkryst.generator.MarkovNameGenerator;
 
 import java.awt.Rectangle;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Driver {
     public static void main(String[] args) throws IOException, URISyntaxException, InterruptedException {
@@ -33,46 +30,25 @@ public class Driver {
         Thread.sleep(200);
 
         // Initialize map tiles:
-        final Tile[][] tiles = new Tile[90][30];
+        final GameScreen gameScreen = new GameScreen(panel);
+        final Tile[][] tiles = gameScreen.getMap().getTiles();
 
         for (int x = 0 ; x < tiles.length ; x++) {
             for (int y = 0 ; y < tiles[x].length ; y++) {
-                tiles[x][y] = new Tile(Sprite.WALL);
-                tiles[x][y].setSolid(true);
-                tiles[x][y].setTransparent(false);
                 tiles[x][y].placeOnScreen(panel.getScreen(), x, y);
             }
         }
 
-        final Map map = new Map(tiles);
-
         // Initialize entity:
-        final Player player = new PlayerBuilder().setX(25).setY(12).setScreen(panel.getScreen()).build();
-        player.show(panel);
+        final Player player = new PlayerBuilder().setX(25).setY(12).build();
+        player.getEquipment().setItemInSlot(EquipmentSlot.MAIN_HAND, new Weapon("TWep", "DoTWep", EquipmentSlot.MAIN_HAND));
+        player.getActions().add(new UpdateLOSPosition(0, 0));
+        player.show();
 
         final Creature npc = new CreatureBuilder().setX(26).setY(13).setSprite(Sprite.ENEMY).build();
-        npc.show(panel);
+        npc.show();
 
-        map.addEntity(player);
-        map.addEntity(npc);
-
-        // Initialize entity names:
-        final ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-        final InputStream is = classloader.getResourceAsStream("Human/Viking/Male.txt");
-        final BufferedReader br = new BufferedReader(new InputStreamReader(is));
-        final List<String> trainingNames = new ArrayList<>();
-        String line;
-
-        while ((line = br.readLine()) != null) {
-            trainingNames.add(line);
-        }
-
-        final MarkovNameGenerator nameGenerator = new MarkovNameGenerator(trainingNames);
-
-        player.setName(nameGenerator.generateName(6));
-        npc.setName(nameGenerator.generateName(8));
-
-        System.out.println(player.getName() + " " + npc.getName());
+        gameScreen.getMap().addEntities(player, npc);
 
         // Create rooms:
         createRoom(panel, tiles, new Rectangle(20, 5, 10, 15));
@@ -80,7 +56,7 @@ public class Driver {
 
         // Render loop:
         while (true) {
-            map.update();
+            gameScreen.getMap().update();
             panel.draw();
             Thread.sleep(100);
         }
