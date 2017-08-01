@@ -50,7 +50,7 @@ public class Driver {
             // Initialize entities:
             final Player player = new PlayerBuilder().setX(25).setY(12).setRace(Race.HUMAN).build();
             player.getEquipment().setItemInSlot(EquipmentSlot.MAIN_HAND, new Weapon("TWep", "DoTWep", EquipmentSlot.MAIN_HAND));
-            player.getActions().add(new UpdateLOSPosition(0, 0));
+            player.getActions().add(new UpdateLOSPosition(25, 12, 0, 0));
 
             final Creature npc = new CreatureBuilder().setX(26).setY(13).setRace(Race.HUMAN).setSprite(Sprite.ENEMY).build();
 
