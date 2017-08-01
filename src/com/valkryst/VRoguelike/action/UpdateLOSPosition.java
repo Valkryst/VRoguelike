@@ -9,11 +9,8 @@ import com.valkryst.VRoguelike.world.Tile;
 import com.valkryst.VTerminal.component.Screen;
 
 import java.awt.Point;
-import java.util.Objects;
 
 public class UpdateLOSPosition implements Action {
-    /** The screen. */
-    private final Screen screen;
     /** The change in x-axis position. */
     private final int dx;
     /** The change in y-axis position. */
@@ -22,19 +19,13 @@ public class UpdateLOSPosition implements Action {
     /**
      * Constructs a new UpdateLOSPosition.
      *
-     * @param screen
-     *        The screen.
-     *
      * @param dx
      *        The change in x-axis position.
      *
      * @param dy
      *        The change in y-axis position.
      */
-    public UpdateLOSPosition(final Screen screen, final int dx, final int dy) {
-        Objects.requireNonNull(screen);
-
-        this.screen = screen;
+    public UpdateLOSPosition(final int dx, final int dy) {
         this.dx = dx;
         this.dy = dy;
     }
@@ -45,6 +36,7 @@ public class UpdateLOSPosition implements Action {
             return;
         }
 
+        final Screen screen = map.getScreen();
         final Tile[][] tiles = map.getTiles();
         final Creature creature = (Creature) entity;
 
