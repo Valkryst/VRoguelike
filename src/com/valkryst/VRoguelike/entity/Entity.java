@@ -1,9 +1,6 @@
 package com.valkryst.VRoguelike.entity;
 
-import com.valkryst.VRoguelike.action.Action;
-import com.valkryst.VRoguelike.action.HideAction;
-import com.valkryst.VRoguelike.action.MoveAction;
-import com.valkryst.VRoguelike.action.ShowAction;
+import com.valkryst.VRoguelike.action.*;
 import com.valkryst.VRoguelike.entity.builder.AbstractEntityBuilder;
 import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.world.Map;
@@ -127,7 +124,8 @@ public class Entity {
     }
 
     /**
-     * Adds a move action to the entity.
+     * Adds a move action and an update LOS position action
+     * to the entity.
      *
      * @param dx
      *        The change in x-axis position.
@@ -139,7 +137,12 @@ public class Entity {
      *        If the action was created and added.
      */
     public boolean move(final int dx, final int dy) {
-        actions.add(new MoveAction(dx, dy));
+        final int x = getX();
+        final int y = getY();
+
+        actions.add(new MoveAction(x, y, dx, dy));
+        actions.add(new UpdateLOSPosition(x, y, dx, dy));
+
         return true;
     }
 
