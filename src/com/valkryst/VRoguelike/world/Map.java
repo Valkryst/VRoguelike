@@ -79,6 +79,31 @@ public class Map {
     }
 
     /**
+     * Determines if a position is both on the map and not
+     * solid.
+     *
+     * @param x
+     *        The x-axis value of the position.
+     *
+     * @param y
+     *        The y-axis value of the position.
+     *
+     * @return
+     *        If the position is free or not.
+     */
+    public boolean isPositionFree(final int x, final int y) {
+        if (x < 0 || y < 0) {
+            return false;
+        }
+
+        if (x > tiles.length || y > tiles[0].length) {
+            return false;
+        }
+
+        return tiles[x][y].isSolid() == false;
+    }
+
+    /**
      * Adds one or more entities to the map.
      *
      * @param entities
