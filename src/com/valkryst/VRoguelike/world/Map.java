@@ -71,25 +71,29 @@ public class Map {
     }
 
     /**
-     * Adds an entity to the map.
+     * Adds one or more entities to the map.
      *
-     * @param entity
-     *        The entity.
+     * @param entities
+     *        The entities.
      */
-    public void addEntity(final Entity entity) {
-        screen.addComponent(entity.getLayer());
-        entities.add(entity);
+    public void addEntity(final Entity ... entities) {
+        for (int i = 0 ; i < entities.length ; i++) {
+            screen.addComponent(entities[i].getLayer());
+            this.entities.add(entities[i]);
+        }
     }
 
     /**
-     * Removes an entity from the map.
+     * Removes one or more entities from the map.
      *
-     * @param entity
-     *        The entity.
+     * @param entities
+     *        The entities.
      */
-    public void removeEntity(final Entity entity) {
-        screen.removeComponent(entity.getLayer());
-        entities.remove(entity);
+    public void removeEntity(final Entity ... entities) {
+        for (int i = 0 ; i < entities.length ; i++) {
+            screen.removeComponent(entities[i].getLayer());
+            this.entities.remove(entities[i]);
+        }
     }
 
     /** @return The width, in tiles, of the map. */
