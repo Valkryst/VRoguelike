@@ -1,4 +1,4 @@
-package com.valkryst.VRoguelike;
+package com.valkryst.VRoguelike.enums;
 
 public enum Tier {
     TIER1,

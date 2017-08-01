@@ -1,7 +1,7 @@
 package com.valkryst.VRoguelike.entity;
 
 import com.valkryst.VRoguelike.LineOfSight;
-import com.valkryst.VRoguelike.Race;
+import com.valkryst.VRoguelike.enums.Race;
 import com.valkryst.VRoguelike.entity.builder.AbstractCreatureBuilder;
 import com.valkryst.VRoguelike.item.equipment.EquipmentInventory;
 import com.valkryst.VRoguelike.stat.Statistic;
