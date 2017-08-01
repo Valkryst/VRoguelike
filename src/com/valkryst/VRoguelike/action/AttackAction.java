@@ -5,7 +5,6 @@ import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
 import com.valkryst.VRoguelike.item.equipment.EquippableItem;
 import com.valkryst.VRoguelike.item.equipment.Weapon;
-import com.valkryst.VRoguelike.stat.Statistic;
 import com.valkryst.VRoguelike.world.Map;
 
 import java.util.Objects;
@@ -30,30 +29,46 @@ public class AttackAction implements Action {
     @Override
     public void perform(final Map map, final Entity entity) {
         final Creature self = (Creature) entity;
-    }
-
-    public int getMeleeAttackDamage(final Creature creature) {
-        final Optional<EquippableItem> optMainHand = creature.getEquipment().getItemInSlot(EquipmentSlot.MAIN_HAND);
-        final Optional<EquippableItem> optOffHand = creature.getEquipment().getItemInSlot(EquipmentSlot.OFF_HAND);
-
-        final Optional<Statistic> optStrength = creature.getStatistic("Strength");
 
         int damage = 0;
+        damage += getWeaponDamage(self, EquipmentSlot.MAIN_HAND);
+        damage += getWeaponDamage(self, EquipmentSlot.OFF_HAND);
+        damage += self.getStat_strength().getValue();
+        damage -= target.getStat_defense().getValue();
 
-        if (optMainHand.isPresent() && optMainHand.get() instanceof Weapon) {
-            final Weapon weapon = (Weapon) optMainHand.get();
-            damage += weapon.attack();
+        if (damage > 0) {
+            final int curHealth = target.getStat_health().getValue();
+            target.getStat_health().setValue(curHealth - damage);
         }
+    }
 
-        if (optOffHand.isPresent() && optOffHand.get() instanceof Weapon) {
-            final Weapon weapon = (Weapon) optOffHand.get();
-            damage += weapon.attack();
+    /**
+     * Retrieves the attack damage of a weapon item.
+     *
+     * @param creature
+     *        The creature.
+     *
+     * @param slot
+     *        The slot.
+     *
+     * @return
+     *        If there is no item in the specified slot, then
+     *        zero is returned.
+     *
+     *        If the item in the specified slot is not a Weapon,
+     *        then zero is returned.
+     *
+     *        If there is a weapon in the specified slot, then
+     *        the weapon's attack damage is returned.
+     */
+    private static int getWeaponDamage(final Creature creature, final EquipmentSlot slot) {
+        final Optional<EquippableItem> optItem = creature.getEquipment().getItemInSlot(slot);
+
+        if (optItem.isPresent() && optItem.get() instanceof Weapon) {
+            final Weapon weapon = (Weapon) optItem.get();
+            return weapon.attack();
+        } else {
+            return 0;
         }
-
-        if (optStrength.isPresent()) {
-            damage += optStrength.get().getValue();
-        }
-
-        return damage;
     }
 }
