@@ -10,6 +10,7 @@ import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
 import com.valkryst.VRoguelike.item.equipment.Weapon;
 import com.valkryst.VRoguelike.screen.GameScreen;
+import com.valkryst.VRoguelike.screen.MainMenuScreen;
 import com.valkryst.VRoguelike.world.Tile;
 import com.valkryst.VTerminal.Panel;
 import com.valkryst.VTerminal.builder.PanelBuilder;
@@ -30,30 +31,39 @@ public class Driver {
 
         Thread.sleep(50);
 
-        // Initialize map tiles:
+        final MainMenuScreen mainMenuScreen = new MainMenuScreen(panel);
         final GameScreen gameScreen = new GameScreen(panel);
-        panel.swapScreen(gameScreen);
+        panel.swapScreen(mainMenuScreen);
 
-        final Tile[][] tiles = gameScreen.getMap().getTiles();
+        mainMenuScreen.getButton_new().setOnClickFunction(() -> {
+            // Initialize map tiles:
+            panel.swapScreen(gameScreen);
 
-        for (int x = 0 ; x < tiles.length ; x++) {
-            for (int y = 0 ; y < tiles[x].length ; y++) {
-                tiles[x][y].placeOnScreen(panel.getScreen(), x, y);
+            final Tile[][] tiles = gameScreen.getMap().getTiles();
+
+            for (int x = 0 ; x < tiles.length ; x++) {
+                for (int y = 0 ; y < tiles[x].length ; y++) {
+                    tiles[x][y].placeOnScreen(panel.getScreen(), x, y);
+                }
             }
-        }
 
-        // Initialize entities:
-        final Player player = new PlayerBuilder().setX(25).setY(12).setRace(Race.HUMAN).build();
-        player.getEquipment().setItemInSlot(EquipmentSlot.MAIN_HAND, new Weapon("TWep", "DoTWep", EquipmentSlot.MAIN_HAND));
-        player.getActions().add(new UpdateLOSPosition(0, 0));
+            // Initialize entities:
+            final Player player = new PlayerBuilder().setX(25).setY(12).setRace(Race.HUMAN).build();
+            player.getEquipment().setItemInSlot(EquipmentSlot.MAIN_HAND, new Weapon("TWep", "DoTWep", EquipmentSlot.MAIN_HAND));
+            player.getActions().add(new UpdateLOSPosition(0, 0));
 
-        final Creature npc = new CreatureBuilder().setX(26).setY(13).setRace(Race.HUMAN).setSprite(Sprite.ENEMY).build();
+            final Creature npc = new CreatureBuilder().setX(26).setY(13).setRace(Race.HUMAN).setSprite(Sprite.ENEMY).build();
 
-        gameScreen.getMap().addEntities(player, npc);
+            gameScreen.getMap().addEntities(player, npc);
 
-        // Create rooms:
-        createRoom(panel, tiles, new Rectangle(20, 5, 10, 15));
-        createRoom(panel, tiles, new Rectangle(50, 5, 10, 15));
+            // Create rooms:
+            createRoom(panel, tiles, new Rectangle(20, 5, 10, 15));
+            createRoom(panel, tiles, new Rectangle(50, 5, 10, 15));
+        });
+
+        mainMenuScreen.getButton_exit().setOnClickFunction(() -> {
+            System.exit(0);
+        });
 
         // Render loop:
         while (true) {
