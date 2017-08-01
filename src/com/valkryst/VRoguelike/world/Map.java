@@ -56,4 +56,14 @@ public class Map {
     public void addEntity(final Entity entity) {
         entities.add(entity);
     }
+
+    /** @return The width, in tiles, of the map. */
+    public int getWidth() {
+        return tiles.length;
+    }
+
+    /** @return The height, in tiles, of the map. */
+    public int getHeight() {
+        return tiles[0].length;
+    }
 }
