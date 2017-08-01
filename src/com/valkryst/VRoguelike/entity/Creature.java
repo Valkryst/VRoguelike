@@ -1,24 +1,31 @@
 package com.valkryst.VRoguelike.entity;
 
 import com.valkryst.VRoguelike.LineOfSight;
-import com.valkryst.VRoguelike.enums.Race;
 import com.valkryst.VRoguelike.entity.builder.AbstractCreatureBuilder;
+import com.valkryst.VRoguelike.enums.Race;
 import com.valkryst.VRoguelike.item.equipment.EquipmentInventory;
-import com.valkryst.VRoguelike.stat.Statistic;
+import com.valkryst.VRoguelike.stat.LimitedStatistic;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Collections;
-import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 
 public class Creature extends Entity {
     /** The race. */
     @Getter @Setter private Race race;
 
-    /** The statistics. */
-    private final Map<String, Statistic> statistics;
+    /** The level. */
+    @Getter private final LimitedStatistic stat_level;
+    /** The experience towards the next level. */
+    @Getter private final LimitedStatistic stat_xp;
+    /** The amount of gold carried. */
+    @Getter private final LimitedStatistic stat_gold;
+    /** The health. */
+    @Getter private final LimitedStatistic stat_health;
+    /** The strength. */
+    @Getter private final LimitedStatistic stat_strength;
+    /** The defense. */
+    @Getter private final LimitedStatistic stat_defense;
 
     /** The equipment inventory. */
     @Getter private final EquipmentInventory equipment;
@@ -35,8 +42,16 @@ public class Creature extends Entity {
     public Creature(final AbstractCreatureBuilder builder) {
         super(builder);
         race = builder.getRace();
-        statistics = builder.getStatistics();
+
+        stat_level = builder.getStat_level();
+        stat_xp = builder.getStat_xp();
+        stat_gold = builder.getStat_gold();
+        stat_health = builder.getStat_health();
+        stat_strength = builder.getStat_strength();
+        stat_defense = builder.getStat_defense();
+
         equipment = builder.getEquipment();
+
         lineOfSight = new LineOfSight(this, builder.getLineOfSightRadius());
     }
 
@@ -47,17 +62,15 @@ public class Creature extends Entity {
         sb.append("\tRace:\t").append(race.name()).append("\n");
 
         sb.append("\tStatistics:\n");
-        for (final Statistic statistic : statistics.values()) {
-            final String temp = "\t\t" + statistic.toString();
-            sb.append(temp.replace("\n\t", "\n\t\t\t")).append("\n");
-        }
 
         return sb.toString();
     }
 
     @Override
     public int hashCode() {
-        return super.hashCode() + Objects.hashCode(statistics);
+        return super.hashCode() + Objects.hashCode(race) + Objects.hashCode(stat_level) + Objects.hashCode(stat_xp)
+               + Objects.hashCode(stat_gold) + Objects.hashCode(stat_health) + Objects.hashCode(stat_strength)
+               + Objects.hashCode(stat_defense) + Objects.hashCode(equipment) + Objects.hashCode(lineOfSight);
     }
 
     @Override
@@ -73,44 +86,16 @@ public class Creature extends Entity {
         final Creature otherCreature = (Creature) otherObj;
 
         boolean isEqual = super.equals(otherObj);
-        isEqual &= Objects.equals(statistics, otherCreature.getStatistics());
+        isEqual &= Objects.equals(race, otherCreature.getRace());
+        isEqual &= Objects.equals(stat_level, otherCreature.getStat_level());
+        isEqual &= Objects.equals(stat_xp, otherCreature.getStat_xp());
+        isEqual &= Objects.equals(stat_gold, otherCreature.getStat_gold());
+        isEqual &= Objects.equals(stat_health, otherCreature.getStat_health());
+        isEqual &= Objects.equals(stat_strength, otherCreature.getStat_strength());
+        isEqual &= Objects.equals(stat_defense, otherCreature.getStat_defense());
+        isEqual &= Objects.equals(equipment, otherCreature.getEquipment());
+        isEqual &= Objects.equals(lineOfSight, otherCreature.getLineOfSight());
         return isEqual;
-    }
-
-    /**
-     * Adds a statistic to the Entity.
-     *
-     * @param statistic
-     *        The statistic.
-     *
-     * @throws NullPointerException
-     *        If the statistic is null.
-     */
-    public void addStatistic(final Statistic statistic) {
-        Objects.requireNonNull(statistic);
-        statistics.put(statistic.getName(), statistic);
-    }
-
-    /**
-     * Retrieves a statistic, if it exists.
-     *
-     * @param name
-     *        The statistic's name.
-     *
-     * @return
-     *        The statistic.
-     *
-     * @throws NullPointerException
-     *        If the name is null.
-     */
-    public Optional<Statistic> getStatistic(final String name) {
-        Objects.requireNonNull(name);
-        return Optional.ofNullable(statistics.get(name));
-    }
-
-    /** @return An unmodifiable version of the statistics map. */
-    public Map<String, Statistic> getStatistics() {
-        return Collections.unmodifiableMap(statistics);
     }
 
     /**
