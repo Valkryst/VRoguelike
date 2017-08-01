@@ -42,9 +42,8 @@ public class Driver {
             }
         }
 
-        // Initialize entity:
+        // Initialize entities:
         final Player player = new PlayerBuilder().setX(25).setY(12).setRace(Race.HUMAN).build();
-        panel.addKeyListener(player);
         player.getEquipment().setItemInSlot(EquipmentSlot.MAIN_HAND, new Weapon("TWep", "DoTWep", EquipmentSlot.MAIN_HAND));
         player.getActions().add(new UpdateLOSPosition(0, 0));
 
