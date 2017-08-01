@@ -76,7 +76,7 @@ public class Map {
      * @param entities
      *        The entities.
      */
-    public void addEntity(final Entity ... entities) {
+    public void addEntities(final Entity ... entities) {
         for (int i = 0 ; i < entities.length ; i++) {
             screen.addComponent(entities[i].getLayer());
             this.entities.add(entities[i]);
@@ -89,7 +89,7 @@ public class Map {
      * @param entities
      *        The entities.
      */
-    public void removeEntity(final Entity ... entities) {
+    public void removeEntities(final Entity ... entities) {
         for (int i = 0 ; i < entities.length ; i++) {
             screen.removeComponent(entities[i].getLayer());
             this.entities.remove(entities[i]);
