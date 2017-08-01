@@ -77,7 +77,7 @@ public class Map {
      *        The entity.
      */
     public void addEntity(final Entity entity) {
-
+        screen.addComponent(entity.getLayer());
         entities.add(entity);
     }
 
@@ -88,6 +88,7 @@ public class Map {
      *        The entity.
      */
     public void removeEntity(final Entity entity) {
+        screen.removeComponent(entity.getLayer());
         entities.remove(entity);
     }
 
