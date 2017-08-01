@@ -1,6 +1,7 @@
 package com.valkryst.VRoguelike.world;
 
 import com.valkryst.VRoguelike.entity.Entity;
+import com.valkryst.VRoguelike.entity.Player;
 import com.valkryst.VTerminal.component.Screen;
 import lombok.Getter;
 
@@ -14,6 +15,9 @@ public class Map {
 
     /** The tiles. */
     @Getter private Tile[][] tiles;
+
+    /** The player entity. */
+    @Getter private Player player;
 
     /** The entity. */
     @Getter private List<Entity> entities = new ArrayList<>();
@@ -67,6 +71,10 @@ public class Map {
 
     /** Updates the map. */
     public void update() {
+        if (player != null) {
+            player.update(this);
+        }
+
         entities.forEach(entity -> entity.update(this));
     }
 
@@ -79,7 +87,13 @@ public class Map {
     public void addEntities(final Entity ... entities) {
         for (int i = 0 ; i < entities.length ; i++) {
             screen.addComponent(entities[i].getLayer());
-            this.entities.add(entities[i]);
+
+
+            if (entities[i] instanceof Player) {
+                player = (Player) entities[i];
+            } else {
+                this.entities.add(entities[i]);
+            }
         }
     }
 
@@ -92,7 +106,12 @@ public class Map {
     public void removeEntities(final Entity ... entities) {
         for (int i = 0 ; i < entities.length ; i++) {
             screen.removeComponent(entities[i].getLayer());
-            this.entities.remove(entities[i]);
+
+            if (entities[i] instanceof Player) {
+                player = null;
+            } else {
+                this.entities.remove(entities[i]);
+            }
         }
     }
 
