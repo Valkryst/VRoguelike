@@ -5,6 +5,7 @@ import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.entity.Player;
 import com.valkryst.VRoguelike.entity.builder.CreatureBuilder;
 import com.valkryst.VRoguelike.entity.builder.PlayerBuilder;
+import com.valkryst.VRoguelike.enums.Race;
 import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
 import com.valkryst.VRoguelike.item.equipment.Weapon;
@@ -23,14 +24,16 @@ public class Driver {
     public static void main(String[] args) throws IOException, URISyntaxException, InterruptedException {
         final Font font = FontLoader.loadFontFromJar("Fonts/DejaVu Sans Mono/20pt/bitmap.png", "Fonts/DejaVu Sans Mono/20pt/data.fnt", 1);
         final Panel panel = new PanelBuilder().setFont(font)
-                .setWidthInCharacters(90)
-                .setHeightInCharacters(30)
-                .build();
+                                              .setWidthInCharacters(90)
+                                              .setHeightInCharacters(30)
+                                              .build();
 
-        Thread.sleep(200);
+        Thread.sleep(50);
 
         // Initialize map tiles:
         final GameScreen gameScreen = new GameScreen(panel);
+        panel.swapScreen(gameScreen);
+
         final Tile[][] tiles = gameScreen.getMap().getTiles();
 
         for (int x = 0 ; x < tiles.length ; x++) {
@@ -40,13 +43,12 @@ public class Driver {
         }
 
         // Initialize entity:
-        final Player player = new PlayerBuilder().setX(25).setY(12).build();
+        final Player player = new PlayerBuilder().setX(25).setY(12).setRace(Race.HUMAN).build();
+        panel.addKeyListener(player);
         player.getEquipment().setItemInSlot(EquipmentSlot.MAIN_HAND, new Weapon("TWep", "DoTWep", EquipmentSlot.MAIN_HAND));
         player.getActions().add(new UpdateLOSPosition(0, 0));
-        player.show();
 
-        final Creature npc = new CreatureBuilder().setX(26).setY(13).setSprite(Sprite.ENEMY).build();
-        npc.show();
+        final Creature npc = new CreatureBuilder().setX(26).setY(13).setRace(Race.HUMAN).setSprite(Sprite.ENEMY).build();
 
         gameScreen.getMap().addEntities(player, npc);
 
