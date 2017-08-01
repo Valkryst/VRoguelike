@@ -1,7 +1,6 @@
 package com.valkryst.VRoguelike.world;
 
 import com.valkryst.VRoguelike.entity.Entity;
-import com.valkryst.VRoguelike.enums.Sprite;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -32,16 +31,13 @@ public class Map {
      *
      * @param height
      *        The height of the map to create.
-     *
-     * @param defaultSprite
-     *        The default sprite of the tiles to fill the map with.
      */
-    public Map(final int width, final int height, final Sprite defaultSprite) {
+    public Map(final int width, final int height) {
         tiles = new Tile[width][height];
 
         for (int x = 0 ; x < width ; x++) {
             for (int y = 0 ; y < height ; y++) {
-                tiles[x][y] = new Tile(defaultSprite);
+                tiles[x][y] = new Tile();
             }
         }
     }
