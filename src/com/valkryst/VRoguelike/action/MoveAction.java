@@ -1,22 +1,29 @@
 package com.valkryst.VRoguelike.action;
 
 import com.valkryst.VRoguelike.entity.Entity;
-import com.valkryst.VRoguelike.world.Tile;
 import com.valkryst.VRoguelike.world.Map;
-import com.valkryst.VTerminal.component.Layer;
-import lombok.Getter;
 
 import java.util.Objects;
 
 
 public class MoveAction implements Action {
+    /** The current position on the x-axis. */
+    private final int x;
+    /** The current position on the y-axis. */
+    private final int y;
     /** The change in x-axis position. */
-    @Getter private final int dx;
+    private final int dx;
     /** The change in y-axis position. */
-    @Getter private final int dy;
+    private final int dy;
 
     /**
      * Constructs a new MoveAction.
+     *
+     * @param x
+     *        The current position on the x-axis.
+     *
+     * @param y
+     *        The current position on the y-axis.
      *
      * @param dx
      *        The change in x-axis position.
@@ -24,7 +31,9 @@ public class MoveAction implements Action {
      * @param dy
      *        The change in y-axis position.
      */
-    public MoveAction(final int dx, final int dy) {
+    public MoveAction(final int x, final int y, final int dx, final int dy) {
+        this.x = x;
+        this.y = y;
         this.dx = dx;
         this.dy = dy;
     }
@@ -34,20 +43,9 @@ public class MoveAction implements Action {
         Objects.requireNonNull(map);
         Objects.requireNonNull(entity);
 
-        // Get curr/new position:
-        final Layer layer = entity.getLayer();
-        final int curX = layer.getColumnIndex();
-        final int curY = layer.getRowIndex();
-
-        final int newX = curX + dx;
-        final int newY = curY + dy;
-
-        // Move to new position, if possible:
-        final Tile tile = map.getTiles()[newX][newY];
-
-        if (tile.isSolid() == false) {
-            layer.setColumnIndex(newX);
-            layer.setRowIndex(newY);
+        if (map.isPositionFree(x + dx, y + dy)) {
+            entity.getLayer().setColumnIndex(x + dy);
+            entity.getLayer().setRowIndex(y + dy);
         }
     }
 }
