@@ -12,9 +12,9 @@ public class Tile {
     @Getter @Setter private Sprite sprite;
 
     /** Whether or not the tile is solid. */
-    @Getter @Setter private boolean solid = false;
+    @Getter @Setter private boolean solid = true;
     /** Whether or not the tile is transparent. */
-    @Getter @Setter private boolean transparent = true;
+    @Getter @Setter private boolean transparent = false;
     /** Whether or not the tile has been seen before. */
     @Getter @Setter private boolean visited = false;
     /** Whether or not the tile is visible. */
