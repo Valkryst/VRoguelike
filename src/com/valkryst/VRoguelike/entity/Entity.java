@@ -124,8 +124,7 @@ public class Entity {
     }
 
     /**
-     * Adds a move action and an update LOS position action
-     * to the entity.
+     * Adds a move action to the entity.
      *
      * @param dx
      *        The change in x-axis position.
@@ -137,12 +136,7 @@ public class Entity {
      *        If the action was created and added.
      */
     public boolean move(final int dx, final int dy) {
-        final int x = getX();
-        final int y = getY();
-
-        actions.add(new MoveAction(x, y, dx, dy));
-        actions.add(new UpdateLOSPosition(x, y, dx, dy));
-
+        actions.add(new MoveAction(getX(), getY(), dx, dy));
         return true;
     }
 
