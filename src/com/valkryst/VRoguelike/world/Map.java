@@ -8,7 +8,6 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 public class Map {
     /** The screen on which the map is drawn. */
@@ -105,7 +104,7 @@ public class Map {
     }
 
     /**
-     * Retrieves Entity at a position, if one exists.
+     * Retrieves all Entities at a position.
      *
      * @param x
      *        The x-axis value of the position.
@@ -114,19 +113,21 @@ public class Map {
      *        The y-axis value of the position.
      *
      * @return
-     *        The Entity, or nothing if none was found.
+     *        The Entities.
      */
-    public Optional<Entity> getEntityAt(final int x, final int y) {
-        for (final Entity entity : entities) {
+    public List<Entity> getEntityAt(final int x, final int y) {
+        final List<Entity> entities = new ArrayList<>();
+
+        for (final Entity entity : this.entities) {
             boolean matches = entity.getX() == x;
             matches &= entity.getY() == y;
 
             if (matches) {
-                return Optional.of(entity);
+                entities.add(entity);
             }
         }
 
-        return Optional.empty();
+        return entities;
     }
 
     /**
