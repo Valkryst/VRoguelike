@@ -61,7 +61,7 @@ public class MoveAction implements Action {
         if (map.isPositionFree(x + dx, y + dy)) {
             entity.getLayer().setColumnIndex(x + dx);
             entity.getLayer().setRowIndex(y + dy);
-            new UpdateLOSPosition(x, y, dx, dy).perform(map, entity);
+            new UpdateLOSAction(x, y, dx, dy).perform(map, entity);
         }
     }
 }

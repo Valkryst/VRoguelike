@@ -10,7 +10,7 @@ import com.valkryst.VTerminal.component.Screen;
 
 import java.awt.Point;
 
-public class UpdateLOSPosition implements Action {
+public class UpdateLOSAction implements Action {
     /** The current position on the x-axis. */
     private final int x;
     /** The current position on the y-axis. */
@@ -35,7 +35,7 @@ public class UpdateLOSPosition implements Action {
      * @param dy
      *        The change in y-axis position.
      */
-    public UpdateLOSPosition(final int x, final int y, final int dx, final int dy) {
+    public UpdateLOSAction(final int x, final int y, final int dx, final int dy) {
         this.x = x;
         this.y = y;
         this.dx = dx;
