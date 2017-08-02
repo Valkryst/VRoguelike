@@ -51,7 +51,7 @@ public class MoveAction implements Action {
         if (entities.size() >= 1) {
             for (final Entity target : entities) {
                 if (target instanceof Creature) {
-                    entity.addAction(new AttackAction((Creature) target));
+                    new AttackAction((Creature) target).perform(map, entity);
                 }
             }
 
