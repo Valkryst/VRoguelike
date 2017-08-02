@@ -9,10 +9,10 @@ import com.valkryst.VTerminal.component.Layer;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Entity {
     /** The name of the entity. */
@@ -22,7 +22,7 @@ public class Entity {
     @Getter @Setter private String description;
 
     /** The action to perform. */
-    @Getter private final List<Action> actions = new LinkedList<>();
+    @Getter private final Queue<Action> actions = new ConcurrentLinkedQueue<>();
 
     /** The layer-component on which the entity is drawn. */
     @Getter private Layer layer;
