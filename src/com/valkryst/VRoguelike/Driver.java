@@ -1,6 +1,7 @@
 package com.valkryst.VRoguelike;
 
-import com.valkryst.VRoguelike.action.UpdateLOSPosition;
+import com.valkryst.VRoguelike.action.UpdateLOSAction;
+import com.valkryst.VRoguelike.ai.AggressiveCombatAI;
 import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.entity.Player;
 import com.valkryst.VRoguelike.entity.builder.CreatureBuilder;
@@ -50,9 +51,14 @@ public class Driver {
             // Initialize entities:
             final Player player = new PlayerBuilder().setX(25).setY(12).setRace(Race.HUMAN).build();
             player.getEquipment().setItemInSlot(EquipmentSlot.MAIN_HAND, new Weapon("TWep", "DoTWep", EquipmentSlot.MAIN_HAND));
-            player.getActions().add(new UpdateLOSPosition(25, 12, 0, 0));
+            player.getActions().add(new UpdateLOSAction(25, 12, 0, 0));
 
-            final Creature npc = new CreatureBuilder().setX(26).setY(13).setRace(Race.HUMAN).setSprite(Sprite.ENEMY).build();
+            final Creature npc = new CreatureBuilder().setX(26)
+                                                      .setY(13)
+                                                      .setRace(Race.HUMAN)
+                                                      .setCombatAI(new AggressiveCombatAI())
+                                                      .setSprite(Sprite.ENEMY).build();
+            npc.getEquipment().setItemInSlot(EquipmentSlot.MAIN_HAND, new Weapon("TWep", "DoTWep", EquipmentSlot.MAIN_HAND));
 
             gameScreen.getMap().addEntities(player, npc);
 
