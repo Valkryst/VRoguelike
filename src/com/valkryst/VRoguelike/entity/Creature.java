@@ -68,12 +68,12 @@ public class Creature extends Entity {
         sb.append("\tRace:\t").append(race.name()).append("\n");
 
         sb.append("\tStatistics:\n");
-        sb.append(stat_level.toString().replace("\n\t", "\n\t\t"));
-        sb.append(stat_xp.toString().replace("\n\t", "\n\t\t"));
-        sb.append(stat_gold.toString().replace("\n\t", "\n\t\t"));
-        sb.append(stat_health.toString().replace("\n\t", "\n\t\t"));
-        sb.append(stat_strength.toString().replace("\n\t", "\n\t\t"));
-        sb.append(stat_defense.toString().replace("\n\t", "\n\t\t"));
+        sb.append("\t\t").append(stat_level.toString().replace("\n\t", "\n\t\t\t")).append("\n");
+        sb.append("\t\t").append(stat_xp.toString().replace("\n\t", "\n\t\t\t")).append("\n");
+        sb.append("\t\t").append(stat_gold.toString().replace("\n\t", "\n\t\t\t")).append("\n");
+        sb.append("\t\t").append(stat_health.toString().replace("\n\t", "\n\t\t\t")).append("\n");
+        sb.append("\t\t").append(stat_strength.toString().replace("\n\t", "\n\t\t\t")).append("\n");
+        sb.append("\t\t").append(stat_defense.toString().replace("\n\t", "\n\t\t\t")).append("\n");
 
         sb.append("\tCombatAI:\t").append(combatAI.getClass().getSimpleName());
 
