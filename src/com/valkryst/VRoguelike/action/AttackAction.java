@@ -5,6 +5,7 @@ import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
 import com.valkryst.VRoguelike.item.equipment.EquippableItem;
 import com.valkryst.VRoguelike.item.equipment.Weapon;
+import com.valkryst.VRoguelike.stat.LimitedStatistic;
 import com.valkryst.VRoguelike.world.Map;
 
 import java.util.Objects;
@@ -29,6 +30,7 @@ public class AttackAction implements Action {
     @Override
     public void perform(final Map map, final Entity entity) {
         final Creature self = (Creature) entity;
+        final LimitedStatistic health = target.getStat_health();
 
         int damage = 0;
         damage += getWeaponDamage(self, EquipmentSlot.MAIN_HAND);
@@ -38,7 +40,11 @@ public class AttackAction implements Action {
 
         if (damage > 0) {
             final int curHealth = target.getStat_health().getValue();
-            target.getStat_health().setValue(curHealth - damage);
+            health.setValue(curHealth - damage);
+        }
+
+        if (health.getValue() == health.getMinimum()) {
+            new DeathAction().perform(map, target);
         }
     }
 
