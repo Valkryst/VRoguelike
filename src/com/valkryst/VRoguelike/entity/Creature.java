@@ -57,6 +57,8 @@ public class Creature extends Entity {
         equipment = builder.getEquipment();
 
         lineOfSight = new LineOfSight(this, builder.getLineOfSightRadius());
+
+        combatAI = builder.getCombatAI();
     }
 
     @Override
