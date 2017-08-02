@@ -39,15 +39,21 @@ public class AttackAction implements Action {
         damage -= target.getStat_defense().getValue();
 
         if (damage > 0) {
-            final int curHealth = target.getStat_health().getValue();
-            health.setValue(curHealth - damage);
+            health.setValue(health.getValue() - damage);
+            System.out.println(self.getName() + " attacked " + target.getName() + " for " + damage + " damage.");
+            System.out.println(target.getName() + "'s health is now " + health.getValue() + "/" + health.getMaximum());
+        } else {
+            System.out.println(self.getName() + " dealt no damage to " + target.getName() + ".");
         }
 
         if (health.getValue() == health.getMinimum()) {
             new DeathAction().perform(map, target);
+            System.out.println(target.getName() + " has died.");
+        } else {
+            target.getCombatAI().decide(map, target, self);
         }
 
-        target.getCombatAI().decide(map, target, self);
+        System.out.println();
     }
 
     /**
