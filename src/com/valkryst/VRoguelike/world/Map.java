@@ -8,6 +8,7 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class Map {
     /** The screen on which the map is drawn. */
@@ -101,6 +102,31 @@ public class Map {
         }
 
         return tiles[x][y].isSolid() == false;
+    }
+
+    /**
+     * Retrieves Entity at a position, if one exists.
+     *
+     * @param x
+     *        The x-axis value of the position.
+     *
+     * @param y
+     *        The y-axis value of the position.
+     *
+     * @return
+     *        The Entity, or nothing if none was found.
+     */
+    public Optional<Entity> getEntityAt(final int x, final int y) {
+        for (final Entity entity : entities) {
+            boolean matches = entity.getX() == x;
+            matches &= entity.getY() == y;
+
+            if (matches) {
+                return Optional.of(entity);
+            }
+        }
+
+        return Optional.empty();
     }
 
     /**
