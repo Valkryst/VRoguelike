@@ -1,5 +1,7 @@
 package com.valkryst.VRoguelike.entity.builder;
 
+import com.valkryst.VRoguelike.ai.CombatAI;
+import com.valkryst.VRoguelike.ai.PassiveCombatAI;
 import com.valkryst.VRoguelike.enums.Race;
 import com.valkryst.VRoguelike.item.equipment.EquipmentInventory;
 import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
@@ -32,6 +34,9 @@ public abstract class AbstractCreatureBuilder<B extends AbstractEntityBuilder<B>
     /** The line of sight radius. */
     @Getter private int lineOfSightRadius;
 
+    /** The decision-making AI used to handle combat. */
+    @Getter private CombatAI combatAI;
+
     @Override
     public void reset() {
         super.reset();
@@ -40,6 +45,7 @@ public abstract class AbstractCreatureBuilder<B extends AbstractEntityBuilder<B>
         race = null;
         equipment = new EquipmentInventory();
         lineOfSightRadius = 4;
+        combatAI = new PassiveCombatAI();
 
         // Set Stats:
         stat_level = new LimitedStatistic("Level", 1, 1, 200);
@@ -74,6 +80,7 @@ public abstract class AbstractCreatureBuilder<B extends AbstractEntityBuilder<B>
     protected void checkState() {
         super.checkState();
         Objects.requireNonNull(race);
+        Objects.requireNonNull(combatAI);
     }
 
     /**
@@ -204,6 +211,20 @@ public abstract class AbstractCreatureBuilder<B extends AbstractEntityBuilder<B>
      */
     public B setLineOfSightRadius(final int lineOfSightRadius) {
         this.lineOfSightRadius = lineOfSightRadius;
+        return (B) this;
+    }
+
+    /**
+     * Sets the combat AI.
+     *
+     * @param combatAI
+     *        The combat AI.
+     *
+     * @return
+     *        This.
+     */
+    public B setCombatAI(final CombatAI combatAI) {
+        this.combatAI = combatAI;
         return (B) this;
     }
 }
