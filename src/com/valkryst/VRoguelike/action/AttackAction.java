@@ -46,6 +46,8 @@ public class AttackAction implements Action {
         if (health.getValue() == health.getMinimum()) {
             new DeathAction().perform(map, target);
         }
+
+        target.getCombatAI().decide(map, target, self);
     }
 
     /**
