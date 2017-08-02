@@ -1,6 +1,7 @@
 package com.valkryst.VRoguelike.entity;
 
 import com.valkryst.VRoguelike.LineOfSight;
+import com.valkryst.VRoguelike.ai.CombatAI;
 import com.valkryst.VRoguelike.entity.builder.AbstractCreatureBuilder;
 import com.valkryst.VRoguelike.enums.Race;
 import com.valkryst.VRoguelike.item.equipment.EquipmentInventory;
@@ -33,6 +34,9 @@ public class Creature extends Entity {
     /** A collection of all tiles that are currently visible to the creature. */
     @Getter private LineOfSight lineOfSight;
 
+    /** The decision-making AI used to handle combat. */
+    @Getter private CombatAI combatAI;
+
     /**
      * Constructs a new Creature.
      *
@@ -62,6 +66,14 @@ public class Creature extends Entity {
         sb.append("\tRace:\t").append(race.name()).append("\n");
 
         sb.append("\tStatistics:\n");
+        sb.append(stat_level.toString().replace("\n\t", "\n\t\t"));
+        sb.append(stat_xp.toString().replace("\n\t", "\n\t\t"));
+        sb.append(stat_gold.toString().replace("\n\t", "\n\t\t"));
+        sb.append(stat_health.toString().replace("\n\t", "\n\t\t"));
+        sb.append(stat_strength.toString().replace("\n\t", "\n\t\t"));
+        sb.append(stat_defense.toString().replace("\n\t", "\n\t\t"));
+
+        sb.append("\tCombatAI:\t").append(combatAI.getClass().getSimpleName());
 
         return sb.toString();
     }
@@ -70,7 +82,8 @@ public class Creature extends Entity {
     public int hashCode() {
         return super.hashCode() + Objects.hashCode(race) + Objects.hashCode(stat_level) + Objects.hashCode(stat_xp)
                + Objects.hashCode(stat_gold) + Objects.hashCode(stat_health) + Objects.hashCode(stat_strength)
-               + Objects.hashCode(stat_defense) + Objects.hashCode(equipment) + Objects.hashCode(lineOfSight);
+               + Objects.hashCode(stat_defense) + Objects.hashCode(equipment) + Objects.hashCode(lineOfSight)
+               + Objects.hashCode(combatAI);
     }
 
     @Override
@@ -95,6 +108,7 @@ public class Creature extends Entity {
         isEqual &= Objects.equals(stat_defense, otherCreature.getStat_defense());
         isEqual &= Objects.equals(equipment, otherCreature.getEquipment());
         isEqual &= Objects.equals(lineOfSight, otherCreature.getLineOfSight());
+        isEqual &= Objects.equals(combatAI, otherCreature.getCombatAI());
         return isEqual;
     }
 
