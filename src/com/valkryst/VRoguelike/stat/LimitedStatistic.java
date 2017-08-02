@@ -101,7 +101,11 @@ public class LimitedStatistic extends Statistic {
 
     @Override
     public void setValue(final int value) {
-        if (value <= maximum && value >= minimum) {
+        if (value > maximum) {
+            super.setValue(maximum);
+        } else if (value < minimum) {
+            super.setValue(minimum);
+        } else {
             super.setValue(value);
         }
     }
