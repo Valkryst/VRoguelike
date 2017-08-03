@@ -3,6 +3,7 @@ package com.valkryst.VRoguelike.entity.builder;
 import com.valkryst.VRoguelike.ai.CombatAI;
 import com.valkryst.VRoguelike.ai.PassiveCombatAI;
 import com.valkryst.VRoguelike.enums.Race;
+import com.valkryst.VRoguelike.enums.State;
 import com.valkryst.VRoguelike.item.equipment.EquipmentInventory;
 import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
 import com.valkryst.VRoguelike.item.equipment.EquippableItem;
@@ -34,6 +35,9 @@ public abstract class AbstractCreatureBuilder<B extends AbstractEntityBuilder<B>
     /** The line of sight radius. */
     @Getter private int lineOfSightRadius;
 
+    /** The current state. */
+    @Getter private State state;
+
     /** The decision-making AI used to handle combat. */
     @Getter private CombatAI combatAI;
 
@@ -45,6 +49,7 @@ public abstract class AbstractCreatureBuilder<B extends AbstractEntityBuilder<B>
         race = null;
         equipment = new EquipmentInventory();
         lineOfSightRadius = 4;
+        state = State.IDLE;
         combatAI = new PassiveCombatAI();
 
         // Set Stats:
@@ -211,6 +216,20 @@ public abstract class AbstractCreatureBuilder<B extends AbstractEntityBuilder<B>
      */
     public B setLineOfSightRadius(final int lineOfSightRadius) {
         this.lineOfSightRadius = lineOfSightRadius;
+        return (B) this;
+    }
+
+    /**
+     * Sets the state.
+     *
+     * @param state
+     *        The state.
+     *
+     * @return
+     *        This.
+     */
+    public B setState(final State state) {
+        this.state = state;
         return (B) this;
     }
 
