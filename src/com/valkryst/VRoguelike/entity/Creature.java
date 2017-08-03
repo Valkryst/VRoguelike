@@ -63,6 +63,8 @@ public class Creature extends Entity {
 
         lineOfSight = new LineOfSight(this, builder.getLineOfSightRadius());
 
+        state = builder.getState();
+
         combatAI = builder.getCombatAI();
     }
 
