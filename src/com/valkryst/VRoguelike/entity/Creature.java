@@ -4,9 +4,11 @@ import com.valkryst.VRoguelike.LineOfSight;
 import com.valkryst.VRoguelike.ai.CombatAI;
 import com.valkryst.VRoguelike.entity.builder.AbstractCreatureBuilder;
 import com.valkryst.VRoguelike.enums.Race;
+import com.valkryst.VRoguelike.enums.State;
 import com.valkryst.VRoguelike.item.equipment.EquipmentInventory;
 import com.valkryst.VRoguelike.stat.LimitedStatistic;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 import java.util.Objects;
@@ -33,6 +35,9 @@ public class Creature extends Entity {
 
     /** A collection of all tiles that are currently visible to the creature. */
     @Getter private LineOfSight lineOfSight;
+
+    /** The current state. */
+    @Getter @Setter @NonNull private State state;
 
     /** The decision-making AI used to handle combat. */
     @Getter private CombatAI combatAI;
@@ -120,7 +125,7 @@ public class Creature extends Entity {
      * @param sightRadius
      *        The sight radius.
      */
-    public void setSightRadius(final int sightRadius) {
+    public void setLineOfSight(final int sightRadius) {
         lineOfSight = new LineOfSight(this, sightRadius);
     }
 }
