@@ -12,13 +12,13 @@ import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
 import com.valkryst.VRoguelike.item.equipment.Weapon;
 import com.valkryst.VRoguelike.screen.GameScreen;
 import com.valkryst.VRoguelike.screen.MainMenuScreen;
+import com.valkryst.VRoguelike.world.Room;
 import com.valkryst.VRoguelike.world.Tile;
 import com.valkryst.VTerminal.Panel;
 import com.valkryst.VTerminal.builder.PanelBuilder;
 import com.valkryst.VTerminal.font.Font;
 import com.valkryst.VTerminal.font.FontLoader;
 
-import java.awt.Rectangle;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -63,8 +63,10 @@ public class Driver {
             gameScreen.getMap().addEntities(player, npc);
 
             // Create rooms:
-            createRoom(panel, tiles, new Rectangle(20, 5, 10, 15));
-            createRoom(panel, tiles, new Rectangle(50, 5, 10, 15));
+            final Room roomA = new Room(20, 5, 10, 15);
+            final Room roomB = new Room(50, 5, 10, 15);
+            roomA.carve(gameScreen);
+            roomB.carve(gameScreen);
         });
 
         mainMenuScreen.getButton_exit().setOnClickFunction(() -> {
@@ -76,20 +78,6 @@ public class Driver {
             gameScreen.getMap().update();
             panel.draw();
             Thread.sleep(100);
-        }
-    }
-
-    private static void createRoom(final Panel panel, final Tile[][] tiles, final Rectangle rectangle) {
-        final int endX = rectangle.width + rectangle.x;
-        final int endY = rectangle.height + rectangle.y;
-
-        for (int x = rectangle.x ; x < endX ; x++) {
-            for (int y = rectangle.y ; y < endY ; y++) {
-                tiles[x][y].setSprite(Sprite.DIRT);
-                tiles[x][y].setSolid(false);
-                tiles[x][y].setTransparent(false);
-                tiles[x][y].placeOnScreen(panel.getScreen(), x, y);
-            }
         }
     }
 }
