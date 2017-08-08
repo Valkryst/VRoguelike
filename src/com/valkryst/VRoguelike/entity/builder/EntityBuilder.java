@@ -19,6 +19,10 @@ public class EntityBuilder {
     /** The sprite. */
     @Getter @Setter private Sprite sprite;
 
+    public EntityBuilder() {
+        reset();
+    }
+
     public Entity build() {
         checkState();
         return new Entity(this);
