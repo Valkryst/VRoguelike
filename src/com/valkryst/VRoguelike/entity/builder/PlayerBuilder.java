@@ -5,8 +5,15 @@ import com.valkryst.VRoguelike.enums.Sprite;
 
 public class PlayerBuilder extends CreatureBuilder {
     public Player build() {
-        super.setSprite(Sprite.PLAYER);
         super.checkState();
         return new Player(this);
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        super.setName("Player");
+        super.setDescription("This is you.");
+        super.setSprite(Sprite.PLAYER);
     }
 }
