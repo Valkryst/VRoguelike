@@ -1,10 +1,9 @@
 package com.valkryst.VRoguelike.item.equipment;
 
 import com.valkryst.VRoguelike.item.Item;
-import com.valkryst.VRoguelike.stat.Statistic;
+import com.valkryst.VRoguelike.item.builder.equipment.EquippableItemBuilder;
 import lombok.Getter;
 
-import java.util.List;
 import java.util.Objects;
 
 public class EquippableItem extends Item {
@@ -14,64 +13,17 @@ public class EquippableItem extends Item {
     /**
      * Constructs a new EquippableItem.
      *
-     * @param name
-     *        The name.
-     *
-     * @param description
-     *        The description.
-     *
-     * @param slot
-     *        The slot.
-     *
-     * @throws NullPointerException
-     *        If the slot is null.
+     * @param builder
+     *        The builder.
      */
-    public EquippableItem(final String name, final String description, final EquipmentSlot slot) {
-        super(name, description);
-
-        Objects.requireNonNull(slot);
-        this.slot = slot;
-    }
-
-    /**
-     * Constructs a new EquippableItem.
-     *
-     * @param name
-     *        The name.
-     *
-     * @param description
-     *        The description.
-     *
-     * @param statistics
-     *        The statistics.
-     *
-     * @param slot
-     *        The slot.
-     *
-     * @throws NullPointerException
-     *        If the slot is null.
-     */
-    public EquippableItem(final String name, final String description, final List<Statistic> statistics, final EquipmentSlot slot) {
-        super(name, description, statistics);
-
-        Objects.requireNonNull(slot);
-        this.slot = slot;
+    public EquippableItem(final EquippableItemBuilder builder) {
+        super(builder);
+        slot = builder.getSlot();
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("EquippableItem:");
-        sb.append("\n\tName:\t").append(super.getName());
-        sb.append("\n\tDescription:\t").append(super.getDescription());
-        sb.append("\n\tSlot:\t").append(slot.name());
-
-        for (final Statistic statistic : super.getStatistics().values()) {
-            final String temp = "\t" + statistic.toString();
-            sb.append(temp.replace("\n\t", "\n\t\t"));
-        }
-
-        return sb.toString();
+        return super.toString() + "\n\tSlot:\t" + slot.name();
     }
 
     @Override
