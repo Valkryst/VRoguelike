@@ -6,6 +6,7 @@ import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.enums.Race;
 import com.valkryst.VRoguelike.enums.State;
 import com.valkryst.VRoguelike.item.equipment.EquipmentInventory;
+import com.valkryst.VRoguelike.loot.LootTable;
 import com.valkryst.VRoguelike.stat.LimitedStatistic;
 import lombok.Getter;
 import lombok.Setter;
@@ -45,6 +46,9 @@ public class CreatureBuilder extends EntityBuilder {
     /** The decision-making AI used to handle combat. */
     @Getter @Setter private CombatAI combatAI;
 
+    /** The loot table. */
+    @Getter @Setter private LootTable lootTable;
+
     public Creature build() {
         checkState();
         return new Creature(this);
@@ -60,6 +64,7 @@ public class CreatureBuilder extends EntityBuilder {
         lineOfSightRadius = 4;
         state = State.IDLE;
         combatAI = new PassiveCombatAI();
+        lootTable = new LootTable();
 
         // Set Stats:
         stat_level = new LimitedStatistic("Level", 1, 1, 200);
