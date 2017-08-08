@@ -45,7 +45,7 @@ public class Item {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append("Item:");
+        sb.append(this.getClass().getSimpleName()).append(":");
         sb.append("\n\tName:\t").append(name);
         sb.append("\n\tDescription:\t").append(description);
         sb.append("\n\tStatistics:");
