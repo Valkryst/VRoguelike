@@ -6,6 +6,7 @@ import com.valkryst.VRoguelike.entity.builder.CreatureBuilder;
 import com.valkryst.VRoguelike.enums.Race;
 import com.valkryst.VRoguelike.enums.State;
 import com.valkryst.VRoguelike.item.equipment.EquipmentInventory;
+import com.valkryst.VRoguelike.loot.LootTable;
 import com.valkryst.VRoguelike.stat.LimitedStatistic;
 import lombok.Getter;
 import lombok.NonNull;
@@ -46,6 +47,9 @@ public class Creature extends Entity {
     /** The decision-making AI used to handle combat. */
     @Getter private CombatAI combatAI;
 
+    /** The loot table. */
+    @Getter private final LootTable lootTable;
+
     /**
      * Constructs a new Creature.
      *
@@ -72,33 +76,29 @@ public class Creature extends Entity {
         state = builder.getState();
 
         combatAI = builder.getCombatAI();
+
+        lootTable = builder.getLootTable();
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("Creature").append(super.toString().substring(6));
-        sb.append("\tRace:\t").append(race.name()).append("\n");
-
-        sb.append("\tStatistics:\n");
-        sb.append("\t\t").append(stat_level.toString().replace("\n\t", "\n\t\t\t")).append("\n");
-        sb.append("\t\t").append(stat_xp.toString().replace("\n\t", "\n\t\t\t")).append("\n");
-        sb.append("\t\t").append(stat_gold.toString().replace("\n\t", "\n\t\t\t")).append("\n");
-        sb.append("\t\t").append(stat_health.toString().replace("\n\t", "\n\t\t\t")).append("\n");
-        sb.append("\t\t").append(stat_strength.toString().replace("\n\t", "\n\t\t\t")).append("\n");
-        sb.append("\t\t").append(stat_defense.toString().replace("\n\t", "\n\t\t\t")).append("\n");
-
-        sb.append("\tCombatAI:\t").append(combatAI.getClass().getSimpleName());
-
-        return sb.toString();
+        return "Creature" + super.toString().substring(6) +
+                "\tRace:\t" + race.name() + "\n" +
+                "\tStatistics:\n" +
+                "\t\t" + stat_level.toString().replace("\n\t", "\n\t\t\t") + "\n" +
+                "\t\t" + stat_xp.toString().replace("\n\t", "\n\t\t\t") + "\n" +
+                "\t\t" + stat_gold.toString().replace("\n\t", "\n\t\t\t") + "\n" +
+                "\t\t" + stat_health.toString().replace("\n\t", "\n\t\t\t") + "\n" +
+                "\t\t" + stat_strength.toString().replace("\n\t", "\n\t\t\t") + "\n" +
+                "\t\t" + stat_defense.toString().replace("\n\t", "\n\t\t\t") + "\n" +
+                "\tCombatAI:\t" + combatAI.getClass().getSimpleName() +
+                lootTable.toString().replace("\n\t", "\n\t\t");
     }
 
     @Override
     public int hashCode() {
-        return super.hashCode() + Objects.hashCode(race) + Objects.hashCode(stat_level) + Objects.hashCode(stat_xp)
-               + Objects.hashCode(stat_gold) + Objects.hashCode(stat_health) + Objects.hashCode(stat_strength)
-               + Objects.hashCode(stat_defense) + Objects.hashCode(equipment) + Objects.hashCode(lineOfSight)
-               + Objects.hashCode(combatAI);
+        return super.hashCode() + Objects.hash(race, stat_level, stat_xp, stat_gold, stat_health, stat_strength,
+                stat_defense, stat_accuracy, stat_dodge, equipment, lineOfSight, combatAI, lootTable);
     }
 
     @Override
@@ -121,9 +121,12 @@ public class Creature extends Entity {
         isEqual &= Objects.equals(stat_health, otherCreature.getStat_health());
         isEqual &= Objects.equals(stat_strength, otherCreature.getStat_strength());
         isEqual &= Objects.equals(stat_defense, otherCreature.getStat_defense());
+        isEqual &= Objects.equals(stat_accuracy, otherCreature.getStat_accuracy());
+        isEqual &= Objects.equals(stat_dodge, otherCreature.getStat_dodge());
         isEqual &= Objects.equals(equipment, otherCreature.getEquipment());
         isEqual &= Objects.equals(lineOfSight, otherCreature.getLineOfSight());
         isEqual &= Objects.equals(combatAI, otherCreature.getCombatAI());
+        isEqual &= Objects.equals(lootTable, otherCreature.getLootTable());
         return isEqual;
     }
 
