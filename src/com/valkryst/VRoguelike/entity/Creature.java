@@ -2,7 +2,7 @@ package com.valkryst.VRoguelike.entity;
 
 import com.valkryst.VRoguelike.LineOfSight;
 import com.valkryst.VRoguelike.ai.CombatAI;
-import com.valkryst.VRoguelike.entity.builder.AbstractCreatureBuilder;
+import com.valkryst.VRoguelike.entity.builder.CreatureBuilder;
 import com.valkryst.VRoguelike.enums.Race;
 import com.valkryst.VRoguelike.enums.State;
 import com.valkryst.VRoguelike.item.equipment.EquipmentInventory;
@@ -29,6 +29,10 @@ public class Creature extends Entity {
     @Getter private final LimitedStatistic stat_strength;
     /** The defense. */
     @Getter private final LimitedStatistic stat_defense;
+    /** The accuracy (Percent chance to land an attack). */
+    @Getter private final LimitedStatistic stat_accuracy;
+    /** The dodge (Percent chance to dodge an attack). */
+    @Getter private final LimitedStatistic stat_dodge;
 
     /** The equipment inventory. */
     @Getter private final EquipmentInventory equipment;
@@ -48,7 +52,7 @@ public class Creature extends Entity {
      * @param builder
      *        The builder.
      */
-    public Creature(final AbstractCreatureBuilder builder) {
+    public Creature(final CreatureBuilder builder) {
         super(builder);
         race = builder.getRace();
 
@@ -58,6 +62,8 @@ public class Creature extends Entity {
         stat_health = builder.getStat_health();
         stat_strength = builder.getStat_strength();
         stat_defense = builder.getStat_defense();
+        stat_accuracy = builder.getStat_accuracy();
+        stat_dodge = builder.getStat_dodge();
 
         equipment = builder.getEquipment();
 

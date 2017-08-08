@@ -1,7 +1,10 @@
 package com.valkryst.VRoguelike.entity;
 
-import com.valkryst.VRoguelike.action.*;
-import com.valkryst.VRoguelike.entity.builder.AbstractEntityBuilder;
+import com.valkryst.VRoguelike.action.Action;
+import com.valkryst.VRoguelike.action.HideAction;
+import com.valkryst.VRoguelike.action.MoveAction;
+import com.valkryst.VRoguelike.action.ShowAction;
+import com.valkryst.VRoguelike.entity.builder.EntityBuilder;
 import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.AsciiCharacter;
@@ -36,7 +39,7 @@ public class Entity {
      * @throws NullPointerException
      *        If the builder is null.
      */
-    public Entity(final AbstractEntityBuilder builder) {
+    public Entity(final EntityBuilder builder) {
         Objects.requireNonNull(builder);
 
         name = builder.getName();

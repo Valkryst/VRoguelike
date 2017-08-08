@@ -1,6 +1,6 @@
 package com.valkryst.VRoguelike.entity;
 
-import com.valkryst.VRoguelike.entity.builder.AbstractPlayerBuilder;
+import com.valkryst.VRoguelike.entity.builder.PlayerBuilder;
 
 public class Player extends Creature {
     /**
@@ -9,7 +9,7 @@ public class Player extends Creature {
      * @param builder
      *        The builder.
      */
-    public Player(final AbstractPlayerBuilder builder) {
+    public Player(final PlayerBuilder builder) {
         super(builder);
     }
 
