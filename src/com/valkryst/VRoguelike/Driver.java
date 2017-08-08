@@ -8,8 +8,8 @@ import com.valkryst.VRoguelike.entity.builder.CreatureBuilder;
 import com.valkryst.VRoguelike.entity.builder.PlayerBuilder;
 import com.valkryst.VRoguelike.enums.Race;
 import com.valkryst.VRoguelike.enums.Sprite;
+import com.valkryst.VRoguelike.item.builder.equipment.WeaponBuilder;
 import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
-import com.valkryst.VRoguelike.item.equipment.Weapon;
 import com.valkryst.VRoguelike.screen.GameScreen;
 import com.valkryst.VRoguelike.screen.MainMenuScreen;
 import com.valkryst.VRoguelike.world.Room;
@@ -54,8 +54,17 @@ public class Driver {
             playerBuilder.setY(12);
             playerBuilder.setRace(Race.HUMAN);
             final Player player = playerBuilder.build();
-            player.getEquipment().setItemInSlot(EquipmentSlot.MAIN_HAND, new Weapon("TWep", "DoTWep", EquipmentSlot.MAIN_HAND));
+
+            final WeaponBuilder weaponBuilder = new WeaponBuilder();
+            weaponBuilder.setName("TWep");
+            weaponBuilder.setDescription("DoTWep");
+            weaponBuilder.setSlot(EquipmentSlot.MAIN_HAND);
+
+            player.getEquipment().setItemInSlot(EquipmentSlot.MAIN_HAND, weaponBuilder.build());
             player.getActions().add(new UpdateLOSAction(25, 12, 0, 0));
+
+
+
 
             final CreatureBuilder creatureBuilder = new CreatureBuilder();
             creatureBuilder.setX(26);
@@ -64,7 +73,7 @@ public class Driver {
             creatureBuilder.setCombatAI(new AggressiveCombatAI());
             creatureBuilder.setSprite(Sprite.ENEMY);
             final Creature npc = creatureBuilder.build();
-            npc.getEquipment().setItemInSlot(EquipmentSlot.MAIN_HAND, new Weapon("TWep", "DoTWep", EquipmentSlot.MAIN_HAND));
+            npc.getEquipment().setItemInSlot(EquipmentSlot.MAIN_HAND, weaponBuilder.build());
 
             gameScreen.getMap().addEntities(player, npc);
 
