@@ -10,6 +10,7 @@ import com.valkryst.VRoguelike.world.Map;
 
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class AttackAction implements Action {
     /** The target. */
@@ -31,6 +32,13 @@ public class AttackAction implements Action {
     public void perform(final Map map, final Entity entity) {
         final Creature self = (Creature) entity;
         final LimitedStatistic health = target.getStat_health();
+
+        if (doesAttackHitTarget(self)) {
+            new DodgeAction().perform(map, target);
+            new AttackMissAction().perform(map, self);
+            System.out.println(self.getName() + " missed " + target.getName() + "\n");
+            return;
+        }
 
         int damage = 0;
         damage += getWeaponDamage(self, EquipmentSlot.MAIN_HAND);
@@ -54,6 +62,22 @@ public class AttackAction implements Action {
         }
 
         System.out.println();
+    }
+
+    /**
+     * Determines if an attack will hit the target.
+     *
+     * @param self
+     *        The attacking creature.
+     *
+     * @return
+     *        If the attack lands.
+     */
+    private boolean doesAttackHitTarget(final Creature self) {
+        final int randomVal = ThreadLocalRandom.current().nextInt(0, 100);
+        final int hitVal = self.getStat_accuracy().getValue() - target.getStat_dodge().getValue();
+
+        return randomVal < hitVal;
     }
 
     /**
