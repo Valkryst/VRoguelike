@@ -68,6 +68,8 @@ public class CreatureBuilder extends EntityBuilder {
         stat_health = new LimitedStatistic("Health", 0, 100);
         stat_strength = new LimitedStatistic("Strength", 0, 100);
         stat_defense = new LimitedStatistic("Defense", 0, 100);
+        stat_accuracy = new LimitedStatistic("Accuracy", 0, 100);
+        stat_dodge = new LimitedStatistic("Dodge", 0, 100);
 
         // Level When XP Full:
         stat_xp.setOnChange(() -> {
