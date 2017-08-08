@@ -19,15 +19,26 @@ public class EntityBuilder {
     /** The sprite. */
     @Getter @Setter private Sprite sprite;
 
+    /** Constructs a new EntityBuilder. */
     public EntityBuilder() {
         reset();
     }
 
+    /** Constructs an Entity. */
     public Entity build() {
         checkState();
         return new Entity(this);
     }
 
+    /**
+     * Ensures the builder is in a valid state.
+     *
+     * @throws NullPointerException
+     *        If the name or description are null.
+     *
+     * @throws IllegalArgumentException
+     *        If the name or description are empty.
+     */
     protected void checkState() {
         if (name == null || name.isEmpty()) {
             name = "Entity";
