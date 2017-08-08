@@ -49,15 +49,21 @@ public class Driver {
             }
 
             // Initialize entities:
-            final Player player = new PlayerBuilder().setX(25).setY(12).setRace(Race.HUMAN).build();
+            final PlayerBuilder playerBuilder = new PlayerBuilder();
+            playerBuilder.setX(25);
+            playerBuilder.setY(12);
+            playerBuilder.setRace(Race.HUMAN);
+            final Player player = playerBuilder.build();
             player.getEquipment().setItemInSlot(EquipmentSlot.MAIN_HAND, new Weapon("TWep", "DoTWep", EquipmentSlot.MAIN_HAND));
             player.getActions().add(new UpdateLOSAction(25, 12, 0, 0));
 
-            final Creature npc = new CreatureBuilder().setX(26)
-                                                      .setY(13)
-                                                      .setRace(Race.HUMAN)
-                                                      .setCombatAI(new AggressiveCombatAI())
-                                                      .setSprite(Sprite.ENEMY).build();
+            final CreatureBuilder creatureBuilder = new CreatureBuilder();
+            creatureBuilder.setX(26);
+            creatureBuilder.setY(13);
+            creatureBuilder.setRace(Race.HUMAN);
+            creatureBuilder.setCombatAI(new AggressiveCombatAI());
+            creatureBuilder.setSprite(Sprite.ENEMY);
+            final Creature npc = creatureBuilder.build();
             npc.getEquipment().setItemInSlot(EquipmentSlot.MAIN_HAND, new Weapon("TWep", "DoTWep", EquipmentSlot.MAIN_HAND));
 
             gameScreen.getMap().addEntities(player, npc);
