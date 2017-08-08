@@ -102,5 +102,6 @@ public class CreatureBuilder extends EntityBuilder {
         super.checkState();
         Objects.requireNonNull(race);
         Objects.requireNonNull(combatAI);
+        Objects.requireNonNull(lootTable);
     }
 }
