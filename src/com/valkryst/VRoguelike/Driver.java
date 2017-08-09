@@ -25,10 +25,13 @@ import java.net.URISyntaxException;
 public class Driver {
     public static void main(String[] args) throws IOException, URISyntaxException, InterruptedException {
         final Font font = FontLoader.loadFontFromJar("Fonts/DejaVu Sans Mono/20pt/bitmap.png", "Fonts/DejaVu Sans Mono/20pt/data.fnt", 1);
-        final Panel panel = new PanelBuilder().setFont(font)
-                                              .setWidthInCharacters(90)
-                                              .setHeightInCharacters(30)
-                                              .build();
+
+        final PanelBuilder panelBuilder = new PanelBuilder();
+        panelBuilder.setFont(font);
+        panelBuilder.setWidthInCharacters(90);
+        panelBuilder.setHeightInCharacters(30);
+
+        final Panel panel = panelBuilder.build();
 
         Thread.sleep(50);
 
