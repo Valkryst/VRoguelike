@@ -1,5 +1,6 @@
 package com.valkryst.VRoguelike.action;
 
+import com.valkryst.VDice.Die;
 import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
@@ -10,7 +11,6 @@ import com.valkryst.VRoguelike.world.Map;
 
 import java.util.Objects;
 import java.util.Optional;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class AttackAction implements Action {
     /** The target. */
@@ -36,7 +36,7 @@ public class AttackAction implements Action {
         if (doesAttackHitTarget(self)) {
             new DodgeAction().perform(map, target);
             new AttackMissAction().perform(map, self);
-            System.out.println(self.getName() + " missed " + target.getName() + "\n");
+            System.out.println(self.getName() + " missed " + target.getName());
             return;
         }
 
@@ -74,7 +74,7 @@ public class AttackAction implements Action {
      *        If the attack lands.
      */
     private boolean doesAttackHitTarget(final Creature self) {
-        final int randomVal = ThreadLocalRandom.current().nextInt(0, 100);
+        final int randomVal = new Die(100).roll();
         final int hitVal = self.getStat_accuracy().getValue() - target.getStat_dodge().getValue();
 
         return randomVal < hitVal;
