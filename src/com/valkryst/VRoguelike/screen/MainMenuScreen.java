@@ -16,6 +16,7 @@ public class MainMenuScreen extends Screen {
         // Construct menu options:
         final ButtonBuilder builder = new ButtonBuilder();
         builder.setText("New");
+        builder.setRadio(panel.getRadio());
         builder.setColumnIndex(panel.getWidthInCharacters() / 3);
         builder.setRowIndex(panel.getHeightInCharacters() / 3);
 
@@ -25,7 +26,10 @@ public class MainMenuScreen extends Screen {
         builder.setRowIndex(builder.getRowIndex() + 1);
         button_exit = builder.build();
 
-        // Add components:
+        // Swap Screen:
+        panel.swapScreen(this);
+
+        // Add components to Screen VIA Panel functions:
         panel.addComponents(button_new, button_exit);
     }
 }
