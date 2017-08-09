@@ -15,20 +15,17 @@ public class MainMenuScreen extends Screen {
 
         // Construct menu options:
         final ButtonBuilder builder = new ButtonBuilder();
+        builder.setText("New");
+        builder.setColumnIndex(panel.getWidthInCharacters() / 3);
+        builder.setRowIndex(panel.getHeightInCharacters() / 3);
 
-        button_new = builder.setText("New")
-                            .setPanel(panel)
-                            .setColumnIndex(panel.getWidthInCharacters() / 3)
-                            .setRowIndex(panel.getHeightInCharacters() / 3)
-                            .build();
+        button_new = builder.build();
 
-        button_exit = builder.setText("Exit")
-                             .setPanel(panel)
-                             .setRowIndex(builder.getRowIndex() + 1)
-                             .build();
+        builder.setText("Exit");
+        builder.setRowIndex(builder.getRowIndex() + 1);
+        button_exit = builder.build();
 
-        // Add components to self:
-        super.addComponent(button_new);
-        super.addComponent(button_exit);
+        // Add components:
+        panel.addComponents(button_new, button_exit);
     }
 }
