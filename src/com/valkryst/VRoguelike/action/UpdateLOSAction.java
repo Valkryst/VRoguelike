@@ -7,9 +7,14 @@ import com.valkryst.VRoguelike.entity.Player;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VRoguelike.world.Tile;
 import com.valkryst.VTerminal.component.Screen;
+import lombok.EqualsAndHashCode;
+import lombok.NonNull;
+import lombok.ToString;
 
 import java.awt.Point;
 
+@EqualsAndHashCode
+@ToString
 public class UpdateLOSAction implements Action {
     /** The current position on the x-axis. */
     private final int x;
@@ -43,7 +48,7 @@ public class UpdateLOSAction implements Action {
     }
 
     @Override
-    public void perform(final Map map, final Entity entity) {
+    public void perform(final @NonNull Map map, final @NonNull Entity entity) {
         if (entity instanceof Creature == false) {
             return;
         }

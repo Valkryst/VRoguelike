@@ -4,10 +4,13 @@ import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
 import com.valkryst.VRoguelike.world.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NonNull;
+import lombok.ToString;
 
-import java.util.Objects;
-
+@EqualsAndHashCode
+@ToString
 public class UnEquipAction implements Action {
     /** The slot to un-equip. */
     @Getter private final EquipmentSlot slot;
@@ -21,14 +24,12 @@ public class UnEquipAction implements Action {
      * @throws NullPointerException
      *        If the slot is null.
      */
-    public UnEquipAction(final EquipmentSlot slot) {
-        Objects.requireNonNull(slot);
-
+    public UnEquipAction(final @NonNull EquipmentSlot slot) {
         this.slot = slot;
     }
 
     @Override
-    public void perform(final Map map, final Entity entity) {
+    public void perform(final @NonNull Map map, final @NonNull Entity entity) {
         if (entity instanceof Creature == false) {
             return;
         }

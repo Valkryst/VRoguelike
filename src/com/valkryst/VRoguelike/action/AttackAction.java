@@ -8,10 +8,14 @@ import com.valkryst.VRoguelike.item.equipment.EquippableItem;
 import com.valkryst.VRoguelike.item.equipment.Weapon;
 import com.valkryst.VRoguelike.stat.LimitedStatistic;
 import com.valkryst.VRoguelike.world.Map;
+import lombok.EqualsAndHashCode;
+import lombok.NonNull;
+import lombok.ToString;
 
-import java.util.Objects;
 import java.util.Optional;
 
+@EqualsAndHashCode
+@ToString
 public class AttackAction implements Action {
     /** The target. */
     private final Creature target;
@@ -21,15 +25,16 @@ public class AttackAction implements Action {
      *
      * @param target
      *        The target.
+     *
+     * @throws NullPointerException
+     *        If the target is null.
      */
-    public AttackAction(final Creature target) {
-        Objects.requireNonNull(target);
-
+    public AttackAction(final @NonNull Creature target) {
         this.target = target;
     }
 
     @Override
-    public void perform(final Map map, final Entity entity) {
+    public void perform(final @NonNull Map map, final @NonNull Entity entity) {
         final Creature self = (Creature) entity;
         final LimitedStatistic health = target.getStat_health();
 
@@ -72,8 +77,11 @@ public class AttackAction implements Action {
      *
      * @return
      *        If the attack lands.
+     *
+     * @throws NullPointerException
+     *        If the creature is null.
      */
-    private boolean doesAttackHitTarget(final Creature self) {
+    private boolean doesAttackHitTarget(final @NonNull Creature self) {
         final int randomVal = new Die(100).roll();
         final int hitVal = self.getStat_accuracy().getValue() - target.getStat_dodge().getValue();
 
@@ -98,8 +106,11 @@ public class AttackAction implements Action {
      *
      *        If there is a weapon in the specified slot, then
      *        the weapon's attack damage is returned.
+     *
+     * @throws NullPointerException
+     *        If the creature or slot is null.
      */
-    private static int getWeaponDamage(final Creature creature, final EquipmentSlot slot) {
+    private static int getWeaponDamage(final @NonNull Creature creature, final @NonNull EquipmentSlot slot) {
         final Optional<EquippableItem> optItem = creature.getEquipment().getItemInSlot(slot);
 
         if (optItem.isPresent() && optItem.get() instanceof Weapon) {

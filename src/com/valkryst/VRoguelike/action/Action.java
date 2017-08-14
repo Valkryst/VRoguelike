@@ -2,6 +2,7 @@ package com.valkryst.VRoguelike.action;
 
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.world.Map;
+import lombok.NonNull;
 
 public interface Action {
     /**
@@ -12,6 +13,9 @@ public interface Action {
      *
      * @param entity
      *        The entity performing the action.
+     *
+     * @throws NullPointerException
+     *        If the map or entity is null.
      */
-    void perform(final Map map, final Entity entity);
+    void perform(final @NonNull Map map, final @NonNull Entity entity);
 }
