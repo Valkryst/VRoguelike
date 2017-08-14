@@ -35,7 +35,7 @@
         <dependency>
             <groupId>com.github.Valkryst</groupId>
             <artifactId>VDice</artifactId>
-            <version>154fa7d6fa533f39f9d06eff55e8384338c5166</version>
+            <version>1.0.2</version>
         </dependency>
         <dependency>
             <groupId>com.github.Valkryst</groupId>
@@ -50,7 +50,7 @@
         <dependency>
             <groupId>com.github.Valkryst</groupId>
             <artifactId>VTerminal</artifactId>
-            <version>1.7.2-ALPHA</version>
+            <version>1.7.3-ALPHA</version>
         </dependency>
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
