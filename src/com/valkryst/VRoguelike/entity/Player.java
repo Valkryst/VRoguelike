@@ -1,38 +1,23 @@
 package com.valkryst.VRoguelike.entity;
 
 import com.valkryst.VRoguelike.entity.builder.PlayerBuilder;
+import lombok.EqualsAndHashCode;
+import lombok.NonNull;
+import lombok.ToString;
 
+@EqualsAndHashCode(callSuper=true)
+@ToString
 public class Player extends Creature {
     /**
      * Constructs a new player.
      *
      * @param builder
      *        The builder.
+     *
+     * @throws NullPointerException
+     *        If the builder is null.
      */
-    public Player(final PlayerBuilder builder) {
+    public Player(final @NonNull PlayerBuilder builder) {
         super(builder);
-    }
-
-    @Override
-    public String toString() {
-        return "Player" + super.toString().substring(8);
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
-    @Override
-    public boolean equals(final Object otherObj) {
-        if (otherObj instanceof Player == false) {
-            return false;
-        }
-
-        if (otherObj == this) {
-            return true;
-        }
-
-        return super.equals(otherObj);
     }
 }

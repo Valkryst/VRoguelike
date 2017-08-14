@@ -8,12 +8,10 @@ import com.valkryst.VRoguelike.enums.State;
 import com.valkryst.VRoguelike.item.equipment.EquipmentInventory;
 import com.valkryst.VRoguelike.loot.LootTable;
 import com.valkryst.VRoguelike.stat.LimitedStatistic;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 
-import java.util.Objects;
-
+@EqualsAndHashCode(callSuper=true)
+@ToString
 public class Creature extends Entity {
     /** The race. */
     @Getter @Setter private Race race;
@@ -55,8 +53,11 @@ public class Creature extends Entity {
      *
      * @param builder
      *        The builder.
+     *
+     * @throws NullPointerException
+     *        If the builder is null.
      */
-    public Creature(final CreatureBuilder builder) {
+    public Creature(final @NonNull CreatureBuilder builder) {
         super(builder);
         race = builder.getRace();
 
@@ -78,56 +79,6 @@ public class Creature extends Entity {
         combatAI = builder.getCombatAI();
 
         lootTable = builder.getLootTable();
-    }
-
-    @Override
-    public String toString() {
-        return "Creature" + super.toString().substring(6) +
-                "\tRace:\t" + race.name() + "\n" +
-                "\tStatistics:\n" +
-                "\t\t" + stat_level.toString().replace("\n\t", "\n\t\t\t") + "\n" +
-                "\t\t" + stat_xp.toString().replace("\n\t", "\n\t\t\t") + "\n" +
-                "\t\t" + stat_gold.toString().replace("\n\t", "\n\t\t\t") + "\n" +
-                "\t\t" + stat_health.toString().replace("\n\t", "\n\t\t\t") + "\n" +
-                "\t\t" + stat_strength.toString().replace("\n\t", "\n\t\t\t") + "\n" +
-                "\t\t" + stat_defense.toString().replace("\n\t", "\n\t\t\t") + "\n" +
-                "\tCombatAI:\t" + combatAI.getClass().getSimpleName() +
-                lootTable.toString().replace("\n\t", "\n\t\t");
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode() + Objects.hash(race, stat_level, stat_xp, stat_gold, stat_health, stat_strength,
-                stat_defense, stat_accuracy, stat_dodge, equipment, lineOfSight, combatAI, lootTable);
-    }
-
-    @Override
-    public boolean equals(final Object otherObj) {
-        if (otherObj instanceof Entity == false) {
-            return false;
-        }
-
-        if (otherObj == this) {
-            return true;
-        }
-
-        final Creature otherCreature = (Creature) otherObj;
-
-        boolean isEqual = super.equals(otherObj);
-        isEqual &= Objects.equals(race, otherCreature.getRace());
-        isEqual &= Objects.equals(stat_level, otherCreature.getStat_level());
-        isEqual &= Objects.equals(stat_xp, otherCreature.getStat_xp());
-        isEqual &= Objects.equals(stat_gold, otherCreature.getStat_gold());
-        isEqual &= Objects.equals(stat_health, otherCreature.getStat_health());
-        isEqual &= Objects.equals(stat_strength, otherCreature.getStat_strength());
-        isEqual &= Objects.equals(stat_defense, otherCreature.getStat_defense());
-        isEqual &= Objects.equals(stat_accuracy, otherCreature.getStat_accuracy());
-        isEqual &= Objects.equals(stat_dodge, otherCreature.getStat_dodge());
-        isEqual &= Objects.equals(equipment, otherCreature.getEquipment());
-        isEqual &= Objects.equals(lineOfSight, otherCreature.getLineOfSight());
-        isEqual &= Objects.equals(combatAI, otherCreature.getCombatAI());
-        isEqual &= Objects.equals(lootTable, otherCreature.getLootTable());
-        return isEqual;
     }
 
     /**
