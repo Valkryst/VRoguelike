@@ -3,11 +3,11 @@ package com.valkryst.VRoguelike;
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VTerminal.misc.ShapeAlgorithms;
 import lombok.Getter;
+import lombok.NonNull;
 
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class LineOfSight {
     @Getter private List<List<Point>> linePoints;
@@ -23,8 +23,11 @@ public class LineOfSight {
      *
      * @param radius
      *        The radius.
+     *
+     * @throws NullPointerException
+     *        If the entity is null.
      */
-    public LineOfSight(final Entity entity, final int radius) {
+    public LineOfSight(final @NonNull Entity entity, final int radius) {
         if (radius < 1) {
             throw new IllegalArgumentException("The radius cannot be below one.");
         }
@@ -42,9 +45,7 @@ public class LineOfSight {
      * @throws NullPointerException
      *        If the entity is null.
      */
-    public void recompute(final Entity entity) {
-        Objects.requireNonNull(entity);
-
+    public void recompute(final @NonNull Entity entity) {
         linePoints = new ArrayList<>();
         for (final Point point : ShapeAlgorithms.getEllipse(entity.getX(), entity.getY(), radius, radius)) {
             linePoints.add(ShapeAlgorithms.getLine(entity.getX(), entity.getY(), point.x, point.y));
