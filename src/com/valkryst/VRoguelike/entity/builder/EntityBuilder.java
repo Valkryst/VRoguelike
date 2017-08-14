@@ -2,11 +2,15 @@ package com.valkryst.VRoguelike.entity.builder;
 
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.enums.Sprite;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.Objects;
 
+@EqualsAndHashCode
+@ToString
 public class EntityBuilder {
     /** The name. */
     @Getter @Setter private String name;
