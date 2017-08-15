@@ -1,20 +1,21 @@
 package com.valkryst.VRoguelike.entity;
 
 import com.valkryst.VRoguelike.action.Action;
+import com.valkryst.VRoguelike.action.HideAction;
 import com.valkryst.VRoguelike.action.MoveAction;
-import com.valkryst.VRoguelike.entity.builder.AbstractEntityBuilder;
+import com.valkryst.VRoguelike.action.ShowAction;
+import com.valkryst.VRoguelike.entity.builder.EntityBuilder;
 import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.AsciiCharacter;
-import com.valkryst.VTerminal.Panel;
 import com.valkryst.VTerminal.component.Layer;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Entity {
     /** The name of the entity. */
@@ -24,7 +25,7 @@ public class Entity {
     @Getter @Setter private String description;
 
     /** The action to perform. */
-    @Getter private final List<Action> actions = new LinkedList<>();
+    @Getter private final Queue<Action> actions = new ConcurrentLinkedQueue<>();
 
     /** The layer-component on which the entity is drawn. */
     @Getter private Layer layer;
@@ -38,7 +39,7 @@ public class Entity {
      * @throws NullPointerException
      *        If the builder is null.
      */
-    public Entity(final AbstractEntityBuilder builder) {
+    public Entity(final EntityBuilder builder) {
         Objects.requireNonNull(builder);
 
         name = builder.getName();
@@ -138,44 +139,30 @@ public class Entity {
      *        If the action was created and added.
      */
     public boolean move(final int dx, final int dy) {
-        actions.add(new MoveAction(dx, dy));
+        actions.add(new MoveAction(getX(), getY(), dx, dy));
         return true;
     }
 
     /**
-     * Adds an entity to a panel, effectively 'showing' the entity.
-     *
-     * @param panel
-     *        The panel.
+     * Adds a show action to the entity.
      *
      * @return
-     *        If the entity was shown.
+     *        If the action was created and added.
      */
-    public boolean show(final Panel panel) {
-        if (panel != null) {
-            panel.addComponent(layer);
-            return true;
-        }
-
-        return false;
+    public boolean show() {
+        actions.add(new ShowAction());
+        return true;
     }
 
     /**
-     * Removes an entity from a panel, effectively 'hiding' the entity.
-     *
-     * @param panel
-     *        The panel.
+     * Adds a hide action to the entity.
      *
      * @return
-     *        If the entity was hidden.
+     *        If the action was created and added.
      */
-    public boolean hide(final Panel panel) {
-        if (panel != null) {
-            panel.removeComponent(layer);
-            return true;
-        }
-
-        return false;
+    public boolean hide() {
+        actions.add(new HideAction());
+        return true;
     }
 
     /**

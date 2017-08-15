@@ -1,4 +1,4 @@
-package com.valkryst.VRoguelike.item;
+package com.valkryst.VRoguelike.item.equipment;
 
 public enum EquipmentSlot {
     HEAD,

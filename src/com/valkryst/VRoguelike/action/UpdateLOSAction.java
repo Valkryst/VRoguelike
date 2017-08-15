@@ -9,11 +9,12 @@ import com.valkryst.VRoguelike.world.Tile;
 import com.valkryst.VTerminal.component.Screen;
 
 import java.awt.Point;
-import java.util.Objects;
 
-public class UpdateLOSPosition implements Action {
-    /** The screen. */
-    private final Screen screen;
+public class UpdateLOSAction implements Action {
+    /** The current position on the x-axis. */
+    private final int x;
+    /** The current position on the y-axis. */
+    private final int y;
     /** The change in x-axis position. */
     private final int dx;
     /** The change in y-axis position. */
@@ -22,8 +23,11 @@ public class UpdateLOSPosition implements Action {
     /**
      * Constructs a new UpdateLOSPosition.
      *
-     * @param screen
-     *        The screen.
+     * @param x
+     *        The current position on the x-axis.
+     *
+     * @param y
+     *        The current position on the y-axis.
      *
      * @param dx
      *        The change in x-axis position.
@@ -31,10 +35,9 @@ public class UpdateLOSPosition implements Action {
      * @param dy
      *        The change in y-axis position.
      */
-    public UpdateLOSPosition(final Screen screen, final int dx, final int dy) {
-        Objects.requireNonNull(screen);
-
-        this.screen = screen;
+    public UpdateLOSAction(final int x, final int y, final int dx, final int dy) {
+        this.x = x;
+        this.y = y;
         this.dx = dx;
         this.dy = dy;
     }
@@ -45,12 +48,13 @@ public class UpdateLOSPosition implements Action {
             return;
         }
 
-        final Tile[][] tiles = map.getTiles();
-        final Creature creature = (Creature) entity;
-
-        if (tiles[creature.getX() + dx][creature.getY() + dy].isSolid()) {
+        if (map.isPositionFree(x + dx, y + dy) == false) {
             return;
         }
+
+        final Screen screen = map.getScreen();
+        final Tile[][] tiles = map.getTiles();
+        final Creature creature = (Creature) entity;
 
         creature.getLineOfSight().move(dx, dy);
 
