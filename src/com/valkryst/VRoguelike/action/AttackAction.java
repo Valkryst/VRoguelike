@@ -64,7 +64,6 @@ public class AttackAction implements Action {
         if (attackRoll > 1 && attackRoll < 5) {
             new DodgeAction().perform(map, target);
             new AttackMissAction().perform(map, self);
-            messageBox.appendText(self.getName() + " missed " + target.getName());
             return;
         }
 
