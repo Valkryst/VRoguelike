@@ -7,7 +7,7 @@ import com.valkryst.VRoguelike.enums.Race;
 import com.valkryst.VRoguelike.enums.State;
 import com.valkryst.VRoguelike.item.equipment.EquipmentInventory;
 import com.valkryst.VRoguelike.loot.LootTable;
-import com.valkryst.VRoguelike.stat.LimitedStatistic;
+import com.valkryst.VRoguelike.stat.BoundedStatistic;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,21 +22,21 @@ public class CreatureBuilder extends EntityBuilder {
     @Getter @Setter private Race race;
 
     /** The level. */
-    @Getter @Setter private LimitedStatistic stat_level;
+    @Getter @Setter private BoundedStatistic stat_level;
     /** The experience towards the next level. */
-    @Getter @Setter private LimitedStatistic stat_xp;
+    @Getter @Setter private BoundedStatistic stat_xp;
     /** The amount of gold carried. */
-    @Getter @Setter private LimitedStatistic stat_gold;
+    @Getter @Setter private BoundedStatistic stat_gold;
     /** The health. */
-    @Getter @Setter private LimitedStatistic stat_health;
+    @Getter @Setter private BoundedStatistic stat_health;
     /** The strength. */
-    @Getter @Setter private LimitedStatistic stat_strength;
+    @Getter @Setter private BoundedStatistic stat_strength;
     /** The defense. */
-    @Getter @Setter private LimitedStatistic stat_defense;
+    @Getter @Setter private BoundedStatistic stat_defense;
     /** The accuracy (Percent chance to land an attack). */
-    @Getter @Setter private LimitedStatistic stat_accuracy;
+    @Getter @Setter private BoundedStatistic stat_accuracy;
     /** The dodge (Percent chance to dodge an attack). */
-    @Getter @Setter private LimitedStatistic stat_dodge;
+    @Getter @Setter private BoundedStatistic stat_dodge;
 
     /** The equipment inventory. */
     @Getter @Setter private EquipmentInventory equipment;
@@ -71,14 +71,14 @@ public class CreatureBuilder extends EntityBuilder {
         lootTable = new LootTable();
 
         // Set Stats:
-        stat_level = new LimitedStatistic("Level", 1, 1, 200);
-        stat_xp = new LimitedStatistic("XP", 0, 83);
-        stat_gold = new LimitedStatistic("Gold", 0, 0, Integer.MAX_VALUE);
-        stat_health = new LimitedStatistic("Health", 0, 100);
-        stat_strength = new LimitedStatistic("Strength", 0, 100);
-        stat_defense = new LimitedStatistic("Defense", 0, 100);
-        stat_accuracy = new LimitedStatistic("Accuracy", 0, 100);
-        stat_dodge = new LimitedStatistic("Dodge", 0, 100);
+        stat_level = new BoundedStatistic("Level", 1, 1, 200);
+        stat_xp = new BoundedStatistic("XP", 0, 83);
+        stat_gold = new BoundedStatistic("Gold", 0, 0, Integer.MAX_VALUE);
+        stat_health = new BoundedStatistic("Health", 0, 100);
+        stat_strength = new BoundedStatistic("Strength", 0, 100);
+        stat_defense = new BoundedStatistic("Defense", 0, 100);
+        stat_accuracy = new BoundedStatistic("Accuracy", 0, 100);
+        stat_dodge = new BoundedStatistic("Dodge", 0, 100);
 
         // Level When XP Full:
         stat_xp.setOnChange(() -> {

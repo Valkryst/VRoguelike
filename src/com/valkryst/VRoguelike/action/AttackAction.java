@@ -6,7 +6,7 @@ import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
 import com.valkryst.VRoguelike.item.equipment.EquippableItem;
 import com.valkryst.VRoguelike.item.equipment.Weapon;
-import com.valkryst.VRoguelike.stat.LimitedStatistic;
+import com.valkryst.VRoguelike.stat.BoundedStatistic;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.component.TextArea;
 import lombok.EqualsAndHashCode;
@@ -40,7 +40,7 @@ public class AttackAction implements Action {
         messageBox.appendText("");
 
         final Creature self = (Creature) entity;
-        final LimitedStatistic health = target.getStat_health();
+        final BoundedStatistic health = target.getStat_health();
 
         if (doesAttackHitTarget(self)) {
             new DodgeAction().perform(map, target);

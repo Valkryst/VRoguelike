@@ -1,7 +1,7 @@
 package com.valkryst.VRoguelike.item.equipment;
 
 import com.valkryst.VRoguelike.item.builder.equipment.WeaponBuilder;
-import com.valkryst.VRoguelike.stat.LimitedStatistic;
+import com.valkryst.VRoguelike.stat.BoundedStatistic;
 import lombok.Getter;
 
 import java.util.Objects;
@@ -9,7 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class Weapon extends EquippableItem {
     /** The damage-range. */
-    @Getter private final LimitedStatistic stat_damage;
+    @Getter private final BoundedStatistic stat_damage;
 
     /**
      * Constructs a new Weapon.
