@@ -40,18 +40,53 @@ public class AttackAction implements Action {
         messageBox.appendText("");
 
         final Creature self = (Creature) entity;
-        final BoundedStatistic health = target.getStat_health();
 
-        if (doesAttackHitTarget() == false) {
+        final int attackRoll = new Die(20).roll();
+
+        // Critical Miss
+        if (attackRoll == 1) {
+            final BoundedStatistic health = self.getStat_health();
+            final int damage = getDamageDealt(self, self);
+
+            health.setValue(health.getValue() - damage);
+
+            messageBox.appendText(self.getName() + " missed and attacked itself for " + damage + " damage.");
+            messageBox.appendText(self.getName() + "'s health is now " + health.getValue() + "/" + health.getMaximum());
+
+            if (health.getValue() == health.getMinimum()) {
+                new DeathAction().perform(map, self);
+            }
+
+            return;
+        }
+
+        // Miss
+        if (attackRoll > 1 && attackRoll < 5) {
             new DodgeAction().perform(map, target);
             new AttackMissAction().perform(map, self);
             messageBox.appendText(self.getName() + " missed " + target.getName());
             return;
         }
 
+        // Normal Attack
+        int damage = 0;
+
+        if (attackRoll >= 5 && attackRoll <= 16) {
+            damage = getDamageDealt(self, target);
+        }
+
+        // Double Damage Attack
+        if (attackRoll > 16 && attackRoll < 20) {
+            damage = getDamageDealt(self, target) * 2;
+        }
+
+        // Critical Attack
+        if (attackRoll == 20) {
+            damage = getDamageDealt(self, target) * 3;
+        }
 
 
-        final int damage = getDamageDealt(self, target);
+        final BoundedStatistic health = target.getStat_health();
 
         if (damage > 0) {
             health.setValue(health.getValue() - damage);
@@ -66,19 +101,6 @@ public class AttackAction implements Action {
         } else {
             target.getCombatAI().decide(map, target, self);
         }
-    }
-
-    /**
-     * Determines if an attack will hit.
-     *
-     * @return
-     *        If the attack lands.
-     *
-     * @throws NullPointerException
-     *        If the creature is null.
-     */
-    private boolean doesAttackHitTarget() {
-        return new Die(20).roll() >= 5;
     }
 
     /**
