@@ -13,7 +13,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class GameScreen extends Screen implements KeyListener {
-    @Getter private final Map map = new Map(this, 65, 25);
+    @Getter private final Map map = new Map(this, 80, 30);
 
     @Getter private TextArea messageBox;
 
@@ -27,17 +27,17 @@ public class GameScreen extends Screen implements KeyListener {
 
     private void drawUISections() {
         final RectanglePrinter printer = new RectanglePrinter();
-        printer.setWidth(23);
+        printer.setWidth(39);
         printer.setHeight(10);
 
         // Player UI Section:
         printer.setTitle("Player");
-        printer.print(this, 66, 0);
+        printer.print(this, 81, 0);
 
 
         // Target UI Section:
         printer.setTitle("Target");
-        printer.print(this, 66, 11);
+        printer.print(this, 81, 11);
     }
 
     private void createMessageBox(final Radio<String> radio) {
@@ -46,10 +46,10 @@ public class GameScreen extends Screen implements KeyListener {
         builder.setRadio(radio);
 
         builder.setColumnIndex(0);
-        builder.setRowIndex(25);
+        builder.setRowIndex(30);
 
-        builder.setWidth(65);
-        builder.setHeight(5);
+        builder.setWidth(80);
+        builder.setHeight(10);
 
         builder.setEditable(false);
 
