@@ -28,10 +28,6 @@ public class Creature extends Entity {
     @Getter private final BoundedStatistic stat_strength;
     /** The defense. */
     @Getter private final BoundedStatistic stat_defense;
-    /** The accuracy (Percent chance to land an attack). */
-    @Getter private final BoundedStatistic stat_accuracy;
-    /** The dodge (Percent chance to dodge an attack). */
-    @Getter private final BoundedStatistic stat_dodge;
 
     /** The equipment inventory. */
     @Getter private final EquipmentInventory equipment;
@@ -67,8 +63,6 @@ public class Creature extends Entity {
         stat_health = builder.getStat_health();
         stat_strength = builder.getStat_strength();
         stat_defense = builder.getStat_defense();
-        stat_accuracy = builder.getStat_accuracy();
-        stat_dodge = builder.getStat_dodge();
 
         equipment = builder.getEquipment();
 
