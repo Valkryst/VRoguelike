@@ -12,5 +12,6 @@ public class DeathAction implements Action {
     @Override
     public void perform(final @NonNull Map map, final @NonNull Entity entity) {
         map.removeEntities(entity);
+        map.getScreen().getMessageBox().appendText(entity.getName() + " has died.");
     }
 }
