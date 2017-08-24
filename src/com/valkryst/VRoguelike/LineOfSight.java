@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LineOfSight {
-    @Getter private List<List<Point>> linePoints;
+    @Getter private List<List<Point>> linePoints = new ArrayList<>();
 
     /** The radius. */
     @Getter private int radius = 4;
@@ -46,7 +46,8 @@ public class LineOfSight {
      *        If the entity is null.
      */
     public void recompute(final @NonNull Entity entity) {
-        linePoints = new ArrayList<>();
+        linePoints.clear();
+
         for (final Point point : ShapeAlgorithms.getEllipse(entity.getX(), entity.getY(), radius, radius)) {
             linePoints.add(ShapeAlgorithms.getLine(entity.getX(), entity.getY(), point.x, point.y));
         }
