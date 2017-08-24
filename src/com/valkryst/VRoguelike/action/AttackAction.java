@@ -49,11 +49,9 @@ public class AttackAction implements Action {
             return;
         }
 
-        int damage = 0;
-        damage += getWeaponDamage(self, EquipmentSlot.MAIN_HAND);
-        damage += getWeaponDamage(self, EquipmentSlot.OFF_HAND);
-        damage += self.getStat_strength().getValue();
-        damage -= target.getStat_defense().getValue();
+
+
+        final int damage = getDamageDealt(self, target);
 
         if (damage > 0) {
             health.setValue(health.getValue() - damage);
@@ -87,6 +85,28 @@ public class AttackAction implements Action {
         final int hitVal = self.getStat_accuracy().getValue() - target.getStat_dodge().getValue();
 
         return randomVal < hitVal;
+    }
+
+    /**
+     * Calculates the damage to deal.
+     *
+     * @param self
+     *        The attacking creature.
+     *
+     * @param target
+     *        The creature being attacked.
+     *
+     * @return
+     *        The damage dealt.
+     */
+    private static int getDamageDealt(final Creature self, final Creature target) {
+        int damage = 0;
+        damage += getWeaponDamage(self, EquipmentSlot.MAIN_HAND);
+        damage += getWeaponDamage(self, EquipmentSlot.OFF_HAND);
+        damage += self.getStat_strength().getValue();
+        damage -= target.getStat_defense().getValue();
+
+        return damage;
     }
 
     /**
