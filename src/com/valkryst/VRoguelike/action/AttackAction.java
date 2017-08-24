@@ -65,7 +65,6 @@ public class AttackAction implements Action {
 
         if (health.getValue() == health.getMinimum()) {
             new DeathAction().perform(map, target);
-            messageBox.appendText(target.getName() + " has died.");
         } else {
             target.getCombatAI().decide(map, target, self);
         }
