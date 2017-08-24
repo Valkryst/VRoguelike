@@ -42,7 +42,7 @@ public class AttackAction implements Action {
         final Creature self = (Creature) entity;
         final BoundedStatistic health = target.getStat_health();
 
-        if (doesAttackHitTarget(self)) {
+        if (doesAttackHitTarget() == false) {
             new DodgeAction().perform(map, target);
             new AttackMissAction().perform(map, self);
             messageBox.appendText(self.getName() + " missed " + target.getName());
@@ -69,10 +69,7 @@ public class AttackAction implements Action {
     }
 
     /**
-     * Determines if an attack will hit the target.
-     *
-     * @param self
-     *        The attacking creature.
+     * Determines if an attack will hit.
      *
      * @return
      *        If the attack lands.
@@ -80,11 +77,8 @@ public class AttackAction implements Action {
      * @throws NullPointerException
      *        If the creature is null.
      */
-    private boolean doesAttackHitTarget(final @NonNull Creature self) {
-        final int randomVal = new Die(100).roll();
-        final int hitVal = self.getStat_accuracy().getValue() - target.getStat_dodge().getValue();
-
-        return randomVal < hitVal;
+    private boolean doesAttackHitTarget() {
+        return new Die(20).roll() >= 5;
     }
 
     /**
