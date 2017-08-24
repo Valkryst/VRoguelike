@@ -8,6 +8,7 @@ import com.valkryst.VRoguelike.item.equipment.EquippableItem;
 import com.valkryst.VRoguelike.item.equipment.Weapon;
 import com.valkryst.VRoguelike.stat.LimitedStatistic;
 import com.valkryst.VRoguelike.world.Map;
+import com.valkryst.VTerminal.component.TextArea;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.ToString;
@@ -35,13 +36,15 @@ public class AttackAction implements Action {
 
     @Override
     public void perform(final @NonNull Map map, final @NonNull Entity entity) {
+        final TextArea messageBox = map.getScreen().getMessageBox();
+
         final Creature self = (Creature) entity;
         final LimitedStatistic health = target.getStat_health();
 
         if (doesAttackHitTarget(self)) {
             new DodgeAction().perform(map, target);
             new AttackMissAction().perform(map, self);
-            System.out.println(self.getName() + " missed " + target.getName());
+            messageBox.appendText(self.getName() + " missed " + target.getName());
             return;
         }
 
@@ -53,20 +56,18 @@ public class AttackAction implements Action {
 
         if (damage > 0) {
             health.setValue(health.getValue() - damage);
-            System.out.println(self.getName() + " attacked " + target.getName() + " for " + damage + " damage.");
-            System.out.println(target.getName() + "'s health is now " + health.getValue() + "/" + health.getMaximum());
+            messageBox.appendText(self.getName() + " attacked " + target.getName() + " for " + damage + " damage.");
+            messageBox.appendText(target.getName() + "'s health is now " + health.getValue() + "/" + health.getMaximum());
         } else {
-            System.out.println(self.getName() + " dealt no damage to " + target.getName() + ".");
+            messageBox.appendText(self.getName() + " dealt no damage to " + target.getName() + ".");
         }
 
         if (health.getValue() == health.getMinimum()) {
             new DeathAction().perform(map, target);
-            System.out.println(target.getName() + " has died.");
+            messageBox.appendText(target.getName() + " has died.");
         } else {
             target.getCombatAI().decide(map, target, self);
         }
-
-        System.out.println();
     }
 
     /**
