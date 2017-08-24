@@ -37,6 +37,7 @@ public class AttackAction implements Action {
     @Override
     public void perform(final @NonNull Map map, final @NonNull Entity entity) {
         final TextArea messageBox = map.getScreen().getMessageBox();
+        messageBox.appendText("");
 
         final Creature self = (Creature) entity;
         final LimitedStatistic health = target.getStat_health();
