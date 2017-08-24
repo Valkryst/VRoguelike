@@ -33,10 +33,6 @@ public class CreatureBuilder extends EntityBuilder {
     @Getter @Setter private BoundedStatistic stat_strength;
     /** The defense. */
     @Getter @Setter private BoundedStatistic stat_defense;
-    /** The accuracy (Percent chance to land an attack). */
-    @Getter @Setter private BoundedStatistic stat_accuracy;
-    /** The dodge (Percent chance to dodge an attack). */
-    @Getter @Setter private BoundedStatistic stat_dodge;
 
     /** The equipment inventory. */
     @Getter @Setter private EquipmentInventory equipment;
@@ -77,8 +73,6 @@ public class CreatureBuilder extends EntityBuilder {
         stat_health = new BoundedStatistic("Health", 0, 100);
         stat_strength = new BoundedStatistic("Strength", 0, 100);
         stat_defense = new BoundedStatistic("Defense", 0, 100);
-        stat_accuracy = new BoundedStatistic("Accuracy", 0, 100);
-        stat_dodge = new BoundedStatistic("Dodge", 0, 100);
 
         // Level When XP Full:
         stat_xp.setOnChange(() -> {
