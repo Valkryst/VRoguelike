@@ -45,18 +45,7 @@ public class AttackAction implements Action {
 
         // Critical Miss
         if (attackRoll == 1) {
-            final BoundedStatistic health = self.getStat_health();
-            final int damage = getDamageDealt(self, self);
-
-            health.setValue(health.getValue() - damage);
-
-            messageBox.appendText(self.getName() + " missed and attacked itself for " + damage + " damage.");
-            messageBox.appendText(self.getName() + "'s health is now " + health.getValue() + "/" + health.getMaximum());
-
-            if (health.getValue() == health.getMinimum()) {
-                new DeathAction().perform(map, self);
-            }
-
+            new CriticalMissAction(getDamageDealt(self, self)).perform(map, self);
             return;
         }
 
