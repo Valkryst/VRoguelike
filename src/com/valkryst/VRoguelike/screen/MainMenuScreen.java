@@ -2,11 +2,14 @@ package com.valkryst.VRoguelike.screen;
 
 import com.valkryst.VTerminal.Panel;
 import com.valkryst.VTerminal.builder.component.ButtonBuilder;
+import com.valkryst.VTerminal.builder.component.ScreenBuilder;
 import com.valkryst.VTerminal.component.Button;
 import com.valkryst.VTerminal.component.Screen;
 import lombok.Getter;
 
 public class MainMenuScreen extends Screen {
+    private final ScreenBuilder screenBuilder = new ScreenBuilder();
+
     @Getter private Button button_new;
     @Getter private Button button_exit;
 

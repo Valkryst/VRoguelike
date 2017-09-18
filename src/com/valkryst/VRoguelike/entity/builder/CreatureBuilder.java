@@ -8,11 +8,15 @@ import com.valkryst.VRoguelike.enums.State;
 import com.valkryst.VRoguelike.item.equipment.EquipmentInventory;
 import com.valkryst.VRoguelike.loot.LootTable;
 import com.valkryst.VRoguelike.stat.LimitedStatistic;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.Objects;
 
+@EqualsAndHashCode(callSuper=true)
+@ToString
 public class CreatureBuilder extends EntityBuilder {
     /** The race. */
     @Getter @Setter private Race race;

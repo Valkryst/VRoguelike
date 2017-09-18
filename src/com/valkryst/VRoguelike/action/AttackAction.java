@@ -8,10 +8,15 @@ import com.valkryst.VRoguelike.item.equipment.EquippableItem;
 import com.valkryst.VRoguelike.item.equipment.Weapon;
 import com.valkryst.VRoguelike.stat.LimitedStatistic;
 import com.valkryst.VRoguelike.world.Map;
+import com.valkryst.VTerminal.component.TextArea;
+import lombok.EqualsAndHashCode;
+import lombok.NonNull;
+import lombok.ToString;
 
-import java.util.Objects;
 import java.util.Optional;
 
+@EqualsAndHashCode
+@ToString
 public class AttackAction implements Action {
     /** The target. */
     private final Creature target;
@@ -21,22 +26,26 @@ public class AttackAction implements Action {
      *
      * @param target
      *        The target.
+     *
+     * @throws NullPointerException
+     *        If the target is null.
      */
-    public AttackAction(final Creature target) {
-        Objects.requireNonNull(target);
-
+    public AttackAction(final @NonNull Creature target) {
         this.target = target;
     }
 
     @Override
-    public void perform(final Map map, final Entity entity) {
+    public void perform(final @NonNull Map map, final @NonNull Entity entity) {
+        final TextArea messageBox = map.getScreen().getMessageBox();
+        messageBox.appendText("");
+
         final Creature self = (Creature) entity;
         final LimitedStatistic health = target.getStat_health();
 
         if (doesAttackHitTarget(self)) {
             new DodgeAction().perform(map, target);
             new AttackMissAction().perform(map, self);
-            System.out.println(self.getName() + " missed " + target.getName());
+            messageBox.appendText(self.getName() + " missed " + target.getName());
             return;
         }
 
@@ -48,20 +57,18 @@ public class AttackAction implements Action {
 
         if (damage > 0) {
             health.setValue(health.getValue() - damage);
-            System.out.println(self.getName() + " attacked " + target.getName() + " for " + damage + " damage.");
-            System.out.println(target.getName() + "'s health is now " + health.getValue() + "/" + health.getMaximum());
+            messageBox.appendText(self.getName() + " attacked " + target.getName() + " for " + damage + " damage.");
+            messageBox.appendText(target.getName() + "'s health is now " + health.getValue() + "/" + health.getMaximum());
         } else {
-            System.out.println(self.getName() + " dealt no damage to " + target.getName() + ".");
+            messageBox.appendText(self.getName() + " dealt no damage to " + target.getName() + ".");
         }
 
         if (health.getValue() == health.getMinimum()) {
             new DeathAction().perform(map, target);
-            System.out.println(target.getName() + " has died.");
+            messageBox.appendText(target.getName() + " has died.");
         } else {
             target.getCombatAI().decide(map, target, self);
         }
-
-        System.out.println();
     }
 
     /**
@@ -72,8 +79,11 @@ public class AttackAction implements Action {
      *
      * @return
      *        If the attack lands.
+     *
+     * @throws NullPointerException
+     *        If the creature is null.
      */
-    private boolean doesAttackHitTarget(final Creature self) {
+    private boolean doesAttackHitTarget(final @NonNull Creature self) {
         final int randomVal = new Die(100).roll();
         final int hitVal = self.getStat_accuracy().getValue() - target.getStat_dodge().getValue();
 
@@ -98,8 +108,11 @@ public class AttackAction implements Action {
      *
      *        If there is a weapon in the specified slot, then
      *        the weapon's attack damage is returned.
+     *
+     * @throws NullPointerException
+     *        If the creature or slot is null.
      */
-    private static int getWeaponDamage(final Creature creature, final EquipmentSlot slot) {
+    private static int getWeaponDamage(final @NonNull Creature creature, final @NonNull EquipmentSlot slot) {
         final Optional<EquippableItem> optItem = creature.getEquipment().getItemInSlot(slot);
 
         if (optItem.isPresent() && optItem.get() instanceof Weapon) {

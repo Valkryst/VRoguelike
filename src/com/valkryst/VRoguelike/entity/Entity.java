@@ -9,14 +9,14 @@ import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.AsciiCharacter;
 import com.valkryst.VTerminal.component.Layer;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+@EqualsAndHashCode
+@ToString
 public class Entity {
     /** The name of the entity. */
     @Getter @Setter private String name;
@@ -39,58 +39,11 @@ public class Entity {
      * @throws NullPointerException
      *        If the builder is null.
      */
-    public Entity(final EntityBuilder builder) {
-        Objects.requireNonNull(builder);
-
+    public Entity(final @NonNull EntityBuilder builder) {
         name = builder.getName();
         description = builder.getDescription();
         layer = new Layer(builder.getX(), builder.getY(), 1, 1);
         setSprite(builder.getSprite());
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        sb.append("Entity:");
-        sb.append("\n\tName:\t").append(name);
-        sb.append("\n\tDescription:\t").append(description);
-        sb.append("\n\tAction Queue:");
-
-        if (actions.size() == 0) {
-            sb.append("\tAction Queue is Empty\n");
-        } else {
-            for (final Action action : actions) {
-                sb.append("\n\t\t").append(action.getClass().getSimpleName());
-            }
-        }
-
-        sb.append("\t").append(layer.toString().replace("\n\t", "\n\t\t\t")).append("\n");
-
-        return sb.toString();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(name) + Objects.hashCode(description) + Objects.hashCode(actions) + Objects.hashCode(layer);
-    }
-
-    @Override
-    public boolean equals(final Object otherObj) {
-        if (otherObj instanceof Entity == false) {
-            return false;
-        }
-
-        if (otherObj == this) {
-            return true;
-        }
-
-        final Entity otherEntity = (Entity) otherObj;
-
-        boolean isEqual = Objects.equals(name, otherEntity.getName());
-        isEqual &= Objects.equals(description, otherEntity.getDescription());
-        isEqual &= Objects.equals(actions, otherEntity.getActions());
-        isEqual &= Objects.equals(layer, otherEntity.getLayer());
-        return isEqual;
     }
 
     /**
@@ -98,12 +51,11 @@ public class Entity {
      *
      * @param map
      *        The map that the entity exists on.
+     *
+     * @throws NullPointerException
+     *        If the map is null.
      */
-    public void update(final Map map) {
-        if (map == null) {
-            throw new NullPointerException("The map cannot be null.");
-        }
-
+    public void update(final @NonNull Map map) {
         actions.forEach(action -> action.perform(map, this));
         actions.clear();
     }
@@ -116,8 +68,11 @@ public class Entity {
      *
      * @return
      *        If the action was added.
+     *
+     * @throws NullPointerException
+     *        If the action is null.
      */
-    public boolean addAction(final Action action) {
+    public boolean addAction(final @NonNull Action action) {
         if (action != null) {
             actions.add(action);
             return true;
@@ -170,12 +125,11 @@ public class Entity {
      *
      * @param sprite
      *        The sprite.
+     *
+     * @throws NullPointerException
+     *        If the sprite is null.
      */
-    public void setSprite(final Sprite sprite) {
-        if (sprite == null) {
-            return;
-        }
-
+    public void setSprite(final @NonNull Sprite sprite) {
         final Optional<AsciiCharacter> optChar = layer.getCharacterAt(0, 0);
 
         optChar.ifPresent(character -> {
