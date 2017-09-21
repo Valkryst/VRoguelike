@@ -8,10 +8,10 @@ import com.valkryst.VRoguelike.entity.builder.EntityBuilder;
 import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.AsciiCharacter;
+import com.valkryst.VTerminal.builder.component.LayerBuilder;
 import com.valkryst.VTerminal.component.Layer;
 import lombok.*;
 
-import java.util.Optional;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -42,7 +42,14 @@ public class Entity {
     public Entity(final @NonNull EntityBuilder builder) {
         name = builder.getName();
         description = builder.getDescription();
-        layer = new Layer(builder.getX(), builder.getY(), 1, 1);
+
+        final LayerBuilder layerBuilder = new LayerBuilder();
+        layerBuilder.setColumnIndex(builder.getX());
+        layerBuilder.setRowIndex(builder.getY());
+        layerBuilder.setWidth(1);
+        layerBuilder.setHeight(1);
+        layer = layerBuilder.build();
+
         setSprite(builder.getSprite());
     }
 
@@ -130,20 +137,17 @@ public class Entity {
      *        If the sprite is null.
      */
     public void setSprite(final @NonNull Sprite sprite) {
-        final Optional<AsciiCharacter> optChar = layer.getCharacterAt(0, 0);
-
-        optChar.ifPresent(character -> {
-            character.setCharacter(sprite.getCharacter());
-            character.setForegroundColor(sprite.getForegroundColor());
-            character.setBackgroundColor(sprite.getBackgroundColor());
-        });
+        final AsciiCharacter character = layer.getCharacterAt(0, 0);
+        character.setCharacter(sprite.getCharacter());
+        character.setForegroundColor(sprite.getForegroundColor());
+        character.setBackgroundColor(sprite.getBackgroundColor());
     }
 
     public int getX() {
-        return layer.getColumnIndex();
+        return layer.getPosition().x;
     }
 
     public int getY() {
-        return layer.getRowIndex();
+        return layer.getPosition().y;
     }
 }

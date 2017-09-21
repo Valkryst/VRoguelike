@@ -3,6 +3,7 @@ package com.valkryst.VRoguelike.screen;
 import com.valkryst.VRadio.Radio;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.Panel;
+import com.valkryst.VTerminal.builder.component.ScreenBuilder;
 import com.valkryst.VTerminal.builder.component.TextAreaBuilder;
 import com.valkryst.VTerminal.component.Screen;
 import com.valkryst.VTerminal.component.TextArea;
@@ -17,8 +18,8 @@ public class GameScreen extends Screen implements KeyListener {
 
     @Getter private TextArea messageBox;
 
-    public GameScreen(final Panel panel) {
-        super(0, 0, panel.getWidthInCharacters(), panel.getHeightInCharacters());
+    public GameScreen(final Panel panel, final ScreenBuilder screenBuilder) {
+        super(screenBuilder);
         panel.addKeyListener(this);
 
         drawUISections();
