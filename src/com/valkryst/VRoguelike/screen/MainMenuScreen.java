@@ -8,8 +8,6 @@ import com.valkryst.VTerminal.component.Screen;
 import lombok.Getter;
 
 public class MainMenuScreen extends Screen {
-    private final ScreenBuilder screenBuilder = new ScreenBuilder();
-
     @Getter private Button button_new;
     @Getter private Button button_exit;
 

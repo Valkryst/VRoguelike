@@ -12,6 +12,7 @@ import com.valkryst.VRoguelike.item.builder.equipment.WeaponBuilder;
 import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
 import com.valkryst.VRoguelike.screen.GameScreen;
 import com.valkryst.VRoguelike.screen.MainMenuScreen;
+import com.valkryst.VRoguelike.world.Room;
 import com.valkryst.VRoguelike.world.Tile;
 import com.valkryst.VTerminal.Panel;
 import com.valkryst.VTerminal.builder.PanelBuilder;
@@ -38,7 +39,7 @@ public class Driver {
         final ScreenBuilder screenBuilder = new ScreenBuilder();
         screenBuilder.setRowIndex(0);
         screenBuilder.setColumnIndex(0);
-        screenBuilder.setWidth(panelBuilder.getHeightInCharacters());
+        screenBuilder.setWidth(panelBuilder.getWidthInCharacters());
         screenBuilder.setHeight(panelBuilder.getHeightInCharacters());
 
         final MainMenuScreen mainMenuScreen = new MainMenuScreen(panel, screenBuilder);
@@ -85,6 +86,12 @@ public class Driver {
             npc.getEquipment().setItemInSlot(EquipmentSlot.MAIN_HAND, weaponBuilder.build());
 
             gameScreen.getMap().addEntities(player, npc);
+
+            // Create rooms:
+            final Room roomA = new Room(20, 5, 10, 15);
+            final Room roomB = new Room(50, 5, 10, 15);
+            roomA.carve(gameScreen);
+            roomB.carve(gameScreen);
         });
 
         mainMenuScreen.getButton_exit().setOnClickFunction(() -> {
