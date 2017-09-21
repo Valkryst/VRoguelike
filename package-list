@@ -1,8 +1,14 @@
 com.valkryst.VRoguelike
 com.valkryst.VRoguelike.action
+com.valkryst.VRoguelike.ai
 com.valkryst.VRoguelike.entity
 com.valkryst.VRoguelike.entity.builder
 com.valkryst.VRoguelike.enums
 com.valkryst.VRoguelike.item
+com.valkryst.VRoguelike.item.builder
+com.valkryst.VRoguelike.item.builder.equipment
+com.valkryst.VRoguelike.item.equipment
+com.valkryst.VRoguelike.loot
+com.valkryst.VRoguelike.screen
 com.valkryst.VRoguelike.stat
 com.valkryst.VRoguelike.world
