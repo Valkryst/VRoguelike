@@ -66,32 +66,27 @@ public class GameScreen extends Screen implements KeyListener {
 
     @Override
     public void keyReleased(final KeyEvent e) {
-        int dx = 0;
-        int dy = 0;
-
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP:
             case KeyEvent.VK_W: {
-                dy = -1;
+                map.getPlayer().move(0, -1);
                 break;
             }
             case KeyEvent.VK_DOWN:
             case KeyEvent.VK_S: {
-                dy = 1;
+                map.getPlayer().move(0, 1);
                 break;
             }
             case KeyEvent.VK_LEFT:
             case KeyEvent.VK_A: {
-                dx = -1;
+                map.getPlayer().move(-1, 0);
                 break;
             }
             case KeyEvent.VK_RIGHT:
             case KeyEvent.VK_D: {
-                dx = 1;
+                map.getPlayer().move(1, 0);
                 break;
             }
         }
-
-        map.getPlayer().move(dx, dy);
     }
 }
