@@ -1,15 +1,16 @@
 package com.valkryst.VRoguelike.stat;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 
-import java.util.Objects;
-
+@Data
+@EqualsAndHashCode(callSuper=true)
 public class BoundedStatistic extends Statistic {
     /** The maximum value. */
-    @Getter @Setter private int maximum;
+    private int maximum;
     /** The minimum value. */
-    @Getter @Setter private int minimum;
+    private int minimum;
 
     /**
      * Constructs a new BoundedStatistic.
@@ -23,10 +24,13 @@ public class BoundedStatistic extends Statistic {
      * @param minimum
      *        The minimum value.
      *
+     * @throws NullPointerException
+     *        If the name is null.
+     *
      * @throws IllegalArgumentException
      *        If the maximum is less than the minimum.
      */
-    public BoundedStatistic(final String name, final int minimum, final int maximum) {
+    public BoundedStatistic(final @NonNull String name, final int minimum, final int maximum) {
         super(name, maximum);
 
         if (maximum < minimum) {
@@ -53,10 +57,13 @@ public class BoundedStatistic extends Statistic {
      * @param maximum
      *        The maximum value.
      *
+     * @throws NullPointerException
+     *        If the name is null.
+     *
      * @throws IllegalArgumentException
      *        If the maximum is less than the minimum.
      */
-    public BoundedStatistic(final String name, final int value, final int minimum, final int maximum) {
+    public BoundedStatistic(final @NonNull String name, final int value, final int minimum, final int maximum) {
         super(name, value);
 
         if (maximum < minimum) {
@@ -74,29 +81,6 @@ public class BoundedStatistic extends Statistic {
         ret += "\n\tMaximum Value:\t" + maximum;
         ret += "\n\tMinimum Value:\t" + minimum;
         return ret;
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode() + Objects.hashCode(maximum) + Objects.hashCode(minimum);
-    }
-
-    @Override
-    public boolean equals(final Object otherObj) {
-        if (otherObj instanceof Statistic == false) {
-            return false;
-        }
-
-        if (otherObj == this) {
-            return true;
-        }
-
-        final BoundedStatistic otherSta = (BoundedStatistic) otherObj;
-
-        boolean isEqual = super.equals(otherObj);
-        isEqual &= Objects.equals(maximum, otherSta.getMaximum());
-        isEqual &= Objects.equals(minimum, otherSta.getMinimum());
-        return isEqual;
     }
 
     @Override
