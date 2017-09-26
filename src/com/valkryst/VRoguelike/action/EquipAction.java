@@ -5,13 +5,11 @@ import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
 import com.valkryst.VRoguelike.item.equipment.EquippableItem;
 import com.valkryst.VRoguelike.world.Map;
-import lombok.EqualsAndHashCode;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NonNull;
-import lombok.ToString;
 
-@EqualsAndHashCode
-@ToString
+@Data
 public class EquipAction implements Action {
     /** The slot to equip the item to. */
     @Getter private final EquipmentSlot slot;

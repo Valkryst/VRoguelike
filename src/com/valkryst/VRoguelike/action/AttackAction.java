@@ -9,14 +9,12 @@ import com.valkryst.VRoguelike.item.equipment.Weapon;
 import com.valkryst.VRoguelike.stat.BoundedStatistic;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.component.TextArea;
-import lombok.EqualsAndHashCode;
+import lombok.Data;
 import lombok.NonNull;
-import lombok.ToString;
 
 import java.util.Optional;
 
-@EqualsAndHashCode
-@ToString
+@Data
 public class AttackAction implements Action {
     /** The target. */
     private final Creature target;
@@ -102,8 +100,11 @@ public class AttackAction implements Action {
      *
      * @return
      *        The damage dealt.
+     *
+     * @throws NullPointerException
+     *        If either creature is null.
      */
-    private static int getDamageDealt(final Creature self, final Creature target) {
+    private static int getDamageDealt(final @NonNull Creature self, final @NonNull Creature target) {
         int damage = 0;
         damage += getWeaponDamage(self, EquipmentSlot.MAIN_HAND);
         damage += getWeaponDamage(self, EquipmentSlot.OFF_HAND);

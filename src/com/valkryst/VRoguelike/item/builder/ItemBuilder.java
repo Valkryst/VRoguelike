@@ -1,25 +1,25 @@
 package com.valkryst.VRoguelike.item.builder;
 
 import com.valkryst.VRoguelike.item.Item;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
+@Data
 public class ItemBuilder {
     /** The name. */
-    @Getter @Setter private String name;
+    private String name;
     /** The description.. */
-    @Getter @Setter private String description;
+    private String description;
 
     /** The health. */
-    @Getter private int stat_health;
+    private int stat_health;
     /** The strength. */
-    @Getter private int stat_strength;
+    private int stat_strength;
     /** The defense. */
-    @Getter private int stat_defense;
+    private int stat_defense;
     /** The accuracy (Percent chance to land an attack). */
-    @Getter private int stat_accuracy;
+    private int stat_accuracy;
     /** The dodge (Percent chance to dodge an attack). */
-    @Getter private int stat_dodge;
+    private int stat_dodge;
 
     /** Constructs a new ItemBuilder. */
     public ItemBuilder() {

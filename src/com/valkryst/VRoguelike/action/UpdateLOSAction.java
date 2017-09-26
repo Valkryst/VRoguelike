@@ -7,14 +7,12 @@ import com.valkryst.VRoguelike.entity.Player;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VRoguelike.world.Tile;
 import com.valkryst.VTerminal.component.Screen;
-import lombok.EqualsAndHashCode;
+import lombok.Data;
 import lombok.NonNull;
-import lombok.ToString;
 
 import java.awt.Point;
 
-@EqualsAndHashCode
-@ToString
+@Data
 public class UpdateLOSAction implements Action {
     /** The current position on the x-axis. */
     private final int x;

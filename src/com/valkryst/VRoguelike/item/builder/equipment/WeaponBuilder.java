@@ -2,13 +2,14 @@ package com.valkryst.VRoguelike.item.builder.equipment;
 
 import com.valkryst.VRoguelike.item.equipment.Weapon;
 import com.valkryst.VRoguelike.stat.BoundedStatistic;
-import lombok.Getter;
+import lombok.Data;
 
 import java.util.Objects;
 
+@Data
 public class WeaponBuilder extends EquippableItemBuilder {
     /** The damage-range. */
-    @Getter private BoundedStatistic stat_damage;
+    private BoundedStatistic stat_damage;
 
     @Override
     public Weapon build() {

@@ -3,15 +3,12 @@ package com.valkryst.VRoguelike.action;
 import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.world.Map;
-import lombok.EqualsAndHashCode;
+import lombok.Data;
 import lombok.NonNull;
-import lombok.ToString;
 
 import java.util.List;
-import java.util.Objects;
 
-@EqualsAndHashCode
-@ToString
+@Data
 public class MoveAction implements Action {
     /** The current position on the x-axis. */
     private final int x;
@@ -46,9 +43,6 @@ public class MoveAction implements Action {
 
     @Override
     public void perform(final @NonNull Map map, final @NonNull Entity entity) {
-        Objects.requireNonNull(map);
-        Objects.requireNonNull(entity);
-
         // Attack any enemies at new location:
         final List<Entity> entities = map.getEntityAt(x + dx, y + dy);
 

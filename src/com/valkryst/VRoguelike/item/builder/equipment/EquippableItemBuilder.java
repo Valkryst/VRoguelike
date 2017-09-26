@@ -3,14 +3,14 @@ package com.valkryst.VRoguelike.item.builder.equipment;
 import com.valkryst.VRoguelike.item.builder.ItemBuilder;
 import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
 import com.valkryst.VRoguelike.item.equipment.EquippableItem;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.Objects;
 
+@Data
 public class EquippableItemBuilder extends ItemBuilder {
     /** The slot. */
-    @Getter @Setter private EquipmentSlot slot;
+    private EquipmentSlot slot;
 
     @Override
     public EquippableItem build() {

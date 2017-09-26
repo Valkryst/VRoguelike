@@ -8,46 +8,44 @@ import com.valkryst.VRoguelike.enums.State;
 import com.valkryst.VRoguelike.item.equipment.EquipmentInventory;
 import com.valkryst.VRoguelike.loot.LootTable;
 import com.valkryst.VRoguelike.stat.BoundedStatistic;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 import java.util.Objects;
 
+@Data
 @EqualsAndHashCode(callSuper=true)
-@ToString
 public class CreatureBuilder extends EntityBuilder {
     /** The race. */
-    @Getter @Setter private Race race;
+    private Race race;
 
     /** The level. */
-    @Getter @Setter private BoundedStatistic stat_level;
+    private BoundedStatistic stat_level;
     /** The experience towards the next level. */
-    @Getter @Setter private BoundedStatistic stat_xp;
+    private BoundedStatistic stat_xp;
     /** The amount of gold carried. */
-    @Getter @Setter private BoundedStatistic stat_gold;
+    private BoundedStatistic stat_gold;
     /** The health. */
-    @Getter @Setter private BoundedStatistic stat_health;
+    private BoundedStatistic stat_health;
     /** The strength. */
-    @Getter @Setter private BoundedStatistic stat_strength;
+    private BoundedStatistic stat_strength;
     /** The defense. */
-    @Getter @Setter private BoundedStatistic stat_defense;
+    private BoundedStatistic stat_defense;
 
     /** The equipment inventory. */
-    @Getter @Setter private EquipmentInventory equipment;
+    private EquipmentInventory equipment;
 
     /** The line of sight radius. */
-    @Getter @Setter private int lineOfSightRadius;
+    private int lineOfSightRadius;
 
     /** The current state. */
-    @Getter @Setter private State state;
+    private State state;
 
     /** The decision-making AI used to handle combat. */
-    @Getter @Setter private CombatAI combatAI;
+    private CombatAI combatAI;
 
     /** The loot table. */
-    @Getter @Setter private LootTable lootTable;
+    private LootTable lootTable;
 
     public Creature build() {
         checkState();

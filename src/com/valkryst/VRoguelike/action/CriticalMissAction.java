@@ -5,8 +5,10 @@ import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.stat.BoundedStatistic;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.component.TextArea;
+import lombok.Data;
+import lombok.NonNull;
 
-
+@Data
 public class CriticalMissAction implements Action {
     /** The damage to deal. */
     private final int damage;
@@ -22,7 +24,7 @@ public class CriticalMissAction implements Action {
     }
 
     @Override
-    public void perform(final Map map, final Entity entity) {
+    public void perform(final @NonNull Map map, final @NonNull Entity entity) {
         if (entity instanceof Creature == false) {
             return;
         }

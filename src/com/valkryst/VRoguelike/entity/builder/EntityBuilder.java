@@ -2,26 +2,24 @@ package com.valkryst.VRoguelike.entity.builder;
 
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.enums.Sprite;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 import java.util.Objects;
 
+@Data
 @EqualsAndHashCode
-@ToString
 public class EntityBuilder {
     /** The name. */
-    @Getter @Setter private String name;
+    private String name;
     /** The description. */
-    @Getter @Setter private String description;
+    private String description;
     /** The x-axis coordinate. */
-    @Getter @Setter private int x;
+    private int x;
     /** The y-axis coordinate. */
-    @Getter @Setter private int y;
+    private int y;
     /** The sprite. */
-    @Getter @Setter private Sprite sprite;
+    private Sprite sprite;
 
     /** Constructs a new EntityBuilder. */
     public EntityBuilder() {
