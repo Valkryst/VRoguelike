@@ -36,14 +36,8 @@ public class Driver {
 
         Thread.sleep(50);
 
-        final ScreenBuilder screenBuilder = new ScreenBuilder();
-        screenBuilder.setRowIndex(0);
-        screenBuilder.setColumnIndex(0);
-        screenBuilder.setWidth(panelBuilder.getWidthInCharacters());
-        screenBuilder.setHeight(panelBuilder.getHeightInCharacters());
-
-        final MainMenuScreen mainMenuScreen = new MainMenuScreen(panel, screenBuilder);
-        final GameScreen gameScreen = new GameScreen(panel, screenBuilder);
+        final MainMenuScreen mainMenuScreen = new MainMenuScreen(panel);
+        final GameScreen gameScreen = new GameScreen(panel);
         panel.swapScreen(mainMenuScreen);
 
         mainMenuScreen.getButton_new().setOnClickFunction(() -> {

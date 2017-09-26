@@ -18,8 +18,8 @@ public class GameScreen extends Screen implements KeyListener {
 
     @Getter private TextArea messageBox;
 
-    public GameScreen(final Panel panel, final ScreenBuilder screenBuilder) {
-        super(screenBuilder);
+    public GameScreen(final Panel panel) {
+        super(new ScreenBuilder(panel.getWidthInCharacters(), panel.getHeightInCharacters()));
         panel.addKeyListener(this);
 
         drawUISections();
