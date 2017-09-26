@@ -16,6 +16,7 @@ import com.valkryst.VRoguelike.world.Room;
 import com.valkryst.VRoguelike.world.Tile;
 import com.valkryst.VTerminal.Panel;
 import com.valkryst.VTerminal.builder.PanelBuilder;
+import com.valkryst.VTerminal.builder.component.ScreenBuilder;
 import com.valkryst.VTerminal.font.Font;
 import com.valkryst.VTerminal.font.FontLoader;
 
@@ -35,8 +36,14 @@ public class Driver {
 
         Thread.sleep(50);
 
-        final MainMenuScreen mainMenuScreen = new MainMenuScreen(panel);
-        final GameScreen gameScreen = new GameScreen(panel);
+        final ScreenBuilder screenBuilder = new ScreenBuilder();
+        screenBuilder.setRowIndex(0);
+        screenBuilder.setColumnIndex(0);
+        screenBuilder.setWidth(panelBuilder.getWidthInCharacters());
+        screenBuilder.setHeight(panelBuilder.getHeightInCharacters());
+
+        final MainMenuScreen mainMenuScreen = new MainMenuScreen(panel, screenBuilder);
+        final GameScreen gameScreen = new GameScreen(panel, screenBuilder);
         panel.swapScreen(mainMenuScreen);
 
         mainMenuScreen.getButton_new().setOnClickFunction(() -> {

@@ -1,47 +1,31 @@
 package com.valkryst.VRoguelike.world;
 
 import com.valkryst.VRoguelike.enums.Sprite;
-import com.valkryst.VRoguelike.screen.GameScreen;
+import com.valkryst.VTerminal.component.Screen;
+import com.valkryst.VTerminal.printer.RectanglePrinter;
+
+import java.awt.Point;
 
 public class Room {
-    private final int x;
-    private final int y;
-    private final int width;
-    private final int height;
+    private final Point position;
+    private int width;
+    private int height;
 
-    public Room(final int x, final int y, final int width, final int height) {
-        if (x < 0) {
-            throw new IllegalArgumentException("The x-axis position cannot be less than zero.");
-        }
+    public Room(final int columnIndex, final int rowIndex, final int width, final int height) {
+        this(new Point(columnIndex, rowIndex), width, height);
+    }
 
-        if (y < 0) {
-            throw new IllegalArgumentException("The y-axis position cannot be less than zero.");
-        }
-
-        if (width < 1) {
-            throw new IllegalArgumentException("The width cannot be less than one.");
-        }
-
-        if (height < 1) {
-            throw new IllegalArgumentException("The height cannot be less than one.");
-        }
-
-        this.x = x;
-        this.y = y;
+    public Room(final Point position, final int width, final int height) {
+        this.position = position;
         this.width = width;
         this.height = height;
     }
 
-    public void carve(final GameScreen gameScreen) {
-        final Tile[][] tiles = gameScreen.getMap().getTiles();
-
-        for (int x = this.x ; x < width + this.x ; x++) {
-            for (int y = this.y ; y < height +  this.y ; y++) {
-                tiles[x][y].setSprite(Sprite.DIRT);
-                tiles[x][y].setSolid(false);
-                tiles[x][y].setTransparent(false);
-                tiles[x][y].placeOnScreen(gameScreen, x, y);
-            }
-        }
+    public void carve(final Screen screen) {
+        final RectanglePrinter rectanglePrinter = new RectanglePrinter();
+        rectanglePrinter.setWidth(width);
+        rectanglePrinter.setHeight(height);
+        rectanglePrinter.setFillChar(Sprite.DIRT.getCharacter());
+        rectanglePrinter.printFilled(screen, position.x, position.y);
     }
 }

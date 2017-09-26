@@ -2,6 +2,7 @@ package com.valkryst.VRoguelike.screen;
 
 import com.valkryst.VTerminal.Panel;
 import com.valkryst.VTerminal.builder.component.ButtonBuilder;
+import com.valkryst.VTerminal.builder.component.ScreenBuilder;
 import com.valkryst.VTerminal.component.Button;
 import com.valkryst.VTerminal.component.Screen;
 import lombok.Getter;
@@ -10,8 +11,8 @@ public class MainMenuScreen extends Screen {
     @Getter private Button button_new;
     @Getter private Button button_exit;
 
-    public MainMenuScreen(final Panel panel) {
-        super(0, 0, panel.getWidthInCharacters(), panel.getHeightInCharacters());
+    public MainMenuScreen(final Panel panel, final ScreenBuilder screenBuilder) {
+        super(screenBuilder);
 
         // Construct menu options:
         final ButtonBuilder builder = new ButtonBuilder();
