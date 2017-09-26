@@ -4,10 +4,12 @@ import com.valkryst.VRoguelike.item.builder.ItemBuilder;
 import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
 import com.valkryst.VRoguelike.item.equipment.EquippableItem;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.Objects;
 
 @Data
+@EqualsAndHashCode(callSuper=true)
 public class EquippableItemBuilder extends ItemBuilder {
     /** The slot. */
     private EquipmentSlot slot;

@@ -5,7 +5,7 @@ import com.valkryst.VRoguelike.item.builder.equipment.EquippableItemBuilder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper=true)
 public class EquippableItem extends Item {
     /** The slot. */
     @Getter private final EquipmentSlot slot;

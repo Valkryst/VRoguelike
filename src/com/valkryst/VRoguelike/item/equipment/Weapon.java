@@ -7,7 +7,7 @@ import lombok.Getter;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper=true)
 public class Weapon extends EquippableItem {
     /** The damage-range. */
     @Getter private final BoundedStatistic stat_damage;
