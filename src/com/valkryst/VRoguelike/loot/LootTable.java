@@ -1,12 +1,13 @@
 package com.valkryst.VRoguelike.loot;
 
 import com.valkryst.VRoguelike.item.Item;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
+@EqualsAndHashCode
 public class LootTable {
     /** The set of items that can be dropped. */
     @Getter private final List<LootEntry> lootTable = new ArrayList<>();
@@ -21,25 +22,6 @@ public class LootTable {
         }
 
         return sb.toString();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(lootTable);
-    }
-
-    @Override
-    public boolean equals(final Object otherObj) {
-        if (otherObj instanceof LootTable == false) {
-            return false;
-        }
-
-        if (otherObj == this) {
-            return true;
-        }
-
-        final LootTable otherTable = (LootTable) otherObj;
-        return Objects.equals(lootTable, otherTable.getLootTable());
     }
 
     /**
