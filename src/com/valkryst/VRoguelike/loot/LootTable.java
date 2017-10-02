@@ -2,7 +2,6 @@ package com.valkryst.VRoguelike.loot;
 
 import com.valkryst.VRoguelike.item.Item;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +9,7 @@ import java.util.List;
 @EqualsAndHashCode
 public class LootTable {
     /** The set of items that can be dropped. */
-    @Getter private final List<LootEntry> lootEntries = new ArrayList<>();
+    private final List<LootEntry> lootEntries = new ArrayList<>();
 
     @Override
     public String toString() {
