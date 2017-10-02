@@ -10,6 +10,7 @@ import com.valkryst.VTerminal.component.TextArea;
 import com.valkryst.VTerminal.printer.RectanglePrinter;
 import lombok.Getter;
 
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -33,12 +34,12 @@ public class GameScreen extends Screen implements KeyListener {
 
         // Player UI Section:
         printer.setTitle("Player");
-        printer.print(this, 81, 0);
+        printer.print(this, new Point(81, 0));
 
 
         // Target UI Section:
         printer.setTitle("Target");
-        printer.print(this, 81, 11);
+        printer.print(this, new Point(81, 11));
     }
 
     private void createMessageBox(final Radio<String> radio) {
