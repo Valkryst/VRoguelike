@@ -1,10 +1,14 @@
 package com.valkryst.VRoguelike.item.builder;
 
+import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.item.Item;
 import lombok.Data;
 
 @Data
 public class ItemBuilder {
+    /** The sprite. */
+    private Sprite sprite;
+
     /** The name. */
     private String name;
     /** The description.. */
@@ -32,16 +36,12 @@ public class ItemBuilder {
         return new Item(this);
     }
 
-    /**
-     * Ensures the builder is in a valid state.
-     *
-     * @throws NullPointerException
-     *        If the name or description are null.
-     *
-     * @throws IllegalArgumentException
-     *        If the name or description are empty.
-     */
+    /** Ensures the builder is in a valid state. */
     protected void checkState() {
+        if (sprite == null) {
+            sprite = Sprite.UNKNOWN;
+        }
+
         if (name == null || name.isEmpty()) {
             name = "Item";
         }
@@ -53,6 +53,8 @@ public class ItemBuilder {
 
     /** Resets the builder to it's default state. */
     public void reset() {
+        sprite = Sprite.UNKNOWN;
+
         name = "Item";
         description = "This is an unnamed item.";
 
