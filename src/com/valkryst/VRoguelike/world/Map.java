@@ -2,7 +2,6 @@ package com.valkryst.VRoguelike.world;
 
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.entity.Player;
-import com.valkryst.VRoguelike.screen.GameScreen;
 import com.valkryst.VTerminal.builder.component.ScreenBuilder;
 import com.valkryst.VTerminal.component.Screen;
 import com.valkryst.VTerminal.component.TextArea;
@@ -12,7 +11,6 @@ import lombok.NonNull;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Map {
     /** The screen on which the map is drawn. */
@@ -46,7 +44,7 @@ public class Map {
      *         If the messageBox is null.
      */
     public Map(final @NonNull TextArea messageBox, final int width, final int height) {
-        this.screen = new ScreenBuilder(tiles.length, tiles[0].length).build();
+        this.screen = new ScreenBuilder(width, height).build();
         this.messageBox = messageBox;
 
         tiles = new Tile[width][height];
