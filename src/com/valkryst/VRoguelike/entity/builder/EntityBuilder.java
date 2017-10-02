@@ -36,7 +36,7 @@ public class EntityBuilder {
      *        If the name or description are null.
      *
      * @throws IllegalArgumentException
-     *        If the name or description are empty.
+     *        If the x/y positions are below zero.
      */
     protected void checkState() {
         if (name == null || name.isEmpty()) {
