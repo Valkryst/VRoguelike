@@ -20,6 +20,7 @@ import com.valkryst.VTerminal.builder.component.ScreenBuilder;
 import com.valkryst.VTerminal.font.Font;
 import com.valkryst.VTerminal.font.FontLoader;
 
+import java.awt.Point;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -71,7 +72,7 @@ public class Driver {
             weaponBuilder.setSlot(EquipmentSlot.MAIN_HAND);
 
             player.getEquipment().setItemInSlot(EquipmentSlot.MAIN_HAND, weaponBuilder.build());
-            player.getActions().add(new UpdateLOSAction(25, 12, 0, 0));
+            player.getActions().add(new UpdateLOSAction(new Point(25, 12), 0, 0));
 
 
 
