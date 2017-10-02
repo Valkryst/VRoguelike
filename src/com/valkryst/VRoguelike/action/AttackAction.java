@@ -42,14 +42,14 @@ public class AttackAction implements Action {
 
         // Critical Miss
         if (attackRoll == 1) {
-            new CriticalMissAction(getDamageDealt(self, self)).perform(map, self);
+            new CriticalMissAction(getDamageDealt(self, self)).perform(map, messageBox, self);
             return;
         }
 
         // Miss
         if (attackRoll > 1 && attackRoll < 5) {
-            new DodgeAction().perform(map, target);
-            new AttackMissAction().perform(map, self);
+            new DodgeAction().perform(map, messageBox, target);
+            new AttackMissAction().perform(map, messageBox, self);
             return;
         }
 
