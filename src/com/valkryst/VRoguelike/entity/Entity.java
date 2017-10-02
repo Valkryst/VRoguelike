@@ -45,8 +45,8 @@ public class Entity {
         description = builder.getDescription();
 
         final LayerBuilder layerBuilder = new LayerBuilder();
-        layerBuilder.setColumnIndex(builder.getX());
-        layerBuilder.setRowIndex(builder.getY());
+        layerBuilder.setColumnIndex(builder.getPosition().x);
+        layerBuilder.setRowIndex(builder.getPosition().y);
         layerBuilder.setWidth(1);
         layerBuilder.setHeight(1);
         layer = layerBuilder.build();
@@ -102,7 +102,7 @@ public class Entity {
      *        If the action was created and added.
      */
     public boolean move(final int dx, final int dy) {
-        actions.add(new MoveAction(getX(), getY(), dx, dy));
+        actions.add(new MoveAction(getPosition(), dx, dy));
         return true;
     }
 
@@ -144,11 +144,7 @@ public class Entity {
         character.setBackgroundColor(sprite.getBackgroundColor());
     }
 
-    public int getX() {
-        return layer.getPosition().x;
-    }
-
-    public int getY() {
-        return layer.getPosition().y;
+    public Point getPosition() {
+        return layer.getPosition();
     }
 }
