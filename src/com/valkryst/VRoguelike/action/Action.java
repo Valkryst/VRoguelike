@@ -19,7 +19,7 @@ public interface Action {
      *        The entity performing the action.
      *
      * @throws NullPointerException
-     *        If the map or entity is null.
+     *        If the map, message box, or entity is null.
      */
     void perform(final @NonNull Map map, final @NonNull TextArea messageBox, final @NonNull Entity entity);
 }
