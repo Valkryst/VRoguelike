@@ -26,6 +26,8 @@ public class DeathAction implements Action {
                     builder.setItem(lootEntry);
                     builder.setPosition(entity.getPosition());
 
+                    map.getMessageBox().appendText(entity.getName() + " dropped " + lootEntry.getName() + ".");
+
                     map.addEntities(builder.build());
                 });
             }
