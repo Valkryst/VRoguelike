@@ -50,7 +50,7 @@
         <dependency>
             <groupId>com.github.Valkryst</groupId>
             <artifactId>VTerminal</artifactId>
-            <version>ed7616b</version>
+            <version>4c87f3c</version>
         </dependency>
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
