@@ -1,7 +1,6 @@
 package com.valkryst.VRoguelike.entity.builder;
 
 import com.valkryst.VRoguelike.entity.ItemDrop;
-import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.item.Item;
 import lombok.Data;
 import lombok.NonNull;
@@ -26,9 +25,8 @@ public class ItemDropBuilder extends EntityBuilder {
     }
 
     /**
-     * Sets the item, name, description, and sprite.
-     *
-     * The name and description are taken from the item.
+     * Sets the item, name, description, and sprite using the
+     * item and it's data.
      *
      * @param item
      *          The item.
@@ -36,7 +34,7 @@ public class ItemDropBuilder extends EntityBuilder {
     public void setItem(final @NonNull Item item) {
         super.setName(item.getName());
         super.setDescription(item.getDescription());
-        super.setSprite(Sprite.GRASS);
+        super.setSprite(item.getSprite());
         this.item = item;
     }
 }
