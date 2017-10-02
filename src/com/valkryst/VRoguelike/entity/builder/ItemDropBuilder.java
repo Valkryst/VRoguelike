@@ -1,0 +1,42 @@
+package com.valkryst.VRoguelike.entity.builder;
+
+import com.valkryst.VRoguelike.entity.ItemDrop;
+import com.valkryst.VRoguelike.enums.Sprite;
+import com.valkryst.VRoguelike.item.Item;
+import lombok.Data;
+import lombok.NonNull;
+
+import java.util.Objects;
+
+@Data
+public class ItemDropBuilder extends EntityBuilder {
+    /** The item. */
+    private Item item;
+
+    /** Constructs an ItemDrop. */
+    public ItemDrop build() {
+        checkState();
+        return new ItemDrop(this);
+    }
+
+    @Override
+    public void checkState() {
+        super.checkState();
+        Objects.requireNonNull(item);
+    }
+
+    /**
+     * Sets the item, name, description, and sprite.
+     *
+     * The name and description are taken from the item.
+     *
+     * @param item
+     *          The item.
+     */
+    public void setItem(final @NonNull Item item) {
+        super.setName(item.getName());
+        super.setDescription(item.getDescription());
+        super.setSprite(Sprite.GRASS);
+        this.item = item;
+    }
+}
