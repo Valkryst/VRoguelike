@@ -9,7 +9,6 @@ import lombok.ToString;
 
 import java.awt.Point;
 import java.util.List;
-import java.util.Objects;
 
 @EqualsAndHashCode
 @ToString
@@ -41,9 +40,6 @@ public class MoveAction implements Action {
 
     @Override
     public void perform(final @NonNull Map map, final @NonNull Entity entity) {
-        Objects.requireNonNull(map);
-        Objects.requireNonNull(entity);
-
         final Point newPosition = new Point(position.x + dx, position.y + dy);
 
         // Attack any enemies at new location:
