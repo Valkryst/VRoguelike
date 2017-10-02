@@ -5,6 +5,7 @@ import com.valkryst.VRoguelike.entity.Player;
 import com.valkryst.VRoguelike.screen.GameScreen;
 import lombok.Getter;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -106,23 +107,17 @@ public class Map {
     /**
      * Retrieves all Entities at a position.
      *
-     * @param x
-     *        The x-axis value of the position.
-     *
-     * @param y
-     *        The y-axis value of the position.
+     * @param position
+     *        The x/y-axis value of the position.
      *
      * @return
      *        The Entities.
      */
-    public List<Entity> getEntityAt(final int x, final int y) {
+    public List<Entity> getEntityAt(final Point position) {
         final List<Entity> entities = new ArrayList<>();
 
         for (final Entity entity : this.entities) {
-            boolean matches = entity.getX() == x;
-            matches &= entity.getY() == y;
-
-            if (matches) {
+            if (entity.getPosition().equals(position)) {
                 entities.add(entity);
             }
         }
