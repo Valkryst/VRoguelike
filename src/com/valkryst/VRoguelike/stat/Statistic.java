@@ -10,7 +10,7 @@ public class Statistic {
     @Getter private final String name;
 
     /** The value. */
-    @Getter @Setter private int value;
+    @Getter private int value;
 
     /** The function to run whenever the value is changed. */
     @Getter @Setter private Runnable onChange;
