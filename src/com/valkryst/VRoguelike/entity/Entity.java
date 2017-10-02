@@ -12,6 +12,7 @@ import com.valkryst.VTerminal.builder.component.LayerBuilder;
 import com.valkryst.VTerminal.component.Layer;
 import lombok.*;
 
+import java.awt.Point;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -137,7 +138,7 @@ public class Entity {
      *        If the sprite is null.
      */
     public void setSprite(final @NonNull Sprite sprite) {
-        final AsciiCharacter character = layer.getCharacterAt(0, 0);
+        final AsciiCharacter character = layer.getCharacterAt(new Point(0, 0));
         character.setCharacter(sprite.getCharacter());
         character.setForegroundColor(sprite.getForegroundColor());
         character.setBackgroundColor(sprite.getBackgroundColor());
