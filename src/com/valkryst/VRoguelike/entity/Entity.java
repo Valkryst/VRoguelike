@@ -147,4 +147,16 @@ public class Entity {
     public Point getPosition() {
         return layer.getPosition();
     }
+
+    public void setPosition(final Point position) {
+        if (position.x < 0) {
+            throw new IllegalArgumentException("The x value (" + position.x + ") cannot be less than zero.");
+        }
+
+        if (position.y < 0) {
+            throw new IllegalArgumentException("The y value (" + position.y + ") cannot be less than zero.");
+        }
+
+        layer.setPosition(position);
+    }
 }
