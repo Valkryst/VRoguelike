@@ -3,6 +3,8 @@ package com.valkryst.VRoguelike.world;
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.entity.Player;
 import com.valkryst.VRoguelike.screen.GameScreen;
+import com.valkryst.VTerminal.builder.component.ScreenBuilder;
+import com.valkryst.VTerminal.component.Screen;
 import lombok.Getter;
 
 import java.awt.Point;
@@ -12,7 +14,7 @@ import java.util.Objects;
 
 public class Map {
     /** The screen on which the map is drawn. */
-    @Getter private GameScreen screen;
+    @Getter private Screen screen;
 
     /** The tiles. */
     @Getter private Tile[][] tiles;
@@ -26,20 +28,17 @@ public class Map {
     /**
      * Constructs a new Map.
      *
-     * @param screen
-     *        The screen on which the map is drawn.
-     *
      * @param tiles
      *        The tiles.
      *
      * @throws NullPointerException
      *         If the screen or tiles are null.
      */
-    public Map(final GameScreen screen, final Tile[][] tiles) {
+    public Map(final Tile[][] tiles) {
         Objects.requireNonNull(screen);
         Objects.requireNonNull(tiles);
 
-        this.screen = screen;
+        this.screen = new ScreenBuilder(tiles.length, tiles[0].length).build();
         this.tiles = tiles;
     }
 
