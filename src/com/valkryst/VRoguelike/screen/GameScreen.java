@@ -32,6 +32,9 @@ public class GameScreen extends Screen implements KeyListener {
         printer.setWidth(39);
         printer.setHeight(10);
 
+        // Map:
+        this.addComponent(map.getScreen());
+
         // Player UI Section:
         printer.setTitle("Player");
         printer.print(this, new Point(81, 0));
