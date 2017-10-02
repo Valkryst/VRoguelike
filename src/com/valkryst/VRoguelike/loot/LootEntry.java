@@ -49,6 +49,6 @@ public class LootEntry {
      *        Whether or not the loot should be dropped.
      */
     public boolean drop() {
-        return ThreadLocalRandom.current().nextInt(101) < dropChance;
+        return ThreadLocalRandom.current().nextInt(101) <= dropChance;
     }
 }
