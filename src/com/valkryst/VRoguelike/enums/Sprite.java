@@ -6,6 +6,8 @@ import lombok.Getter;
 import java.awt.Color;
 
 public enum Sprite {
+    UNKNOWN('?', Color.BLACK, Color.RED),
+
     DARKNESS('█', Color.BLACK, Color.BLACK),
     DIRT('▒', new Color(0x452F09), new Color(0x372507)),
     GRASS('▒', new Color(0x3D4509), new Color(0x303707)),
