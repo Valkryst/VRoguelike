@@ -7,6 +7,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.ToString;
 
+import java.awt.TextArea;
+
 @EqualsAndHashCode(callSuper=true)
 @ToString
 public class AggressiveCombatAI extends CombatAI {
