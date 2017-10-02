@@ -8,6 +8,7 @@ import com.valkryst.VTerminal.component.TextArea;
 import lombok.Getter;
 import lombok.NonNull;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +47,8 @@ public class Map {
     public Map(final @NonNull TextArea messageBox, final int width, final int height) {
         this.screen = new ScreenBuilder(width, height).build();
         this.messageBox = messageBox;
+
+        screen.setBackgroundColor(Color.BLACK);
 
         tiles = new Tile[width][height];
 
