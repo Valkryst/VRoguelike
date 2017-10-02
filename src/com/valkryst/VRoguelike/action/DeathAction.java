@@ -2,10 +2,9 @@ package com.valkryst.VRoguelike.action;
 
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.world.Map;
+import com.valkryst.VTerminal.component.TextArea;
 import lombok.Data;
 import lombok.NonNull;
-
-import java.awt.TextArea;
 
 @Data
 public class DeathAction implements Action {
