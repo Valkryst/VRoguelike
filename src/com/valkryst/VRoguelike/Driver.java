@@ -10,13 +10,13 @@ import com.valkryst.VRoguelike.enums.Race;
 import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.item.builder.equipment.WeaponBuilder;
 import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
+import com.valkryst.VRoguelike.loot.LootTable;
 import com.valkryst.VRoguelike.screen.GameScreen;
 import com.valkryst.VRoguelike.screen.MainMenuScreen;
 import com.valkryst.VRoguelike.world.Room;
 import com.valkryst.VRoguelike.world.Tile;
 import com.valkryst.VTerminal.Panel;
 import com.valkryst.VTerminal.builder.PanelBuilder;
-import com.valkryst.VTerminal.builder.component.ScreenBuilder;
 import com.valkryst.VTerminal.font.Font;
 import com.valkryst.VTerminal.font.FontLoader;
 
@@ -71,12 +71,16 @@ public class Driver {
 
 
 
+            final LootTable lootTable = new LootTable();
+            lootTable.add(weaponBuilder.build(), 100);
+
             final CreatureBuilder creatureBuilder = new CreatureBuilder();
             creatureBuilder.setX(26);
             creatureBuilder.setY(13);
             creatureBuilder.setRace(Race.HUMAN);
             creatureBuilder.setCombatAI(new AggressiveCombatAI());
             creatureBuilder.setSprite(Sprite.ENEMY);
+            creatureBuilder.setLootTable(lootTable);
             final Creature npc = creatureBuilder.build();
             npc.getEquipment().setItemInSlot(EquipmentSlot.MAIN_HAND, weaponBuilder.build());
 
