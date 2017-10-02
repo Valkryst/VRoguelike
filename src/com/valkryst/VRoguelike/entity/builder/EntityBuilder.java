@@ -18,7 +18,7 @@ public class EntityBuilder {
     /** The description. */
     @Getter @Setter private String description;
     /** The x/y-axis coordinates. */
-    @Getter @Setter private Point position;
+    @Getter @Setter private Point position = new Point(-1, -1);
     /** The sprite. */
     @Getter @Setter private Sprite sprite;
 
