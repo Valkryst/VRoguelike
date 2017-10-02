@@ -26,6 +26,6 @@ public class Room {
         rectanglePrinter.setWidth(width);
         rectanglePrinter.setHeight(height);
         rectanglePrinter.setFillChar(Sprite.DIRT.getCharacter());
-        rectanglePrinter.printFilled(screen, position.x, position.y);
+        rectanglePrinter.printFilled(screen, position);
     }
 }
