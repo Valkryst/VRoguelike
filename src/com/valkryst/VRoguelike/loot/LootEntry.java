@@ -28,8 +28,8 @@ public class LootEntry {
             throw new IllegalArgumentException("The drop chance cannot be below 1.");
         }
 
-        if (dropChance > 99) {
-            throw new IllegalArgumentException("The drop chance cannot be above 99.");
+        if (dropChance > 100) {
+            throw new IllegalArgumentException("The drop chance cannot be above 100.");
         }
 
         this.item = item;
