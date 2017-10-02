@@ -3,11 +3,13 @@ package com.valkryst.VRoguelike.action;
 import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.world.Map;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NonNull;
+import lombok.ToString;
 
 import java.awt.Point;
 import java.util.List;
+import java.util.Objects;
 
 @EqualsAndHashCode
 @ToString
