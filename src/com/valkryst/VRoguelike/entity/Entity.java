@@ -10,7 +10,6 @@ import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.AsciiCharacter;
 import com.valkryst.VTerminal.builder.component.LayerBuilder;
 import com.valkryst.VTerminal.component.Layer;
-import com.valkryst.VTerminal.component.TextArea;
 import lombok.*;
 
 import java.awt.Point;
@@ -61,14 +60,11 @@ public class Entity {
      * @param map
      *        The map that the entity exists on.
      *
-     * @param messageBox
-     *        The TextArea to display messages in.
-     *
      * @throws NullPointerException
      *        If the map or message box is null.
      */
-    public void update(final @NonNull Map map, final @NonNull TextArea messageBox) {
-        actions.forEach(action -> action.perform(map, messageBox,this));
+    public void update(final @NonNull Map map) {
+        actions.forEach(action -> action.perform(map,this));
         actions.clear();
     }
 
