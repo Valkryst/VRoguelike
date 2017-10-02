@@ -3,7 +3,6 @@ package com.valkryst.VRoguelike.action;
 import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.world.Map;
-import com.valkryst.VTerminal.component.TextArea;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.ToString;
@@ -41,7 +40,7 @@ public class MoveAction implements Action {
     }
 
     @Override
-    public void perform(final @NonNull Map map, final @NonNull TextArea messageBox, final @NonNull Entity entity) {
+    public void perform(final @NonNull Map map, final @NonNull Entity entity) {
         Objects.requireNonNull(map);
         Objects.requireNonNull(entity);
 
@@ -53,7 +52,7 @@ public class MoveAction implements Action {
         if (entities.size() >= 1) {
             for (final Entity target : entities) {
                 if (target instanceof Creature) {
-                    new AttackAction((Creature) target).perform(map, messageBox, entity);
+                    new AttackAction((Creature) target).perform(map, entity);
                 }
             }
 
@@ -62,7 +61,7 @@ public class MoveAction implements Action {
 
         if (map.isPositionFree(newPosition)) {
             entity.setPosition(newPosition);
-            new UpdateLOSAction(position, dx, dy).perform(map, messageBox, entity);
+            new UpdateLOSAction(position, dx, dy).perform(map, entity);
         }
     }
 }

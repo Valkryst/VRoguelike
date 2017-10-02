@@ -8,7 +8,6 @@ import com.valkryst.VRoguelike.item.equipment.EquippableItem;
 import com.valkryst.VRoguelike.item.equipment.Weapon;
 import com.valkryst.VRoguelike.stat.BoundedStatistic;
 import com.valkryst.VRoguelike.world.Map;
-import com.valkryst.VTerminal.component.TextArea;
 import lombok.Data;
 import lombok.NonNull;
 
@@ -33,8 +32,8 @@ public class AttackAction implements Action {
     }
 
     @Override
-    public void perform(final @NonNull Map map, final @NonNull TextArea messageBox, final @NonNull Entity entity) {
-        messageBox.appendText("");
+    public void perform(final @NonNull Map map, final @NonNull Entity entity) {
+        map.getMessageBox().appendText("");
 
         final Creature self = (Creature) entity;
 
@@ -42,14 +41,14 @@ public class AttackAction implements Action {
 
         // Critical Miss
         if (attackRoll == 1) {
-            new CriticalMissAction(getDamageDealt(self, self)).perform(map, messageBox, self);
+            new CriticalMissAction(getDamageDealt(self, self)).perform(map, self);
             return;
         }
 
         // Miss
         if (attackRoll > 1 && attackRoll < 5) {
-            new DodgeAction().perform(map, messageBox, target);
-            new AttackMissAction().perform(map, messageBox, self);
+            new DodgeAction().perform(map, target);
+            new AttackMissAction().perform(map, self);
             return;
         }
 
@@ -75,14 +74,14 @@ public class AttackAction implements Action {
 
         if (damage > 0) {
             health.setValue(health.getValue() - damage);
-            messageBox.appendText(self.getName() + " attacked " + target.getName() + " for " + damage + " damage.");
-            messageBox.appendText(target.getName() + "'s health is now " + health.getValue() + "/" + health.getMaximum());
+            map.getMessageBox().appendText(self.getName() + " attacked " + target.getName() + " for " + damage + " damage.");
+            map.getMessageBox().appendText(target.getName() + "'s health is now " + health.getValue() + "/" + health.getMaximum());
         } else {
-            messageBox.appendText(self.getName() + " dealt no damage to " + target.getName() + ".");
+            map.getMessageBox().appendText(self.getName() + " dealt no damage to " + target.getName() + ".");
         }
 
         if (health.getValue() == health.getMinimum()) {
-            new DeathAction().perform(map, messageBox, target);
+            new DeathAction().perform(map, target);
         } else {
             target.getCombatAI().decide(map, target, self);
         }
