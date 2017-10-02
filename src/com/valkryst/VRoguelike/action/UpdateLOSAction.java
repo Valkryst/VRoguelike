@@ -7,6 +7,7 @@ import com.valkryst.VRoguelike.entity.Player;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VRoguelike.world.Tile;
 import com.valkryst.VTerminal.component.Screen;
+import com.valkryst.VTerminal.component.TextArea;
 import lombok.Data;
 import lombok.NonNull;
 
@@ -40,7 +41,7 @@ public class UpdateLOSAction implements Action {
     }
 
     @Override
-    public void perform(final @NonNull Map map, final @NonNull Entity entity) {
+    public void perform(final @NonNull Map map, final @NonNull TextArea messageBox, final @NonNull Entity entity) {
         if (entity instanceof Creature == false) {
             return;
         }

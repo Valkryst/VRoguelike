@@ -5,11 +5,13 @@ import com.valkryst.VRoguelike.world.Map;
 import lombok.Data;
 import lombok.NonNull;
 
+import java.awt.TextArea;
+
 @Data
 public class DeathAction implements Action {
     @Override
-    public void perform(final @NonNull Map map, final @NonNull Entity entity) {
+    public void perform(final @NonNull Map map, final @NonNull TextArea messageBox, final @NonNull Entity entity) {
         map.removeEntities(entity);
-        map.getScreen().getMessageBox().appendText(entity.getName() + " has died.");
+        messageBox.appendText(entity.getName() + " has died.");
     }
 }

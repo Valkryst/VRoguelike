@@ -33,8 +33,7 @@ public class AttackAction implements Action {
     }
 
     @Override
-    public void perform(final @NonNull Map map, final @NonNull Entity entity) {
-        final TextArea messageBox = map.getScreen().getMessageBox();
+    public void perform(final @NonNull Map map, final @NonNull TextArea messageBox, final @NonNull Entity entity) {
         messageBox.appendText("");
 
         final Creature self = (Creature) entity;
@@ -83,7 +82,7 @@ public class AttackAction implements Action {
         }
 
         if (health.getValue() == health.getMinimum()) {
-            new DeathAction().perform(map, target);
+            new DeathAction().perform(map, messageBox, target);
         } else {
             target.getCombatAI().decide(map, target, self);
         }

@@ -4,7 +4,9 @@ import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
 import com.valkryst.VRoguelike.world.Map;
-import lombok.*;
+import com.valkryst.VTerminal.component.TextArea;
+import lombok.Data;
+import lombok.NonNull;
 
 @Data
 public class UnEquipAction implements Action {
@@ -25,7 +27,7 @@ public class UnEquipAction implements Action {
     }
 
     @Override
-    public void perform(final @NonNull Map map, final @NonNull Entity entity) {
+    public void perform(final @NonNull Map map, final @NonNull TextArea messageBox, final @NonNull Entity entity) {
         if (entity instanceof Creature == false) {
             return;
         }
