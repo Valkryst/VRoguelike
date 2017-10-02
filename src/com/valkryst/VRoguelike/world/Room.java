@@ -1,8 +1,7 @@
 package com.valkryst.VRoguelike.world;
 
 import com.valkryst.VRoguelike.enums.Sprite;
-import com.valkryst.VTerminal.component.Screen;
-import com.valkryst.VTerminal.printer.RectanglePrinter;
+import com.valkryst.VRoguelike.screen.GameScreen;
 
 import java.awt.Point;
 
@@ -21,11 +20,15 @@ public class Room {
         this.height = height;
     }
 
-    public void carve(final Screen screen) {
-        final RectanglePrinter rectanglePrinter = new RectanglePrinter();
-        rectanglePrinter.setWidth(width);
-        rectanglePrinter.setHeight(height);
-        rectanglePrinter.setFillChar(Sprite.DIRT.getCharacter());
-        rectanglePrinter.printFilled(screen, position);
+    public void carve(final GameScreen screen) {
+        final Map map = screen.getMap();
+        final Tile[][] tiles = map.getTiles();
+
+        for (int x = position.x ; x < position.x + width ; x++) {
+            for (int y = position.y ; y < position.y + height ; y++) {
+                tiles[x][y].setSprite(Sprite.DIRT);
+                tiles[x][y].setSolid(false);
+            }
+        }
     }
 }

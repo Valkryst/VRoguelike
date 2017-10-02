@@ -4,16 +4,12 @@ import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
 import com.valkryst.VRoguelike.world.Map;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.ToString;
+import lombok.*;
 
-@EqualsAndHashCode
-@ToString
+@Data
 public class UnEquipAction implements Action {
     /** The slot to un-equip. */
-    @Getter private final EquipmentSlot slot;
+    private final EquipmentSlot slot;
 
     /**
      * Constructs a new UnEquipAction.

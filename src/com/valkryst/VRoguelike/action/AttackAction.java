@@ -6,17 +6,15 @@ import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
 import com.valkryst.VRoguelike.item.equipment.EquippableItem;
 import com.valkryst.VRoguelike.item.equipment.Weapon;
-import com.valkryst.VRoguelike.stat.LimitedStatistic;
+import com.valkryst.VRoguelike.stat.BoundedStatistic;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.component.TextArea;
-import lombok.EqualsAndHashCode;
+import lombok.Data;
 import lombok.NonNull;
-import lombok.ToString;
 
 import java.util.Optional;
 
-@EqualsAndHashCode
-@ToString
+@Data
 public class AttackAction implements Action {
     /** The target. */
     private final Creature target;
@@ -40,20 +38,41 @@ public class AttackAction implements Action {
         messageBox.appendText("");
 
         final Creature self = (Creature) entity;
-        final LimitedStatistic health = target.getStat_health();
 
-        if (doesAttackHitTarget(self)) {
-            new DodgeAction().perform(map, target);
-            new AttackMissAction().perform(map, self);
-            messageBox.appendText(self.getName() + " missed " + target.getName());
+        final int attackRoll = new Die(20).roll();
+
+        // Critical Miss
+        if (attackRoll == 1) {
+            new CriticalMissAction(getDamageDealt(self, self)).perform(map, self);
             return;
         }
 
+        // Miss
+        if (attackRoll > 1 && attackRoll < 5) {
+            new DodgeAction().perform(map, target);
+            new AttackMissAction().perform(map, self);
+            return;
+        }
+
+        // Normal Attack
         int damage = 0;
-        damage += getWeaponDamage(self, EquipmentSlot.MAIN_HAND);
-        damage += getWeaponDamage(self, EquipmentSlot.OFF_HAND);
-        damage += self.getStat_strength().getValue();
-        damage -= target.getStat_defense().getValue();
+
+        if (attackRoll >= 5 && attackRoll <= 16) {
+            damage = getDamageDealt(self, target);
+        }
+
+        // Double Damage Attack
+        if (attackRoll > 16 && attackRoll < 20) {
+            damage = getDamageDealt(self, target) * 2;
+        }
+
+        // Critical Attack
+        if (attackRoll == 20) {
+            damage = getDamageDealt(self, target) * 3;
+        }
+
+
+        final BoundedStatistic health = target.getStat_health();
 
         if (damage > 0) {
             health.setValue(health.getValue() - damage);
@@ -65,29 +84,34 @@ public class AttackAction implements Action {
 
         if (health.getValue() == health.getMinimum()) {
             new DeathAction().perform(map, target);
-            messageBox.appendText(target.getName() + " has died.");
         } else {
             target.getCombatAI().decide(map, target, self);
         }
     }
 
     /**
-     * Determines if an attack will hit the target.
+     * Calculates the damage to deal.
      *
      * @param self
      *        The attacking creature.
      *
+     * @param target
+     *        The creature being attacked.
+     *
      * @return
-     *        If the attack lands.
+     *        The damage dealt.
      *
      * @throws NullPointerException
-     *        If the creature is null.
+     *        If either creature is null.
      */
-    private boolean doesAttackHitTarget(final @NonNull Creature self) {
-        final int randomVal = new Die(100).roll();
-        final int hitVal = self.getStat_accuracy().getValue() - target.getStat_dodge().getValue();
+    private static int getDamageDealt(final @NonNull Creature self, final @NonNull Creature target) {
+        int damage = 0;
+        damage += getWeaponDamage(self, EquipmentSlot.MAIN_HAND);
+        damage += getWeaponDamage(self, EquipmentSlot.OFF_HAND);
+        damage += self.getStat_strength().getValue();
+        damage -= target.getStat_defense().getValue();
 
-        return randomVal < hitVal;
+        return damage;
     }
 
     /**

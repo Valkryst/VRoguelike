@@ -7,7 +7,7 @@ import com.valkryst.VRoguelike.enums.Race;
 import com.valkryst.VRoguelike.enums.State;
 import com.valkryst.VRoguelike.item.equipment.EquipmentInventory;
 import com.valkryst.VRoguelike.loot.LootTable;
-import com.valkryst.VRoguelike.stat.LimitedStatistic;
+import com.valkryst.VRoguelike.stat.BoundedStatistic;
 import lombok.*;
 
 @EqualsAndHashCode(callSuper=true)
@@ -17,21 +17,17 @@ public class Creature extends Entity {
     @Getter @Setter private Race race;
 
     /** The level. */
-    @Getter private final LimitedStatistic stat_level;
+    @Getter private final BoundedStatistic stat_level;
     /** The experience towards the next level. */
-    @Getter private final LimitedStatistic stat_xp;
+    @Getter private final BoundedStatistic stat_xp;
     /** The amount of gold carried. */
-    @Getter private final LimitedStatistic stat_gold;
+    @Getter private final BoundedStatistic stat_gold;
     /** The health. */
-    @Getter private final LimitedStatistic stat_health;
+    @Getter private final BoundedStatistic stat_health;
     /** The strength. */
-    @Getter private final LimitedStatistic stat_strength;
+    @Getter private final BoundedStatistic stat_strength;
     /** The defense. */
-    @Getter private final LimitedStatistic stat_defense;
-    /** The accuracy (Percent chance to land an attack). */
-    @Getter private final LimitedStatistic stat_accuracy;
-    /** The dodge (Percent chance to dodge an attack). */
-    @Getter private final LimitedStatistic stat_dodge;
+    @Getter private final BoundedStatistic stat_defense;
 
     /** The equipment inventory. */
     @Getter private final EquipmentInventory equipment;
@@ -67,8 +63,6 @@ public class Creature extends Entity {
         stat_health = builder.getStat_health();
         stat_strength = builder.getStat_strength();
         stat_defense = builder.getStat_defense();
-        stat_accuracy = builder.getStat_accuracy();
-        stat_dodge = builder.getStat_dodge();
 
         equipment = builder.getEquipment();
 

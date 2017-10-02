@@ -1,14 +1,16 @@
 package com.valkryst.VRoguelike.loot;
 
 import com.valkryst.VRoguelike.item.Item;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NonNull;
 
-import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
+@EqualsAndHashCode
 public class LootEntry {
     /** The item. */
-    @Getter private final Item item;
+    @Getter @NonNull private final Item item;
     /** The drop chance. */
     @Getter private final int dropChance;
 
@@ -22,8 +24,6 @@ public class LootEntry {
      *        The drop chance.
      */
     public LootEntry(final Item item, final int dropChance) {
-        Objects.requireNonNull(item);
-
         if (dropChance < 1) {
             throw new IllegalArgumentException("The drop chance cannot be below 1.");
         }
@@ -38,36 +38,12 @@ public class LootEntry {
 
     @Override
     public String toString() {
-        return "LootEntry:\n\tItem:" + item.toString().replace("\n\t", "\n\t\t") + "\n\tDrop Chance:"
-               + dropChance;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(item, dropChance);
-    }
-
-    @Override
-    public boolean equals(final Object otherObj) {
-        if (otherObj instanceof LootEntry == false) {
-            return false;
-        }
-
-        if (otherObj == this) {
-            return true;
-        }
-
-        final LootEntry otherEntry = (LootEntry) otherObj;
-
-        boolean isEqual = super.equals(otherObj);
-        isEqual &= Objects.equals(item, otherEntry.getItem());
-        isEqual &= Objects.equals(dropChance, otherEntry.getDropChance());
-        return isEqual;
+        return "LootEntry:\n\tItem:" + item.toString().replace("\n\t", "\n\t\t")
+                + "\n\tDrop Chance:" + dropChance;
     }
 
     /**
-     * Determines whether or not the loot should be
-     * dropped.
+     * Determines whether or not the loot should be dropped.
      *
      * @return
      *        Whether or not the loot should be dropped.

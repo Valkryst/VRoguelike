@@ -1,15 +1,16 @@
 package com.valkryst.VRoguelike.item.equipment;
 
 import com.valkryst.VRoguelike.item.builder.equipment.WeaponBuilder;
-import com.valkryst.VRoguelike.stat.LimitedStatistic;
+import com.valkryst.VRoguelike.stat.BoundedStatistic;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
-import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
+@EqualsAndHashCode(callSuper=true)
 public class Weapon extends EquippableItem {
     /** The damage-range. */
-    @Getter private final LimitedStatistic stat_damage;
+    @Getter private final BoundedStatistic stat_damage;
 
     /**
      * Constructs a new Weapon.
@@ -25,28 +26,6 @@ public class Weapon extends EquippableItem {
     @Override
     public String toString() {
         return super.toString() + stat_damage.toString().replace("\n\t", "\n\t\t");
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode() + Objects.hashCode(stat_damage);
-    }
-
-    @Override
-    public boolean equals(final Object otherObj) {
-        if (otherObj instanceof Weapon == false) {
-            return false;
-        }
-
-        if (otherObj == this) {
-            return true;
-        }
-
-        final Weapon otherWep = (Weapon) otherObj;
-
-        boolean isEqual = super.equals(otherObj);
-        isEqual &= Objects.equals(stat_damage, otherWep.getStat_damage());
-        return isEqual;
     }
 
     /**

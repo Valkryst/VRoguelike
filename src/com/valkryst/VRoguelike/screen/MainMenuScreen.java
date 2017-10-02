@@ -11,8 +11,8 @@ public class MainMenuScreen extends Screen {
     @Getter private Button button_new;
     @Getter private Button button_exit;
 
-    public MainMenuScreen(final Panel panel, final ScreenBuilder screenBuilder) {
-        super(screenBuilder);
+    public MainMenuScreen(final Panel panel) {
+        super(new ScreenBuilder(panel.getWidthInCharacters(), panel.getHeightInCharacters()));
 
         // Construct menu options:
         final ButtonBuilder builder = new ButtonBuilder();
