@@ -5,7 +5,9 @@ import com.valkryst.VRoguelike.entity.Player;
 import com.valkryst.VRoguelike.screen.GameScreen;
 import com.valkryst.VTerminal.builder.component.ScreenBuilder;
 import com.valkryst.VTerminal.component.Screen;
+import com.valkryst.VTerminal.component.TextArea;
 import lombok.Getter;
+import lombok.NonNull;
 
 import java.awt.Point;
 import java.util.ArrayList;
@@ -25,28 +27,14 @@ public class Map {
     /** The entity. */
     @Getter private List<Entity> entities = new ArrayList<>();
 
-    /**
-     * Constructs a new Map.
-     *
-     * @param tiles
-     *        The tiles.
-     *
-     * @throws NullPointerException
-     *         If the screen or tiles are null.
-     */
-    public Map(final Tile[][] tiles) {
-        Objects.requireNonNull(screen);
-        Objects.requireNonNull(tiles);
-
-        this.screen = new ScreenBuilder(tiles.length, tiles[0].length).build();
-        this.tiles = tiles;
-    }
+    /** The component to display messages within. */
+    @Getter private TextArea messageBox;
 
     /**
      * Constructs a new Map.
      *
-     * @param screen
-     *        The screen on which the map is drawn.
+     * @param messageBox
+     *        The component to display messages within.
      *
      * @param width
      *        The width of the map to create.
@@ -55,10 +43,11 @@ public class Map {
      *        The height of the map to create.
      *
      * @throws NullPointerException
-     *         If the screen is null.
+     *         If the messageBox is null.
      */
-    public Map(final GameScreen screen, final int width, final int height) {
-        this.screen = screen;
+    public Map(final @NonNull TextArea messageBox, final int width, final int height) {
+        this.screen = new ScreenBuilder(tiles.length, tiles[0].length).build();
+        this.messageBox = messageBox;
 
         tiles = new Tile[width][height];
 
