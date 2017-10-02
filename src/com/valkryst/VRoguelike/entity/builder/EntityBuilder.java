@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.awt.Point;
 import java.util.Objects;
 
 @EqualsAndHashCode
@@ -16,10 +17,8 @@ public class EntityBuilder {
     @Getter @Setter private String name;
     /** The description. */
     @Getter @Setter private String description;
-    /** The x-axis coordinate. */
-    @Getter @Setter private int x;
-    /** The y-axis coordinate. */
-    @Getter @Setter private int y;
+    /** The x/y-axis coordinates. */
+    @Getter @Setter private Point position;
     /** The sprite. */
     @Getter @Setter private Sprite sprite;
 
@@ -52,12 +51,12 @@ public class EntityBuilder {
             description = "This is an unnamed Entity.";
         }
 
-        if (x < 0) {
-            throw new IllegalArgumentException("The x value (" + x + ") cannot be less than zero.");
+        if (position.x < 0) {
+            throw new IllegalArgumentException("The x value (" + position.x + ") cannot be less than zero.");
         }
 
-        if (y < 0) {
-            throw new IllegalArgumentException("The y value (" + y + ") cannot be less than zero.");
+        if (position.y < 0) {
+            throw new IllegalArgumentException("The y value (" + position.y + ") cannot be less than zero.");
         }
 
         Objects.requireNonNull(sprite);
@@ -67,8 +66,7 @@ public class EntityBuilder {
     public void reset() {
         name = "";
         description = "";
-        x = -1;
-        y = -1;
+        position.setLocation(-1, -1);
         sprite = null;
     }
 }
