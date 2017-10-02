@@ -20,6 +20,7 @@ import com.valkryst.VTerminal.builder.PanelBuilder;
 import com.valkryst.VTerminal.font.Font;
 import com.valkryst.VTerminal.font.FontLoader;
 
+import java.awt.Dimension;
 import java.awt.Point;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -87,8 +88,8 @@ public class Driver {
             gameScreen.getMap().addEntities(player, npc);
 
             // Create rooms:
-            final Room roomA = new Room(20, 5, 10, 15);
-            final Room roomB = new Room(50, 5, 10, 15);
+            final Room roomA = new Room(new Point(20, 5), new Dimension(10, 15));
+            final Room roomB = new Room(new Point(50, 5), new Dimension(10, 15));
             roomA.carve(gameScreen);
             roomB.carve(gameScreen);
         });
