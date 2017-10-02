@@ -15,7 +15,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class GameScreen extends Screen implements KeyListener {
-    @Getter private final Map map = new Map(this, 80, 30);
+    @Getter private final Map map;
 
     @Getter private TextArea messageBox;
 
@@ -23,8 +23,9 @@ public class GameScreen extends Screen implements KeyListener {
         super(new ScreenBuilder(panel.getWidthInCharacters(), panel.getHeightInCharacters()));
         panel.addKeyListener(this);
 
-        drawUISections();
         createMessageBox(panel.getRadio());
+        map = new Map(getMessageBox(), 80, 30);
+        drawUISections();
     }
 
     private void drawUISections() {
