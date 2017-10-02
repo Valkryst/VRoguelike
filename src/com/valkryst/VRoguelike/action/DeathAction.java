@@ -24,6 +24,7 @@ public class DeathAction implements Action {
                 lootTable.loot().forEach(lootEntry -> {
                     final ItemDropBuilder builder = new ItemDropBuilder();
                     builder.setItem(lootEntry);
+                    builder.setPosition(entity.getPosition());
 
                     map.addEntities(builder.build());
                 });
