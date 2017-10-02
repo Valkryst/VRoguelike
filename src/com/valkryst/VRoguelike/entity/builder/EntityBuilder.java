@@ -69,4 +69,20 @@ public class EntityBuilder {
         position.setLocation(-1, -1);
         sprite = null;
     }
+
+    public void setX(final int x) {
+        if (x < 0) {
+            throw new IllegalArgumentException("The x value (" + position.x + ") cannot be less than zero.");
+        }
+
+        position.setLocation(x, position.y);
+    }
+
+    public void setY(final int y) {
+        if (y < 0) {
+            throw new IllegalArgumentException("The y value (" + position.y + ") cannot be less than zero.");
+        }
+
+        position.setLocation(position.x, y);
+    }
 }
