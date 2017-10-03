@@ -3,11 +3,13 @@ package com.valkryst.VRoguelike.entity.builder;
 import com.valkryst.VRoguelike.entity.ItemDrop;
 import com.valkryst.VRoguelike.item.Item;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 
 import java.util.Objects;
 
 @Data
+@EqualsAndHashCode(callSuper=true)
 public class ItemDropBuilder extends EntityBuilder {
     /** The item. */
     private Item item;
