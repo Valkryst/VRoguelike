@@ -55,7 +55,7 @@
         <dependency>
             <groupId>com.github.Valkryst</groupId>
             <artifactId>VController</artifactId>
-            <version>f004128</version>
+            <version>0593f47</version>
         </dependency>
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
