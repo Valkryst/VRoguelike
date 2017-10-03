@@ -53,6 +53,11 @@
             <version>4c87f3c</version>
         </dependency>
         <dependency>
+            <groupId>com.github.Valkryst</groupId>
+            <artifactId>VController</artifactId>
+            <version>5cd6f6b</version>
+        </dependency>
+        <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
             <version>1.1.1</version>
