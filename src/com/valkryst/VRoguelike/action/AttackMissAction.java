@@ -9,6 +9,6 @@ import lombok.NonNull;
 public class AttackMissAction implements Action {
     @Override
     public void perform(final @NonNull Map map, final @NonNull Entity entity) {
-        map.getScreen().getMessageBox().appendText(entity.getName() + " missed it's target.");
+        map.getMessageBox().appendText(entity.getName() + " missed it's target.");
     }
 }

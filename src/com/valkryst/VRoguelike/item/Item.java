@@ -1,11 +1,15 @@
 package com.valkryst.VRoguelike.item;
 
+import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.item.builder.ItemBuilder;
 import com.valkryst.VRoguelike.stat.Statistic;
 import lombok.Data;
 
 @Data
 public class Item {
+    /** The sprite. */
+    private Sprite sprite;
+
     /** The name. */
     private String name = "Item";
 
@@ -30,6 +34,8 @@ public class Item {
      *        The builder.
      */
     public Item(final ItemBuilder builder) {
+        sprite = builder.getSprite();
+
         name = builder.getName();
         description = builder.getDescription();
 
@@ -43,6 +49,7 @@ public class Item {
     @Override
     public String toString() {
         return this.getClass().getSimpleName() + ":" +
+                "\n\tSprite:\t" + sprite +
                 "\n\tName:\t" + name +
                 "\n\tDescription:\t" + description +
                 "\n\tStatistics:" +

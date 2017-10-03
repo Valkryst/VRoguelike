@@ -10,11 +10,12 @@ import com.valkryst.VTerminal.component.TextArea;
 import com.valkryst.VTerminal.printer.RectanglePrinter;
 import lombok.Getter;
 
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class GameScreen extends Screen implements KeyListener {
-    @Getter private final Map map = new Map(this, 80, 30);
+    @Getter private final Map map;
 
     @Getter private TextArea messageBox;
 
@@ -22,8 +23,9 @@ public class GameScreen extends Screen implements KeyListener {
         super(new ScreenBuilder(panel.getWidthInCharacters(), panel.getHeightInCharacters()));
         panel.addKeyListener(this);
 
-        drawUISections();
         createMessageBox(panel.getRadio());
+        map = new Map(getMessageBox(), 80, 30);
+        drawUISections();
     }
 
     private void drawUISections() {
@@ -31,14 +33,17 @@ public class GameScreen extends Screen implements KeyListener {
         printer.setWidth(39);
         printer.setHeight(10);
 
+        // Map:
+        this.addComponent(map.getScreen());
+
         // Player UI Section:
         printer.setTitle("Player");
-        printer.print(this, 81, 0);
+        printer.print(this, new Point(81, 0));
 
 
         // Target UI Section:
         printer.setTitle("Target");
-        printer.print(this, 81, 11);
+        printer.print(this, new Point(81, 11));
     }
 
     private void createMessageBox(final Radio<String> radio) {

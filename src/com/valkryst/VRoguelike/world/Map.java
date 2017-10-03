@@ -2,16 +2,20 @@ package com.valkryst.VRoguelike.world;
 
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.entity.Player;
-import com.valkryst.VRoguelike.screen.GameScreen;
+import com.valkryst.VTerminal.builder.component.ScreenBuilder;
+import com.valkryst.VTerminal.component.Screen;
+import com.valkryst.VTerminal.component.TextArea;
 import lombok.Getter;
+import lombok.NonNull;
 
+import java.awt.Color;
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Map {
     /** The screen on which the map is drawn. */
-    @Getter private GameScreen screen;
+    @Getter private Screen screen;
 
     /** The tiles. */
     @Getter private Tile[][] tiles;
@@ -22,31 +26,14 @@ public class Map {
     /** The entity. */
     @Getter private List<Entity> entities = new ArrayList<>();
 
-    /**
-     * Constructs a new Map.
-     *
-     * @param screen
-     *        The screen on which the map is drawn.
-     *
-     * @param tiles
-     *        The tiles.
-     *
-     * @throws NullPointerException
-     *         If the screen or tiles are null.
-     */
-    public Map(final GameScreen screen, final Tile[][] tiles) {
-        Objects.requireNonNull(screen);
-        Objects.requireNonNull(tiles);
-
-        this.screen = screen;
-        this.tiles = tiles;
-    }
+    /** The component to display messages within. */
+    @Getter private TextArea messageBox;
 
     /**
      * Constructs a new Map.
      *
-     * @param screen
-     *        The screen on which the map is drawn.
+     * @param messageBox
+     *        The component to display messages within.
      *
      * @param width
      *        The width of the map to create.
@@ -55,10 +42,13 @@ public class Map {
      *        The height of the map to create.
      *
      * @throws NullPointerException
-     *         If the screen is null.
+     *         If the messageBox is null.
      */
-    public Map(final GameScreen screen, final int width, final int height) {
-        this.screen = screen;
+    public Map(final @NonNull TextArea messageBox, final int width, final int height) {
+        this.screen = new ScreenBuilder(width, height).build();
+        this.messageBox = messageBox;
+
+        screen.setBackgroundColor(Color.BLACK);
 
         tiles = new Tile[width][height];
 
@@ -82,47 +72,38 @@ public class Map {
      * Determines if a position is both on the map and not
      * solid.
      *
-     * @param x
-     *        The x-axis value of the position.
-     *
-     * @param y
-     *        The y-axis value of the position.
+     * @param position
+     *        The x/y-axis values of the position.
      *
      * @return
      *        If the position is free or not.
      */
-    public boolean isPositionFree(final int x, final int y) {
-        if (x < 0 || y < 0) {
+    public boolean isPositionFree(final Point position) {
+        if (position.x < 0 || position.y < 0) {
             return false;
         }
 
-        if (x > tiles.length || y > tiles[0].length) {
+        if (position.x > tiles.length || position.y > tiles[0].length) {
             return false;
         }
 
-        return tiles[x][y].isSolid() == false;
+        return tiles[position.x][position.y].isSolid() == false;
     }
 
     /**
      * Retrieves all Entities at a position.
      *
-     * @param x
-     *        The x-axis value of the position.
-     *
-     * @param y
-     *        The y-axis value of the position.
+     * @param position
+     *        The x/y-axis value of the position.
      *
      * @return
      *        The Entities.
      */
-    public List<Entity> getEntityAt(final int x, final int y) {
+    public List<Entity> getEntityAt(final Point position) {
         final List<Entity> entities = new ArrayList<>();
 
         for (final Entity entity : this.entities) {
-            boolean matches = entity.getX() == x;
-            matches &= entity.getY() == y;
-
-            if (matches) {
+            if (entity.getPosition().equals(position)) {
                 entities.add(entity);
             }
         }

@@ -14,10 +14,8 @@ import java.awt.Point;
 
 @Data
 public class UpdateLOSAction implements Action {
-    /** The current position on the x-axis. */
-    private final int x;
-    /** The current position on the y-axis. */
-    private final int y;
+    /** The current position on the x/y-axis. */
+    private final Point position;
     /** The change in x-axis position. */
     private final int dx;
     /** The change in y-axis position. */
@@ -26,11 +24,8 @@ public class UpdateLOSAction implements Action {
     /**
      * Constructs a new UpdateLOSPosition.
      *
-     * @param x
-     *        The current position on the x-axis.
-     *
-     * @param y
-     *        The current position on the y-axis.
+     * @param position
+     *        The current position on the x/y-axis.
      *
      * @param dx
      *        The change in x-axis position.
@@ -38,9 +33,8 @@ public class UpdateLOSAction implements Action {
      * @param dy
      *        The change in y-axis position.
      */
-    public UpdateLOSAction(final int x, final int y, final int dx, final int dy) {
-        this.x = x;
-        this.y = y;
+    public UpdateLOSAction(final Point position, final int dx, final int dy) {
+        this.position = position;
         this.dx = dx;
         this.dy = dy;
     }
@@ -51,7 +45,7 @@ public class UpdateLOSAction implements Action {
             return;
         }
 
-        if (map.isPositionFree(x + dx, y + dy) == false) {
+        if (map.isPositionFree(new Point(position.x + dx, position.y + dy)) == false) {
             return;
         }
 

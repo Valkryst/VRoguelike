@@ -8,7 +8,6 @@ import com.valkryst.VRoguelike.item.equipment.EquippableItem;
 import com.valkryst.VRoguelike.item.equipment.Weapon;
 import com.valkryst.VRoguelike.stat.BoundedStatistic;
 import com.valkryst.VRoguelike.world.Map;
-import com.valkryst.VTerminal.component.TextArea;
 import lombok.Data;
 import lombok.NonNull;
 
@@ -34,8 +33,7 @@ public class AttackAction implements Action {
 
     @Override
     public void perform(final @NonNull Map map, final @NonNull Entity entity) {
-        final TextArea messageBox = map.getScreen().getMessageBox();
-        messageBox.appendText("");
+        map.getMessageBox().appendText("");
 
         final Creature self = (Creature) entity;
 
@@ -76,10 +74,10 @@ public class AttackAction implements Action {
 
         if (damage > 0) {
             health.setValue(health.getValue() - damage);
-            messageBox.appendText(self.getName() + " attacked " + target.getName() + " for " + damage + " damage.");
-            messageBox.appendText(target.getName() + "'s health is now " + health.getValue() + "/" + health.getMaximum());
+            map.getMessageBox().appendText(self.getName() + " attacked " + target.getName() + " for " + damage + " damage.");
+            map.getMessageBox().appendText(target.getName() + "'s health is now " + health.getValue() + "/" + health.getMaximum());
         } else {
-            messageBox.appendText(self.getName() + " dealt no damage to " + target.getName() + ".");
+            map.getMessageBox().appendText(self.getName() + " dealt no damage to " + target.getName() + ".");
         }
 
         if (health.getValue() == health.getMinimum()) {

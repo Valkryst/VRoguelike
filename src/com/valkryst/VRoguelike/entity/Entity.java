@@ -12,6 +12,7 @@ import com.valkryst.VTerminal.builder.component.LayerBuilder;
 import com.valkryst.VTerminal.component.Layer;
 import lombok.*;
 
+import java.awt.Point;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -44,8 +45,8 @@ public class Entity {
         description = builder.getDescription();
 
         final LayerBuilder layerBuilder = new LayerBuilder();
-        layerBuilder.setColumnIndex(builder.getX());
-        layerBuilder.setRowIndex(builder.getY());
+        layerBuilder.setColumnIndex(builder.getPosition().x);
+        layerBuilder.setRowIndex(builder.getPosition().y);
         layerBuilder.setWidth(1);
         layerBuilder.setHeight(1);
         layer = layerBuilder.build();
@@ -60,10 +61,10 @@ public class Entity {
      *        The map that the entity exists on.
      *
      * @throws NullPointerException
-     *        If the map is null.
+     *        If the map or message box is null.
      */
     public void update(final @NonNull Map map) {
-        actions.forEach(action -> action.perform(map, this));
+        actions.forEach(action -> action.perform(map,this));
         actions.clear();
     }
 
@@ -101,7 +102,7 @@ public class Entity {
      *        If the action was created and added.
      */
     public boolean move(final int dx, final int dy) {
-        actions.add(new MoveAction(getX(), getY(), dx, dy));
+        actions.add(new MoveAction(getPosition(), dx, dy));
         return true;
     }
 
@@ -137,17 +138,25 @@ public class Entity {
      *        If the sprite is null.
      */
     public void setSprite(final @NonNull Sprite sprite) {
-        final AsciiCharacter character = layer.getCharacterAt(0, 0);
+        final AsciiCharacter character = layer.getCharacterAt(new Point(0, 0));
         character.setCharacter(sprite.getCharacter());
         character.setForegroundColor(sprite.getForegroundColor());
         character.setBackgroundColor(sprite.getBackgroundColor());
     }
 
-    public int getX() {
-        return layer.getPosition().x;
+    public Point getPosition() {
+        return layer.getPosition();
     }
 
-    public int getY() {
-        return layer.getPosition().y;
+    public void setPosition(final Point position) {
+        if (position.x < 0) {
+            throw new IllegalArgumentException("The x value (" + position.x + ") cannot be less than zero.");
+        }
+
+        if (position.y < 0) {
+            throw new IllegalArgumentException("The y value (" + position.y + ") cannot be less than zero.");
+        }
+
+        layer.setPosition(position);
     }
 }

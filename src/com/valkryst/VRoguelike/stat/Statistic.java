@@ -1,18 +1,19 @@
 package com.valkryst.VRoguelike.stat;
 
-import lombok.Data;
-import lombok.NonNull;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+import java.util.Objects;
+
 public class Statistic {
     /** The name of the statistic. */
-    private final String name;
+    @Getter private final String name;
 
     /** The value. */
-    private int value;
+    @Getter private int value;
 
     /** The function to run whenever the value is changed. */
-    private Runnable onChange;
+    @Getter @Setter private Runnable onChange;
 
     /**
      * Constructs a new Statistic.
@@ -29,7 +30,9 @@ public class Statistic {
      * @throws IllegalArgumentException
      *        If the name is empty.
      */
-    public Statistic(final @NonNull String name, final int value) {
+    public Statistic(final String name, final int value) {
+        Objects.requireNonNull(name);
+
         if (name.isEmpty()) {
             throw new IllegalArgumentException("The name cannot be empty.");
         }
@@ -51,16 +54,40 @@ public class Statistic {
      *        The function to run whenever the value is changed.
      *
      * @throws NullPointerException
-     *        If name or onChange is null.
+     *        If onChange is null.
      */
-    public Statistic(final @NonNull String name, final int value, final @NonNull Runnable onChange) {
+    public Statistic(final String name, final int value, final Runnable onChange) {
         this(name, value);
+
+        Objects.requireNonNull(onChange);
         this.onChange = onChange;
     }
 
     @Override
     public String toString() {
         return name + ":\n\tValue:\t" + value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(name) + Objects.hashCode(value);
+    }
+
+    @Override
+    public boolean equals(final Object otherObj) {
+        if (otherObj instanceof Statistic == false) {
+            return false;
+        }
+
+        if (otherObj == this) {
+            return true;
+        }
+
+        final Statistic otherSta = (Statistic) otherObj;
+
+        boolean isEqual = Objects.equals(name, otherSta.getName());
+        isEqual &= Objects.equals(value, otherSta.getValue());
+        return isEqual;
     }
 
     /**

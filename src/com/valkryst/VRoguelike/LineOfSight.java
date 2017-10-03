@@ -5,6 +5,7 @@ import com.valkryst.VTerminal.misc.ShapeAlgorithms;
 import lombok.Getter;
 import lombok.NonNull;
 
+import java.awt.Dimension;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,8 +49,10 @@ public class LineOfSight {
     public void recompute(final @NonNull Entity entity) {
         linePoints.clear();
 
-        for (final Point point : ShapeAlgorithms.getEllipse(entity.getX(), entity.getY(), radius, radius)) {
-            linePoints.add(ShapeAlgorithms.getLine(entity.getX(), entity.getY(), point.x, point.y));
+        final Point position = entity.getPosition();
+
+        for (final Point point : ShapeAlgorithms.getEllipse(position, new Dimension(radius, radius))) {
+            linePoints.add(ShapeAlgorithms.getLine(position.x, position.y, point.x, point.y));
         }
     }
 

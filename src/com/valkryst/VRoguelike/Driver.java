@@ -10,16 +10,18 @@ import com.valkryst.VRoguelike.enums.Race;
 import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.item.builder.equipment.WeaponBuilder;
 import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
+import com.valkryst.VRoguelike.loot.LootTable;
 import com.valkryst.VRoguelike.screen.GameScreen;
 import com.valkryst.VRoguelike.screen.MainMenuScreen;
 import com.valkryst.VRoguelike.world.Room;
 import com.valkryst.VRoguelike.world.Tile;
 import com.valkryst.VTerminal.Panel;
 import com.valkryst.VTerminal.builder.PanelBuilder;
-import com.valkryst.VTerminal.builder.component.ScreenBuilder;
 import com.valkryst.VTerminal.font.Font;
 import com.valkryst.VTerminal.font.FontLoader;
 
+import java.awt.Dimension;
+import java.awt.Point;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -65,10 +67,13 @@ public class Driver {
             weaponBuilder.setSlot(EquipmentSlot.MAIN_HAND);
 
             player.getEquipment().setItemInSlot(EquipmentSlot.MAIN_HAND, weaponBuilder.build());
-            player.getActions().add(new UpdateLOSAction(25, 12, 0, 0));
+            player.getActions().add(new UpdateLOSAction(new Point(25, 12), 0, 0));
 
 
 
+
+            final LootTable lootTable = new LootTable();
+            lootTable.add(weaponBuilder.build(), 100);
 
             final CreatureBuilder creatureBuilder = new CreatureBuilder();
             creatureBuilder.setX(26);
@@ -76,14 +81,15 @@ public class Driver {
             creatureBuilder.setRace(Race.HUMAN);
             creatureBuilder.setCombatAI(new AggressiveCombatAI());
             creatureBuilder.setSprite(Sprite.ENEMY);
+            creatureBuilder.setLootTable(lootTable);
             final Creature npc = creatureBuilder.build();
             npc.getEquipment().setItemInSlot(EquipmentSlot.MAIN_HAND, weaponBuilder.build());
 
             gameScreen.getMap().addEntities(player, npc);
 
             // Create rooms:
-            final Room roomA = new Room(20, 5, 10, 15);
-            final Room roomB = new Room(50, 5, 10, 15);
+            final Room roomA = new Room(new Point(20, 5), new Dimension(10, 15));
+            final Room roomB = new Room(new Point(50, 5), new Dimension(10, 15));
             roomA.carve(gameScreen);
             roomB.carve(gameScreen);
         });

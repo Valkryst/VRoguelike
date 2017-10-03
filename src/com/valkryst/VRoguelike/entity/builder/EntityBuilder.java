@@ -3,21 +3,18 @@ package com.valkryst.VRoguelike.entity.builder;
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.enums.Sprite;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
+import java.awt.Point;
 import java.util.Objects;
 
 @Data
-@EqualsAndHashCode
 public class EntityBuilder {
     /** The name. */
     private String name;
     /** The description. */
     private String description;
-    /** The x-axis coordinate. */
-    private int x;
-    /** The y-axis coordinate. */
-    private int y;
+    /** The x/y-axis coordinates. */
+    private Point position = new Point(-1, -1);
     /** The sprite. */
     private Sprite sprite;
 
@@ -39,7 +36,7 @@ public class EntityBuilder {
      *        If the name or description are null.
      *
      * @throws IllegalArgumentException
-     *        If the name or description are empty.
+     *        If the x/y positions are below zero.
      */
     protected void checkState() {
         if (name == null || name.isEmpty()) {
@@ -50,12 +47,12 @@ public class EntityBuilder {
             description = "This is an unnamed Entity.";
         }
 
-        if (x < 0) {
-            throw new IllegalArgumentException("The x value (" + x + ") cannot be less than zero.");
+        if (position.x < 0) {
+            throw new IllegalArgumentException("The x value (" + position.x + ") cannot be less than zero.");
         }
 
-        if (y < 0) {
-            throw new IllegalArgumentException("The y value (" + y + ") cannot be less than zero.");
+        if (position.y < 0) {
+            throw new IllegalArgumentException("The y value (" + position.y + ") cannot be less than zero.");
         }
 
         Objects.requireNonNull(sprite);
@@ -65,8 +62,23 @@ public class EntityBuilder {
     public void reset() {
         name = "";
         description = "";
-        x = -1;
-        y = -1;
+        position.setLocation(-1, -1);
         sprite = null;
+    }
+
+    public void setX(final int x) {
+        if (x < 0) {
+            throw new IllegalArgumentException("The x value (" + position.x + ") cannot be less than zero.");
+        }
+
+        position.setLocation(x, position.y);
+    }
+
+    public void setY(final int y) {
+        if (y < 0) {
+            throw new IllegalArgumentException("The y value (" + position.y + ") cannot be less than zero.");
+        }
+
+        position.setLocation(position.x, y);
     }
 }

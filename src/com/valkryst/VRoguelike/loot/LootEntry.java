@@ -28,8 +28,8 @@ public class LootEntry {
             throw new IllegalArgumentException("The drop chance cannot be below 1.");
         }
 
-        if (dropChance > 99) {
-            throw new IllegalArgumentException("The drop chance cannot be above 99.");
+        if (dropChance > 100) {
+            throw new IllegalArgumentException("The drop chance cannot be above 100.");
         }
 
         this.item = item;
@@ -49,6 +49,6 @@ public class LootEntry {
      *        Whether or not the loot should be dropped.
      */
     public boolean drop() {
-        return ThreadLocalRandom.current().nextInt(101) < dropChance;
+        return ThreadLocalRandom.current().nextInt(101) <= dropChance;
     }
 }
