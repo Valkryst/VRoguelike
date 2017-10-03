@@ -1,6 +1,7 @@
 package com.valkryst.VRoguelike.stat;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 import java.util.Objects;
@@ -30,9 +31,7 @@ public class Statistic {
      * @throws IllegalArgumentException
      *        If the name is empty.
      */
-    public Statistic(final String name, final int value) {
-        Objects.requireNonNull(name);
-
+    public Statistic(final @NonNull String name, final int value) {
         if (name.isEmpty()) {
             throw new IllegalArgumentException("The name cannot be empty.");
         }
@@ -54,12 +53,10 @@ public class Statistic {
      *        The function to run whenever the value is changed.
      *
      * @throws NullPointerException
-     *        If onChange is null.
+     *        If name or onChange is null.
      */
-    public Statistic(final String name, final int value, final Runnable onChange) {
+    public Statistic(final @NonNull String name, final int value, final @NonNull Runnable onChange) {
         this(name, value);
-
-        Objects.requireNonNull(onChange);
         this.onChange = onChange;
     }
 
