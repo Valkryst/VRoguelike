@@ -4,21 +4,21 @@ import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VTerminal.AsciiString;
 import com.valkryst.VTerminal.component.Screen;
 import com.valkryst.VTerminal.misc.IntRange;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
+@Data
 public class Tile {
     /** The sprite. */
-    @Getter @Setter private Sprite sprite = Sprite.WALL;
+    private Sprite sprite = Sprite.WALL;
 
     /** Whether or not the tile is solid. */
-    @Getter @Setter private boolean solid = true;
+    private boolean solid = true;
     /** Whether or not the tile is transparent. */
-    @Getter @Setter private boolean transparent = false;
+    private boolean transparent = false;
     /** Whether or not the tile has been seen before. */
-    @Getter @Setter private boolean visited = false;
+    private boolean visited = false;
     /** Whether or not the tile is visible. */
-    @Getter @Setter private boolean visible = false;
+    private boolean visible = false;
 
     /** Constructs a new Tile. */
     public Tile() {}
