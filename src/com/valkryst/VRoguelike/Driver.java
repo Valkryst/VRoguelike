@@ -90,8 +90,8 @@ public class Driver {
             // Create rooms:
             final Room roomA = new Room(new Point(20, 5), new Dimension(10, 15));
             final Room roomB = new Room(new Point(50, 5), new Dimension(10, 15));
-            roomA.carve(gameScreen);
-            roomB.carve(gameScreen);
+            roomA.carve(gameScreen.getMap());
+            roomB.carve(gameScreen.getMap());
         });
 
         mainMenuScreen.getButton_exit().setOnClickFunction(() -> {
