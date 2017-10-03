@@ -118,14 +118,14 @@ public class Map {
      *        The entities.
      */
     public void addEntities(final Entity ... entities) {
-        for (int i = 0 ; i < entities.length ; i++) {
-            screen.addComponent(entities[i].getLayer());
+        for (final Entity entity : entities) {
+            screen.addComponent(entity.getLayer());
 
 
-            if (entities[i] instanceof Player) {
-                player = (Player) entities[i];
+            if (entity instanceof Player) {
+                player = (Player) entity;
             } else {
-                this.entities.add(entities[i]);
+                this.entities.add(entity);
             }
         }
     }
@@ -137,13 +137,13 @@ public class Map {
      *        The entities.
      */
     public void removeEntities(final Entity ... entities) {
-        for (int i = 0 ; i < entities.length ; i++) {
-            screen.removeComponent(entities[i].getLayer());
+        for (final Entity entity : entities) {
+            screen.removeComponent(entity.getLayer());
 
-            if (entities[i] instanceof Player) {
+            if (entity instanceof Player) {
                 player = null;
             } else {
-                this.entities.remove(entities[i]);
+                this.entities.remove(entity);
             }
         }
     }
