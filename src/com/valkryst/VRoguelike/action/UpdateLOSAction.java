@@ -53,13 +53,21 @@ public class UpdateLOSAction implements Action {
         final Tile[][] tiles = map.getTiles();
         final Creature creature = (Creature) entity;
 
-        creature.getLineOfSight().move(dx, dy);
+        final LineOfSight lineOfSight = creature.getLineOfSight();
+        lineOfSight.move(dx, dy);
 
         if (entity instanceof Player) {
             // Set all tiles to non-visible:
-            // todo Update to only reset tiles at the player's last position.
-            for (int x = 0 ; x < tiles.length ; x++) {
-                for (int y = 0 ; y < tiles[x].length ; y++) {
+            final int sightRadius = lineOfSight.getRadius() + 2;
+
+            final int startX = position.x - sightRadius;
+            final int endX = Math.min(position.x + sightRadius, tiles.length);
+
+            final int startY = position.y - sightRadius;
+            final int endY = Math.min(position.y + sightRadius, tiles[0].length);
+
+            for (int x = startX ; x < endX ; x++) {
+                for (int y = startY ; y < endY ; y++) {
                     if (tiles[x][y].isVisible()) {
                         tiles[x][y].setVisible(false);
                         tiles[x][y].placeOnScreen(screen, x, y);
