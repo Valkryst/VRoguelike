@@ -47,7 +47,7 @@ public class GameScreen extends Screen implements KeyListener, Receiver<Event> {
         if (controllers.size() > 0) {
             final Controller controller = ControllerHelper.getSupportedControllers().get(0);
             controllerPreset = ControllerHelper.getControllerPreset(controller);
-            controllerListener = new ControllerListener(controller);
+            controllerListener = new ControllerListener(controller, 64);
 
             controllerListener.getRadio().addReceiver("CONTROLLER", this);
         }
