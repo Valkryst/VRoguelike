@@ -18,12 +18,15 @@ public class LootEntry {
      * Constructs a new LootEntry.
      *
      * @param item
-     *        The item.
+     *         The item.
      *
      * @param dropChance
-     *        The drop chance.
+     *         The drop chance.
+     *
+     * @throws NullPointerException
+     *         If the item is null.
      */
-    public LootEntry(final Item item, final int dropChance) {
+    public LootEntry(final @NonNull Item item, final int dropChance) {
         if (dropChance < 1) {
             throw new IllegalArgumentException("The drop chance cannot be below 1.");
         }
