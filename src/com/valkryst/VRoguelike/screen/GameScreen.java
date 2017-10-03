@@ -122,11 +122,7 @@ public class GameScreen extends Screen implements KeyListener, Receiver<Event> {
 
     @Override
     public void receive(final String event, final Event data) {
-        if (controllerPreset.getButtonType(data) != ButtonType.DPAD) {
-            return;
-        }
-
-        switch (controllerPreset.getDPadDirection(data)) {
+        if (controllerPreset.getButtonType(data) == ButtonType.DPAD) {switch (controllerPreset.getDPadDirection(data)) {
             case UP: {
                 map.getPlayer().move(0, -1);
                 break;
@@ -143,6 +139,7 @@ public class GameScreen extends Screen implements KeyListener, Receiver<Event> {
                 map.getPlayer().move(1, 0);
                 break;
             }
+        }
         }
     }
 }
