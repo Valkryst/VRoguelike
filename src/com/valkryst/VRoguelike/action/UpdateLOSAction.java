@@ -76,9 +76,7 @@ public class UpdateLOSAction implements Action {
             }
 
             // Set visible tiles:
-            final LineOfSight los = creature.getLineOfSight();
-
-            los.getLinePoints().forEach(line -> {
+            lineOfSight.getLinePoints().forEach(line -> {
                 for (final Point point : line) {
                     final Tile tile = tiles[point.x][point.y];
                     tile.setVisible(true);
