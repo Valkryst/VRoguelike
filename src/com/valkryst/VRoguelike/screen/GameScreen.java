@@ -42,7 +42,7 @@ public class GameScreen extends Screen implements KeyListener, Receiver<Event> {
         drawUISections();
     }
 
-    public void addController() {
+    private void addController() {
         final List<Controller> controllers = ControllerHelper.getSupportedControllers();
 
         if (controllers.size() > 0) {
