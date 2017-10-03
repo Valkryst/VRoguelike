@@ -1,5 +1,6 @@
 package com.valkryst.VRoguelike;
 
+import com.valkryst.VController.ControllerHelper;
 import com.valkryst.VRoguelike.action.UpdateLOSAction;
 import com.valkryst.VRoguelike.ai.AggressiveCombatAI;
 import com.valkryst.VRoguelike.entity.Creature;
@@ -24,10 +25,18 @@ import java.awt.Dimension;
 import java.awt.Point;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 
 public class Driver {
     public static void main(String[] args) throws IOException, URISyntaxException, InterruptedException {
         final Font font = FontLoader.loadFontFromJar("Fonts/DejaVu Sans Mono/18pt/bitmap.png", "Fonts/DejaVu Sans Mono/18pt/data.fnt", 1);
+
+
+        System.out.println(Arrays.toString(ControllerHelper.getAllControllers()));
+        System.out.println(ControllerHelper.getSupportedControllers());
+        System.out.println(ControllerHelper.getControllerPreset(ControllerHelper.getSupportedControllers().get(0)));
+
+
 
         final PanelBuilder panelBuilder = new PanelBuilder();
         panelBuilder.setFont(font);
