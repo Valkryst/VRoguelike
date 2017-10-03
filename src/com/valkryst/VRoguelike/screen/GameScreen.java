@@ -3,7 +3,6 @@ package com.valkryst.VRoguelike.screen;
 import com.valkryst.VController.ButtonType;
 import com.valkryst.VController.ControllerHelper;
 import com.valkryst.VController.ControllerListener;
-import com.valkryst.VController.DirectionType;
 import com.valkryst.VController.preset.ControllerPreset;
 import com.valkryst.VRadio.Radio;
 import com.valkryst.VRadio.Receiver;
@@ -123,17 +122,11 @@ public class GameScreen extends Screen implements KeyListener, Receiver<Event> {
 
     @Override
     public void receive(final String event, final Event data) {
-        final ButtonType buttonType = controllerPreset.getButtonType(data);
-        DirectionType directionType = DirectionType.NONE;
-
-        switch (buttonType) {
-            case DPAD: {
-                directionType = controllerPreset.getDPadDirection(data);
-                break;
-            }
+        if (controllerPreset.getButtonType(data) != ButtonType.DPAD) {
+            return;
         }
 
-        switch (directionType) {
+        switch (controllerPreset.getDPadDirection(data)) {
             case UP: {
                 map.getPlayer().move(0, -1);
                 break;
