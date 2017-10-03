@@ -92,9 +92,5 @@ public class BoundedStatistic extends Statistic {
         } else {
             super.setValue(value);
         }
-
-        if (super.getOnChange() != null) {
-            super.getOnChange().run();
-        }
     }
 }
