@@ -1,6 +1,12 @@
 package com.valkryst.VRoguelike.screen;
 
+import com.valkryst.VController.ButtonType;
+import com.valkryst.VController.ControllerHelper;
+import com.valkryst.VController.ControllerListener;
+import com.valkryst.VController.DirectionType;
+import com.valkryst.VController.preset.ControllerPreset;
 import com.valkryst.VRadio.Radio;
+import com.valkryst.VRadio.Receiver;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.Panel;
 import com.valkryst.VTerminal.builder.component.ScreenBuilder;
@@ -9,23 +15,43 @@ import com.valkryst.VTerminal.component.Screen;
 import com.valkryst.VTerminal.component.TextArea;
 import com.valkryst.VTerminal.printer.RectanglePrinter;
 import lombok.Getter;
+import net.java.games.input.Controller;
+import net.java.games.input.Event;
 
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.List;
 
-public class GameScreen extends Screen implements KeyListener {
+public class GameScreen extends Screen implements KeyListener, Receiver<Event> {
     @Getter private final Map map;
 
     @Getter private TextArea messageBox;
+
+    private ControllerPreset controllerPreset;
+    private ControllerListener controllerListener;
 
     public GameScreen(final Panel panel) {
         super(new ScreenBuilder(panel.getWidthInCharacters(), panel.getHeightInCharacters()));
         panel.addKeyListener(this);
 
+        addController();
+
         createMessageBox(panel.getRadio());
         map = new Map(getMessageBox(), 80, 30);
         drawUISections();
+    }
+
+    public void addController() {
+        final List<Controller> controllers = ControllerHelper.getSupportedControllers();
+
+        if (controllers.size() > 0) {
+            final Controller controller = ControllerHelper.getSupportedControllers().get(0);
+            controllerPreset = ControllerHelper.getControllerPreset(controller);
+            controllerListener = new ControllerListener(controller);
+
+            controllerListener.getRadio().addReceiver("CONTROLLER", this);
+        }
     }
 
     private void drawUISections() {
@@ -89,6 +115,38 @@ public class GameScreen extends Screen implements KeyListener {
             }
             case KeyEvent.VK_RIGHT:
             case KeyEvent.VK_D: {
+                map.getPlayer().move(1, 0);
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void receive(final String event, final Event data) {
+        final ButtonType buttonType = controllerPreset.getButtonType(data);
+        DirectionType directionType = DirectionType.NONE;
+
+        switch (buttonType) {
+            case DPAD: {
+                directionType = controllerPreset.getDPadDirection(data);
+                break;
+            }
+        }
+
+        switch (directionType) {
+            case UP: {
+                map.getPlayer().move(0, -1);
+                break;
+            }
+            case DOWN: {
+                map.getPlayer().move(0, 1);
+                break;
+            }
+            case LEFT: {
+                map.getPlayer().move(-1, 0);
+                break;
+            }
+            case RIGHT: {
                 map.getPlayer().move(1, 0);
                 break;
             }
