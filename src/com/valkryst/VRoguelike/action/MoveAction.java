@@ -56,8 +56,8 @@ public class MoveAction implements Action {
         }
 
         if (map.isPositionFree(newPosition)) {
-            entity.setPosition(newPosition);
             new UpdateLOSAction(position, dx, dy).perform(map, entity);
+            entity.setPosition(newPosition);
         }
     }
 }
