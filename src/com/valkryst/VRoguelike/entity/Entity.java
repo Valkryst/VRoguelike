@@ -8,6 +8,7 @@ import com.valkryst.VRoguelike.entity.builder.EntityBuilder;
 import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.AsciiCharacter;
+import com.valkryst.VTerminal.AsciiString;
 import com.valkryst.VTerminal.builder.component.LayerBuilder;
 import com.valkryst.VTerminal.component.Layer;
 import lombok.*;
@@ -126,6 +127,30 @@ public class Entity {
     public boolean hide() {
         actions.add(new HideAction());
         return true;
+    }
+
+    /**
+     * Retrieves an AsciiString containing the Entity's name
+     * with the same foreground color as it's sprite.
+     *
+     * @return
+     *         The Entity's name with the same foreground
+     *         color as it's sprite.
+     */
+    public AsciiString getColoredName() {
+        final AsciiString asciiString = new AsciiString(name);
+        asciiString.setForegroundColor(getSprite().getForegroundColor());
+        return asciiString;
+    }
+
+    /**
+     * Retrieves the current sprite character.
+     *
+     * @return
+     *         The sprite character.
+     */
+    public AsciiCharacter getSprite() {
+        return layer.getCharacterAt(new Point(0, 0));
     }
 
     /**
