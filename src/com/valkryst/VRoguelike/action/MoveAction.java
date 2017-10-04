@@ -49,10 +49,9 @@ public class MoveAction implements Action {
             for (final Entity target : entities) {
                 if (target instanceof Creature) {
                     new AttackAction((Creature) target).perform(map, entity);
+                    return;
                 }
             }
-
-            return;
         }
 
         if (map.isPositionFree(newPosition)) {
