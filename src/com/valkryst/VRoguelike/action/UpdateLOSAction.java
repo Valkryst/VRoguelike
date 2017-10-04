@@ -60,10 +60,10 @@ public class UpdateLOSAction implements Action {
             // Set all tiles to non-visible:
             final int sightRadius = lineOfSight.getRadius() + 2;
 
-            final int startX = position.x - sightRadius;
+            final int startX = Math.min(position.x - sightRadius, 0);
             final int endX = Math.min(position.x + sightRadius, tiles.length);
 
-            final int startY = position.y - sightRadius;
+            final int startY = Math.min(position.y - sightRadius, 0);;
             final int endY = Math.min(position.y + sightRadius, tiles[0].length);
 
             for (int x = startX ; x < endX ; x++) {
