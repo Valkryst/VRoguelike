@@ -107,7 +107,7 @@ public class BoundedStatistic extends Statistic {
      * @return
      *         The label component that represents the statistic.
      */
-    public Label getLabelComponentWithoutMax() {
+    public Label getLabelComponentWithMax() {
         final LabelBuilder labelBuilder = new LabelBuilder();
         labelBuilder.setId(super.getName());
         labelBuilder.setText(super.getName() + ": " + super.getValue() + "/" + maximum);
