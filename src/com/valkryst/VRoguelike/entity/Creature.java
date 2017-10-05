@@ -8,7 +8,11 @@ import com.valkryst.VRoguelike.enums.State;
 import com.valkryst.VRoguelike.item.equipment.EquipmentInventory;
 import com.valkryst.VRoguelike.loot.LootTable;
 import com.valkryst.VRoguelike.stat.BoundedStatistic;
+import com.valkryst.VTerminal.component.Label;
+import com.valkryst.VTerminal.component.Screen;
 import lombok.*;
+
+import java.awt.Point;
 
 @EqualsAndHashCode(callSuper=true)
 @ToString
@@ -83,5 +87,84 @@ public class Creature extends Entity {
      */
     public void setLineOfSight(final int sightRadius) {
         lineOfSight = new LineOfSight(this, sightRadius);
+    }
+
+    @Override
+    public Screen getInformationPanel() {
+        final Screen screen = super.getInformationPanel();
+
+        // Add Level label and set it to update on change.
+        final Runnable add_level = () -> {
+            screen.removeComponent(screen.getComponentByID(stat_level.getName()));
+
+            final Label label = stat_level.getLabelComponent();
+            label.setPosition(new Point(0, 1));
+
+            screen.addComponent(label);
+        };
+
+        stat_level.getOnChangeFunctions().add(add_level);
+
+        // Add XP label and set it to update on change.
+        final Runnable add_xp = () -> {
+            screen.removeComponent(screen.getComponentByID(stat_xp.getName()));
+
+            final Label label = stat_xp.getLabelComponent();
+            label.setPosition(new Point(0, 2));
+
+            screen.addComponent(label);
+        };
+
+        stat_xp.getOnChangeFunctions().add(add_xp);
+
+        // Add Gold label and set it to update on change.
+        final Runnable add_gold = () -> {
+            screen.removeComponent(screen.getComponentByID(stat_gold.getName()));
+
+            final Label label = stat_gold.getLabelComponent();
+            label.setPosition(new Point(0, 3));
+
+            screen.addComponent(label);
+        };
+
+        stat_gold.getOnChangeFunctions().add(add_gold);
+
+        // Add Health label and set it to update on change.
+        final Runnable add_health = () -> {
+            screen.removeComponent(screen.getComponentByID(stat_health.getName()));
+
+            final Label label = stat_health.getLabelComponent();
+            label.setPosition(new Point(0, 4));
+
+            screen.addComponent(label);
+        };
+
+        stat_health.getOnChangeFunctions().add(add_health);
+
+        // Add Strength label and set it to update on change.
+        final Runnable add_strength = () -> {
+            screen.removeComponent(screen.getComponentByID(stat_strength.getName()));
+
+            final Label label = stat_strength.getLabelComponent();
+            label.setPosition(new Point(0, 5));
+
+            screen.addComponent(label);
+        };
+
+        stat_strength.getOnChangeFunctions().add(add_strength);
+
+        // Add Strength label and set it to update on change.
+        final Runnable add_defense = () -> {
+            screen.removeComponent(screen.getComponentByID(stat_defense.getName()));
+
+            final Label label = stat_defense.getLabelComponent();
+            label.setPosition(new Point(0, 5));
+
+            screen.addComponent(label);
+        };
+
+        stat_defense.getOnChangeFunctions().add(add_defense);
+
+        return screen;
     }
 }
