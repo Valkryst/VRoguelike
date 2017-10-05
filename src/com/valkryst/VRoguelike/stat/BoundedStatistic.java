@@ -1,5 +1,7 @@
 package com.valkryst.VRoguelike.stat;
 
+import com.valkryst.VTerminal.builder.component.LabelBuilder;
+import com.valkryst.VTerminal.component.Label;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
@@ -92,5 +94,13 @@ public class BoundedStatistic extends Statistic {
         } else {
             super.setValue(value);
         }
+    }
+
+    @Override
+    public Label getLabelComponent() {
+        final LabelBuilder labelBuilder = new LabelBuilder();
+        labelBuilder.setId(super.getName());
+        labelBuilder.setText(super.getName() + ": " + super.getValue() + "/" + maximum);
+        return labelBuilder.build();
     }
 }
