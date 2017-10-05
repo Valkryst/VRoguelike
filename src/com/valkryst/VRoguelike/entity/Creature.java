@@ -110,7 +110,7 @@ public class Creature extends Entity {
         final Runnable add_xp = () -> {
             screen.removeComponent(screen.getComponentByID(stat_xp.getName()));
 
-            final Label label = stat_xp.getLabelComponent();
+            final Label label = stat_xp.getLabelComponentWithMax();
             label.setPosition(new Point(0, 2));
 
             screen.addComponent(label);
@@ -136,7 +136,7 @@ public class Creature extends Entity {
         final Runnable add_health = () -> {
             screen.removeComponent(screen.getComponentByID(stat_health.getName()));
 
-            final Label label = stat_health.getLabelComponent();
+            final Label label = stat_health.getLabelComponentWithMax();
             label.setPosition(new Point(0, 4));
 
             screen.addComponent(label);
@@ -158,7 +158,7 @@ public class Creature extends Entity {
         stat_strength.getOnChangeFunctions().add(add_strength);
         add_strength.run();
 
-        // Add Strength label and set it to update on change.
+        // Add Defense label and set it to update on change.
         final Runnable add_defense = () -> {
             screen.removeComponent(screen.getComponentByID(stat_defense.getName()));
 
