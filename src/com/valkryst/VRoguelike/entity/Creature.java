@@ -104,6 +104,7 @@ public class Creature extends Entity {
         };
 
         stat_level.getOnChangeFunctions().add(add_level);
+        add_level.run();
 
         // Add XP label and set it to update on change.
         final Runnable add_xp = () -> {
@@ -116,6 +117,7 @@ public class Creature extends Entity {
         };
 
         stat_xp.getOnChangeFunctions().add(add_xp);
+        add_xp.run();
 
         // Add Gold label and set it to update on change.
         final Runnable add_gold = () -> {
@@ -128,6 +130,7 @@ public class Creature extends Entity {
         };
 
         stat_gold.getOnChangeFunctions().add(add_gold);
+        add_gold.run();
 
         // Add Health label and set it to update on change.
         final Runnable add_health = () -> {
@@ -140,6 +143,7 @@ public class Creature extends Entity {
         };
 
         stat_health.getOnChangeFunctions().add(add_health);
+        add_health.run();
 
         // Add Strength label and set it to update on change.
         final Runnable add_strength = () -> {
@@ -152,6 +156,7 @@ public class Creature extends Entity {
         };
 
         stat_strength.getOnChangeFunctions().add(add_strength);
+        add_strength.run();
 
         // Add Strength label and set it to update on change.
         final Runnable add_defense = () -> {
@@ -164,6 +169,7 @@ public class Creature extends Entity {
         };
 
         stat_defense.getOnChangeFunctions().add(add_defense);
+        add_defense.run();
 
         return screen;
     }
