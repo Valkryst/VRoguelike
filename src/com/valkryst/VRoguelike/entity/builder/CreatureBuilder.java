@@ -73,14 +73,14 @@ public class CreatureBuilder extends EntityBuilder {
         stat_defense = new BoundedStatistic("Defense", 0, 100);
 
         // Level When XP Full:
-        stat_xp.setOnChange(() -> {
+        stat_xp.getOnChangeFunctions().add(() -> {
             if (stat_xp.getValue() == stat_xp.getMaximum()) {
                 stat_level.setValue(stat_level.getValue() + 1);
             }
         });
 
         // Set New XP Goal on Levelup:
-        stat_level.setOnChange(() -> {
+        stat_level.getOnChangeFunctions().add(() -> {
             double newXp = 100;
 
             for (int i = 1 ; i < stat_level.getValue() ; i++) {
