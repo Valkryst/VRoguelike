@@ -96,8 +96,18 @@ public class BoundedStatistic extends Statistic {
         }
     }
 
-    @Override
-    public Label getLabelComponent() {
+    /**
+     * Retrieves a label component where the ID is set
+     * to the stat's name and the text is set to contain
+     * the name and current value.
+     *
+     * Unlike the default getLabelComponent function, this
+     * one returns a label with the maximum value listed.
+     *
+     * @return
+     *         The label component that represents the statistic.
+     */
+    public Label getLabelComponentWithoutMax() {
         final LabelBuilder labelBuilder = new LabelBuilder();
         labelBuilder.setId(super.getName());
         labelBuilder.setText(super.getName() + ": " + super.getValue() + "/" + maximum);
