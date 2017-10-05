@@ -75,7 +75,6 @@ public class AttackAction implements Action {
         if (damage > 0) {
             health.setValue(health.getValue() - damage);
             map.getMessageBox().appendText(self.getName() + " attacked " + target.getName() + " for " + damage + " damage.");
-            map.getMessageBox().appendText(target.getName() + "'s health is now " + health.getValue() + "/" + health.getMaximum());
         } else {
             map.getMessageBox().appendText(self.getName() + " dealt no damage to " + target.getName() + ".");
         }
