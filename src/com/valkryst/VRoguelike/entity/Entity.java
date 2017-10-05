@@ -9,8 +9,11 @@ import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.AsciiCharacter;
 import com.valkryst.VTerminal.AsciiString;
+import com.valkryst.VTerminal.builder.component.LabelBuilder;
 import com.valkryst.VTerminal.builder.component.LayerBuilder;
+import com.valkryst.VTerminal.builder.component.ScreenBuilder;
 import com.valkryst.VTerminal.component.Layer;
+import com.valkryst.VTerminal.component.Screen;
 import lombok.*;
 
 import java.awt.Point;
@@ -127,6 +130,22 @@ public class Entity {
     public boolean hide() {
         actions.add(new HideAction());
         return true;
+    }
+
+    public Screen getInformationPanel() {
+        final ScreenBuilder screenBuilder = new ScreenBuilder();
+        screenBuilder.setWidth(39);
+        screenBuilder.setHeight(10);
+
+        final LabelBuilder labelBuilder = new LabelBuilder();
+        labelBuilder.setRowIndex(0);
+        labelBuilder.setColumnIndex(0);
+        labelBuilder.setText("Name: " + name);
+
+        final Screen screen = screenBuilder.build();
+        screen.addComponent(labelBuilder.build());
+
+        return screen;
     }
 
     /**
