@@ -8,7 +8,6 @@ import com.valkryst.VRoguelike.entity.builder.EntityBuilder;
 import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.AsciiCharacter;
-import com.valkryst.VTerminal.AsciiString;
 import com.valkryst.VTerminal.builder.component.LabelBuilder;
 import com.valkryst.VTerminal.builder.component.LayerBuilder;
 import com.valkryst.VTerminal.builder.component.ScreenBuilder;
@@ -146,20 +145,6 @@ public class Entity {
         screen.addComponent(labelBuilder.build());
 
         return screen;
-    }
-
-    /**
-     * Retrieves an AsciiString containing the Entity's name
-     * with the same foreground color as it's sprite.
-     *
-     * @return
-     *         The Entity's name with the same foreground
-     *         color as it's sprite.
-     */
-    public AsciiString getColoredName() {
-        final AsciiString asciiString = new AsciiString(name);
-        asciiString.setForegroundColor(getSprite().getForegroundColor());
-        return asciiString;
     }
 
     /**
