@@ -50,7 +50,7 @@
         <dependency>
             <groupId>com.github.Valkryst</groupId>
             <artifactId>VTerminal</artifactId>
-            <version>d1dbace</version>
+            <version>5040da5</version>
         </dependency>
         <dependency>
             <groupId>com.github.Valkryst</groupId>
