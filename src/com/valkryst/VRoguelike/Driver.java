@@ -17,6 +17,7 @@ import com.valkryst.VRoguelike.world.Room;
 import com.valkryst.VRoguelike.world.Tile;
 import com.valkryst.VTerminal.Panel;
 import com.valkryst.VTerminal.builder.PanelBuilder;
+import com.valkryst.VTerminal.component.Screen;
 import com.valkryst.VTerminal.font.Font;
 import com.valkryst.VTerminal.font.FontLoader;
 
@@ -92,6 +93,16 @@ public class Driver {
             final Room roomB = new Room(new Point(50, 5), new Dimension(10, 15));
             roomA.carve(gameScreen.getMap());
             roomB.carve(gameScreen.getMap());
+
+
+            // Add Player/Creature Screens to main panel
+            final Screen playerPanel = player.getInformationPanel();
+            playerPanel.setPosition(new Point(82, 1));
+            gameScreen.addComponent(playerPanel);
+
+            final Screen creaturePanel = npc.getInformationPanel();
+            creaturePanel.setPosition(new Point(82, 12));
+            gameScreen.addComponent(creaturePanel);
         });
 
         mainMenuScreen.getButton_exit().setOnClickFunction(() -> {
