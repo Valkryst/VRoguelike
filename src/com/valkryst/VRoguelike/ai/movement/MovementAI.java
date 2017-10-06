@@ -52,7 +52,6 @@ public abstract class MovementAI {
         }
 
         entity.move(dx, dy);
-        System.out.println("Moving by " + dx + " " + dy);
     }
 
     /**
