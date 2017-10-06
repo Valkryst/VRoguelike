@@ -52,6 +52,7 @@ public abstract class MovementAI {
         }
 
         entity.move(dx, dy);
+        System.out.println("Moving by " + dx + " " + dy);
     }
 
     /**
@@ -150,39 +151,11 @@ public abstract class MovementAI {
     protected Point getNeighbour(final @NonNull Map map, final int x, final int y) {
         final Point neighbour = new Point(x, y);
 
-        if (isValidPosition(map, neighbour)) {
+        if (map.isPositionFree(neighbour)) {
             return neighbour;
         } else {
             return null;
         }
-    }
-
-    /**
-     * Determines if a position is contained within the map.
-     *
-     * @param map
-     *          The map.
-     *
-     * @param position
-     *          The position.
-     *
-     * @return
-     *          Whether or not the position is contained within
-     *          the map.
-     *
-     * @throws NullPointerException
-     *          If the map or position is null.
-     */
-    protected boolean isValidPosition(final @NonNull Map map, final @NonNull Point position) {
-        if (position.x < 0 || position.x > map.getWidth() - 1) {
-            return false;
-        }
-
-        if (position.y < 0 || position.y > map.getHeight() - 1) {
-            return false;
-        }
-
-        return true;
     }
 
     /**
