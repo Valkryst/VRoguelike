@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 public abstract class MovementAI {
     /** The cache. */
     private static Cache<Integer, ArrayDeque<Point>> PATH_CACHE = Caffeine.newBuilder()
-                                                                                    .initialCapacity(5_000)
+                                                                                    .initialCapacity(128)
                                                                                     .expireAfterAccess(5, TimeUnit.MINUTES)
                                                                                     .build();
 
