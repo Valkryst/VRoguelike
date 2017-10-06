@@ -1,11 +1,15 @@
 package com.valkryst.VRoguelike.ai.movement;
 
+import com.valkryst.VRoguelike.world.Map;
 import lombok.Getter;
 import lombok.NonNull;
 
 import java.awt.Point;
 
 public class MovementNode {
+    /** The cost to reach this node. */
+    @Getter private int cost;
+
     /** The previous movement. */
     @Getter private final MovementNode previousMovement;
     /** The current position. */
@@ -13,6 +17,9 @@ public class MovementNode {
 
     /**
      * Constructs a new MovementNode.
+     *
+     * @param map
+     *           The map.
      *
      * @param previousMovement
      *          The previous movement.
@@ -23,8 +30,16 @@ public class MovementNode {
      * @throws NullPointerException
      *          If the currentPosition is null.
      */
-    public MovementNode(final MovementNode previousMovement, final @NonNull Point currentPosition) {
+    public MovementNode(final @NonNull Map map, final MovementNode previousMovement, final @NonNull Point currentPosition) {
         this.previousMovement = previousMovement;
         this.currentPosition = currentPosition;
+
+        if (previousMovement != null) {
+            cost = previousMovement.getCost();
+        } else {
+            cost = 0;
+        }
+
+        cost += cost = map.getTiles()[currentPosition.x][currentPosition.y].getMovementCost();
     }
 }
