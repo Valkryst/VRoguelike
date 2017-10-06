@@ -2,7 +2,6 @@ package com.valkryst.VRoguelike.entity.builder;
 
 import com.valkryst.VRoguelike.ai.combat.CombatAI;
 import com.valkryst.VRoguelike.ai.combat.PassiveCombatAI;
-import com.valkryst.VRoguelike.ai.movement.BFSMovementAI;
 import com.valkryst.VRoguelike.ai.movement.MovementAI;
 import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.enums.Race;
@@ -67,7 +66,7 @@ public class CreatureBuilder extends EntityBuilder {
         lineOfSightRadius = 4;
         state = State.IDLE;
         combatAI = new PassiveCombatAI();
-        movementAI = new BFSMovementAI();
+        movementAI = new MovementAI();
         lootTable = new LootTable();
 
         // Set Stats:
