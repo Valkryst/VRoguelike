@@ -106,24 +106,21 @@ public class MovementAI {
             }
         }
 
-
-        final boolean[][] visitedNodes = new boolean[map.getHeight()][map.getWidth()];
-        final ArrayDeque<MovementNode> nodes = new ArrayDeque<>();
-
+        final boolean[][] visitedNodes = new boolean[map.getWidth()][map.getHeight()];
         MovementNode endNode = null;
 
-        // Add start node
+        final ArrayDeque<MovementNode> nodes = new ArrayDeque<>();
         nodes.add(new MovementNode(map, null, start));
 
         do {
             final MovementNode currentNode = nodes.removeFirst();
             final Point currentPosition = currentNode.getCurrentPosition();
 
-            visitedNodes[currentPosition.y][currentPosition.x] = true;
+            visitedNodes[currentPosition.x][currentPosition.y] = true;
 
             // Add new neighbours to the queue
             for (final Point neighbour : getNeighbours(map, currentPosition)) {
-                if (neighbour == null || visitedNodes[neighbour.y][neighbour.x]) {
+                if (neighbour == null || visitedNodes[neighbour.x][neighbour.y]) {
                     continue;
                 }
 
