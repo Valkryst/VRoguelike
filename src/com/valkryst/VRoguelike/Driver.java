@@ -1,7 +1,7 @@
 package com.valkryst.VRoguelike;
 
 import com.valkryst.VRoguelike.action.UpdateLOSAction;
-import com.valkryst.VRoguelike.ai.AggressiveCombatAI;
+import com.valkryst.VRoguelike.ai.combat.AggressiveCombatAI;
 import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.entity.Player;
 import com.valkryst.VRoguelike.entity.builder.CreatureBuilder;
