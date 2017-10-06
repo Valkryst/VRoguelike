@@ -2,13 +2,9 @@ package com.valkryst.VRoguelike.ai;
 
 import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.world.Map;
-import lombok.EqualsAndHashCode;
 import lombok.NonNull;
-import lombok.ToString;
 
-@EqualsAndHashCode
-@ToString
-public abstract class CombatAI {
+public interface CombatAI {
     /**
      * Decides what a creature should do in it's current
      * combat situation and acts upon the decision.
@@ -25,5 +21,5 @@ public abstract class CombatAI {
      * @throws NullPointerException
      *        If the map, self, or target are null.
      */
-    public abstract void decide(final @NonNull Map map, final @NonNull Creature self, final @NonNull Creature target);
+    void decide(final @NonNull Map map, final @NonNull Creature self, final @NonNull Creature target);
 }
