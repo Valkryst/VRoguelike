@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 
 @EqualsAndHashCode
 @ToString
-public abstract class MovementAI {
+public class MovementAI {
     /** The cache. */
     private static Cache<Integer, ArrayDeque<Point>> PATH_CACHE = Caffeine.newBuilder()
                                                                                     .initialCapacity(128)
@@ -67,6 +67,9 @@ public abstract class MovementAI {
      * Determines a path to take, in order to move from the
      * start position to the end position.
      *
+     * Uses a brute-force algorithm to find the shortest
+     * path.
+     *
      * @param map
      *          The map.
      *
@@ -87,17 +90,60 @@ public abstract class MovementAI {
      *          If the map, start point, or end point is null.
      */
     public ArrayDeque<Point> findPath(final @NonNull Map map, final @NonNull Point start, final @NonNull Point end) {
-        final ArrayDeque<Point> path;
-
+        // Handle the cases where:
+        //      * The starting point is equals to the ending point.
+        //      * The path is cached.
         if (start.equals(end)) {
-            path = new ArrayDeque<>();
+            final ArrayDeque<Point> path = new ArrayDeque<>();
             path.add(start);
+            return path;
         } else {
             final int hash = start.hashCode() + end.hashCode();
-            path = PATH_CACHE.getIfPresent(hash);
+            final ArrayDeque<Point> path = PATH_CACHE.getIfPresent(hash);
+
+            if (path != null) {
+                return path;
+            }
         }
 
-        return path == null ? new ArrayDeque<>() : path;
+
+        final boolean[][] visitedNodes = new boolean[map.getHeight()][map.getWidth()];
+        final ArrayDeque<MovementNode> nodes = new ArrayDeque<>();
+
+        MovementNode endNode = null;
+
+        // Add start node
+        nodes.add(new MovementNode(map, null, start));
+
+        do {
+            final MovementNode currentNode = nodes.removeFirst();
+            final Point currentPosition = currentNode.getCurrentPosition();
+
+            visitedNodes[currentPosition.y][currentPosition.x] = true;
+
+            // Add new neighbours to the queue
+            for (final Point neighbour : getNeighbours(map, currentPosition)) {
+                if (neighbour == null || visitedNodes[neighbour.y][neighbour.x]) {
+                    continue;
+                }
+
+                final MovementNode neighbourNode = new MovementNode(map, currentNode, neighbour);
+                nodes.add(neighbourNode);
+
+                // Check if the neighbour is the destination
+                if (end.equals(neighbour)) {
+                    if (endNode == null) {
+                        endNode = neighbourNode;
+                    } else {
+                        if (endNode.getCost() < neighbourNode.getCost()) {
+                            endNode = neighbourNode;
+                        }
+                    }
+                }
+            }
+        } while (nodes.size() > 0);
+
+        return constructPath(endNode);
     }
 
     /**
@@ -179,68 +225,25 @@ public abstract class MovementAI {
     }
 
     /**
-     * Calculates the distance between two points using the
-     * Manhattan formula.
+     * Constructs a path of points from the end node to
+     * the start node.
      *
-     * @param start
-     *        The x/y-axis position of the start point.
-     *
-     * @param end
-     *        The x/y-axis position of the end point.
+     * @param endNode
+     *          The end node.
      *
      * @return
-     *        The distance.
-     *
-     * @throws NullPointerException
-     *          If the start or end position is null.
+     *          A FILO queue where the end position is
+     *          at the beginning of the queue and the
+     *          start position is at the end of the queue.
      */
-    public static int manhattan(final @NonNull Point start, final @NonNull Point end) {
-        return Math.abs(start.x - end.x) + Math.abs(start.y - end.y);
-    }
+    private ArrayDeque<Point> constructPath(@NonNull MovementNode endNode) {
+        final ArrayDeque<Point> path = new ArrayDeque<>();
 
-    /**
-     * Calculates the distance between two points using the
-     * Euclidean formula.
-     *
-     * @param start
-     *        The x/y-axis position of the start point.
-     *
-     * @param end
-     *        The x/y-axis position of the end point.
-     *
-     * @return
-     *        The distance.
-     *
-     * @throws NullPointerException
-     *          If the start or end position is null.
-     */
-    public static int euclidean(final @NonNull Point start, final @NonNull Point end) {
-        int a = start.x - end.x;
-        a *= a;
+        while (endNode != null) {
+            path.add(endNode.getCurrentPosition());
+            endNode = endNode.getPreviousMovement();
+        }
 
-        int b = start.y - end.y;
-        b *= b;
-
-        return (int) Math.round(Math.sqrt(a + b));
-    }
-
-    /**
-     * Calculates the distance between two points using the
-     * Chebyshev formula.
-     *
-     * @param start
-     *        The x/y-axis position of the start point.
-     *
-     * @param end
-     *        The x/y-axis position of the end point.
-     *
-     * @return
-     *        The distance.
-     *
-     * @throws NullPointerException
-     *          If the start or end position is null.
-     */
-    public static int chebyshev(final @NonNull Point start, final @NonNull Point end) {
-        return Math.max((start.x - end.x), (start.y - end.y));
+        return path;
     }
 }
