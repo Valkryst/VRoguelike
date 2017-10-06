@@ -19,8 +19,11 @@ public class MovementNode {
      *
      * @param currentPosition
      *          The current position of the movement.
+     *
+     * @throws NullPointerException
+     *          If the currentPosition is null.
      */
-    public MovementNode(final @NonNull Point previousPosition, final @NonNull Point currentPosition) {
+    public MovementNode(final Point previousPosition, final @NonNull Point currentPosition) {
         this.previousPosition = previousPosition;
         this.currentPosition = currentPosition;
     }
