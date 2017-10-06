@@ -87,9 +87,17 @@ public abstract class MovementAI {
      *          If the map, start point, or end point is null.
      */
     public ArrayDeque<Point> findPath(final @NonNull Map map, final @NonNull Point start, final @NonNull Point end) {
-        final int hash = start.hashCode() + end.hashCode();
-        final ArrayDeque<Point> cachedPath = PATH_CACHE.getIfPresent(hash);
-        return cachedPath == null ? new ArrayDeque<>() : cachedPath;
+        final ArrayDeque<Point> path;
+
+        if (start.equals(end)) {
+            path = new ArrayDeque<>();
+            path.add(start);
+        } else {
+            final int hash = start.hashCode() + end.hashCode();
+            path = PATH_CACHE.getIfPresent(hash);
+        }
+
+        return path == null ? new ArrayDeque<>() : path;
     }
 
     /**
