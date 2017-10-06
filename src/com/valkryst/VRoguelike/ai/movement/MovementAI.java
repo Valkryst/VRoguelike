@@ -17,13 +17,10 @@ import java.util.concurrent.TimeUnit;
 @ToString
 public abstract class MovementAI {
     /** The cache. */
-    private static Cache<Integer, ArrayDeque<Point>> PATH_CACHE;
-    static {
-        PATH_CACHE = Caffeine.newBuilder()
-                                 .initialCapacity(5_000)
-                                 .expireAfterAccess(5, TimeUnit.MINUTES)
-                                 .build();
-    }
+    private static Cache<Integer, ArrayDeque<Point>> PATH_CACHE = Caffeine.newBuilder()
+                                                                                    .initialCapacity(5_000)
+                                                                                    .expireAfterAccess(5, TimeUnit.MINUTES)
+                                                                                    .build();
 
     /** The current path being followed. */
     @Setter private ArrayDeque<Point> currentPath = new ArrayDeque<>();
