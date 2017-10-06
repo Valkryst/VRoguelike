@@ -1,11 +1,15 @@
 package com.valkryst.VRoguelike.ai.movement;
 
 import com.valkryst.VRoguelike.world.Map;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
+import lombok.ToString;
 
 import java.awt.Point;
 
+@EqualsAndHashCode
+@ToString
 public class MovementNode {
     /** The cost to reach this node. */
     @Getter private int cost;
