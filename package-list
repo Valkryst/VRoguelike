@@ -1,6 +1,7 @@
 com.valkryst.VRoguelike
 com.valkryst.VRoguelike.action
-com.valkryst.VRoguelike.ai
+com.valkryst.VRoguelike.ai.combat
+com.valkryst.VRoguelike.ai.movement
 com.valkryst.VRoguelike.entity
 com.valkryst.VRoguelike.entity.builder
 com.valkryst.VRoguelike.enums
