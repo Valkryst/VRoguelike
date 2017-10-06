@@ -6,7 +6,7 @@ import lombok.NonNull;
 import java.awt.Point;
 import java.util.ArrayDeque;
 
-public class BFSMovementAI extends MovementAI {
+public class BruteMovementAI extends MovementAI {
     @Override
     public ArrayDeque<Point> findPath(final @NonNull Map map, final @NonNull Point start, final @NonNull Point end) {
         // Check if cached path exists:
