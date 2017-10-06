@@ -9,6 +9,7 @@ import com.valkryst.VRoguelike.enums.State;
 import com.valkryst.VRoguelike.item.equipment.EquipmentInventory;
 import com.valkryst.VRoguelike.loot.LootTable;
 import com.valkryst.VRoguelike.stat.BoundedStatistic;
+import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.component.Label;
 import com.valkryst.VTerminal.component.Screen;
 import lombok.*;
@@ -82,6 +83,12 @@ public class Creature extends Entity {
         movementAI = builder.getMovementAI();
 
         lootTable = builder.getLootTable();
+    }
+
+    @Override
+    public void update(final @NonNull Map map) {
+        movementAI.move(this);
+        super.update(map);
     }
 
     /**
