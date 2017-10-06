@@ -2,6 +2,8 @@ package com.valkryst.VRoguelike.entity.builder;
 
 import com.valkryst.VRoguelike.ai.combat.CombatAI;
 import com.valkryst.VRoguelike.ai.combat.PassiveCombatAI;
+import com.valkryst.VRoguelike.ai.movement.AStarMovementAI;
+import com.valkryst.VRoguelike.ai.movement.MovementAI;
 import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.enums.Race;
 import com.valkryst.VRoguelike.enums.State;
@@ -44,6 +46,9 @@ public class CreatureBuilder extends EntityBuilder {
     /** The decision-making AI used to handle combat. */
     private CombatAI combatAI;
 
+    /** The AI used to handle movement from one tile to another. */
+    private MovementAI movementAI;
+
     /** The loot table. */
     private LootTable lootTable;
 
@@ -62,6 +67,7 @@ public class CreatureBuilder extends EntityBuilder {
         lineOfSightRadius = 4;
         state = State.IDLE;
         combatAI = new PassiveCombatAI();
+        movementAI = new AStarMovementAI();
         lootTable = new LootTable();
 
         // Set Stats:
@@ -98,6 +104,7 @@ public class CreatureBuilder extends EntityBuilder {
         super.checkState();
         Objects.requireNonNull(race);
         Objects.requireNonNull(combatAI);
+        Objects.requireNonNull(movementAI);
         Objects.requireNonNull(lootTable);
     }
 }
