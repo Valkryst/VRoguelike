@@ -83,7 +83,7 @@ public class Map {
             return false;
         }
 
-        if (position.x > tiles.length || position.y > tiles[0].length) {
+        if (position.x >= tiles.length || position.y >= tiles[0].length) {
             return false;
         }
 
