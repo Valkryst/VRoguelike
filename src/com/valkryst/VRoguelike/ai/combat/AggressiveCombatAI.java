@@ -1,4 +1,4 @@
-package com.valkryst.VRoguelike.ai;
+package com.valkryst.VRoguelike.ai.combat;
 
 import com.valkryst.VRoguelike.action.AttackAction;
 import com.valkryst.VRoguelike.entity.Creature;

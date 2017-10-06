@@ -1,7 +1,7 @@
 package com.valkryst.VRoguelike.entity.builder;
 
-import com.valkryst.VRoguelike.ai.CombatAI;
-import com.valkryst.VRoguelike.ai.PassiveCombatAI;
+import com.valkryst.VRoguelike.ai.combat.CombatAI;
+import com.valkryst.VRoguelike.ai.combat.PassiveCombatAI;
 import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.enums.Race;
 import com.valkryst.VRoguelike.enums.State;
