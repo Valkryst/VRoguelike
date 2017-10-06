@@ -2,6 +2,7 @@ package com.valkryst.VRoguelike.entity;
 
 import com.valkryst.VRoguelike.LineOfSight;
 import com.valkryst.VRoguelike.ai.combat.CombatAI;
+import com.valkryst.VRoguelike.ai.movement.MovementAI;
 import com.valkryst.VRoguelike.entity.builder.CreatureBuilder;
 import com.valkryst.VRoguelike.enums.Race;
 import com.valkryst.VRoguelike.enums.State;
@@ -45,6 +46,9 @@ public class Creature extends Entity {
     /** The decision-making AI used to handle combat. */
     @Getter private CombatAI combatAI;
 
+    /** The AI used to handle movement from one tile to another. */
+    @Getter private MovementAI movementAI;
+
     /** The loot table. */
     @Getter private final LootTable lootTable;
 
@@ -75,6 +79,7 @@ public class Creature extends Entity {
         state = builder.getState();
 
         combatAI = builder.getCombatAI();
+        movementAI = builder.getMovementAI();
 
         lootTable = builder.getLootTable();
     }
