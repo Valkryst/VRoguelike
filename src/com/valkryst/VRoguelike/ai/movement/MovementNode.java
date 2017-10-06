@@ -10,7 +10,7 @@ import java.awt.Point;
 
 @EqualsAndHashCode
 @ToString
-public class MovementNode {
+final class MovementNode {
     /** The cost to reach this node. */
     @Getter private int cost;
 
@@ -34,7 +34,7 @@ public class MovementNode {
      * @throws NullPointerException
      *          If the currentPosition is null.
      */
-    public MovementNode(final @NonNull Map map, final MovementNode previousMovement, final @NonNull Point currentPosition) {
+    MovementNode(final @NonNull Map map, final MovementNode previousMovement, final @NonNull Point currentPosition) {
         this.previousMovement = previousMovement;
         this.currentPosition = currentPosition;
 
