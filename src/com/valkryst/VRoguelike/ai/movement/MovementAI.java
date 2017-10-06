@@ -1,5 +1,7 @@
 package com.valkryst.VRoguelike.ai.movement;
 
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.world.Map;
 import lombok.EqualsAndHashCode;
@@ -9,10 +11,20 @@ import lombok.ToString;
 
 import java.awt.Point;
 import java.util.ArrayDeque;
+import java.util.concurrent.TimeUnit;
 
 @EqualsAndHashCode
 @ToString
 public abstract class MovementAI {
+    /** The cache. */
+    private static Cache<Integer, ArrayDeque<Point>> PATH_CACHE;
+    static {
+        PATH_CACHE = Caffeine.newBuilder()
+                                 .initialCapacity(5_000)
+                                 .expireAfterAccess(5, TimeUnit.MINUTES)
+                                 .build();
+    }
+
     /** The current path being followed. */
     @Setter private ArrayDeque<Point> currentPath = new ArrayDeque<>();
 
@@ -77,7 +89,11 @@ public abstract class MovementAI {
      * @throws NullPointerException
      *          If the map, start point, or end point is null.
      */
-    public abstract ArrayDeque<Point> findPath(final @NonNull Map map, final @NonNull Point start, final @NonNull Point end);
+    public ArrayDeque<Point> findPath(final @NonNull Map map, final @NonNull Point start, final @NonNull Point end) {
+        final int hash = start.hashCode() + end.hashCode();
+        final ArrayDeque<Point> cachedPath = PATH_CACHE.getIfPresent(hash);
+        return cachedPath == null ? new ArrayDeque<>() : cachedPath;
+    }
 
     /**
      * Determines, and sets, a path to take, in order to move
