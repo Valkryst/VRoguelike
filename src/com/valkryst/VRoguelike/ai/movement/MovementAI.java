@@ -185,7 +185,7 @@ public class MovementAI {
      * @throws NullPointerException
      *          If the map or position is null.
      */
-    protected Point[] getNeighbours(final @NonNull Map map, final @NonNull Point position) {
+    private Point[] getNeighbours(final @NonNull Map map, final @NonNull Point position) {
         final Point top = getNeighbour(map, position.x, position.y - 1);
         final Point bottom = getNeighbour(map, position.x, position.y + 1);
         final Point left = getNeighbour(map, position.x - 1, position.y);
@@ -214,7 +214,7 @@ public class MovementAI {
      * @throws NullPointerException
      *          If the map is null.
      */
-    protected Point getNeighbour(final @NonNull Map map, final int x, final int y) {
+    private Point getNeighbour(final @NonNull Map map, final int x, final int y) {
         final Point neighbour = new Point(x, y);
 
         if (map.isPositionFree(neighbour)) {
