@@ -6,12 +6,6 @@ import lombok.NonNull;
 import java.awt.Point;
 import java.util.ArrayDeque;
 
-/**
- * Implements a Breadth-First Search.
- *
- * This search ignores the movement cost of each tile
- * and it returns the first path that it finds.
- */
 public class BFSMovementAI extends MovementAI {
     @Override
     public ArrayDeque<Point> findPath(final @NonNull Map map, final @NonNull Point start, final @NonNull Point end) {
@@ -27,12 +21,11 @@ public class BFSMovementAI extends MovementAI {
         final ArrayDeque<MovementNode> nodes = new ArrayDeque<>();
 
         MovementNode endNode = null;
-        boolean endFound = false;
 
         // Add start node
         nodes.add(new MovementNode(map, null, start));
 
-        while (nodes.size() > 0 && endFound == false) {
+        while (nodes.size() > 0) {
             final MovementNode currentNode = nodes.removeFirst();
             final Point currentPosition = currentNode.getCurrentPosition();
 
@@ -51,12 +44,18 @@ public class BFSMovementAI extends MovementAI {
                     continue;
                 }
 
-                nodes.add(new MovementNode(map, currentNode, neighbour));
+                final MovementNode neighbourNode = new MovementNode(map, currentNode, neighbour);
+                nodes.add(neighbourNode);
 
                 // Check if the neighbour is the destination
                 if (end.equals(neighbour)) {
-                    endFound = true;
-                    endNode = nodes.getLast();
+                    if (endNode == null) {
+                        endNode = neighbourNode;
+                    } else {
+                        if (endNode.getCost() < neighbourNode.getCost()) {
+                            endNode = neighbourNode;
+                        }
+                    }
                 }
             }
         }
