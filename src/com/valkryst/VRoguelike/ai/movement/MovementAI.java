@@ -2,12 +2,10 @@ package com.valkryst.VRoguelike.ai.movement;
 
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.world.Map;
-import com.valkryst.VRoguelike.world.Tile;
 import lombok.NonNull;
 
 import java.awt.Point;
 import java.util.ArrayDeque;
-import java.util.Iterator;
 
 public abstract class MovementAI {
     /** The current path being followed. */
@@ -160,35 +158,6 @@ public abstract class MovementAI {
         }
 
         return true;
-    }
-
-    /**
-     * Calculates the movement cost of a path.
-     *
-     * @param map
-     *          The map.
-     *
-     * @param path
-     *          The path.
-     *
-     * @return
-     *          The total movement cost of the path.
-     *
-     * @throws NullPointerException
-     *          If the map or path is null.
-     */
-    protected int calculatePathCost(final @NonNull Map map, final @NonNull ArrayDeque<Point> path) {
-        final Tile[][] tiles = map.getTiles();
-        final Iterator<Point> it = path.iterator();
-
-        int cost = 0;
-
-        while (it.hasNext()) {
-            final Point position = it.next();
-            cost += tiles[position.x][position.y].getMovementCost();
-        }
-
-        return cost;
     }
 
     /**
