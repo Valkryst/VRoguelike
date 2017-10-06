@@ -6,9 +6,9 @@ import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.ToString;
 
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode
 @ToString
-public class PassiveCombatAI extends CombatAI {
+public class PassiveCombatAI implements CombatAI {
     @Override
     public void decide(final @NonNull Map map, final @NonNull Creature self, final @NonNull Creature target) {}
 }

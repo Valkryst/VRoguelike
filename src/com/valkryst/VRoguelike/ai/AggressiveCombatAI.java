@@ -7,11 +7,9 @@ import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 import lombok.ToString;
 
-import java.awt.TextArea;
-
-@EqualsAndHashCode(callSuper=true)
+@EqualsAndHashCode
 @ToString
-public class AggressiveCombatAI extends CombatAI {
+public class AggressiveCombatAI implements CombatAI {
     @Override
     public void decide(final @NonNull Map map, final @NonNull Creature self, final @NonNull Creature target) {
         new AttackAction(target).perform(map, self);
