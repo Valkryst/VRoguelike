@@ -91,7 +91,7 @@ public class MovementAI {
      */
     public ArrayDeque<Point> findPath(final @NonNull Map map, final @NonNull Point start, final @NonNull Point end) {
         // Handle the cases where:
-        //      * The starting point is equals to the ending point.
+        //      * The starting point is equal to the ending point.
         //      * The path is cached.
         if (start.equals(end)) {
             final ArrayDeque<Point> path = new ArrayDeque<>();
