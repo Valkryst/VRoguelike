@@ -5,11 +5,16 @@ import com.valkryst.VTerminal.AsciiString;
 import com.valkryst.VTerminal.component.Screen;
 import com.valkryst.VTerminal.misc.IntRange;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
 public class Tile {
     /** The sprite. */
     private Sprite sprite = Sprite.WALL;
+
+    /** The cost for an entity to move across the tile. */
+    @Getter @Setter private int movementCost = 1;
 
     /** Whether or not the tile is solid. */
     private boolean solid = true;
