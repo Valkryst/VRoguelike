@@ -2,10 +2,12 @@ package com.valkryst.VRoguelike.ai.movement;
 
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.world.Map;
+import com.valkryst.VRoguelike.world.Tile;
 import lombok.NonNull;
 
 import java.awt.Point;
 import java.util.ArrayDeque;
+import java.util.Iterator;
 
 public abstract class MovementAI {
     /** The current path being followed. */
@@ -75,6 +77,121 @@ public abstract class MovementAI {
     public abstract ArrayDeque<Point> findPath(final @NonNull Map map, final @NonNull Point start, final @NonNull Point end);
 
     /**
+     * Retrieves the four positions neighbouring a position.
+     *
+     * Returned positions may be null if they are not positions
+     * contained within the map.
+     *
+     * @param map
+     *          The map.
+     *
+     * @param position
+     *          The center position.
+     *
+     * @return
+     *          The top, bottom, left, and right positions
+     *          neighbouring the center position.
+     *
+     * @throws NullPointerException
+     *          If the map or position is null.
+     */
+    protected Point[] getNeighbours(final @NonNull Map map, final @NonNull Point position) {
+        final Point top = getNeighbour(map, position.x, position.y - 1);
+        final Point bottom = getNeighbour(map, position.x, position.y + 1);
+        final Point left = getNeighbour(map, position.x - 1, position.y);
+        final Point right = getNeighbour(map, position.x + 1, position.y);
+
+        return new Point[] {top, bottom, left, right};
+    }
+
+    /**
+     * Retrieves a neighbour position.
+     *
+     * @param map
+     *          The map.
+     *
+     * @param x
+     *          The x-axis coordinate of the neighbour.
+     *
+     * @param y
+     *          The y-axis coordinate of the neighbour.
+     *
+     * @return
+     *          Either the neighbour position, or null if the
+     *          position is invalid and is not contained within
+     *          the map.
+     *
+     * @throws NullPointerException
+     *          If the map is null.
+     */
+    protected Point getNeighbour(final @NonNull Map map, final int x, final int y) {
+        final Point neighbour = new Point(x, y);
+
+        if (isValidPosition(map, neighbour)) {
+            return neighbour;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Determines if a position is contained within the map.
+     *
+     * @param map
+     *          The map.
+     *
+     * @param position
+     *          The position.
+     *
+     * @return
+     *          Whether or not the position is contained within
+     *          the map.
+     *
+     * @throws NullPointerException
+     *          If the map or position is null.
+     */
+    protected boolean isValidPosition(final @NonNull Map map, final @NonNull Point position) {
+        if (position.x < 0 || position.x > map.getWidth()) {
+            return false;
+        }
+
+        if (position.y < 0 || position.y > map.getHeight()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Calculates the movement cost of a path.
+     *
+     * @param map
+     *          The map.
+     *
+     * @param path
+     *          The path.
+     *
+     * @return
+     *          The total movement cost of the path.
+     *
+     * @throws NullPointerException
+     *          If the map or path is null.
+     */
+    protected int calculatePathCost(final @NonNull Map map, final @NonNull ArrayDeque<Point> path) {
+        final Tile[][] tiles = map.getTiles();
+        final Iterator<Point> it = path.iterator();
+
+        int cost = 0;
+
+        while (it.hasNext()) {
+            final Point position = it.next();
+            cost += tiles[position.x][position.y].getMovementCost();
+        }
+
+        return cost;
+    }
+
+    /**
      * Calculates the distance between two points using the
      * Manhattan formula.
      *
@@ -86,8 +203,11 @@ public abstract class MovementAI {
      *
      * @return
      *        The distance.
+     *
+     * @throws NullPointerException
+     *          If the start or end position is null.
      */
-    public static int manhattan(final Point start, final Point end) {
+    public static int manhattan(final @NonNull Point start, final @NonNull Point end) {
         return Math.abs(start.x - end.x) + Math.abs(start.y - end.y);
     }
 
@@ -103,8 +223,11 @@ public abstract class MovementAI {
      *
      * @return
      *        The distance.
+     *
+     * @throws NullPointerException
+     *          If the start or end position is null.
      */
-    public static int euclidean(final Point start, final Point end) {
+    public static int euclidean(final @NonNull Point start, final @NonNull Point end) {
         int a = start.x - end.x;
         a *= a;
 
@@ -126,8 +249,11 @@ public abstract class MovementAI {
      *
      * @return
      *        The distance.
+     *
+     * @throws NullPointerException
+     *          If the start or end position is null.
      */
-    public static int chebyshev(final Point start, final Point end) {
+    public static int chebyshev(final @NonNull Point start, final @NonNull Point end) {
         return Math.max((start.x - end.x), (start.y - end.y));
     }
 }
