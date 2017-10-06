@@ -154,11 +154,11 @@ public abstract class MovementAI {
      *          If the map or position is null.
      */
     protected boolean isValidPosition(final @NonNull Map map, final @NonNull Point position) {
-        if (position.x < 0 || position.x > map.getWidth()) {
+        if (position.x < 0 || position.x > map.getWidth() - 1) {
             return false;
         }
 
-        if (position.y < 0 || position.y > map.getHeight()) {
+        if (position.y < 0 || position.y > map.getHeight() - 1) {
             return false;
         }
 
