@@ -80,6 +80,26 @@ public abstract class MovementAI {
     public abstract ArrayDeque<Point> findPath(final @NonNull Map map, final @NonNull Point start, final @NonNull Point end);
 
     /**
+     * Determines, and sets, a path to take, in order to move
+     * from the start position to the end position.
+     *
+     * @param map
+     *          The map.
+     *
+     * @param start
+     *          The start position.
+     *
+     * @param end
+     *          The end position.
+     *
+     * @throws NullPointerException
+     *          If the map, start point, or end point is null.
+     */
+    public void findAndSetPath(final @NonNull Map map, final @NonNull Point start, final @NonNull Point end) {
+        currentPath = findPath(map, start, end);
+    }
+
+    /**
      * Retrieves the four positions neighbouring a position.
      *
      * Returned positions may be null if they are not positions
