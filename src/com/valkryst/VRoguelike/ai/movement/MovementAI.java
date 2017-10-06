@@ -2,14 +2,19 @@ package com.valkryst.VRoguelike.ai.movement;
 
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.world.Map;
+import lombok.EqualsAndHashCode;
 import lombok.NonNull;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.awt.Point;
 import java.util.ArrayDeque;
 
+@EqualsAndHashCode
+@ToString
 public abstract class MovementAI {
     /** The current path being followed. */
-    private ArrayDeque<Point> currentPath = new ArrayDeque<>();
+    @Setter private ArrayDeque<Point> currentPath = new ArrayDeque<>();
 
     /**
      * Moves the entity to the next position along the
@@ -27,7 +32,7 @@ public abstract class MovementAI {
         }
 
         final Point currentPosition = entity.getPosition();
-        final Point newPosition = currentPath.removeFirst();
+        final Point newPosition = currentPath.removeLast();
 
         int dx = 0;
         int dy = 0;
