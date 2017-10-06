@@ -103,6 +103,10 @@ public class Driver {
             final Screen creaturePanel = npc.getInformationPanel();
             creaturePanel.setPosition(new Point(82, 12));
             gameScreen.addComponent(creaturePanel);
+
+
+            // Test movement
+            player.getMovementAI().findAndSetPath(gameScreen.getMap(), player.getPosition(), new Point(player.getPosition().x + 3, player.getPosition().y + 5));
         });
 
         mainMenuScreen.getButton_exit().setOnClickFunction(() -> {
