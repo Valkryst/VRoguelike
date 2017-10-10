@@ -76,19 +76,22 @@ public enum Race {
         return new MarkovNameGenerator(trainingNames);
     }
 
-    public String generateMaleName() {
+    /**
+     * Generates a name with both a first and last
+     * name.
+     *
+     * @param gender
+     *          The gender to use when generating the
+     *          first name.
+     *
+     * @return
+     *          The name.
+     */
+    public String generateName(final @NonNull Gender gender) {
         final int firstNameLength = ThreadLocalRandom.current().nextInt(10) + 3;
         final int lastNameLength = ThreadLocalRandom.current().nextInt(12) + 3;
 
-        return maleNameGenerator.generateName(firstNameLength)
-               + lastNameGenerator.generateName(lastNameLength);
-    }
-
-    public String generateFemaleName() {
-        final int firstNameLength = ThreadLocalRandom.current().nextInt(10) + 3;
-        final int lastNameLength = ThreadLocalRandom.current().nextInt(12) + 3;
-
-        return femaleNameGenerator.generateName(firstNameLength)
+        return (gender == Gender.MALE ? maleNameGenerator : femaleNameGenerator).generateName(firstNameLength)
                 + lastNameGenerator.generateName(lastNameLength);
     }
 }
