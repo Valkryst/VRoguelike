@@ -58,19 +58,19 @@ public class AttackAction implements Action {
 
         if (attackRoll >= 5 && attackRoll <= 16) {
             damage = getDamageDealt(self, target);
-            message = self.getName() + " attacked " + target.getName() + " for " + damage + " damage.";
+            message = getAttackMessage(self, damage);
         }
 
         // Double Damage Attack
         if (attackRoll > 16 && attackRoll < 20) {
             damage = getDamageDealt(self, target) * 2;
-            message = self.getName() + " landed a double-damage attack against " + target.getName() + " for " + damage + " damage.";
+            message = getDoubleAttackMessage(self, damage);
         }
 
         // Critical Attack
         if (attackRoll == 20) {
             damage = getDamageDealt(self, target) * 3;
-            message = self.getName() + " landed a critical attack against " + target.getName() + " for " + damage + " damage.";
+            message = getCriticalAttackMessage(self, damage);
         }
 
 
@@ -146,5 +146,72 @@ public class AttackAction implements Action {
         } else {
             return 0;
         }
+    }
+
+    /**
+     * Constructs an attack message.
+     *
+     * @param self
+     *          The attacking creature.
+     *
+     * @param damage
+     *          The damage dealt.
+     *
+     * @return
+     *          The message.
+     *
+     * @throws NullPointerException
+     *        If self is null.
+     */
+    private String getAttackMessage(final @NonNull Creature self, final int damage) {
+        return String.format("%s attacked %s for %d damage.",
+                                self.getName(),
+                                target.getName(),
+                                damage);
+    }
+
+    /**
+     * Constructs a double-attack message.
+     *
+     * @param self
+     *          The attacking creature.
+     *
+     * @param damage
+     *          The damage dealt.
+     *
+     * @return
+     *          The message.
+     *
+     * @throws NullPointerException
+     *        If self is null.
+     */
+    private String getDoubleAttackMessage(final @NonNull Creature self, final int damage) {
+        return String.format("%s landed a double-damage attack against %s for %d damage.",
+                                self.getName(),
+                                target.getName(),
+                                damage);
+    }
+
+    /**
+     * Constructs a critical attack message.
+     *
+     * @param self
+     *          The attacking creature.
+     *
+     * @param damage
+     *          The damage dealt.
+     *
+     * @return
+     *          The message.
+     *
+     * @throws NullPointerException
+     *        If self is null.
+     */
+    private String getCriticalAttackMessage(final @NonNull Creature self, final int damage) {
+        return String.format("%s landed a critical attack against %s for %d damage.",
+                                self.getName(),
+                                target.getName(),
+                                damage);
+
     }
 }

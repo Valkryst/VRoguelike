@@ -34,10 +34,29 @@ public class CriticalMissAction implements Action {
 
         health.setValue(health.getValue() - damage);
 
-        map.getMessageBox().appendText(self.getName() + " missed and attacked itself for " + damage + " damage.");
+        map.getMessageBox().appendText(getCriticalMissMessage(self));
 
         if (health.getValue() == health.getMinimum()) {
             new DeathAction().perform(map, self);
         }
+    }
+
+    /**
+     * Constructs a critical miss message.
+     *
+     * @param self
+     *          The creature that missed.
+     *
+     * @return
+     *          The message.
+     *
+     * @throws NullPointerException
+     *        If self is null.
+     */
+    private String getCriticalMissMessage(final @NonNull Creature self) {
+        return String.format("%s missed and attacked %s for %d damage.",
+                                self.getName(),
+                                self.getGender().getPronounReflexive(),
+                                damage);
     }
 }
