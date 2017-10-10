@@ -1,12 +1,10 @@
 package com.valkryst.VRoguelike;
 
 import com.valkryst.VRoguelike.action.UpdateLOSAction;
-import com.valkryst.VRoguelike.ai.combat.AggressiveCombatAI;
 import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.entity.Player;
 import com.valkryst.VRoguelike.entity.builder.CreatureBuilder;
 import com.valkryst.VRoguelike.entity.builder.PlayerBuilder;
-import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.item.builder.equipment.WeaponBuilder;
 import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
 import com.valkryst.VRoguelike.loot.LootTable;
@@ -78,10 +76,11 @@ public class Driver {
             lootTable.add(weaponBuilder.build(), 100);
 
             final CreatureBuilder creatureBuilder = new CreatureBuilder();
-            creatureBuilder.setX(26);
-            creatureBuilder.setY(13);
-            creatureBuilder.setCombatAI(new AggressiveCombatAI());
-            creatureBuilder.setSprite(Sprite.ENEMY);
+            try {
+                creatureBuilder.loadFromJSON(System.getProperty("user.dir") + "/test_res/test_entity_creature.json");
+            } catch (final ParseException | IOException e) {
+                e.printStackTrace();
+            }
             creatureBuilder.setLootTable(lootTable);
             final Creature npc = creatureBuilder.build();
             npc.getEquipment().setItemInSlot(EquipmentSlot.MAIN_HAND, weaponBuilder.build());
