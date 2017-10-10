@@ -1,0 +1,11 @@
+{
+  "type": "entity_creature",
+  "name": "",
+  "description": "Your sworn enemy.",
+  "x": 26,
+  "y": 13,
+  "sprite": "ENEMY",
+  "race": "HUMAN",
+  "gender": "FEMALE",
+  "combat_ai": "AGGRESSIVE"
+}
