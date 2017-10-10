@@ -1,5 +1,6 @@
 package com.valkryst.VRoguelike.entity.builder;
 
+import com.valkryst.VRoguelike.ai.combat.AggressiveCombatAI;
 import com.valkryst.VRoguelike.ai.combat.CombatAI;
 import com.valkryst.VRoguelike.ai.combat.PassiveCombatAI;
 import com.valkryst.VRoguelike.ai.movement.MovementAI;
@@ -12,6 +13,8 @@ import com.valkryst.VRoguelike.loot.LootTable;
 import com.valkryst.VRoguelike.stat.BoundedStatistic;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NonNull;
+import org.json.simple.JSONObject;
 
 import java.util.Objects;
 
@@ -116,5 +119,40 @@ public class CreatureBuilder extends EntityBuilder {
         Objects.requireNonNull(combatAI);
         Objects.requireNonNull(movementAI);
         Objects.requireNonNull(lootTable);
+    }
+
+    @Override
+    public void parseJSON(final @NonNull JSONObject jsonObject) {
+        super.parseJSON(jsonObject);
+
+        final Race race = Race.valueOf((String) jsonObject.get("race"));
+
+        final Gender gender = Gender.valueOf((String) jsonObject.get("gender"));
+
+        final String combatAI = ((String) jsonObject.get("combat_ai")).toLowerCase();
+
+
+        if (race != null) {
+            this.race = race;
+        }
+
+
+        if (gender != null) {
+            this.gender = gender;
+        }
+
+
+        if (combatAI != null && combatAI.isEmpty() == false) {
+            switch (combatAI) {
+                case "aggressive": {
+                    this.combatAI = new AggressiveCombatAI();
+                    break;
+                }
+                case "passive": {
+                    this.combatAI = new PassiveCombatAI();
+                    break;
+                }
+            }
+        }
     }
 }
