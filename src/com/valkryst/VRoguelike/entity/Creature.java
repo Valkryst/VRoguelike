@@ -180,7 +180,7 @@ public class Creature extends Entity {
             screen.removeComponent(screen.getComponentByID(stat_defense.getName()));
 
             final Label label = stat_defense.getLabelComponent();
-            label.setPosition(new Point(0, 5));
+            label.setPosition(new Point(0, 6));
 
             screen.addComponent(label);
         };
