@@ -4,6 +4,7 @@ import com.valkryst.VRoguelike.ai.combat.CombatAI;
 import com.valkryst.VRoguelike.ai.combat.PassiveCombatAI;
 import com.valkryst.VRoguelike.ai.movement.MovementAI;
 import com.valkryst.VRoguelike.entity.Creature;
+import com.valkryst.VRoguelike.enums.Gender;
 import com.valkryst.VRoguelike.enums.Race;
 import com.valkryst.VRoguelike.enums.State;
 import com.valkryst.VRoguelike.item.equipment.EquipmentInventory;
@@ -19,6 +20,9 @@ import java.util.Objects;
 public class CreatureBuilder extends EntityBuilder {
     /** The race. */
     private Race race;
+
+    /** The gender. */
+    private Gender gender;
 
     /** The level. */
     private BoundedStatistic stat_level;
@@ -61,7 +65,8 @@ public class CreatureBuilder extends EntityBuilder {
         super.reset();
         super.setName("Creature");
         super.setDescription("This is an unnamed Creature.");
-        race = null;
+        race = Race.HUMAN;
+        gender = Gender.MALE;
         equipment = new EquipmentInventory();
         lineOfSightRadius = 4;
         state = State.IDLE;
@@ -102,6 +107,7 @@ public class CreatureBuilder extends EntityBuilder {
     protected void checkState() {
         super.checkState();
         Objects.requireNonNull(race);
+        Objects.requireNonNull(gender);
         Objects.requireNonNull(combatAI);
         Objects.requireNonNull(movementAI);
         Objects.requireNonNull(lootTable);

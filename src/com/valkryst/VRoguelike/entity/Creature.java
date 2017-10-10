@@ -4,6 +4,7 @@ import com.valkryst.VRoguelike.LineOfSight;
 import com.valkryst.VRoguelike.ai.combat.CombatAI;
 import com.valkryst.VRoguelike.ai.movement.MovementAI;
 import com.valkryst.VRoguelike.entity.builder.CreatureBuilder;
+import com.valkryst.VRoguelike.enums.Gender;
 import com.valkryst.VRoguelike.enums.Race;
 import com.valkryst.VRoguelike.enums.State;
 import com.valkryst.VRoguelike.item.equipment.EquipmentInventory;
@@ -20,7 +21,10 @@ import java.awt.Point;
 @ToString
 public class Creature extends Entity {
     /** The race. */
-    @Getter @Setter private Race race;
+    @Getter private Race race;
+
+    /** The gender. */
+    @Getter private Gender gender;
 
     /** The level. */
     @Getter private final BoundedStatistic stat_level;
@@ -65,6 +69,7 @@ public class Creature extends Entity {
     public Creature(final @NonNull CreatureBuilder builder) {
         super(builder);
         race = builder.getRace();
+        gender = builder.getGender();
 
         stat_level = builder.getStat_level();
         stat_xp = builder.getStat_xp();
