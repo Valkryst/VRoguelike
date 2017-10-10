@@ -53,10 +53,10 @@ public class Item {
                 "\n\tName:\t" + name +
                 "\n\tDescription:\t" + description +
                 "\n\tStatistics:" +
-                stat_health.toString().replace("\n\t", "\n\t\t") +
-                stat_strength.toString().replace("\n\t", "\n\t\t") +
-                stat_defense.toString().replace("\n\t", "\n\t\t") +
-                stat_accuracy.toString().replace("\n\t", "\n\t\t") +
-                stat_dodge.toString().replace("\n\t", "\n\t\t");
+                "\n\t" + stat_health.toString().replace("\n\t", "\n\t\t") +
+                "\n\t" + stat_strength.toString().replace("\n\t", "\n\t\t") +
+                "\n\t" + stat_defense.toString().replace("\n\t", "\n\t\t") +
+                "\n\t" + stat_accuracy.toString().replace("\n\t", "\n\t\t") +
+                "\n\t" + stat_dodge.toString().replace("\n\t", "\n\t\t");
     }
 }
