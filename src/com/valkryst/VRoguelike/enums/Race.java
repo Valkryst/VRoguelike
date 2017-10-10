@@ -1,6 +1,7 @@
 package com.valkryst.VRoguelike.enums;
 
 import com.valkryst.generator.MarkovNameGenerator;
+import lombok.NonNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -21,18 +22,21 @@ public enum Race {
      * Constructs a new Race enum.
      *
      * @param maleNamesFile
-     *        The path to the training data file containing
-     *        the male names.
+     *          The path to the training data file containing
+     *          the male names.
      *
      * @param femaleNamesFile
-     *        The path to the training data file containing
-     *        the female names.
+     *          The path to the training data file containing
+     *          the female names.
      *
      * @param lastNamesFile
-     *        The path to the training data file containing
-     *        the last names.
+     *          The path to the training data file containing
+     *          the last names.
+     *
+     * @throws NullPointerException
+     *          If the male, female, or last names is null.
      */
-    Race(final String maleNamesFile, final String femaleNamesFile, final String lastNamesFile) {
+    Race(final @NonNull String maleNamesFile, final @NonNull String femaleNamesFile, final @NonNull String lastNamesFile) {
         try {
             maleNameGenerator = trainNameGenerator(maleNamesFile);
             femaleNameGenerator = trainNameGenerator(femaleNamesFile);
@@ -47,15 +51,18 @@ public enum Race {
      * file of training data.
      *
      * @param trainingDataFile
-     *        The path to the training data file.
+     *          The path to the training data file.
      *
      * @return
-     *        A trained MarkovNameGenerator.
+     *          A trained MarkovNameGenerator.
      *
      * @throws IOException
-     *         If an I/O error occurs.
+     *           If an I/O error occurs.
+     *
+     * @throws NullPointerException
+     *          If the training data is null.
      */
-    private MarkovNameGenerator trainNameGenerator(final String trainingDataFile) throws IOException {
+    private MarkovNameGenerator trainNameGenerator(final @NonNull String trainingDataFile) throws IOException {
         final ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         final InputStream is = classloader.getResourceAsStream(trainingDataFile);
         final BufferedReader br = new BufferedReader(new InputStreamReader(is));
