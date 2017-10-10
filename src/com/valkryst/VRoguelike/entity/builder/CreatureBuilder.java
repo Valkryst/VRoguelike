@@ -57,6 +57,11 @@ public class CreatureBuilder extends EntityBuilder {
 
     public Creature build() {
         checkState();
+
+        if (super.getName().equals("Entity")) {
+            super.setName(race.generateName(gender));
+        }
+
         return new Creature(this);
     }
 
