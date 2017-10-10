@@ -25,7 +25,7 @@ public class Weapon extends EquippableItem {
 
     @Override
     public String toString() {
-        return super.toString() + stat_damage.toString().replace("\n\t", "\n\t\t");
+        return super.toString() + "\n\t" + stat_damage.toString().replace("\n\t", "\n\t\t");
     }
 
     /**
