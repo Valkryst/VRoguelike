@@ -54,19 +54,23 @@ public class AttackAction implements Action {
 
         // Normal Attack
         int damage = 0;
+        String message = "";
 
         if (attackRoll >= 5 && attackRoll <= 16) {
             damage = getDamageDealt(self, target);
+            message = self.getName() + " attacked " + target.getName() + " for " + damage + " damage.";
         }
 
         // Double Damage Attack
         if (attackRoll > 16 && attackRoll < 20) {
             damage = getDamageDealt(self, target) * 2;
+            message = self.getName() + " landed a double-damage attack against " + target.getName() + " for " + damage + " damage.";
         }
 
         // Critical Attack
         if (attackRoll == 20) {
             damage = getDamageDealt(self, target) * 3;
+            message = self.getName() + " landed a critical attack against " + target.getName() + " for " + damage + " damage.";
         }
 
 
@@ -74,7 +78,7 @@ public class AttackAction implements Action {
 
         if (damage > 0) {
             health.setValue(health.getValue() - damage);
-            map.getMessageBox().appendText(self.getName() + " attacked " + target.getName() + " for " + damage + " damage.");
+            map.getMessageBox().appendText(message);
         } else {
             map.getMessageBox().appendText(self.getName() + " dealt no damage to " + target.getName() + ".");
         }
