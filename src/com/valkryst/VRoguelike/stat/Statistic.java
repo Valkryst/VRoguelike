@@ -2,8 +2,10 @@ package com.valkryst.VRoguelike.stat;
 
 import com.valkryst.VTerminal.builder.component.LabelBuilder;
 import com.valkryst.VTerminal.component.Label;
+import com.valkryst.VTerminal.misc.JSONFunctions;
 import lombok.Getter;
 import lombok.NonNull;
+import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +43,20 @@ public class Statistic {
 
         this.name = name;
         this.value = value;
+    }
+
+    /**
+     * Constructs a new Statistic.
+     *
+     * @param jsonObject
+     *          The JSON to load the statistic from.
+     *
+     * @throws NullPointerException
+     *        If the object is null.
+     */
+    public Statistic(final @NonNull JSONObject jsonObject) {
+        this((String) jsonObject.get("name"),
+              JSONFunctions.getIntElement(jsonObject, "val"));
     }
 
     @Override

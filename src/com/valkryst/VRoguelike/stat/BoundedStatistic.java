@@ -2,9 +2,11 @@ package com.valkryst.VRoguelike.stat;
 
 import com.valkryst.VTerminal.builder.component.LabelBuilder;
 import com.valkryst.VTerminal.component.Label;
+import com.valkryst.VTerminal.misc.JSONFunctions;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
+import org.json.simple.JSONObject;
 
 @Data
 @EqualsAndHashCode(callSuper=true)
@@ -13,36 +15,6 @@ public class BoundedStatistic extends Statistic {
     private int maximum;
     /** The minimum value. */
     private int minimum;
-
-    /**
-     * Constructs a new BoundedStatistic.
-     *
-     * @param name
-     *        The name of the statistic.
-     *
-     * @param maximum
-     *        The maximum and initial value.
-     *
-     * @param minimum
-     *        The minimum value.
-     *
-     * @throws NullPointerException
-     *        If the name is null.
-     *
-     * @throws IllegalArgumentException
-     *        If the maximum is less than the minimum.
-     */
-    public BoundedStatistic(final @NonNull String name, final int minimum, final int maximum) {
-        super(name, maximum);
-
-        if (maximum < minimum) {
-            throw new IllegalArgumentException("The maximum (" + maximum + ") cannot be less than the minimum("
-                                               + minimum + ").");
-        }
-
-        this.maximum = maximum;
-        this.minimum = minimum;
-    }
 
     /**
      * Constructs a new BoundedStatistic.
@@ -75,6 +47,44 @@ public class BoundedStatistic extends Statistic {
 
         this.maximum = maximum;
         this.minimum = minimum;
+    }
+
+    /**
+     * Constructs a new BoundedStatistic.
+     *
+     * @param name
+     *        The name of the statistic.
+     *
+     * @param maximum
+     *        The maximum and initial value.
+     *
+     * @param minimum
+     *        The minimum value.
+     *
+     * @throws NullPointerException
+     *        If the name is null.
+     *
+     * @throws IllegalArgumentException
+     *        If the maximum is less than the minimum.
+     */
+    public BoundedStatistic(final @NonNull String name, final int minimum, final int maximum) {
+        this(name, maximum, minimum, maximum);
+    }
+
+    /**
+     * Constructs a new BoundedStatistic.
+     *
+     * @param jsonObject
+     *          The JSON to load the statistic from.
+     *
+     * @throws NullPointerException
+     *        If the object is null.
+     */
+    public BoundedStatistic(final @NonNull JSONObject jsonObject) {
+        this((String) jsonObject.get("name"),
+             JSONFunctions.getIntElement(jsonObject, "val"),
+             JSONFunctions.getIntElement(jsonObject, "min"),
+             JSONFunctions.getIntElement(jsonObject, "max"));
     }
 
     @Override
