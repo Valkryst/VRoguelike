@@ -19,6 +19,7 @@ import com.valkryst.VTerminal.builder.PanelBuilder;
 import com.valkryst.VTerminal.component.Screen;
 import com.valkryst.VTerminal.font.Font;
 import com.valkryst.VTerminal.font.FontLoader;
+import org.json.simple.parser.ParseException;
 
 import java.awt.Dimension;
 import java.awt.Point;
@@ -61,9 +62,11 @@ public class Driver {
             final Player player = playerBuilder.build();
 
             final WeaponBuilder weaponBuilder = new WeaponBuilder();
-            weaponBuilder.setName("TWep");
-            weaponBuilder.setDescription("DoTWep");
-            weaponBuilder.setSlot(EquipmentSlot.MAIN_HAND);
+            try {
+                weaponBuilder.loadFromJSON(System.getProperty("user.dir") + "/test_res/test_item_weapon.json");
+            } catch (final ParseException | IOException e) {
+                e.printStackTrace();
+            }
 
             player.getEquipment().setItemInSlot(EquipmentSlot.MAIN_HAND, weaponBuilder.build());
             player.getActions().add(new UpdateLOSAction(new Point(25, 12), 0, 0));
