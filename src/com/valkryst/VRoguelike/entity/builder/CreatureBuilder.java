@@ -87,6 +87,7 @@ public class CreatureBuilder extends EntityBuilder {
         stat_strength = new BoundedStatistic("Strength", 0, 100);
         stat_defense = new BoundedStatistic("Defense", 0, 100);
 
+        stat_strength.setValue(0);
         stat_defense.setValue(0);
 
         // Level When XP Full:
