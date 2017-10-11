@@ -8,15 +8,15 @@ import com.valkryst.VRoguelike.entity.builder.EntityBuilder;
 import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.AsciiCharacter;
-import com.valkryst.VTerminal.builder.component.LabelBuilder;
 import com.valkryst.VTerminal.builder.component.LayerBuilder;
 import com.valkryst.VTerminal.builder.component.ScreenBuilder;
-import com.valkryst.VTerminal.component.Label;
 import com.valkryst.VTerminal.component.Layer;
 import com.valkryst.VTerminal.component.Screen;
 import com.valkryst.VTerminal.misc.IntRange;
+import com.valkryst.VTerminal.printer.RectanglePrinter;
 import lombok.*;
 
+import java.awt.Color;
 import java.awt.Point;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -135,19 +135,22 @@ public class Entity {
 
     public Screen getInformationPanel() {
         final ScreenBuilder screenBuilder = new ScreenBuilder();
-        screenBuilder.setWidth(37);
-        screenBuilder.setHeight(8);
-
-        final LabelBuilder labelBuilder = new LabelBuilder();
-        labelBuilder.setRowIndex(0);
-        labelBuilder.setColumnIndex(0);
-        labelBuilder.setText("Name: " + name);
-
-        final Label label = labelBuilder.build();
-        label.getString(0).setForegroundColor(getSprite().getForegroundColor(), new IntRange(6, 6 + name.length()));
+        screenBuilder.setWidth(39);
+        screenBuilder.setHeight(10);
 
         final Screen screen = screenBuilder.build();
-        screen.addComponent(label);
+
+        // Print border
+        final RectanglePrinter rectanglePrinter = new RectanglePrinter();
+        rectanglePrinter.setWidth(39);
+        rectanglePrinter.setHeight(10);
+        rectanglePrinter.setTitle(name);
+        rectanglePrinter.print(screen, new Point(0, 0));
+
+        // Color name on the border
+        final Color color = getSprite().getForegroundColor();
+        final IntRange nameRange = new IntRange(2, 2 + name.length());
+        screen.getString(0).setForegroundColor(color, nameRange);
 
         return screen;
     }
