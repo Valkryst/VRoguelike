@@ -1,5 +1,6 @@
 package com.valkryst.VRoguelike.action;
 
+import com.valkryst.VRoguelike.Message;
 import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.entity.builder.ItemDropBuilder;
@@ -13,7 +14,7 @@ public class DeathAction implements Action {
     @Override
     public void perform(final @NonNull Map map, final @NonNull Entity entity) {
         map.removeEntities(entity);
-        map.getMessageBox().appendText(entity.getName() + " has died.");
+        map.addMessage(new Message().appendEntityName(entity).append(" has died."));
 
 
         if (entity instanceof Creature) {
@@ -26,7 +27,9 @@ public class DeathAction implements Action {
                     builder.setItem(lootEntry);
                     builder.setPosition(entity.getPosition());
 
-                    map.getMessageBox().appendText(entity.getName() + " dropped " + lootEntry.getName() + ".");
+
+                    map.addMessage(new Message().appendEntityName(entity)
+                                                     .append(" dropped " + lootEntry.getName() + "."));
 
                     map.addEntities(builder.build());
                 });
