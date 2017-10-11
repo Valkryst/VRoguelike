@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public enum Race {
-    HUMAN("Human/Ancient_Roman/Male.txt", "Human/Ancient_Roman/Female.txt", "Human/Ancient_Roman/Last.txt");
+    HUMAN("Human/Ancient_Roman/Male.txt", "Human/Ancient_Roman/Female.txt", "Human/Ancient_Roman/Male.txt");
 
     private MarkovNameGenerator maleNameGenerator;
     private MarkovNameGenerator femaleNameGenerator;
