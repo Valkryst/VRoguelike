@@ -89,7 +89,7 @@ public enum Race {
      */
     public String generateName(final @NonNull Gender gender) {
         final int firstNameLength = ThreadLocalRandom.current().nextInt(8) + 3;
-        final int lastNameLength = ThreadLocalRandom.current().nextInt(10) + 3;
+        final int lastNameLength = ThreadLocalRandom.current().nextInt(8) + 3;
 
         return (gender == Gender.MALE ? maleNameGenerator : femaleNameGenerator).generateName(firstNameLength)
                 + " " + lastNameGenerator.generateName(lastNameLength);
