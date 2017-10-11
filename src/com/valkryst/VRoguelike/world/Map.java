@@ -1,5 +1,6 @@
 package com.valkryst.VRoguelike.world;
 
+import com.valkryst.VRoguelike.Message;
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.entity.Player;
 import com.valkryst.VTerminal.builder.component.ScreenBuilder;
@@ -27,7 +28,7 @@ public class Map {
     @Getter private List<Entity> entities = new ArrayList<>();
 
     /** The component to display messages within. */
-    @Getter private TextArea messageBox;
+    private TextArea messageBox;
 
     /**
      * Constructs a new Map.
@@ -146,6 +147,19 @@ public class Map {
                 this.entities.remove(entity);
             }
         }
+    }
+
+    /**
+     * Adds a message to the message box.
+     *
+     * @param message
+     *           The message.
+     *
+     * @throws NullPointerException
+     *           If the message is null.
+     */
+    public void addMessage(final @NonNull Message message) {
+        messageBox.appendText(message.getMessage());
     }
 
     /** @return The width, in tiles, of the map. */
