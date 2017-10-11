@@ -43,6 +43,7 @@ public class AttackAction implements Action {
         // Critical Miss
         if (attackRoll == 1) {
             new CriticalMissAction(getDamageDealt(self, self)).perform(map, self);
+            target.getCombatAI().decide(map, target, self);
             return;
         }
 
