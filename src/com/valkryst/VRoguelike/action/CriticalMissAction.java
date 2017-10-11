@@ -1,5 +1,6 @@
 package com.valkryst.VRoguelike.action;
 
+import com.valkryst.VRoguelike.Message;
 import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.stat.BoundedStatistic;
@@ -34,7 +35,7 @@ public class CriticalMissAction implements Action {
 
         health.setValue(health.getValue() - damage);
 
-        map.getMessageBox().appendText(getCriticalMissMessage(self));
+        map.addMessage(getCriticalMissMessage(self));
 
         if (health.getValue() == health.getMinimum()) {
             new DeathAction().perform(map, self);
@@ -53,10 +54,10 @@ public class CriticalMissAction implements Action {
      * @throws NullPointerException
      *        If self is null.
      */
-    private String getCriticalMissMessage(final @NonNull Creature self) {
-        return String.format("%s missed and attacked %s for %d damage.",
-                                self.getName(),
-                                self.getGender().getPronounReflexive(),
-                                damage);
+    private Message getCriticalMissMessage(final @NonNull Creature self) {
+        return new Message().appendEntityName(self)
+                               .append(" missed and attacked ")
+                               .append(self.getGender().getPronounReflexive())
+                               .append(" for " + damage + " damage.");
     }
 }
