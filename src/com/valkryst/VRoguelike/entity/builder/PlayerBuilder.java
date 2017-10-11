@@ -10,6 +10,11 @@ import lombok.EqualsAndHashCode;
 public class PlayerBuilder extends CreatureBuilder {
     public Player build() {
         super.checkState();
+
+        if (super.getName().equals("player")) {
+            super.setName(super.getRace().generateName(super.getGender()));
+        }
+
         return new Player(this);
     }
 
