@@ -96,11 +96,11 @@ public class Driver {
 
             // Add Player/Creature Screens to main panel
             final Screen playerPanel = player.getInformationPanel();
-            playerPanel.setPosition(new Point(82, 1));
+            playerPanel.setPosition(new Point(81, 0));
             gameScreen.addComponent(playerPanel);
 
             final Screen creaturePanel = npc.getInformationPanel();
-            creaturePanel.setPosition(new Point(82, 12));
+            creaturePanel.setPosition(new Point(81, 11));
             gameScreen.addComponent(creaturePanel);
 
 
