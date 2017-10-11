@@ -3,6 +3,7 @@ package com.valkryst.VRoguelike.action;
 import com.valkryst.VRoguelike.Message;
 import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.entity.Entity;
+import com.valkryst.VRoguelike.entity.ItemDrop;
 import com.valkryst.VRoguelike.entity.builder.ItemDropBuilder;
 import com.valkryst.VRoguelike.loot.LootTable;
 import com.valkryst.VRoguelike.world.Map;
@@ -27,11 +28,15 @@ public class DeathAction implements Action {
                     builder.setItem(lootEntry);
                     builder.setPosition(entity.getPosition());
 
+                    final ItemDrop itemDrop = builder.build();
+
 
                     map.addMessage(new Message().appendEntityName(entity)
-                                                     .append(" dropped " + lootEntry.getName() + "."));
+                                                     .append(" dropped ")
+                                                     .appendEntityName(itemDrop)
+                                                     .append("."));
 
-                    map.addEntities(builder.build());
+                    map.addEntities(itemDrop);
                 });
             }
         }
