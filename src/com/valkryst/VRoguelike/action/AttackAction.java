@@ -1,6 +1,7 @@
 package com.valkryst.VRoguelike.action;
 
 import com.valkryst.VDice.Die;
+import com.valkryst.VRoguelike.Message;
 import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
@@ -33,7 +34,7 @@ public class AttackAction implements Action {
 
     @Override
     public void perform(final @NonNull Map map, final @NonNull Entity entity) {
-        map.getMessageBox().appendText("");
+        map.addMessage(new Message());
 
         final Creature self = (Creature) entity;
 
@@ -54,7 +55,7 @@ public class AttackAction implements Action {
 
         // Normal Attack
         int damage = 0;
-        String message = "";
+        Message message = new Message();
 
         if (attackRoll >= 5 && attackRoll <= 16) {
             damage = getDamageDealt(self, target);
@@ -78,9 +79,9 @@ public class AttackAction implements Action {
 
         if (damage > 0) {
             health.setValue(health.getValue() - damage);
-            map.getMessageBox().appendText(message);
+            map.addMessage(message);
         } else {
-            map.getMessageBox().appendText(self.getName() + " dealt no damage to " + target.getName() + ".");
+            map.addMessage(getNoDamageMessage(self));
         }
 
         if (health.getValue() == health.getMinimum()) {
@@ -163,11 +164,11 @@ public class AttackAction implements Action {
      * @throws NullPointerException
      *        If self is null.
      */
-    private String getAttackMessage(final @NonNull Creature self, final int damage) {
-        return String.format("%s attacked %s for %d damage.",
-                                self.getName(),
-                                target.getName(),
-                                damage);
+    private Message getAttackMessage(final @NonNull Creature self, final int damage) {
+        return new Message().appendEntityName(self)
+                               .append(" attacked ")
+                               .appendEntityName(target)
+                               .append(" for " + damage + " damage.");
     }
 
     /**
@@ -185,11 +186,11 @@ public class AttackAction implements Action {
      * @throws NullPointerException
      *        If self is null.
      */
-    private String getDoubleAttackMessage(final @NonNull Creature self, final int damage) {
-        return String.format("%s landed a double-damage attack against %s for %d damage.",
-                                self.getName(),
-                                target.getName(),
-                                damage);
+    private Message getDoubleAttackMessage(final @NonNull Creature self, final int damage) {
+        return new Message().appendEntityName(self)
+                               .append(" landed a double-damage attack against ")
+                               .appendEntityName(target)
+                               .append(" for " + damage + " damage.");
     }
 
     /**
@@ -207,11 +208,29 @@ public class AttackAction implements Action {
      * @throws NullPointerException
      *        If self is null.
      */
-    private String getCriticalAttackMessage(final @NonNull Creature self, final int damage) {
-        return String.format("%s landed a critical attack against %s for %d damage.",
-                                self.getName(),
-                                target.getName(),
-                                damage);
+    private Message getCriticalAttackMessage(final @NonNull Creature self, final int damage) {
+        return new Message().appendEntityName(self)
+                               .append(" landed a critical attack against ")
+                               .appendEntityName(target)
+                               .append(" for " + damage + " damage.");
+    }
 
+    /**
+     * Constructs a no-damage message.
+     *
+     * @param self
+     *          The attacking creature.
+     *
+     * @return
+     *          The message.
+     *
+     * @throws NullPointerException
+     *        If self is null.
+     */
+    private Message getNoDamageMessage(final @NonNull Creature self) {
+        return new Message().appendEntityName(self)
+                               .append(" dealt no damage to ")
+                               .appendEntityName(target)
+                               .append(".");
     }
 }
