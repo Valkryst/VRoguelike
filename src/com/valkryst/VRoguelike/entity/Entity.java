@@ -11,8 +11,10 @@ import com.valkryst.VTerminal.AsciiCharacter;
 import com.valkryst.VTerminal.builder.component.LabelBuilder;
 import com.valkryst.VTerminal.builder.component.LayerBuilder;
 import com.valkryst.VTerminal.builder.component.ScreenBuilder;
+import com.valkryst.VTerminal.component.Label;
 import com.valkryst.VTerminal.component.Layer;
 import com.valkryst.VTerminal.component.Screen;
+import com.valkryst.VTerminal.misc.IntRange;
 import lombok.*;
 
 import java.awt.Point;
@@ -141,8 +143,11 @@ public class Entity {
         labelBuilder.setColumnIndex(0);
         labelBuilder.setText("Name: " + name);
 
+        final Label label = labelBuilder.build();
+        label.getString(0).setForegroundColor(getSprite().getForegroundColor(), new IntRange(6, 6 + name.length()));
+
         final Screen screen = screenBuilder.build();
-        screen.addComponent(labelBuilder.build());
+        screen.addComponent(label);
 
         return screen;
     }
