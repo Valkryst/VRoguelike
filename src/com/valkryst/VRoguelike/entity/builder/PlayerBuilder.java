@@ -11,7 +11,7 @@ public class PlayerBuilder extends CreatureBuilder {
     public Player build() {
         super.checkState();
 
-        if (super.getName().equals("player")) {
+        if (super.getName().equals("Player")) {
             super.setName(super.getRace().generateName(super.getGender()));
         }
 
