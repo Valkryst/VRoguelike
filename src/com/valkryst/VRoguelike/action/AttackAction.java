@@ -50,6 +50,7 @@ public class AttackAction implements Action {
         if (attackRoll > 1 && attackRoll < 5) {
             new DodgeAction().perform(map, target);
             new AttackMissAction().perform(map, self);
+            target.getCombatAI().decide(map, target, self);
             return;
         }
 
