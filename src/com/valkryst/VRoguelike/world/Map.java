@@ -1,5 +1,6 @@
 package com.valkryst.VRoguelike.world;
 
+import com.valkryst.VJSON.VJSONParser;
 import com.valkryst.VRoguelike.Message;
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.entity.Player;
@@ -8,13 +9,14 @@ import com.valkryst.VTerminal.component.Screen;
 import com.valkryst.VTerminal.component.TextArea;
 import lombok.Getter;
 import lombok.NonNull;
+import org.json.simple.JSONObject;
 
 import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Map {
+public class Map implements VJSONParser {
     /** The screen on which the map is drawn. */
     @Getter private Screen screen;
 
@@ -58,6 +60,11 @@ public class Map {
                 tiles[x][y] = new Tile();
             }
         }
+    }
+
+    @Override
+    public void parse(final @NonNull JSONObject jsonObject) {
+        System.out.println("Implement JSON parsing in Map.");
     }
 
     /** Updates the map. */
