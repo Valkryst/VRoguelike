@@ -14,14 +14,9 @@ import java.util.List;
 public enum Race {
     HUMAN("Human/Ancient_Roman/Male.txt", "Human/Ancient_Roman/Female.txt", "Human/Ancient_Roman/Male.txt");
 
-    private final static DiceRoller DICE_ROLLER = new DiceRoller();
     private MarkovNameGenerator maleNameGenerator;
     private MarkovNameGenerator femaleNameGenerator;
     private MarkovNameGenerator lastNameGenerator;
-
-    static {
-        DICE_ROLLER.addDice(7, 1);
-    }
 
     /**
      * Constructs a new Race enum.
@@ -93,8 +88,11 @@ public enum Race {
      *          The name.
      */
     public String generateName(final @NonNull Gender gender) {
-        final int firstNameLength = DICE_ROLLER.roll() + 3;
-        final int lastNameLength = DICE_ROLLER.roll() + 3;
+        final DiceRoller diceRoller = new DiceRoller();
+        diceRoller.addDice(7, 1);
+
+        final int firstNameLength = diceRoller.roll() + 3;
+        final int lastNameLength = diceRoller.roll() + 3;
 
         return (gender == Gender.MALE ? maleNameGenerator : femaleNameGenerator).generateName(firstNameLength)
                 + " " + lastNameGenerator.generateName(lastNameLength);
