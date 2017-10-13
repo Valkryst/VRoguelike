@@ -14,7 +14,6 @@ import com.valkryst.VRoguelike.world.Room;
 import com.valkryst.VRoguelike.world.Tile;
 import com.valkryst.VTerminal.Panel;
 import com.valkryst.VTerminal.builder.PanelBuilder;
-import com.valkryst.VTerminal.component.Screen;
 import com.valkryst.VTerminal.font.Font;
 import com.valkryst.VTerminal.font.FontLoader;
 import org.json.simple.parser.ParseException;
@@ -95,13 +94,8 @@ public class Driver {
 
 
             // Add Player/Creature Screens to main panel
-            final Screen playerPanel = player.getInformationPanel();
-            playerPanel.setPosition(new Point(81, 0));
-            gameScreen.addComponent(playerPanel);
-
-            final Screen creaturePanel = npc.getInformationPanel();
-            creaturePanel.setPosition(new Point(81, 11));
-            gameScreen.addComponent(creaturePanel);
+            gameScreen.setPlayer(player);
+            gameScreen.setTarget(npc);
 
 
             // Test movement
