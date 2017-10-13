@@ -1,5 +1,6 @@
 package com.valkryst.VRoguelike;
 
+import com.valkryst.VJSON.VJSONLoader;
 import com.valkryst.VRoguelike.action.UpdateLOSAction;
 import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.entity.Player;
@@ -60,7 +61,7 @@ public class Driver {
 
             final WeaponBuilder weaponBuilder = new WeaponBuilder();
             try {
-                weaponBuilder.loadFromJSON(System.getProperty("user.dir") + "/test_res/test_item_weapon.json");
+                new VJSONLoader(weaponBuilder).loadFromJSON(System.getProperty("user.dir") + "/test_res/test_item_weapon.json");
             } catch (final ParseException | IOException e) {
                 e.printStackTrace();
             }
@@ -76,7 +77,7 @@ public class Driver {
 
             final CreatureBuilder creatureBuilder = new CreatureBuilder();
             try {
-                creatureBuilder.loadFromJSON(System.getProperty("user.dir") + "/test_res/test_entity_creature.json");
+                new VJSONLoader(creatureBuilder).loadFromJSON(System.getProperty("user.dir") + "/test_res/test_entity_creature.json");
             } catch (final ParseException | IOException e) {
                 e.printStackTrace();
             }
