@@ -68,7 +68,7 @@ public class AttackAction implements Action {
         }
 
         // Double Damage Attack
-        if (attackRoll > 17 && attackRoll < 20) {
+        if (attackRoll > 16 && attackRoll < 20) {
             damage = getDamageDealt(self, target) * 2;
             message = getDoubleAttackMessage(self, damage);
         }
