@@ -35,8 +35,8 @@ public class EquippableItemBuilder extends ItemBuilder {
     }
 
     @Override
-    public void parseJSON(final @NonNull JSONObject jsonObject) {
-        super.parseJSON(jsonObject);
+    public void parse(final @NonNull JSONObject jsonObject) {
+        super.parse(jsonObject);
 
         final EquipmentSlot slot = EquipmentSlot.valueOf((String) jsonObject.get("slot"));
 
