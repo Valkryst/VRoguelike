@@ -34,8 +34,8 @@ public class WeaponBuilder extends EquippableItemBuilder {
     }
 
     @Override
-    public void parseJSON(final @NonNull JSONObject jsonObject) {
-        super.parseJSON(jsonObject);
+    public void parse(final @NonNull JSONObject jsonObject) {
+        super.parse(jsonObject);
 
         final BoundedStatistic stat_damage = new BoundedStatistic((JSONObject) jsonObject.get("stat_damage"));
 
