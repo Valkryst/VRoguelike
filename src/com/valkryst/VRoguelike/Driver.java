@@ -77,7 +77,7 @@ public class Driver {
 
             final CreatureBuilder creatureBuilder = new CreatureBuilder();
             try {
-                VJSONLoader.loadFromJSON(weaponBuilder, System.getProperty("user.dir") + "/test_res/test_entity_creature.json");
+                VJSONLoader.loadFromJSON(creatureBuilder, System.getProperty("user.dir") + "/test_res/test_entity_creature.json");
             } catch (final ParseException | IOException e) {
                 e.printStackTrace();
             }
