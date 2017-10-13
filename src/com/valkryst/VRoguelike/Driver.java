@@ -61,7 +61,7 @@ public class Driver {
 
             final WeaponBuilder weaponBuilder = new WeaponBuilder();
             try {
-                new VJSONLoader(weaponBuilder).loadFromJSON(System.getProperty("user.dir") + "/test_res/test_item_weapon.json");
+                VJSONLoader.loadFromJSON(weaponBuilder, System.getProperty("user.dir") + "/test_res/test_item_weapon.json");
             } catch (final ParseException | IOException e) {
                 e.printStackTrace();
             }
@@ -77,7 +77,7 @@ public class Driver {
 
             final CreatureBuilder creatureBuilder = new CreatureBuilder();
             try {
-                new VJSONLoader(creatureBuilder).loadFromJSON(System.getProperty("user.dir") + "/test_res/test_entity_creature.json");
+                VJSONLoader.loadFromJSON(weaponBuilder, System.getProperty("user.dir") + "/test_res/test_entity_creature.json");
             } catch (final ParseException | IOException e) {
                 e.printStackTrace();
             }
