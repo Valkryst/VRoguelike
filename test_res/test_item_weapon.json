@@ -1,6 +1,6 @@
 {
   "type": "item_weapon",
-  "sprite": "UNKNOWN"
+  "sprite": "UNKNOWN",
   "name": "Mouldy Muffin",
   "description": "A very old muffin.",
   "slot": "MAIN_HAND",
