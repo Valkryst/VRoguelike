@@ -6,6 +6,8 @@ import com.valkryst.VController.ControllerListener;
 import com.valkryst.VController.preset.ControllerPreset;
 import com.valkryst.VRadio.Radio;
 import com.valkryst.VRadio.Receiver;
+import com.valkryst.VRoguelike.entity.Entity;
+import com.valkryst.VRoguelike.entity.Player;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.Panel;
 import com.valkryst.VTerminal.builder.component.ScreenBuilder;
@@ -13,9 +15,11 @@ import com.valkryst.VTerminal.builder.component.TextAreaBuilder;
 import com.valkryst.VTerminal.component.Screen;
 import com.valkryst.VTerminal.component.TextArea;
 import lombok.Getter;
+import lombok.NonNull;
 import net.java.games.input.Controller;
 import net.java.games.input.Event;
 
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.List;
@@ -27,6 +31,12 @@ public class GameScreen extends Screen implements KeyListener, Receiver<Event> {
 
     private ControllerPreset controllerPreset;
     private ControllerListener controllerListener;
+
+    /** The currently displayed player information. */
+    private Screen playerInfoScreen;
+
+    /** The currently displayed target information. */
+    private Screen targetInfoScreen;
 
     public GameScreen(final Panel panel) {
         super(new ScreenBuilder(panel.getWidthInCharacters(), panel.getHeightInCharacters()));
@@ -66,6 +76,44 @@ public class GameScreen extends Screen implements KeyListener, Receiver<Event> {
 
         messageBox = builder.build();
         this.addComponent(messageBox);
+    }
+
+    /**
+     * Changes the displayed player information to that
+     * of the specified Player.
+     *
+     * @param player
+     *          The player.
+     */
+    public void setPlayer(final @NonNull Player player) {
+        final Screen screen = player.getInformationPanel();
+        screen.setPosition(new Point(81, 0));
+
+        if (playerInfoScreen != null) {
+            this.removeComponent(playerInfoScreen);
+        }
+
+        playerInfoScreen = screen;
+        this.addComponent(playerInfoScreen);
+    }
+
+    /**
+     * Changes the displayed target information to that
+     * of the specified Entity.
+     *
+     * @param entity
+     *          The target.
+     */
+    public void setTarget(final @NonNull Entity entity) {
+        final Screen screen = entity.getInformationPanel();
+        screen.setPosition(new Point(81, 11));
+
+        if (targetInfoScreen != null) {
+            this.removeComponent(targetInfoScreen);
+        }
+
+        targetInfoScreen = screen;
+        this.addComponent(targetInfoScreen);
     }
 
     @Override
