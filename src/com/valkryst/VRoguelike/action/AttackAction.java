@@ -1,6 +1,6 @@
 package com.valkryst.VRoguelike.action;
 
-import com.valkryst.VDice.Die;
+import com.valkryst.VDice.DiceRoller;
 import com.valkryst.VRoguelike.Message;
 import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.entity.Entity;
@@ -38,7 +38,10 @@ public class AttackAction implements Action {
 
         final Creature self = (Creature) entity;
 
-        final int attackRoll = new Die(20).roll();
+        final DiceRoller diceRoller = new DiceRoller();
+        diceRoller.addDice(20, 1);
+
+        final int attackRoll = diceRoller.roll();
 
         // Critical Miss
         if (attackRoll == 1) {
