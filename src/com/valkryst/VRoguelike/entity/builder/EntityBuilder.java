@@ -92,8 +92,6 @@ public class EntityBuilder {
         position.setLocation(position.x, y);
     }
 
-
-
     /**
      * Loads a portion of the builder's data from JSON.
      *
