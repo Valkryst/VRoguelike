@@ -1,5 +1,6 @@
 package com.valkryst.VRoguelike.enums;
 
+import com.valkryst.VDice.DiceRoller;
 import com.valkryst.generator.MarkovNameGenerator;
 import lombok.NonNull;
 
@@ -9,14 +10,18 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 public enum Race {
     HUMAN("Human/Ancient_Roman/Male.txt", "Human/Ancient_Roman/Female.txt", "Human/Ancient_Roman/Male.txt");
 
+    private final static DiceRoller diceRoller = new DiceRoller();
     private MarkovNameGenerator maleNameGenerator;
     private MarkovNameGenerator femaleNameGenerator;
     private MarkovNameGenerator lastNameGenerator;
+
+    static {
+        diceRoller.addDice(7, 1);
+    }
 
     /**
      * Constructs a new Race enum.
@@ -88,8 +93,8 @@ public enum Race {
      *          The name.
      */
     public String generateName(final @NonNull Gender gender) {
-        final int firstNameLength = ThreadLocalRandom.current().nextInt(7) + 3;
-        final int lastNameLength = ThreadLocalRandom.current().nextInt(7) + 3;
+        final int firstNameLength = diceRoller.roll() + 3;
+        final int lastNameLength = diceRoller.roll() + 3;
 
         return (gender == Gender.MALE ? maleNameGenerator : femaleNameGenerator).generateName(firstNameLength)
                 + " " + lastNameGenerator.generateName(lastNameLength);
