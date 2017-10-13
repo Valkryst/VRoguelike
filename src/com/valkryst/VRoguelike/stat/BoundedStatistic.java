@@ -1,8 +1,8 @@
 package com.valkryst.VRoguelike.stat;
 
+import com.valkryst.VJSON.VJSONParser;
 import com.valkryst.VTerminal.builder.component.LabelBuilder;
 import com.valkryst.VTerminal.component.Label;
-import com.valkryst.VTerminal.misc.JSONFunctions;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
@@ -11,6 +11,8 @@ import org.json.simple.JSONObject;
 @Data
 @EqualsAndHashCode(callSuper=true)
 public class BoundedStatistic extends Statistic {
+    final VJSONParser parser = jo -> {};
+
     /** The maximum value. */
     private int maximum;
     /** The minimum value. */
@@ -82,9 +84,9 @@ public class BoundedStatistic extends Statistic {
      */
     public BoundedStatistic(final @NonNull JSONObject jsonObject) {
         this((String) jsonObject.get("name"),
-             JSONFunctions.getIntElement(jsonObject, "val"),
-             JSONFunctions.getIntElement(jsonObject, "min"),
-             JSONFunctions.getIntElement(jsonObject, "max"));
+                JSON_PARSER.getInteger(jsonObject, "val"),
+                JSON_PARSER.getInteger(jsonObject, "min"),
+                JSON_PARSER.getInteger(jsonObject, "max"));
     }
 
     @Override

@@ -1,8 +1,8 @@
 package com.valkryst.VRoguelike.stat;
 
+import com.valkryst.VJSON.VJSONParser;
 import com.valkryst.VTerminal.builder.component.LabelBuilder;
 import com.valkryst.VTerminal.component.Label;
-import com.valkryst.VTerminal.misc.JSONFunctions;
 import lombok.Getter;
 import lombok.NonNull;
 import org.json.simple.JSONObject;
@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class Statistic {
+    protected final static VJSONParser JSON_PARSER = jo -> {};
+
     /** The name of the statistic. */
     @Getter private final String name;
 
@@ -56,7 +58,7 @@ public class Statistic {
      */
     public Statistic(final @NonNull JSONObject jsonObject) {
         this((String) jsonObject.get("name"),
-              JSONFunctions.getIntElement(jsonObject, "val"));
+                JSON_PARSER.getInteger(jsonObject, "val"));
     }
 
     @Override
