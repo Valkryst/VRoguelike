@@ -1,0 +1,31 @@
+{
+  "rooms": [
+    {
+      "type": "room",
+      "x": 20,
+      "y": 5,
+      "width": 10,
+      "height": 15
+    },
+    {
+      "type": "room",
+      "x": 50,
+      "y": 5,
+      "width": 10,
+      "height": 15
+    }
+  ],
+  "entities": [
+    {
+      "type": "entity_creature",
+      "name": "",
+      "description": "Your sworn enemy.",
+      "x": 26,
+      "y": 13,
+      "sprite": "ENEMY",
+      "race": "HUMAN",
+      "gender": "FEMALE",
+      "combat_ai": "AGGRESSIVE"
+    }
+  ]
+}
