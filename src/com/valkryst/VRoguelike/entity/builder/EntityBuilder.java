@@ -1,24 +1,17 @@
 package com.valkryst.VRoguelike.entity.builder;
 
+import com.valkryst.VJSON.VJSONParser;
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.enums.Sprite;
-import com.valkryst.VTerminal.font.FontLoader;
-import com.valkryst.VTerminal.misc.JSONFunctions;
 import lombok.Data;
 import lombok.NonNull;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.awt.Point;
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Data
-public class EntityBuilder {
+public class EntityBuilder implements VJSONParser {
     /** The name. */
     private String name;
     /** The description. */
@@ -91,128 +84,15 @@ public class EntityBuilder {
 
         position.setLocation(position.x, y);
     }
-
-    /**
-     * Loads a portion of the builder's data from JSON.
-     *
-     * @param jsonFilePath
-     *        The path to the JSON file.
-     *
-     * @throws org.json.simple.parser.ParseException
-     *         If there's an error when parsing the JSON.
-     *
-     * @throws IOException
-     *         If an IO error occurs.
-     *
-     *         If the file does not exist, is a directory rather
-     *         than a regular file, or for some other reason cannot
-     *         be opened for reading.
-     *
-     * @throws NullPointerException
-     *        If the file path is null.
-     */
-    public void loadFromJSON(final @NonNull String jsonFilePath) throws ParseException, IOException {
-        if (jsonFilePath.isEmpty()) {
-            throw new IllegalArgumentException("The JSON file path cannot be empty.");
-        }
-
-        loadFromJSON(new FileInputStream(jsonFilePath));
-    }
-
-    /**
-     * Loads a portion of the builder's data from a JSON file within the Jar.
-     *
-     * @param jsonFilePath
-     *         The path to the JSON file.
-     *
-     * @throws ParseException
-     *         If there's an error when parsing the JSON.
-     *
-     * @throws IOException
-     *         If an IO error occurs.
-     *
-     * @throws NullPointerException
-     *        If the file path is null.
-     */
-    public void loadFromJSONInJar(final @NonNull String jsonFilePath) throws ParseException, IOException {
-        if (jsonFilePath.isEmpty()) {
-            throw new IllegalArgumentException("The JSON file path cannot be empty.");
-        }
-
-        final ClassLoader classLoader = FontLoader.class.getClassLoader();
-        final InputStream jsonFileStream = classLoader.getResourceAsStream(jsonFilePath);
-
-        loadFromJSON(jsonFileStream);
-
-        jsonFileStream.close();
-    }
-
-    /**
-     * Loads a portion of the builder's data from JSON.
-     *
-     * @param jsonFileStream
-     *        The JSON input stream.
-     *
-     * @throws ParseException
-     *         If there's an error when parsing the JSON.
-     *
-     * @throws IOException
-     *         If an IO error occurs.
-     *
-     * @throws NullPointerException
-     *        If the file stream is null.
-     */
-    public void loadFromJSON(final @NonNull InputStream jsonFileStream) throws ParseException, IOException {
-        final InputStreamReader isr = new InputStreamReader(jsonFileStream, StandardCharsets.UTF_8);
-        final BufferedReader br = new BufferedReader(isr);
-        final List<String> lines = br.lines().collect(Collectors.toList());
-
-        parseJSON(String.join("\n", lines));
-
-        br.close();
-        isr.close();
-    }
-
-    /**
-     * Loads a portion of the builder's data from JSON.
-     *
-     * @param jsonData
-     *        The JSON.
-     *
-     * @throws ParseException
-     *         If there's an error when parsing the JSON.
-     *
-     * @throws NullPointerException
-     *        If the data is null.
-     */
-    public void parseJSON(@NonNull String jsonData) throws ParseException {
-        // Remove comments from JSON:
-        jsonData = jsonData.replaceAll("/\\*.*\\*/", ""); // Strip '/**/' comments
-        jsonData = jsonData.replaceAll("//.*(?=\\n)", ""); // Strip '//' comments
-
-        final JSONParser parser = new JSONParser();
-        final Object object = parser.parse(jsonData);
-
-        parseJSON((JSONObject) object);
-    }
-
-    /**
-     * Loads a portion of the builder's data from JSON.
-     *
-     * @param jsonObject
-     *        The JSON.
-     *
-     * @throws NullPointerException
-     *        If the object is null.
-     */
-    public void parseJSON(final @NonNull JSONObject jsonObject) {
+    @Override
+    public void parse(final @NonNull JSONObject jsonObject) {
         reset();
 
         final String name = (String) jsonObject.get("name");
         final String description = (String) jsonObject.get("description");
 
-        final Integer x = JSONFunctions.getIntElement(jsonObject, "x");
-        final Integer y = JSONFunctions.getIntElement(jsonObject, "y");
+        final Integer x = getInteger(jsonObject, "x");
+        final Integer y = getInteger(jsonObject, "y");
 
         final Sprite sprite = Sprite.valueOf((String) jsonObject.get("sprite"));
 

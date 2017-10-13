@@ -122,8 +122,8 @@ public class CreatureBuilder extends EntityBuilder {
     }
 
     @Override
-    public void parseJSON(final @NonNull JSONObject jsonObject) {
-        super.parseJSON(jsonObject);
+    public void parse(final @NonNull JSONObject jsonObject) {
+        super.parse(jsonObject);
 
         final Race race = Race.valueOf((String) jsonObject.get("race"));
 
