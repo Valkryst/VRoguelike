@@ -16,10 +16,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Map implements VJSONParser {
-    /** The screen on which the map is drawn. */
-    @Getter private Screen screen;
-
+public class Map extends Screen implements VJSONParser {
     /** The tiles. */
     @Getter private Tile[][] tiles;
 
@@ -48,10 +45,10 @@ public class Map implements VJSONParser {
      *         If the messageBox is null.
      */
     public Map(final @NonNull TextArea messageBox, final int width, final int height) {
-        this.screen = new ScreenBuilder(width, height).build();
-        this.messageBox = messageBox;
+        super(new ScreenBuilder(width, height));
+        this.setBackgroundColor(Color.BLACK);
 
-        screen.setBackgroundColor(Color.BLACK);
+        this.messageBox = messageBox;
 
         tiles = new Tile[width][height];
 
@@ -127,7 +124,7 @@ public class Map implements VJSONParser {
      */
     public void addEntities(final Entity ... entities) {
         for (final Entity entity : entities) {
-            screen.addComponent(entity.getLayer());
+            this.addComponent(entity.getLayer());
 
 
             if (entity instanceof Player) {
@@ -146,7 +143,7 @@ public class Map implements VJSONParser {
      */
     public void removeEntities(final Entity ... entities) {
         for (final Entity entity : entities) {
-            screen.removeComponent(entity.getLayer());
+            this.removeComponent(entity.getLayer());
 
             if (entity instanceof Player) {
                 player = null;
