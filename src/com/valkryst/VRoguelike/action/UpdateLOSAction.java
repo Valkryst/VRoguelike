@@ -49,7 +49,7 @@ public class UpdateLOSAction implements Action {
             return;
         }
 
-        final Screen screen = map.getScreen();
+        final Screen screen = map;
         final Tile[][] tiles = map.getTiles();
         final Creature creature = (Creature) entity;
 

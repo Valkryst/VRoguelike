@@ -9,6 +9,6 @@ import lombok.NonNull;
 public class ShowAction implements Action {
     @Override
     public void perform(final @NonNull Map map, final @NonNull Entity entity) {
-        map.getScreen().addComponent(entity.getLayer());
+        map.addComponent(entity.getLayer());
     }
 }

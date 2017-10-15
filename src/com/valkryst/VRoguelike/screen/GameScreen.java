@@ -46,7 +46,8 @@ public class GameScreen extends Screen implements KeyListener, Receiver<Event> {
 
         createMessageBox(panel.getRadio());
         map = new Map(getMessageBox(), 80, 30);
-        this.addComponent(map.getScreen());
+        this.addComponent(map);
+        System.out.println(map);
     }
 
     private void addController() {
