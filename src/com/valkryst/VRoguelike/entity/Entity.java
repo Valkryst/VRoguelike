@@ -143,7 +143,7 @@ public class Entity {
         // Print border
         final RectanglePrinter rectanglePrinter = new RectanglePrinter();
         rectanglePrinter.setWidth(39);
-        rectanglePrinter.setHeight(10);
+        rectanglePrinter.setHeight(8);
         rectanglePrinter.setTitle(name);
         rectanglePrinter.print(screen, new Point(0, 0));
 
