@@ -193,7 +193,7 @@ public class AttackAction implements Action {
      */
     private Message getDoubleAttackMessage(final @NonNull Creature self, final int damage) {
         return new Message().appendEntityName(self)
-                               .append(" landed a double-damage attack against ")
+                               .append(" landed a heavy attack against ")
                                .appendEntityName(target)
                                .append(" for " + damage + " damage.");
     }
