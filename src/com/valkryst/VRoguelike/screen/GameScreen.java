@@ -107,7 +107,7 @@ public class GameScreen extends Screen implements KeyListener, Receiver<Event> {
      */
     public void setTarget(final @NonNull Entity entity) {
         final Screen screen = entity.getInformationPanel();
-        screen.setPosition(new Point(81, 10));
+        screen.setPosition(new Point(81, 8));
 
         if (targetInfoScreen != null) {
             this.removeComponent(targetInfoScreen);
