@@ -19,6 +19,7 @@ import com.valkryst.VTerminal.font.Font;
 import com.valkryst.VTerminal.font.FontLoader;
 import org.json.simple.parser.ParseException;
 
+import javax.swing.Timer;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.io.IOException;
@@ -108,10 +109,11 @@ public class Driver {
         });
 
         // Render loop:
-        while (true) {
+        final Timer timer = new Timer(100, e -> {
             gameScreen.getMap().update();
             panel.draw();
-            Thread.sleep(100);
-        }
+        });
+
+        timer.start();
     }
 }
