@@ -132,6 +132,9 @@ public class Map extends Screen implements VJSONParser {
             } else {
                 this.entities.add(entity);
             }
+
+            // Ensure player is drawn above everything else:
+            this.changeDrawOrder(entity.getLayer(), player.getLayer());
         }
     }
 
