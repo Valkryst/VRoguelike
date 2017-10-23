@@ -45,7 +45,7 @@ public class GameScreen extends Screen implements KeyListener, Receiver<Event> {
         addController();
 
         createMessageBox(panel.getRadio());
-        map = new Map(getMessageBox(), 80, 30);
+        map = new Map(getMessageBox(), 81, 30);
         this.addComponent(map);
         System.out.println(map);
     }
@@ -70,7 +70,7 @@ public class GameScreen extends Screen implements KeyListener, Receiver<Event> {
         builder.setColumnIndex(0);
         builder.setRowIndex(30);
 
-        builder.setWidth(80);
+        builder.setWidth(81);
         builder.setHeight(10);
 
         builder.setEditable(false);
