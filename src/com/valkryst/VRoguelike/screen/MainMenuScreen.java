@@ -16,14 +16,14 @@ public class MainMenuScreen extends Screen {
 
         // Construct menu options:
         final ButtonBuilder builder = new ButtonBuilder();
-        builder.setText("New");
+        builder.setText("<New>");
         builder.setRadio(panel.getRadio());
-        builder.setColumnIndex(panel.getWidthInCharacters() / 3);
-        builder.setRowIndex(panel.getHeightInCharacters() / 3);
+        builder.setColumnIndex(50);
+        builder.setRowIndex(15);
 
         button_new = builder.build();
 
-        builder.setText("Exit");
+        builder.setText("<Exit>");
         builder.setRowIndex(builder.getRowIndex() + 1);
         button_exit = builder.build();
 
