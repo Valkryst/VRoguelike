@@ -34,8 +34,6 @@ public class AttackAction implements Action {
 
     @Override
     public void perform(final @NonNull Map map, final @NonNull Entity entity) {
-        map.addMessage(new Message());
-
         final Creature self = (Creature) entity;
 
         final DiceRoller diceRoller = new DiceRoller();
