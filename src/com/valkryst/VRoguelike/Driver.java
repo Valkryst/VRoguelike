@@ -26,6 +26,8 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 public class Driver {
+    public static Panel PANEL;
+
     public static void main(String[] args) throws IOException, URISyntaxException, InterruptedException {
         final Font font = FontLoader.loadFontFromJar("Fonts/DejaVu Sans Mono/18pt/bitmap.png", "Fonts/DejaVu Sans Mono/18pt/data.fnt", 1);
 
@@ -34,23 +36,23 @@ public class Driver {
         panelBuilder.setWidthInCharacters(120);
         panelBuilder.setHeightInCharacters(40);
 
-        final Panel panel = panelBuilder.build();
+        PANEL = panelBuilder.build();
 
         Thread.sleep(50);
 
-        final MainMenuScreen mainMenuScreen = new MainMenuScreen(panel);
-        final GameScreen gameScreen = new GameScreen(panel);
-        panel.swapScreen(mainMenuScreen);
+        final MainMenuScreen mainMenuScreen = new MainMenuScreen(PANEL);
+        final GameScreen gameScreen = new GameScreen(PANEL);
+        PANEL.swapScreen(mainMenuScreen);
 
         mainMenuScreen.getButton_new().setOnClickFunction(() -> {
             // Initialize map tiles:
-            panel.swapScreen(gameScreen);
+            PANEL.swapScreen(gameScreen);
 
             final Tile[][] tiles = gameScreen.getMap().getTiles();
 
             for (int x = 0 ; x < tiles.length ; x++) {
                 for (int y = 0 ; y < tiles[x].length ; y++) {
-                    tiles[x][y].placeOnScreen(panel.getScreen(), x, y);
+                    tiles[x][y].placeOnScreen(PANEL.getScreen(), x, y);
                 }
             }
 
@@ -111,7 +113,7 @@ public class Driver {
         // Render loop:
         final Timer timer = new Timer(100, e -> {
             gameScreen.getMap().update();
-            panel.draw();
+            PANEL.draw();
         });
 
         timer.start();
