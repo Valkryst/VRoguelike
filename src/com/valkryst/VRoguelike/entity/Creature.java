@@ -115,7 +115,7 @@ public class Creature extends Entity {
             screen.removeComponent(screen.getComponentByID(stat_level.getName()));
 
             final Label label = stat_level.getLabelComponent();
-            label.setPosition(new Point(1, 1));
+            label.setPosition(new Point(4, 1));
 
             screen.addComponent(label);
         };
@@ -128,7 +128,7 @@ public class Creature extends Entity {
             screen.removeComponent(screen.getComponentByID(stat_xp.getName()));
 
             final Label label = stat_xp.getLabelComponentWithMax();
-            label.setPosition(new Point(1, 2));
+            label.setPosition(new Point(7, 2));
 
             screen.addComponent(label);
         };
@@ -141,7 +141,7 @@ public class Creature extends Entity {
             screen.removeComponent(screen.getComponentByID(stat_gold.getName()));
 
             final Label label = stat_gold.getLabelComponent();
-            label.setPosition(new Point(1, 3));
+            label.setPosition(new Point(5, 3));
 
             screen.addComponent(label);
         };
@@ -154,7 +154,7 @@ public class Creature extends Entity {
             screen.removeComponent(screen.getComponentByID(stat_health.getName()));
 
             final Label label = stat_health.getLabelComponentWithMax();
-            label.setPosition(new Point(1, 4));
+            label.setPosition(new Point(3, 4));
 
             screen.addComponent(label);
         };
@@ -180,7 +180,7 @@ public class Creature extends Entity {
             screen.removeComponent(screen.getComponentByID(stat_defense.getName()));
 
             final Label label = stat_defense.getLabelComponent();
-            label.setPosition(new Point(1, 6));
+            label.setPosition(new Point(2, 6));
 
             screen.addComponent(label);
         };
