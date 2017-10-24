@@ -33,12 +33,12 @@ public class EquippableItem extends Item {
 
     public Label getInformationLabel() {
         final LabelBuilder labelBuilder = new LabelBuilder();
-        labelBuilder.setText(slot.name() + ": " + super.getName());
+        labelBuilder.setText(slot.getName() + ": " + super.getName());
 
         final Label label = labelBuilder.build();
 
         // Color item name
-        final int slotNameLength = slot.name().length() + 1;
+        final int slotNameLength = slot.getName().length() + 1;
         final int nameLength = super.getName().length();
 
         final Color color = getSprite().getForegroundColor();
