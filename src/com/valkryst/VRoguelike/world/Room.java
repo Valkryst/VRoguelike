@@ -54,6 +54,8 @@ public class Room implements VJSONParser {
 
     @Override
     public void parse(final @NonNull JSONObject jsonObject) {
+        this.checkType(jsonObject, "room");
+
         final Integer x = getInteger(jsonObject, "x");
         final Integer y = getInteger(jsonObject, "y");
 
