@@ -88,6 +88,16 @@ public class EntityBuilder implements VJSONParser {
     public void parse(final @NonNull JSONObject jsonObject) {
         reset();
 
+        try {
+            this.checkType(jsonObject, "entity");
+        } catch (final IllegalStateException ea) {
+            try {
+                this.checkType(jsonObject, "entity_creature");
+            } catch (final IllegalStateException eb) {
+                this.checkType(jsonObject, "entity_player");
+            }
+        }
+
         final String name = (String) jsonObject.get("name");
         final String description = (String) jsonObject.get("description");
 
