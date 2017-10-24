@@ -1,6 +1,7 @@
 package com.valkryst.VRoguelike.loot;
 
 import com.valkryst.VRoguelike.item.Item;
+import com.valkryst.VRoguelike.loot.builder.LootEntryBuilder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NonNull;
@@ -17,26 +18,15 @@ public class LootEntry {
     /**
      * Constructs a new LootEntry.
      *
-     * @param item
-     *         The item.
-     *
-     * @param dropChance
-     *         The drop chance.
+     * @param builder
+     *         The builder.
      *
      * @throws NullPointerException
-     *         If the item is null.
+     *         If the builder is null.
      */
-    public LootEntry(final @NonNull Item item, final int dropChance) {
-        if (dropChance < 1) {
-            throw new IllegalArgumentException("The drop chance cannot be below 1.");
-        }
-
-        if (dropChance > 100) {
-            throw new IllegalArgumentException("The drop chance cannot be above 100.");
-        }
-
-        this.item = item;
-        this.dropChance = dropChance;
+    public LootEntry(final @NonNull LootEntryBuilder builder) {
+        this.item = builder.getItem();
+        this.dropChance = builder.getDropChance();
     }
 
     @Override
