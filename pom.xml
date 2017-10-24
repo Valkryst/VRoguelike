@@ -60,7 +60,7 @@
         <dependency>
             <groupId>com.github.Valkryst</groupId>
             <artifactId>VJSON</artifactId>
-            <version>94ff6bc</version>
+            <version>d3313e4</version>
         </dependency>
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
