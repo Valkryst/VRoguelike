@@ -28,6 +28,7 @@ public class Room implements VJSONParser {
      *          room.
      *
      * @param dimensions
+     *          The width/height of the room.
      */
     public Room(final Point position, final Dimension dimensions) {
         this.position = position;
