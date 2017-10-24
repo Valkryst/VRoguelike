@@ -91,8 +91,8 @@ public enum Race {
         final DiceRoller diceRoller = new DiceRoller();
         diceRoller.addDice(5, 1);
 
-        final int firstNameLength = diceRoller.roll() + 3;
-        final int lastNameLength = diceRoller.roll() + 3;
+        final int firstNameLength = diceRoller.roll() + 2;
+        final int lastNameLength = diceRoller.roll() + 2;
 
         return (gender == Gender.MALE ? maleNameGenerator : femaleNameGenerator).generateName(firstNameLength)
                 + " " + lastNameGenerator.generateName(lastNameLength);
