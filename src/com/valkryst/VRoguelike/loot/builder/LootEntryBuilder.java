@@ -50,6 +50,8 @@ public class LootEntryBuilder implements VJSONParser {
 
     @Override
     public void parse(final @NonNull JSONObject jsonObject) {
+        this.checkType(jsonObject, "loot_entry");
+
         final JSONObject itemJSON = (JSONObject) jsonObject.get("item");
         final String type = getString(itemJSON, "type");
 
