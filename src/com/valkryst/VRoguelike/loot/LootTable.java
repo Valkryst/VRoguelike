@@ -13,6 +13,11 @@ public class LootTable {
     /** The set of items that can be dropped. */
     private final List<LootEntry> lootEntries;
 
+    /** Constructs a new empty LootTable. */
+    public LootTable() {
+        lootEntries = new ArrayList<>();
+    }
+
     /**
      * Constructs a new LootTable.
      *
