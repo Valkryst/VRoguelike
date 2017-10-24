@@ -1,6 +1,7 @@
 package com.valkryst.VRoguelike.loot;
 
 import com.valkryst.VRoguelike.item.Item;
+import com.valkryst.VRoguelike.loot.builder.LootTableBuilder;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 
@@ -10,7 +11,17 @@ import java.util.List;
 @EqualsAndHashCode
 public class LootTable {
     /** The set of items that can be dropped. */
-    private final List<LootEntry> lootEntries = new ArrayList<>();
+    private final List<LootEntry> lootEntries;
+
+    /**
+     * Constructs a new LootTable.
+     *
+     * @param builder
+     *          The builder.
+     */
+    public LootTable(final @NonNull LootTableBuilder builder) {
+        lootEntries = builder.getLootEntries();
+    }
 
     @Override
     public String toString() {
@@ -22,19 +33,6 @@ public class LootTable {
         }
 
         return sb.toString();
-    }
-
-    /**
-     * Adds a new entry to the loot table.
-     *
-     * @param entry
-     *          The entry.
-     *
-     * @throws NullPointerException
-     *          If the entry is null.
-     */
-    public void add(final @NonNull LootEntry entry) {
-        lootEntries.add(entry);
     }
 
     /**
