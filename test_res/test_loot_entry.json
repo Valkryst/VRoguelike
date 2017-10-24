@@ -1,4 +1,5 @@
 {
+  "type": "loot_entry",
   "item": {
     "type": "item_weapon",
     "sprite": "UNKNOWN",
