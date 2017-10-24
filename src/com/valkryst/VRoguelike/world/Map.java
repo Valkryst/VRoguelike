@@ -83,7 +83,7 @@ public class Map extends Screen implements VJSONParser {
 
         jsonObject_lootTables.forEach(tableJSON -> {
             final String name = getString((JSONObject) tableJSON, "name");
-            lootTableBuilder.parse((JSONObject) ((JSONObject) tableJSON).get("loot"));
+            lootTableBuilder.parse((JSONObject) tableJSON);
 
             lootTables.put(name, lootTableBuilder.build());
         });
