@@ -31,6 +31,8 @@ public class LootTableBuilder implements VJSONParser {
 
     @Override
     public void parse(final @NonNull JSONObject jsonObject) {
+        this.checkType(jsonObject, "loot_entry");
+
         final JSONArray lootEntries = (JSONArray) jsonObject.get("loot");
 
         final LootEntryBuilder builder = new LootEntryBuilder();
