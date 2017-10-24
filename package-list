@@ -10,6 +10,7 @@ com.valkryst.VRoguelike.item.builder
 com.valkryst.VRoguelike.item.builder.equipment
 com.valkryst.VRoguelike.item.equipment
 com.valkryst.VRoguelike.loot
+com.valkryst.VRoguelike.loot.builder
 com.valkryst.VRoguelike.screen
 com.valkryst.VRoguelike.stat
 com.valkryst.VRoguelike.world
