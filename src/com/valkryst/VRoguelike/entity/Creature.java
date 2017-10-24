@@ -11,6 +11,7 @@ import com.valkryst.VRoguelike.item.equipment.EquipmentInventory;
 import com.valkryst.VRoguelike.loot.LootTable;
 import com.valkryst.VRoguelike.stat.BoundedStatistic;
 import com.valkryst.VRoguelike.world.Map;
+import com.valkryst.VTerminal.builder.component.LabelBuilder;
 import com.valkryst.VTerminal.component.Label;
 import com.valkryst.VTerminal.component.Screen;
 import lombok.*;
@@ -153,8 +154,18 @@ public class Creature extends Entity {
         final Runnable add_health = () -> {
             screen.removeComponent(screen.getComponentByID(stat_health.getName()));
 
-            final Label label = stat_health.getLabelComponentWithMax();
-            label.setPosition(new Point(3, 4));
+            final Label label;
+
+            if (stat_health.getValue() > 0) {
+                label = stat_health.getLabelComponentWithMax();
+                label.setPosition(new Point(3, 4));
+            } else {
+                final LabelBuilder builder = new LabelBuilder();
+                builder.setText("Health: Deceased");
+                builder.setColumnIndex(3);
+                builder.setRowIndex(4);
+                label = builder.build();
+            }
 
             screen.addComponent(label);
         };
