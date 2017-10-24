@@ -57,11 +57,13 @@ public class LootEntryBuilder implements VJSONParser {
             case "item_armor": {
                 final ItemBuilder itemBuilder = new ArmorBuilder();
                 itemBuilder.parse(itemJSON);
+                item = itemBuilder.build();
                 break;
             }
             case "item_weapon": {
                 final ItemBuilder itemBuilder = new WeaponBuilder();
                 itemBuilder.parse(itemJSON);
+                item = itemBuilder.build();
                 break;
             }
             case "item": {
