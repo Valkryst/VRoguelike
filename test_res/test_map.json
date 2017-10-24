@@ -26,6 +26,30 @@
       "race": "HUMAN",
       "gender": "FEMALE",
       "combat_ai": "AGGRESSIVE"
+      "loot": [
+        {
+          "item": {
+            "type": "item_weapon",
+            "sprite": "UNKNOWN",
+            "name": "Mouldy Muffin",
+            "description": "A very old muffin.",
+            "slot": "MAIN_HAND",
+            "stat_health": 0,
+            "stat_strength": 0,
+            "stat_defense": 0,
+            "stat_accuracy": 0,
+            "stat_dodge": 0,
+            "stat_damage": {
+              "type": "bounded statistic",
+              "name": "Damage",
+              "val": 10,
+              "min": 1,
+              "max": 10
+            }
+          },
+          "chance": 100
+        }
+      ]
     }
   ]
 }
