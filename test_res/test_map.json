@@ -15,17 +15,10 @@
       "height": 15
     }
   ],
-  "entities": [
+  "loot_tables": [
     {
-      "type": "entity_creature",
-      "name": "",
-      "description": "Your sworn enemy.",
-      "x": 26,
-      "y": 13,
-      "sprite": "ENEMY",
-      "race": "HUMAN",
-      "gender": "FEMALE",
-      "combat_ai": "AGGRESSIVE"
+      "type": "loot_table",
+      "name": "table_a",
       "loot": [
         {
           "item": {
@@ -50,6 +43,20 @@
           "chance": 100
         }
       ]
+    }
+  ],
+  "entities": [
+    {
+      "type": "entity_creature",
+      "name": "",
+      "description": "Your sworn enemy.",
+      "x": 26,
+      "y": 13,
+      "sprite": "ENEMY",
+      "race": "HUMAN",
+      "gender": "FEMALE",
+      "combat_ai": "AGGRESSIVE",
+      "loot_table_name": "table_a"
     }
   ]
 }
