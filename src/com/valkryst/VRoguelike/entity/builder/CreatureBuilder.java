@@ -10,6 +10,7 @@ import com.valkryst.VRoguelike.enums.Race;
 import com.valkryst.VRoguelike.enums.State;
 import com.valkryst.VRoguelike.item.equipment.EquipmentInventory;
 import com.valkryst.VRoguelike.loot.LootTable;
+import com.valkryst.VRoguelike.loot.builder.LootTableBuilder;
 import com.valkryst.VRoguelike.stat.BoundedStatistic;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -153,6 +154,12 @@ public class CreatureBuilder extends EntityBuilder {
                     break;
                 }
             }
+        }
+
+        if (jsonObject.get("loot") != null) {
+            final LootTableBuilder builder = new LootTableBuilder();
+            builder.parse(jsonObject);
+            this.lootTable = builder.build();
         }
     }
 }
