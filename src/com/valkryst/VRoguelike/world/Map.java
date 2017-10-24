@@ -5,6 +5,8 @@ import com.valkryst.VRoguelike.Message;
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.entity.Player;
 import com.valkryst.VRoguelike.entity.builder.CreatureBuilder;
+import com.valkryst.VRoguelike.loot.LootTable;
+import com.valkryst.VRoguelike.loot.builder.LootTableBuilder;
 import com.valkryst.VTerminal.builder.component.ScreenBuilder;
 import com.valkryst.VTerminal.component.Screen;
 import com.valkryst.VTerminal.component.TextArea;
@@ -16,6 +18,7 @@ import org.json.simple.JSONObject;
 import java.awt.Color;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Map extends Screen implements VJSONParser {
@@ -64,7 +67,13 @@ public class Map extends Screen implements VJSONParser {
     @Override
     public void parse(final @NonNull JSONObject jsonObject) {
         final JSONArray jsonObject_rooms = (JSONArray) jsonObject.get("rooms");
+        final JSONArray jsonObject_lootTables = (JSONArray) jsonObject.get("loot_tables");
         final JSONArray jsonObject_entities = (JSONArray) jsonObject.get("entities");
+
+        final LootTableBuilder lootTableBuilder = new LootTableBuilder();
+        final CreatureBuilder creatureBuilder = new CreatureBuilder();
+
+        final HashMap<String, LootTable> lootTables = new HashMap<>();
 
         jsonObject_rooms.forEach(roomJSON -> {
             final Room room = new Room();
@@ -72,13 +81,20 @@ public class Map extends Screen implements VJSONParser {
             room.carve(this);
         });
 
+        jsonObject_lootTables.forEach(tableJSON -> {
+            final String name = getString((JSONObject) tableJSON, "name");
+            lootTableBuilder.parse((JSONObject) ((JSONObject) tableJSON).get("loot"));
 
-        final CreatureBuilder creatureBuilder = new CreatureBuilder();
+            lootTables.put(name, lootTableBuilder.build());
+        });
 
         jsonObject_entities.forEach(entityJSON -> {
             switch (getString((JSONObject) entityJSON, "type")) {
                 case "entity_creature": {
+                    final String lootTableName = getString((JSONObject) entityJSON, "loot_table_name");
                     creatureBuilder.parse((JSONObject) entityJSON);
+                    creatureBuilder.setLootTable(lootTables.get(lootTableName));
+
                     addEntities(creatureBuilder.build());
                     break;
                 }
