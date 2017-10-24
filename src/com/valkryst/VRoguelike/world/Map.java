@@ -63,8 +63,6 @@ public class Map extends Screen implements VJSONParser {
 
     @Override
     public void parse(final @NonNull JSONObject jsonObject) {
-        System.out.println("Implement JSON parsing in Map.");
-
         final JSONArray jsonObject_rooms = (JSONArray) jsonObject.get("rooms");
         final JSONArray jsonObject_entities = (JSONArray) jsonObject.get("entities");
 
