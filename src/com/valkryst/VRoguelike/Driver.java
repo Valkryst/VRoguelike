@@ -70,16 +70,6 @@ public class Driver {
 
 
             /*
-            final LootTable lootTable = new LootTable();
-            lootTable.add(weaponBuilder.build(), 100);
-
-            final CreatureBuilder creatureBuilder = new CreatureBuilder();
-            try {
-                VJSONLoader.loadFromJSON(creatureBuilder, System.getProperty("user.dir") + "/test_res/test_entity_creature.json");
-            } catch (final ParseException | IOException e) {
-                e.printStackTrace();
-            }
-            creatureBuilder.setLootTable(lootTable);
             final Creature npc = creatureBuilder.build();
             npc.getEquipment().setItemInSlot(EquipmentSlot.MAIN_HAND, weaponBuilder.build());
             */
