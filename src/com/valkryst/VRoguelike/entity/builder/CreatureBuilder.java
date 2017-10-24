@@ -84,7 +84,7 @@ public class CreatureBuilder extends EntityBuilder {
 
         // Set Stats:
         stat_level = new BoundedStatistic("Level", 1, 1, 200);
-        stat_xp = new BoundedStatistic("XP", 0, 83);
+        stat_xp = new BoundedStatistic("XP", 0, 0, 83);
         stat_gold = new BoundedStatistic("Gold", 0, 0, Integer.MAX_VALUE);
         stat_health = new BoundedStatistic("Health", 0, 100);
         stat_strength = new BoundedStatistic("Strength", 0, 0, 100);
