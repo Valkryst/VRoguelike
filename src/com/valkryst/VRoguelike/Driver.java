@@ -85,6 +85,7 @@ public class Driver {
 
             // Add Player/Creature Screens to main panel
             gameScreen.setPlayer(player);
+            gameScreen.setTarget(gameScreen.getMap().getEntities().get(0));
 
 
             // Test movement
