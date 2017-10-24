@@ -2,6 +2,7 @@ package com.valkryst.VRoguelike.loot;
 
 import com.valkryst.VRoguelike.item.Item;
 import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,14 +27,14 @@ public class LootTable {
     /**
      * Adds a new entry to the loot table.
      *
-     * @param item
-     *        The item.
+     * @param entry
+     *          The entry.
      *
-     * @param dropChance
-     *        The drop chance.
+     * @throws NullPointerException
+     *          If the entry is null.
      */
-    public void add(final Item item, final int dropChance) {
-        lootEntries.add(new LootEntry(item, dropChance));
+    public void add(final @NonNull LootEntry entry) {
+        lootEntries.add(entry);
     }
 
     /**
