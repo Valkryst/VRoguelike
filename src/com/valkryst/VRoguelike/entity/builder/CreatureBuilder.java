@@ -125,12 +125,13 @@ public class CreatureBuilder extends EntityBuilder {
     @Override
     public void parse(final @NonNull JSONObject jsonObject) {
         super.parse(jsonObject);
+        this.checkType(jsonObject, "entity_creature");
 
-        final Race race = Race.valueOf((String) jsonObject.get("race"));
+        final Race race = Race.valueOf(getString(jsonObject, "race"));
 
-        final Gender gender = Gender.valueOf((String) jsonObject.get("gender"));
+        final Gender gender = Gender.valueOf(getString(jsonObject, "gender"));
 
-        final String combatAI = ((String) jsonObject.get("combat_ai")).toLowerCase();
+        final String combatAI = getString(jsonObject, "combat_ai").toLowerCase();
 
 
         if (race != null) {
