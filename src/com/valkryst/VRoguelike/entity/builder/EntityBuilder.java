@@ -87,15 +87,18 @@ public class EntityBuilder implements VJSONParser {
     @Override
     public void parse(final @NonNull JSONObject jsonObject) {
         reset();
+        final String type = getString(jsonObject, "type");
 
-        try {
-            this.checkType(jsonObject, "entity");
-        } catch (final IllegalStateException ea) {
-            try {
-                this.checkType(jsonObject, "entity_creature");
-            } catch (final IllegalStateException eb) {
-                this.checkType(jsonObject, "entity_player");
-            }
+        if (type == null) {
+            throw new IllegalStateException("The entity has no type.");
+        }
+
+        if (type.isEmpty()) {
+            throw new IllegalStateException("The entity's type cannot be empty.");
+        }
+
+        if (type.substring(0, 5).equals("entity")) {
+            throw new IllegalStateException("The entity's type '" + type + "' is not an entity type.");
         }
 
         final String name = (String) jsonObject.get("name");
