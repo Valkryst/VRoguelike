@@ -37,7 +37,7 @@ public class LootTableBuilder implements VJSONParser {
 
         lootEntries.forEach(entryObj -> {
             builder.parse((JSONObject) entryObj);
-            lootEntries.add(builder.build());
+            this.lootEntries.add(builder.build());
         });
     }
 }
