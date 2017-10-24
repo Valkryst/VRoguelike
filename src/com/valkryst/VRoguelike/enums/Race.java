@@ -89,7 +89,7 @@ public enum Race {
      */
     public String generateName(final @NonNull Gender gender) {
         final DiceRoller diceRoller = new DiceRoller();
-        diceRoller.addDice(7, 1);
+        diceRoller.addDice(5, 1);
 
         final int firstNameLength = diceRoller.roll() + 3;
         final int lastNameLength = diceRoller.roll() + 3;
