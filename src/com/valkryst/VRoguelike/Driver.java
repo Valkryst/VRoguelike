@@ -2,16 +2,12 @@ package com.valkryst.VRoguelike;
 
 import com.valkryst.VJSON.VJSONLoader;
 import com.valkryst.VRoguelike.action.UpdateLOSAction;
-import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.entity.Player;
-import com.valkryst.VRoguelike.entity.builder.CreatureBuilder;
 import com.valkryst.VRoguelike.entity.builder.PlayerBuilder;
 import com.valkryst.VRoguelike.item.builder.equipment.WeaponBuilder;
 import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
-import com.valkryst.VRoguelike.loot.LootTable;
 import com.valkryst.VRoguelike.screen.GameScreen;
 import com.valkryst.VRoguelike.screen.MainMenuScreen;
-import com.valkryst.VRoguelike.world.Room;
 import com.valkryst.VRoguelike.world.Tile;
 import com.valkryst.VTerminal.Panel;
 import com.valkryst.VTerminal.builder.PanelBuilder;
@@ -20,7 +16,6 @@ import com.valkryst.VTerminal.font.FontLoader;
 import org.json.simple.parser.ParseException;
 
 import javax.swing.Timer;
-import java.awt.Dimension;
 import java.awt.Point;
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -74,7 +69,7 @@ public class Driver {
 
 
 
-
+            /*
             final LootTable lootTable = new LootTable();
             lootTable.add(weaponBuilder.build(), 100);
 
@@ -87,28 +82,26 @@ public class Driver {
             creatureBuilder.setLootTable(lootTable);
             final Creature npc = creatureBuilder.build();
             npc.getEquipment().setItemInSlot(EquipmentSlot.MAIN_HAND, weaponBuilder.build());
+            */
 
-            gameScreen.getMap().addEntities(player, npc);
+            try {
+                VJSONLoader.loadFromJSON(gameScreen.getMap(), System.getProperty("user.dir") + "/test_res/test_map.json");
+            } catch (ParseException | IOException e) {
+                e.printStackTrace();
+            }
 
-            // Create rooms:
-            final Room roomA = new Room(new Point(20, 5), new Dimension(10, 15));
-            final Room roomB = new Room(new Point(50, 5), new Dimension(10, 15));
-            roomA.carve(gameScreen.getMap());
-            roomB.carve(gameScreen.getMap());
+            gameScreen.getMap().addEntities(player);
 
 
             // Add Player/Creature Screens to main panel
             gameScreen.setPlayer(player);
-            gameScreen.setTarget(npc);
 
 
             // Test movement
             player.getMovementAI().findAndSetPath(gameScreen.getMap(), player.getPosition(), new Point(player.getPosition().x + 3, player.getPosition().y + 5));
         });
 
-        mainMenuScreen.getButton_exit().setOnClickFunction(() -> {
-            System.exit(0);
-        });
+        mainMenuScreen.getButton_exit().setOnClickFunction(() -> System.exit(0));
 
         // Render loop:
         final Timer timer = new Timer(100, e -> {
