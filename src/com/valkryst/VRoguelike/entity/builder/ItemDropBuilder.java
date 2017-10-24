@@ -5,6 +5,7 @@ import com.valkryst.VRoguelike.item.Item;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
+import org.json.simple.JSONObject;
 
 import java.util.Objects;
 
@@ -24,6 +25,12 @@ public class ItemDropBuilder extends EntityBuilder {
     public void checkState() {
         super.checkState();
         Objects.requireNonNull(item);
+    }
+
+    @Override
+    public void parse(final @NonNull JSONObject jsonObject) {
+        super.parse(jsonObject);
+        this.checkType(jsonObject, "entity_item_drop");
     }
 
     /**

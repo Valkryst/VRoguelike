@@ -4,6 +4,8 @@ import com.valkryst.VRoguelike.entity.Player;
 import com.valkryst.VRoguelike.enums.Sprite;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NonNull;
+import org.json.simple.JSONObject;
 
 @Data
 @EqualsAndHashCode(callSuper=true)
@@ -24,5 +26,11 @@ public class PlayerBuilder extends CreatureBuilder {
         super.setName("Player");
         super.setDescription("This is you.");
         super.setSprite(Sprite.PLAYER);
+    }
+
+    @Override
+    public void parse(final @NonNull JSONObject jsonObject) {
+        super.parse(jsonObject);
+        this.checkType(jsonObject, "entity_player");
     }
 }
