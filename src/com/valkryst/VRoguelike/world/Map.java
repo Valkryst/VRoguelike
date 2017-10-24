@@ -66,6 +66,8 @@ public class Map extends Screen implements VJSONParser {
 
     @Override
     public void parse(final @NonNull JSONObject jsonObject) {
+        this.checkType(jsonObject, "map");
+
         final JSONArray jsonObject_rooms = (JSONArray) jsonObject.get("rooms");
         final JSONArray jsonObject_lootTables = (JSONArray) jsonObject.get("loot_tables");
         final JSONArray jsonObject_entities = (JSONArray) jsonObject.get("entities");
