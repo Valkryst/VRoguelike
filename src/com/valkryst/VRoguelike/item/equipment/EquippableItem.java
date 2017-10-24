@@ -2,8 +2,13 @@ package com.valkryst.VRoguelike.item.equipment;
 
 import com.valkryst.VRoguelike.item.Item;
 import com.valkryst.VRoguelike.item.builder.equipment.EquippableItemBuilder;
+import com.valkryst.VTerminal.builder.component.LabelBuilder;
+import com.valkryst.VTerminal.component.Label;
+import com.valkryst.VTerminal.misc.IntRange;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+
+import java.awt.Color;
 
 @EqualsAndHashCode(callSuper=true)
 public class EquippableItem extends Item {
@@ -24,5 +29,22 @@ public class EquippableItem extends Item {
     @Override
     public String toString() {
         return super.toString() + "\n\tSlot:\t" + slot.name();
+    }
+
+    public Label getInformationLabel() {
+        final LabelBuilder labelBuilder = new LabelBuilder();
+        labelBuilder.setText(slot.name() + ": " + super.getName());
+
+        final Label label = labelBuilder.build();
+
+        // Color item name
+        final int slotNameLength = slot.name().length() + 1;
+        final int nameLength = super.getName().length();
+
+        final Color color = getSprite().getForegroundColor();
+        final IntRange nameRange = new IntRange(slotNameLength, slotNameLength + 1 + nameLength);
+        label.getString(0).setForegroundColor(color, nameRange);
+
+        return label;
     }
 }
