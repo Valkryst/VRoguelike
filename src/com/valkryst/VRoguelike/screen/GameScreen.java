@@ -35,6 +35,9 @@ public class GameScreen extends Screen implements KeyListener, Receiver<Event> {
     /** The currently displayed player information. */
     private Screen playerInfoScreen;
 
+    /** The currently displayed player equipment information. */
+    private Screen playerEquipmentScreen;
+
     /** The currently displayed target information. */
     private Screen targetInfoScreen;
 
@@ -87,7 +90,8 @@ public class GameScreen extends Screen implements KeyListener, Receiver<Event> {
      *          The player.
      */
     public void setPlayer(final @NonNull Player player) {
-        final Screen screen = player.getInformationPanel();
+        // Set the information panel.
+        Screen screen = player.getInformationPanel();
         screen.setPosition(new Point(81, 0));
 
         if (playerInfoScreen != null) {
@@ -96,6 +100,17 @@ public class GameScreen extends Screen implements KeyListener, Receiver<Event> {
 
         playerInfoScreen = screen;
         this.addComponent(playerInfoScreen);
+
+        // Set the equipment panel.
+        screen = player.getEquipment().getInformationPanel();
+        screen.setPosition(new Point(81, 16));
+
+        if (playerEquipmentScreen != null) {
+            this.removeComponent(playerEquipmentScreen);
+        }
+
+        playerEquipmentScreen = screen;
+        this.addComponent(playerEquipmentScreen);
     }
 
     /**
