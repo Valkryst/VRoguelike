@@ -4,11 +4,13 @@ import com.valkryst.VJSON.VJSONParser;
 import com.valkryst.VRoguelike.Message;
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.entity.Player;
+import com.valkryst.VRoguelike.entity.builder.CreatureBuilder;
 import com.valkryst.VTerminal.builder.component.ScreenBuilder;
 import com.valkryst.VTerminal.component.Screen;
 import com.valkryst.VTerminal.component.TextArea;
 import lombok.Getter;
 import lombok.NonNull;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import java.awt.Color;
@@ -62,6 +64,28 @@ public class Map extends Screen implements VJSONParser {
     @Override
     public void parse(final @NonNull JSONObject jsonObject) {
         System.out.println("Implement JSON parsing in Map.");
+
+        final JSONArray jsonObject_rooms = (JSONArray) jsonObject.get("rooms");
+        final JSONArray jsonObject_entities = (JSONArray) jsonObject.get("entities");
+
+        jsonObject_rooms.forEach(roomJSON -> {
+            final Room room = new Room();
+            room.parse((JSONObject) roomJSON);
+            room.carve(this);
+        });
+
+
+        final CreatureBuilder creatureBuilder = new CreatureBuilder();
+
+        jsonObject_entities.forEach(entityJSON -> {
+            switch (getString((JSONObject) entityJSON, "type")) {
+                case "entity_creature": {
+                    creatureBuilder.parse((JSONObject) entityJSON);
+                    addEntities(creatureBuilder.build());
+                    break;
+                }
+            }
+        });
     }
 
     /** Updates the map. */
@@ -134,7 +158,9 @@ public class Map extends Screen implements VJSONParser {
             }
 
             // Ensure player is drawn above everything else:
-            this.changeDrawOrder(entity.getLayer(), player.getLayer());
+            if (player != null) {
+                this.changeDrawOrder(entity.getLayer(), player.getLayer());
+            }
         }
     }
 
