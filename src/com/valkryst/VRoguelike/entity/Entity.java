@@ -136,7 +136,7 @@ public class Entity {
     public Screen getInformationPanel() {
         final ScreenBuilder screenBuilder = new ScreenBuilder();
         screenBuilder.setWidth(39);
-        screenBuilder.setHeight(10);
+        screenBuilder.setHeight(8);
 
         final Screen screen = screenBuilder.build();
 
