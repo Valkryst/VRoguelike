@@ -36,12 +36,12 @@ public class ItemDrop extends Entity {
         final Screen screen = super.getInformationPanel(gameScreen);
 
         final ButtonBuilder buttonBuilder = new ButtonBuilder();
+        buttonBuilder.setColumnIndex(1);
 
         // Equip Button
         if (item instanceof EquippableItem) {
             buttonBuilder.setText("Equip");
             buttonBuilder.setRowIndex(1);
-            buttonBuilder.setColumnIndex(1);
             buttonBuilder.setOnClickFunction(() -> {
                 final EquippableItem equippableItem = (EquippableItem) item;
                 final EquipmentSlot slot = equippableItem.getSlot();
