@@ -1,11 +1,8 @@
 package com.valkryst.VRoguelike.screen;
 
-import com.valkryst.VController.ButtonType;
-import com.valkryst.VController.ControllerHelper;
 import com.valkryst.VController.ControllerListener;
 import com.valkryst.VController.preset.ControllerPreset;
 import com.valkryst.VRadio.Radio;
-import com.valkryst.VRadio.Receiver;
 import com.valkryst.VRoguelike.Driver;
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.entity.Player;
@@ -19,17 +16,14 @@ import com.valkryst.VTerminal.font.Font;
 import com.valkryst.VTerminal.printer.RectanglePrinter;
 import lombok.Getter;
 import lombok.NonNull;
-import net.java.games.input.Controller;
-import net.java.games.input.Event;
 
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.List;
 
-public class GameScreen extends Screen implements KeyListener, MouseListener, Receiver<Event> {
+public class GameScreen extends Screen implements KeyListener, MouseListener {
     @Getter private final Map map;
 
     @Getter private TextArea messageBox;
@@ -60,6 +54,7 @@ public class GameScreen extends Screen implements KeyListener, MouseListener, Re
     }
 
     private void addController() {
+        /*
         final List<Controller> controllers = ControllerHelper.getSupportedControllers();
 
         if (controllers.size() > 0) {
@@ -69,13 +64,11 @@ public class GameScreen extends Screen implements KeyListener, MouseListener, Re
 
             controllerListener.getRadio().addReceiver("CONTROLLER", this);
         }
+        */
     }
 
     private void createMessageBox(final Radio<String> radio) {
         final TextAreaBuilder builder = new TextAreaBuilder();
-
-        builder.setRadio(radio);
-
         builder.setColumnIndex(0);
         builder.setRowIndex(30);
 
@@ -97,7 +90,7 @@ public class GameScreen extends Screen implements KeyListener, MouseListener, Re
      */
     public void setPlayer(final @NonNull Player player) {
         // Set the information panel.
-        Screen screen = player.getInformationPanel(map);
+        Screen screen = player.getInformationPanel(this);
         screen.setPosition(new Point(81, 0));
 
         if (playerInfoScreen != null) {
@@ -143,7 +136,7 @@ public class GameScreen extends Screen implements KeyListener, MouseListener, Re
             rectanglePrinter.setTitle("No Target");
             rectanglePrinter.print(screen, new Point(0, 0));
         } else {
-            screen = entity.getInformationPanel(map);
+            screen = entity.getInformationPanel(this);
         }
 
         screen.setPosition(new Point(81, 8));
@@ -156,6 +149,7 @@ public class GameScreen extends Screen implements KeyListener, MouseListener, Re
         this.addComponent(targetInfoScreen);
     }
 
+    /*
     @Override
     public void receive(final String event, final Event data) {
         if (controllerPreset.getButtonType(data) == ButtonType.DPAD) {switch (controllerPreset.getDPadDirection(data)) {
@@ -178,6 +172,7 @@ public class GameScreen extends Screen implements KeyListener, MouseListener, Re
         }
         }
     }
+    */
 
     @Override
     public void mouseClicked(final @NonNull MouseEvent e) {}
