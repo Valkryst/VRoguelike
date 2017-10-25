@@ -17,7 +17,6 @@ public class MainMenuScreen extends Screen {
         // Construct menu options:
         final ButtonBuilder builder = new ButtonBuilder();
         builder.setText("<New>");
-        builder.setRadio(panel.getRadio());
         builder.setColumnIndex(50);
         builder.setRowIndex(15);
 
