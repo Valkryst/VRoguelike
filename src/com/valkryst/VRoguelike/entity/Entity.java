@@ -140,6 +140,8 @@ public class Entity {
         screenBuilder.setHeight(8);
 
         final Screen screen = screenBuilder.build();
+        screen.setParentPanel(gameScreen.getParentPanel());
+        screen.setRadio(gameScreen.getRadio());
 
         // Print border
         final RectanglePrinter rectanglePrinter = new RectanglePrinter();
