@@ -40,7 +40,7 @@ public class ItemDrop extends Entity {
 
         // Equip Button
         if (item instanceof EquippableItem) {
-            buttonBuilder.setText("Equip");
+            buttonBuilder.setText("▶ Equip");
             buttonBuilder.setRowIndex(1);
             buttonBuilder.setOnClickFunction(() -> {
                 final EquippableItem equippableItem = (EquippableItem) item;
@@ -52,7 +52,7 @@ public class ItemDrop extends Entity {
         }
 
         // Destroy Button
-        buttonBuilder.setText("Destroy");
+        buttonBuilder.setText("▶ Destroy");
         buttonBuilder.setRowIndex(buttonBuilder.getRowIndex() + 1);
         buttonBuilder.setOnClickFunction(() -> map.removeEntities(this));
         screen.addComponent(buttonBuilder.build());
