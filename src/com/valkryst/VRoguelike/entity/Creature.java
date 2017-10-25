@@ -9,6 +9,7 @@ import com.valkryst.VRoguelike.enums.Race;
 import com.valkryst.VRoguelike.enums.State;
 import com.valkryst.VRoguelike.item.equipment.EquipmentInventory;
 import com.valkryst.VRoguelike.loot.LootTable;
+import com.valkryst.VRoguelike.screen.GameScreen;
 import com.valkryst.VRoguelike.stat.BoundedStatistic;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.builder.component.LabelBuilder;
@@ -108,8 +109,8 @@ public class Creature extends Entity {
     }
 
     @Override
-    public Screen getInformationPanel(final @NonNull Map map) {
-        final Screen screen = super.getInformationPanel(map);
+    public Screen getInformationPanel(final @NonNull GameScreen gameScreen) {
+        final Screen screen = super.getInformationPanel(gameScreen);
 
         // Add Level label and set it to update on change.
         final Runnable add_level = () -> {

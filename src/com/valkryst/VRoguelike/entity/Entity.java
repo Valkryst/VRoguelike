@@ -6,6 +6,7 @@ import com.valkryst.VRoguelike.action.MoveAction;
 import com.valkryst.VRoguelike.action.ShowAction;
 import com.valkryst.VRoguelike.entity.builder.EntityBuilder;
 import com.valkryst.VRoguelike.enums.Sprite;
+import com.valkryst.VRoguelike.screen.GameScreen;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.AsciiCharacter;
 import com.valkryst.VTerminal.builder.component.LayerBuilder;
@@ -133,7 +134,7 @@ public class Entity {
         return true;
     }
 
-    public Screen getInformationPanel(final @NonNull Map map) {
+    public Screen getInformationPanel(final @NonNull GameScreen gameScreen) {
         final ScreenBuilder screenBuilder = new ScreenBuilder();
         screenBuilder.setWidth(39);
         screenBuilder.setHeight(8);
