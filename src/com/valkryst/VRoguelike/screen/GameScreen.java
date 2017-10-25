@@ -97,7 +97,7 @@ public class GameScreen extends Screen implements KeyListener, MouseListener, Re
      */
     public void setPlayer(final @NonNull Player player) {
         // Set the information panel.
-        Screen screen = player.getInformationPanel();
+        Screen screen = player.getInformationPanel(map);
         screen.setPosition(new Point(81, 0));
 
         if (playerInfoScreen != null) {
@@ -143,7 +143,7 @@ public class GameScreen extends Screen implements KeyListener, MouseListener, Re
             rectanglePrinter.setTitle("No Target");
             rectanglePrinter.print(screen, new Point(0, 0));
         } else {
-            screen = entity.getInformationPanel();
+            screen = entity.getInformationPanel(map);
         }
 
         screen.setPosition(new Point(81, 8));
