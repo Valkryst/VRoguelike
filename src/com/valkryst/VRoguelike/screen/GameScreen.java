@@ -49,7 +49,6 @@ public class GameScreen extends Screen implements KeyListener, MouseListener {
         createMessageBox();
         map = new Map(getMessageBox(), 81, 30);
         this.addComponent(map);
-        System.out.println(map);
     }
 
     private void addController() {
