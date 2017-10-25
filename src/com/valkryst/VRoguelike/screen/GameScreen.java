@@ -6,6 +6,7 @@ import com.valkryst.VController.ControllerListener;
 import com.valkryst.VController.preset.ControllerPreset;
 import com.valkryst.VRadio.Radio;
 import com.valkryst.VRadio.Receiver;
+import com.valkryst.VRoguelike.Driver;
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.entity.Player;
 import com.valkryst.VRoguelike.world.Map;
@@ -14,6 +15,8 @@ import com.valkryst.VTerminal.builder.component.ScreenBuilder;
 import com.valkryst.VTerminal.builder.component.TextAreaBuilder;
 import com.valkryst.VTerminal.component.Screen;
 import com.valkryst.VTerminal.component.TextArea;
+import com.valkryst.VTerminal.font.Font;
+import com.valkryst.VTerminal.printer.RectanglePrinter;
 import lombok.Getter;
 import lombok.NonNull;
 import net.java.games.input.Controller;
@@ -22,9 +25,11 @@ import net.java.games.input.Event;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 
-public class GameScreen extends Screen implements KeyListener, Receiver<Event> {
+public class GameScreen extends Screen implements KeyListener, MouseListener, Receiver<Event> {
     @Getter private final Map map;
 
     @Getter private TextArea messageBox;
@@ -44,6 +49,7 @@ public class GameScreen extends Screen implements KeyListener, Receiver<Event> {
     public GameScreen(final Panel panel) {
         super(new ScreenBuilder(panel.getWidthInCharacters(), panel.getHeightInCharacters()));
         panel.addKeyListener(this);
+        panel.addMouseListener(this);
 
         addController();
 
@@ -120,8 +126,26 @@ public class GameScreen extends Screen implements KeyListener, Receiver<Event> {
      * @param entity
      *          The target.
      */
-    public void setTarget(final @NonNull Entity entity) {
-        final Screen screen = entity.getInformationPanel();
+    public void setTarget(final Entity entity) {
+        final Screen screen;
+
+        if (entity == null) {
+            final ScreenBuilder screenBuilder = new ScreenBuilder();
+            screenBuilder.setWidth(39);
+            screenBuilder.setHeight(8);
+
+            screen = screenBuilder.build();
+
+            // Print border
+            final RectanglePrinter rectanglePrinter = new RectanglePrinter();
+            rectanglePrinter.setWidth(39);
+            rectanglePrinter.setHeight(8);
+            rectanglePrinter.setTitle("No Target");
+            rectanglePrinter.print(screen, new Point(0, 0));
+        } else {
+            screen = entity.getInformationPanel();
+        }
+
         screen.setPosition(new Point(81, 8));
 
         if (targetInfoScreen != null) {
@@ -130,38 +154,6 @@ public class GameScreen extends Screen implements KeyListener, Receiver<Event> {
 
         targetInfoScreen = screen;
         this.addComponent(targetInfoScreen);
-    }
-
-    @Override
-    public void keyTyped(final KeyEvent e) {}
-
-    @Override
-    public void keyPressed(final KeyEvent e) {}
-
-    @Override
-    public void keyReleased(final KeyEvent e) {
-        switch (e.getKeyCode()) {
-            case KeyEvent.VK_UP:
-            case KeyEvent.VK_W: {
-                map.getPlayer().move(0, -1);
-                break;
-            }
-            case KeyEvent.VK_DOWN:
-            case KeyEvent.VK_S: {
-                map.getPlayer().move(0, 1);
-                break;
-            }
-            case KeyEvent.VK_LEFT:
-            case KeyEvent.VK_A: {
-                map.getPlayer().move(-1, 0);
-                break;
-            }
-            case KeyEvent.VK_RIGHT:
-            case KeyEvent.VK_D: {
-                map.getPlayer().move(1, 0);
-                break;
-            }
-        }
     }
 
     @Override
@@ -184,6 +176,69 @@ public class GameScreen extends Screen implements KeyListener, Receiver<Event> {
                 break;
             }
         }
+        }
+    }
+
+    @Override
+    public void mouseClicked(final @NonNull MouseEvent e) {}
+
+    @Override
+    public void mousePressed(final @NonNull MouseEvent e) {
+        // Retrieve click position and convert it to cell coordinates:
+        final Font font = Driver.PANEL.getImageCache().getFont();
+
+        final Point clickPoint = e.getPoint();
+        final int x = (int) (clickPoint.getX() / font.getWidth());
+        final int y = (int) (clickPoint.getY() / font.getHeight());
+        clickPoint.setLocation(x, y);
+
+        // Check if a non-player Entity is being selected:
+        map.getEntities().forEach(entity -> {
+            if (entity.getLayer().intersects(clickPoint)) {
+                setTarget(entity);
+                return;
+            }
+        });
+    }
+
+    @Override
+    public void mouseReleased(final @NonNull MouseEvent e) {}
+
+    @Override
+    public void mouseEntered(final @NonNull MouseEvent e) {}
+
+    @Override
+    public void mouseExited(final @NonNull MouseEvent e) {}
+
+    @Override
+    public void keyTyped(final @NonNull KeyEvent e) {}
+
+    @Override
+    public void keyPressed(final @NonNull KeyEvent e) {}
+
+    @Override
+    public void keyReleased(final @NonNull KeyEvent e) {
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_UP:
+            case KeyEvent.VK_W: {
+                map.getPlayer().move(0, -1);
+                break;
+            }
+            case KeyEvent.VK_DOWN:
+            case KeyEvent.VK_S: {
+                map.getPlayer().move(0, 1);
+                break;
+            }
+            case KeyEvent.VK_LEFT:
+            case KeyEvent.VK_A: {
+                map.getPlayer().move(-1, 0);
+                break;
+            }
+            case KeyEvent.VK_RIGHT:
+            case KeyEvent.VK_D: {
+                map.getPlayer().move(1, 0);
+                break;
+            }
         }
     }
 }
