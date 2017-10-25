@@ -2,7 +2,6 @@ package com.valkryst.VRoguelike.screen;
 
 import com.valkryst.VController.ControllerListener;
 import com.valkryst.VController.preset.ControllerPreset;
-import com.valkryst.VRadio.Radio;
 import com.valkryst.VRoguelike.Driver;
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.entity.Player;
@@ -47,7 +46,7 @@ public class GameScreen extends Screen implements KeyListener, MouseListener {
 
         addController();
 
-        createMessageBox(panel.getRadio());
+        createMessageBox();
         map = new Map(getMessageBox(), 81, 30);
         this.addComponent(map);
         System.out.println(map);
@@ -67,7 +66,7 @@ public class GameScreen extends Screen implements KeyListener, MouseListener {
         */
     }
 
-    private void createMessageBox(final Radio<String> radio) {
+    private void createMessageBox() {
         final TextAreaBuilder builder = new TextAreaBuilder();
         builder.setColumnIndex(0);
         builder.setRowIndex(30);
