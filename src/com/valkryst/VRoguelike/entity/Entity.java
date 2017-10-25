@@ -141,7 +141,6 @@ public class Entity {
 
         final Screen screen = screenBuilder.build();
         screen.setParentPanel(gameScreen.getParentPanel());
-        screen.setRadio(gameScreen.getRadio());
 
         // Print border
         final RectanglePrinter rectanglePrinter = new RectanglePrinter();
