@@ -133,7 +133,7 @@ public class Entity {
         return true;
     }
 
-    public Screen getInformationPanel() {
+    public Screen getInformationPanel(final @NonNull Map map) {
         final ScreenBuilder screenBuilder = new ScreenBuilder();
         screenBuilder.setWidth(39);
         screenBuilder.setHeight(8);

@@ -108,8 +108,8 @@ public class Creature extends Entity {
     }
 
     @Override
-    public Screen getInformationPanel() {
-        final Screen screen = super.getInformationPanel();
+    public Screen getInformationPanel(final @NonNull Map map) {
+        final Screen screen = super.getInformationPanel(map);
 
         // Add Level label and set it to update on change.
         final Runnable add_level = () -> {
