@@ -47,6 +47,7 @@ public class ItemDrop extends Entity {
                 final EquipmentSlot slot = equippableItem.getSlot();
 
                 map.getPlayer().addAction(new EquipAction(slot, equippableItem));
+                map.removeEntities(this);
             });
             screen.addComponent(buttonBuilder.build());
         }
