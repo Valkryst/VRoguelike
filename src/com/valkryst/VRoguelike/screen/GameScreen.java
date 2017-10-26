@@ -180,14 +180,9 @@ public class GameScreen extends Screen implements KeyListener, MouseListener {
         // Retrieve click position and convert it to cell coordinates:
         final Font font = Driver.PANEL.getImageCache().getFont();
 
-        final Point clickPoint = e.getPoint();
-        final int x = (int) (clickPoint.getX() / font.getWidth());
-        final int y = (int) (clickPoint.getY() / font.getHeight());
-        clickPoint.setLocation(x, y);
-
         // Check if a non-player Entity is being selected:
         map.getEntities().forEach(entity -> {
-            if (entity.getLayer().intersects(clickPoint)) {
+            if (entity.getLayer().intersects(e, font.getWidth(), font.getHeight())) {
                 setTarget(entity);
                 return;
             }
