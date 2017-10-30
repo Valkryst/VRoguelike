@@ -46,7 +46,10 @@ public class ItemDrop extends Entity {
                 final EquippableItem equippableItem = (EquippableItem) item;
                 final EquipmentSlot slot = equippableItem.getSlot();
 
-                map.getPlayer().addAction(new EquipAction(slot, equippableItem));
+                final EquipAction equipAction = new EquipAction(slot, equippableItem);
+                equipAction.getOnActionFunctions().add(() -> gameScreen.setTarget(null));
+
+                map.getPlayer().addAction(equipAction);
                 map.removeEntities(this);
             });
             screen.addComponent(buttonBuilder.build());
@@ -55,7 +58,10 @@ public class ItemDrop extends Entity {
         // Destroy Button
         buttonBuilder.setText("▶ Destroy");
         buttonBuilder.setRowIndex(buttonBuilder.getRowIndex() + 1);
-        buttonBuilder.setOnClickFunction(() -> map.removeEntities(this));
+        buttonBuilder.setOnClickFunction(() -> {
+            map.removeEntities(this);
+            gameScreen.setTarget(null);
+        });
         screen.addComponent(buttonBuilder.build());
 
         return screen;
