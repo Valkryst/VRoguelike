@@ -8,15 +8,21 @@ import com.valkryst.VRoguelike.entity.builder.ItemDropBuilder;
 import com.valkryst.VRoguelike.loot.LootTable;
 import com.valkryst.VRoguelike.world.Map;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NonNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 public class DeathAction implements Action {
+    /** The functions to run when the action is run. */
+    @Getter private final List<Runnable> onDeathFunctions = new ArrayList<>();
+
     @Override
     public void perform(final @NonNull Map map, final @NonNull Entity entity) {
         map.removeEntities(entity);
         map.addMessage(new Message().appendEntityName(entity).append(" has died."));
-
 
         if (entity instanceof Creature) {
             final Creature creature = (Creature) entity;
@@ -39,6 +45,10 @@ public class DeathAction implements Action {
                     map.addEntities(itemDrop);
                 });
             }
+        }
+
+        for (final Runnable runnable : onDeathFunctions) {
+            runnable.run();
         }
     }
 }
