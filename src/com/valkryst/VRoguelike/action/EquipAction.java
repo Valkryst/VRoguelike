@@ -10,7 +10,7 @@ import lombok.Getter;
 import lombok.NonNull;
 
 @Data
-public class EquipAction implements Action {
+public class EquipAction extends Action {
     /** The slot to equip the item to. */
     @Getter private final EquipmentSlot slot;
     /** The item being equipped. */
@@ -38,6 +38,8 @@ public class EquipAction implements Action {
         if (entity instanceof Creature == false) {
             return;
         }
+
+        super.perform(map, entity);
 
         final Creature creature = (Creature) entity;
         creature.getEquipment().setItemInSlot(slot, item);

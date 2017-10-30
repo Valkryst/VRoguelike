@@ -8,7 +8,7 @@ import lombok.Data;
 import lombok.NonNull;
 
 @Data
-public class UnEquipAction implements Action {
+public class UnEquipAction extends Action {
     /** The slot to un-equip. */
     private final EquipmentSlot slot;
 
@@ -30,6 +30,8 @@ public class UnEquipAction implements Action {
         if (entity instanceof Creature == false) {
             return;
         }
+
+        super.perform(map, entity);
 
         final Creature creature = (Creature) entity;
         creature.getEquipment().setItemInSlot(slot, null);

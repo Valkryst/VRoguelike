@@ -12,7 +12,7 @@ import java.util.List;
 
 @EqualsAndHashCode
 @ToString
-public class MoveAction implements Action {
+public class MoveAction extends Action {
     /** The current position on the x/y-axis. */
     private final Point position;
     /** The change in x-axis position. */
@@ -55,6 +55,7 @@ public class MoveAction implements Action {
         }
 
         if (map.isPositionFree(newPosition)) {
+            super.perform(map, entity);
             new UpdateLOSAction(position, dx, dy).perform(map, entity);
             entity.setPosition(newPosition);
         }

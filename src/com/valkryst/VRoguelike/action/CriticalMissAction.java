@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.NonNull;
 
 @Data
-public class CriticalMissAction implements Action {
+public class CriticalMissAction extends Action {
     /** The damage to deal. */
     private final int damage;
 
@@ -28,6 +28,8 @@ public class CriticalMissAction implements Action {
         if (entity instanceof Creature == false) {
             return;
         }
+
+        super.perform(map, entity);
 
         final Creature self = (Creature) entity;
 

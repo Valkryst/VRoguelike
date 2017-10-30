@@ -6,9 +6,10 @@ import lombok.Data;
 import lombok.NonNull;
 
 @Data
-public class HideAction implements Action {
+public class HideAction extends Action {
     @Override
     public void perform(final @NonNull Map map, final @NonNull Entity entity) {
+        super.perform(map, entity);
         map.removeComponent(entity.getLayer());
     }
 }

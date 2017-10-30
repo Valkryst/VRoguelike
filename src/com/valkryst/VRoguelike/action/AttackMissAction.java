@@ -7,9 +7,10 @@ import lombok.Data;
 import lombok.NonNull;
 
 @Data
-public class AttackMissAction implements Action {
+public class AttackMissAction extends Action {
     @Override
     public void perform(final @NonNull Map map, final @NonNull Entity entity) {
+        super.perform(map, entity);
         map.addMessage(new Message().appendEntityName(entity).append(" missed it's target."));
     }
 }

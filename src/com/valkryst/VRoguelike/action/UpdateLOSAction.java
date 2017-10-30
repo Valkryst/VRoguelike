@@ -13,7 +13,7 @@ import lombok.NonNull;
 import java.awt.Point;
 
 @Data
-public class UpdateLOSAction implements Action {
+public class UpdateLOSAction extends Action {
     /** The current position on the x/y-axis. */
     private final Point position;
     /** The change in x-axis position. */
@@ -88,6 +88,8 @@ public class UpdateLOSAction implements Action {
                     }
                 }
             });
+
+            super.perform(map, entity);
         }
     }
 }

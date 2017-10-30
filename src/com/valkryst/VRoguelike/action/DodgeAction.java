@@ -6,9 +6,9 @@ import lombok.Data;
 import lombok.NonNull;
 
 @Data
-public class DodgeAction implements Action {
+public class DodgeAction extends Action {
     @Override
     public void perform(final @NonNull Map map, final @NonNull Entity entity) {
-
+        super.perform(map, entity);
     }
 }

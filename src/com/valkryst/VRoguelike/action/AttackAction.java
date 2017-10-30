@@ -15,7 +15,7 @@ import lombok.NonNull;
 import java.util.Optional;
 
 @Data
-public class AttackAction implements Action {
+public class AttackAction extends Action {
     /** The target. */
     private final Creature target;
 
@@ -83,6 +83,7 @@ public class AttackAction implements Action {
         if (damage > 0) {
             health.setValue(health.getValue() - damage);
             map.addMessage(message);
+            super.perform(map, entity);
         } else {
             map.addMessage(getNoDamageMessage(self));
         }
