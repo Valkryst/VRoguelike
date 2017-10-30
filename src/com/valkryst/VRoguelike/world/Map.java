@@ -195,7 +195,13 @@ public class Map extends Screen implements VJSONParser {
             } else {
                 this.entities.remove(entity);
             }
+
+            // Set the Map Tile below the entity to redraw:
+            final Point position = entity.getPosition();
+            tiles[position.x][position.y].placeOnScreen(this, position.x, position.y);
         }
+
+        this.transmitDraw();
     }
 
     /**
