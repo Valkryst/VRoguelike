@@ -39,8 +39,8 @@ public class GameScreen extends Screen implements KeyListener, MouseListener {
 
     public GameScreen(final Panel panel) {
         super(new ScreenBuilder(panel.getWidthInCharacters(), panel.getHeightInCharacters()));
-        panel.addListener(this);
-        panel.addListener(this);
+        panel.getCanvas().addKeyListener(this);
+        panel.getCanvas().addMouseListener(this);
 
         addController();
 
