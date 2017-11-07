@@ -26,10 +26,9 @@ public class MainMenuScreen extends Screen {
         builder.setRowIndex(builder.getRowIndex() + 1);
         button_exit = builder.build();
 
+        this.addComponents(button_new, button_exit);
+
         // Swap Screen:
         panel.swapScreen(this);
-
-        // Add components to Screen VIA Panel functions:
-        panel.addComponents(button_new, button_exit);
     }
 }
