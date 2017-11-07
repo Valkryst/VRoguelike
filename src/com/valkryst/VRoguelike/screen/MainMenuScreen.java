@@ -27,8 +27,5 @@ public class MainMenuScreen extends Screen {
         button_exit = builder.build();
 
         this.addComponents(button_new, button_exit);
-
-        // Swap Screen:
-        panel.swapScreen(this);
     }
 }
