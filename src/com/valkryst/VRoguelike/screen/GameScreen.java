@@ -2,7 +2,6 @@ package com.valkryst.VRoguelike.screen;
 
 import com.valkryst.VController.ControllerListener;
 import com.valkryst.VController.preset.ControllerPreset;
-import com.valkryst.VRoguelike.Driver;
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.entity.Player;
 import com.valkryst.VRoguelike.world.Map;
@@ -11,7 +10,6 @@ import com.valkryst.VTerminal.builder.component.ScreenBuilder;
 import com.valkryst.VTerminal.builder.component.TextAreaBuilder;
 import com.valkryst.VTerminal.component.Screen;
 import com.valkryst.VTerminal.component.TextArea;
-import com.valkryst.VTerminal.font.Font;
 import com.valkryst.VTerminal.printer.RectanglePrinter;
 import lombok.Getter;
 import lombok.NonNull;
@@ -41,8 +39,8 @@ public class GameScreen extends Screen implements KeyListener, MouseListener {
 
     public GameScreen(final Panel panel) {
         super(new ScreenBuilder(panel.getWidthInCharacters(), panel.getHeightInCharacters()));
-        panel.addKeyListener(this);
-        panel.addMouseListener(this);
+        panel.addListener(this);
+        panel.addListener(this);
 
         addController();
 
@@ -177,12 +175,9 @@ public class GameScreen extends Screen implements KeyListener, MouseListener {
 
     @Override
     public void mousePressed(final @NonNull MouseEvent e) {
-        // Retrieve click position and convert it to cell coordinates:
-        final Font font = Driver.PANEL.getImageCache().getFont();
-
         // Check if a non-player Entity is being selected:
         map.getEntities().forEach(entity -> {
-            if (entity.getLayer().intersects(e, font.getWidth(), font.getHeight())) {
+            if (entity.getLayer().intersects(e)) {
                 setTarget(entity);
                 return;
             }
