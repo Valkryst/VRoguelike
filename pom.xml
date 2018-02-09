@@ -30,7 +30,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.16.16</version>
+            <version>1.16.20</version>
         </dependency>
         <dependency>
             <groupId>com.github.Valkryst</groupId>
@@ -50,7 +50,7 @@
         <dependency>
             <groupId>com.github.Valkryst</groupId>
             <artifactId>VTerminal</artifactId>
-            <version>a1bcb6e</version>
+            <version>2.20.0-BETA</version>
         </dependency>
         <dependency>
             <groupId>com.github.Valkryst</groupId>
