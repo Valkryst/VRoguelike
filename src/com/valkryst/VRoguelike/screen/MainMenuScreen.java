@@ -1,31 +1,29 @@
 package com.valkryst.VRoguelike.screen;
 
-import com.valkryst.VTerminal.Panel;
-import com.valkryst.VTerminal.builder.component.ButtonBuilder;
-import com.valkryst.VTerminal.builder.component.ScreenBuilder;
+import com.valkryst.VTerminal.builder.ButtonBuilder;
+import com.valkryst.VTerminal.builder.LayerBuilder;
 import com.valkryst.VTerminal.component.Button;
-import com.valkryst.VTerminal.component.Screen;
+import com.valkryst.VTerminal.component.Layer;
 import lombok.Getter;
 
-public class MainMenuScreen extends Screen {
+public class MainMenuScreen extends Layer {
     @Getter private Button button_new;
     @Getter private Button button_exit;
 
-    public MainMenuScreen(final Panel panel) {
-        super(new ScreenBuilder(panel.getWidthInCharacters(), panel.getHeightInCharacters()));
+    public MainMenuScreen(final LayerBuilder builder) {
+        super(builder);
 
         // Construct menu options:
-        final ButtonBuilder builder = new ButtonBuilder();
-        builder.setText("<New>");
-        builder.setColumnIndex(50);
-        builder.setRowIndex(15);
+        final ButtonBuilder buttonBuilder = new ButtonBuilder();
+        buttonBuilder.setText("<New>");
+        buttonBuilder.setPosition(50, 15);
+        button_new = buttonBuilder.build();
 
-        button_new = builder.build();
+        buttonBuilder.setText("<Exit>");
+        buttonBuilder.setPosition(50, 16);
+        button_exit = buttonBuilder.build();
 
-        builder.setText("<Exit>");
-        builder.setRowIndex(builder.getRowIndex() + 1);
-        button_exit = builder.build();
-
-        this.addComponents(button_new, button_exit);
+        this.addComponent(button_new);
+        this.addComponent(button_exit);
     }
 }
