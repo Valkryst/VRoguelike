@@ -8,12 +8,9 @@ import com.valkryst.VRoguelike.entity.builder.EntityBuilder;
 import com.valkryst.VRoguelike.enums.Sprite;
 import com.valkryst.VRoguelike.screen.GameScreen;
 import com.valkryst.VRoguelike.world.Map;
-import com.valkryst.VTerminal.AsciiCharacter;
-import com.valkryst.VTerminal.builder.component.LayerBuilder;
-import com.valkryst.VTerminal.builder.component.ScreenBuilder;
+import com.valkryst.VTerminal.Tile;
+import com.valkryst.VTerminal.builder.LayerBuilder;
 import com.valkryst.VTerminal.component.Layer;
-import com.valkryst.VTerminal.component.Screen;
-import com.valkryst.VTerminal.misc.IntRange;
 import com.valkryst.VTerminal.printer.RectanglePrinter;
 import lombok.*;
 
@@ -51,8 +48,7 @@ public class Entity {
         description = builder.getDescription();
 
         final LayerBuilder layerBuilder = new LayerBuilder();
-        layerBuilder.setColumnIndex(builder.getPosition().x);
-        layerBuilder.setRowIndex(builder.getPosition().y);
+        layerBuilder.setPosition(builder.getPosition());
         layerBuilder.setWidth(1);
         layerBuilder.setHeight(1);
         layer = layerBuilder.build();
@@ -134,27 +130,29 @@ public class Entity {
         return true;
     }
 
-    public Screen getInformationPanel(final @NonNull GameScreen gameScreen) {
-        final ScreenBuilder screenBuilder = new ScreenBuilder();
-        screenBuilder.setWidth(39);
-        screenBuilder.setHeight(8);
+    public Layer getInformationPanel(final @NonNull GameScreen gameScreen) {
+        final LayerBuilder layerBuilder = new LayerBuilder();
+        layerBuilder.setWidth(39);
+        layerBuilder.setHeight(8);
 
-        final Screen screen = screenBuilder.build();
-        screen.setParentPanel(gameScreen.getParentPanel());
+        final Layer layer = layerBuilder.build();
 
         // Print border
         final RectanglePrinter rectanglePrinter = new RectanglePrinter();
         rectanglePrinter.setWidth(39);
         rectanglePrinter.setHeight(8);
         rectanglePrinter.setTitle(name);
-        rectanglePrinter.print(screen, new Point(0, 0));
+        rectanglePrinter.print(layer.getTiles(), new Point(0, 0));
 
         // Color name on the border
         final Color color = getSprite().getForegroundColor();
-        final IntRange nameRange = new IntRange(2, 2 + name.length());
-        screen.getString(0).setForegroundColor(color, nameRange);
+        final Tile[] nameTiles = layer.getTiles().getRowSubset(0, 2, 2 + name.length());
 
-        return screen;
+        for (final Tile tile : nameTiles) {
+            tile.setForegroundColor(color);
+        }
+
+        return layer;
     }
 
     /**
@@ -163,8 +161,8 @@ public class Entity {
      * @return
      *         The sprite character.
      */
-    public AsciiCharacter getSprite() {
-        return layer.getCharacterAt(new Point(0, 0));
+    public Tile getSprite() {
+        return layer.getTileAt(new Point(0, 0));
     }
 
     /**
@@ -177,14 +175,14 @@ public class Entity {
      *        If the sprite is null.
      */
     public void setSprite(final @NonNull Sprite sprite) {
-        final AsciiCharacter character = layer.getCharacterAt(new Point(0, 0));
-        character.setCharacter(sprite.getCharacter());
-        character.setForegroundColor(sprite.getForegroundColor());
-        character.setBackgroundColor(sprite.getBackgroundColor());
+        final Tile tile = layer.getTileAt(new Point(0, 0));
+        tile.setCharacter(sprite.getCharacter());
+        tile.setForegroundColor(sprite.getForegroundColor());
+        tile.setBackgroundColor(sprite.getBackgroundColor());
     }
 
     public Point getPosition() {
-        return layer.getPosition();
+        return new Point(layer.getTiles().getXPosition(), layer.getTiles().getYPosition());
     }
 
     public void setPosition(final Point position) {
@@ -196,6 +194,7 @@ public class Entity {
             throw new IllegalArgumentException("The y value (" + position.y + ") cannot be less than zero.");
         }
 
-        layer.setPosition(position);
+        layer.getTiles().setXPosition(position.x);
+        layer.getTiles().setYPosition(position.y);
     }
 }
