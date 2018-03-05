@@ -1,9 +1,7 @@
 package com.valkryst.VRoguelike.world;
 
 import com.valkryst.VRoguelike.enums.Sprite;
-import com.valkryst.VTerminal.AsciiString;
-import com.valkryst.VTerminal.component.Screen;
-import com.valkryst.VTerminal.misc.IntRange;
+import com.valkryst.VTerminal.component.Layer;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -45,8 +43,8 @@ public class Tile {
     /**
      * Places the tile on a screen.
      *
-     * @param screen
-     *        The screen.
+     * @param layer
+     *        The layer.
      *
      * @param x
      *        The x-axis position of the tile.
@@ -54,26 +52,26 @@ public class Tile {
      * @param y
      *        The y-axis position of the tile.
      */
-    public void placeOnScreen(final Screen screen, final int x, final int y) {
-        if (screen == null) {
+    public void placeOnScreen(final Layer layer, final int x, final int y) {
+        if (layer == null) {
             throw new NullPointerException("The screen cannot be null.");
         }
 
         if (visited == false) {
-            final AsciiString string = screen.getString(y);
-            string.setCharacter(x, Sprite.DARKNESS.getCharacter());
-            string.setBackgroundColor(Sprite.DARKNESS.getBackgroundColor(), new IntRange(x, x + 1));
-            string.setForegroundColor(Sprite.DARKNESS.getForegroundColor(), new IntRange(x, x + 1));
+            final com.valkryst.VTerminal.Tile tile = layer.getTileAt(x, y);
+            tile.setCharacter(Sprite.DARKNESS.getCharacter());
+            tile.setBackgroundColor(Sprite.DARKNESS.getBackgroundColor());
+            tile.setForegroundColor(Sprite.DARKNESS.getForegroundColor());
         } else {
-            final AsciiString string = screen.getString(y);
-            string.setCharacter(x, sprite.getCharacter());
+            final com.valkryst.VTerminal.Tile tile = layer.getTileAt(x, y);
+            tile.setCharacter(sprite.getCharacter());
 
             if (visible) {
-                string.setBackgroundColor(sprite.getBackgroundColor(), new IntRange(x, x + 1));
-                string.setForegroundColor(sprite.getForegroundColor(), new IntRange(x, x + 1));
+                tile.setBackgroundColor(sprite.getBackgroundColor());
+                tile.setForegroundColor(sprite.getForegroundColor());
             } else {
-                string.setBackgroundColor(sprite.getDarkBackgroundColor(), new IntRange(x, x + 1));
-                string.setForegroundColor(sprite.getDarkForegroundColor(), new IntRange(x, x + 1));
+                tile.setBackgroundColor(sprite.getDarkBackgroundColor());
+                tile.setForegroundColor(sprite.getDarkForegroundColor());
             }
         }
     }
