@@ -9,15 +9,13 @@ import com.valkryst.VRoguelike.enums.Race;
 import com.valkryst.VRoguelike.enums.State;
 import com.valkryst.VRoguelike.item.equipment.EquipmentInventory;
 import com.valkryst.VRoguelike.loot.LootTable;
-import com.valkryst.VRoguelike.screen.GameScreen;
+import com.valkryst.VRoguelike.view.GameView;
 import com.valkryst.VRoguelike.stat.BoundedStatistic;
 import com.valkryst.VRoguelike.world.Map;
-import com.valkryst.VTerminal.builder.component.LabelBuilder;
+import com.valkryst.VTerminal.builder.LabelBuilder;
 import com.valkryst.VTerminal.component.Label;
-import com.valkryst.VTerminal.component.Screen;
+import com.valkryst.VTerminal.component.Layer;
 import lombok.*;
-
-import java.awt.Point;
 
 @EqualsAndHashCode(callSuper=true)
 @ToString
@@ -109,17 +107,17 @@ public class Creature extends Entity {
     }
 
     @Override
-    public Screen getInformationPanel(final @NonNull GameScreen gameScreen) {
-        final Screen screen = super.getInformationPanel(gameScreen);
+    public Layer getInformationPanel(final @NonNull GameView gameView) {
+        final Layer layer = super.getInformationPanel(gameView);
 
         // Add Level label and set it to update on change.
         final Runnable add_level = () -> {
-            screen.removeComponent(screen.getComponentByID(stat_level.getName()));
+            layer.getComponentsByID(stat_level.getName()).forEach(layer::removeComponent);
 
             final Label label = stat_level.getLabelComponent();
-            label.setPosition(new Point(4, 1));
+            label.getTiles().setPosition(4, 1);
 
-            screen.addComponent(label);
+            layer.addComponent(label);
         };
 
         stat_level.getOnChangeFunctions().add(add_level);
@@ -127,12 +125,12 @@ public class Creature extends Entity {
 
         // Add XP label and set it to update on change.
         final Runnable add_xp = () -> {
-            screen.removeComponent(screen.getComponentByID(stat_xp.getName()));
+            layer.getComponentsByID(stat_xp.getName()).forEach(layer::removeComponent);
 
             final Label label = stat_xp.getLabelComponentWithMax();
-            label.setPosition(new Point(7, 2));
+            label.getTiles().setPosition(7, 2);
 
-            screen.addComponent(label);
+            layer.addComponent(label);
         };
 
         stat_xp.getOnChangeFunctions().add(add_xp);
@@ -140,12 +138,12 @@ public class Creature extends Entity {
 
         // Add Gold label and set it to update on change.
         final Runnable add_gold = () -> {
-            screen.removeComponent(screen.getComponentByID(stat_gold.getName()));
+            layer.getComponentsByID(stat_gold.getName()).forEach(layer::removeComponent);
 
             final Label label = stat_gold.getLabelComponent();
-            label.setPosition(new Point(5, 3));
+            label.getTiles().setPosition(5, 3);
 
-            screen.addComponent(label);
+            layer.addComponent(label);
         };
 
         stat_gold.getOnChangeFunctions().add(add_gold);
@@ -153,22 +151,21 @@ public class Creature extends Entity {
 
         // Add Health label and set it to update on change.
         final Runnable add_health = () -> {
-            screen.removeComponent(screen.getComponentByID(stat_health.getName()));
+            layer.getComponentsByID(stat_health.getName()).forEach(layer::removeComponent);
 
             final Label label;
 
             if (stat_health.getValue() > 0) {
                 label = stat_health.getLabelComponentWithMax();
-                label.setPosition(new Point(3, 4));
+                label.getTiles().setPosition(3, 4);
             } else {
                 final LabelBuilder builder = new LabelBuilder();
                 builder.setText("Health: Deceased");
-                builder.setColumnIndex(3);
-                builder.setRowIndex(4);
+                builder.setPosition(3, 4);
                 label = builder.build();
             }
 
-            screen.addComponent(label);
+            layer.addComponent(label);
         };
 
         stat_health.getOnChangeFunctions().add(add_health);
@@ -176,12 +173,12 @@ public class Creature extends Entity {
 
         // Add Strength label and set it to update on change.
         final Runnable add_strength = () -> {
-            screen.removeComponent(screen.getComponentByID(stat_strength.getName()));
+            layer.getComponentsByID(stat_strength.getName()).forEach(layer::removeComponent);
 
             final Label label = stat_strength.getLabelComponent();
-            label.setPosition(new Point(1, 5));
+            label.getTiles().setPosition(1, 5);
 
-            screen.addComponent(label);
+            layer.addComponent(label);
         };
 
         stat_strength.getOnChangeFunctions().add(add_strength);
@@ -189,17 +186,17 @@ public class Creature extends Entity {
 
         // Add Defense label and set it to update on change.
         final Runnable add_defense = () -> {
-            screen.removeComponent(screen.getComponentByID(stat_defense.getName()));
+            layer.getComponentsByID(stat_defense.getName()).forEach(layer::removeComponent);
 
             final Label label = stat_defense.getLabelComponent();
-            label.setPosition(new Point(2, 6));
+            label.getTiles().setPosition(2, 6);
 
-            screen.addComponent(label);
+            layer.addComponent(label);
         };
 
         stat_defense.getOnChangeFunctions().add(add_defense);
         add_defense.run();
 
-        return screen;
+        return layer;
     }
 }
