@@ -1,26 +1,25 @@
-package com.valkryst.VRoguelike.screen;
+package com.valkryst.VRoguelike.view;
 
 import com.valkryst.VController.ControllerListener;
 import com.valkryst.VController.preset.ControllerPreset;
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.entity.Player;
 import com.valkryst.VRoguelike.world.Map;
-import com.valkryst.VTerminal.Panel;
-import com.valkryst.VTerminal.builder.component.ScreenBuilder;
-import com.valkryst.VTerminal.builder.component.TextAreaBuilder;
-import com.valkryst.VTerminal.component.Screen;
+import com.valkryst.VTerminal.Screen;
+import com.valkryst.VTerminal.builder.TextAreaBuilder;
+import com.valkryst.VTerminal.component.Layer;
 import com.valkryst.VTerminal.component.TextArea;
 import com.valkryst.VTerminal.printer.RectanglePrinter;
 import lombok.Getter;
 import lombok.NonNull;
 
-import java.awt.Point;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class GameScreen extends Screen implements KeyListener, MouseListener {
+public class GameView extends Layer implements KeyListener, MouseListener {
     @Getter private final Map map;
 
     @Getter private TextArea messageBox;
@@ -29,18 +28,18 @@ public class GameScreen extends Screen implements KeyListener, MouseListener {
     private ControllerListener controllerListener;
 
     /** The currently displayed player information. */
-    private Screen playerInfoScreen;
+    private Layer playerInfoView;
 
     /** The currently displayed player equipment information. */
-    private Screen playerEquipmentScreen;
+    private Layer playerEquipmentView;
 
     /** The currently displayed target information. */
-    private Screen targetInfoScreen;
+    private Layer targetInfoView;
 
-    public GameScreen(final Panel panel) {
-        super(new ScreenBuilder(panel.getWidthInCharacters(), panel.getHeightInCharacters()));
-        panel.getCanvas().addKeyListener(this);
-        panel.getCanvas().addMouseListener(this);
+    public GameView(final Screen screen) {
+        super(new Dimension(screen.getWidth(), screen.getHeight()));
+        screen.addListener((KeyListener) this);
+        screen.addListener((MouseListener) this);
 
         addController();
 
@@ -65,9 +64,7 @@ public class GameScreen extends Screen implements KeyListener, MouseListener {
 
     private void createMessageBox() {
         final TextAreaBuilder builder = new TextAreaBuilder();
-        builder.setColumnIndex(0);
-        builder.setRowIndex(30);
-
+        builder.setPosition(0, 30);
         builder.setWidth(81);
         builder.setHeight(10);
 
@@ -86,26 +83,26 @@ public class GameScreen extends Screen implements KeyListener, MouseListener {
      */
     public void setPlayer(final @NonNull Player player) {
         // Set the information panel.
-        Screen screen = player.getInformationPanel(this);
-        screen.setPosition(new Point(81, 0));
+        Layer layer = player.getInformationPanel(this);
+        layer.getTiles().setPosition(81, 0);
 
-        if (playerInfoScreen != null) {
-            this.removeComponent(playerInfoScreen);
+        if (playerInfoView != null) {
+            this.removeComponent(playerInfoView);
         }
 
-        playerInfoScreen = screen;
-        this.addComponent(playerInfoScreen);
+        playerInfoView = layer;
+        this.addComponent(playerInfoView);
 
         // Set the equipment panel.
-        screen = player.getEquipment().getInformationPanel();
-        screen.setPosition(new Point(81, 16));
+        layer = player.getEquipment().getInformationPanel();
+        layer.getTiles().setPosition(81, 16);
 
-        if (playerEquipmentScreen != null) {
-            this.removeComponent(playerEquipmentScreen);
+        if (playerEquipmentView != null) {
+            this.removeComponent(playerEquipmentView);
         }
 
-        playerEquipmentScreen = screen;
-        this.addComponent(playerEquipmentScreen);
+        playerEquipmentView = layer;
+        this.addComponent(playerEquipmentView);
     }
 
     /**
@@ -116,33 +113,29 @@ public class GameScreen extends Screen implements KeyListener, MouseListener {
      *          The target.
      */
     public void setTarget(final Entity entity) {
-        final Screen screen;
+        final Layer layer;
 
         if (entity == null) {
-            final ScreenBuilder screenBuilder = new ScreenBuilder();
-            screenBuilder.setWidth(39);
-            screenBuilder.setHeight(8);
-
-            screen = screenBuilder.build();
+            layer = new Layer(new Dimension(39, 8));
 
             // Print border
             final RectanglePrinter rectanglePrinter = new RectanglePrinter();
             rectanglePrinter.setWidth(39);
             rectanglePrinter.setHeight(8);
             rectanglePrinter.setTitle("No Target");
-            rectanglePrinter.print(screen, new Point(0, 0));
+            rectanglePrinter.print(layer.getTiles(), new Point(0, 0));
         } else {
-            screen = entity.getInformationPanel(this);
+            layer = entity.getInformationPanel(this);
         }
 
-        screen.setPosition(new Point(81, 8));
+        layer.getTiles().setPosition(81, 8);
 
-        if (targetInfoScreen != null) {
-            this.removeComponent(targetInfoScreen);
+        if (targetInfoView != null) {
+            this.removeComponent(targetInfoView);
         }
 
-        targetInfoScreen = screen;
-        this.addComponent(targetInfoScreen);
+        targetInfoView = layer;
+        this.addComponent(targetInfoView);
     }
 
     /*
@@ -177,7 +170,7 @@ public class GameScreen extends Screen implements KeyListener, MouseListener {
     public void mousePressed(final @NonNull MouseEvent e) {
         // Check if a non-player Entity is being selected:
         map.getEntities().forEach(entity -> {
-            if (entity.getLayer().intersects(e)) {
+            if (entity.getLayer().intersects(e.getPoint())) {
                 setTarget(entity);
                 return;
             }
