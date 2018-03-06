@@ -1,7 +1,7 @@
 package com.valkryst.VRoguelike.stat;
 
 import com.valkryst.VJSON.VJSONParser;
-import com.valkryst.VTerminal.builder.component.LabelBuilder;
+import com.valkryst.VTerminal.builder.LabelBuilder;
 import com.valkryst.VTerminal.component.Label;
 import lombok.Getter;
 import lombok.NonNull;
@@ -98,9 +98,12 @@ public class Statistic {
      */
     public Label getLabelComponent() {
         final LabelBuilder labelBuilder = new LabelBuilder();
-        labelBuilder.setId(name);
         labelBuilder.setText(name + ": " + value);
-        return labelBuilder.build();
+
+        final Label label = labelBuilder.build();
+        label.setId(name);
+
+        return label;
     }
 
     /**

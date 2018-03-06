@@ -1,7 +1,7 @@
 package com.valkryst.VRoguelike.stat;
 
 import com.valkryst.VJSON.VJSONParser;
-import com.valkryst.VTerminal.builder.component.LabelBuilder;
+import com.valkryst.VTerminal.builder.LabelBuilder;
 import com.valkryst.VTerminal.component.Label;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -121,8 +121,11 @@ public class BoundedStatistic extends Statistic {
      */
     public Label getLabelComponentWithMax() {
         final LabelBuilder labelBuilder = new LabelBuilder();
-        labelBuilder.setId(super.getName());
         labelBuilder.setText(super.getName() + ": " + super.getValue() + "/" + maximum);
+
+        final Label label = labelBuilder.build();
+        label.setId(super.getName());
+
         return labelBuilder.build();
     }
 }
