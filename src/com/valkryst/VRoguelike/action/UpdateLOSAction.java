@@ -6,7 +6,7 @@ import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.entity.Player;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VRoguelike.world.Tile;
-import com.valkryst.VTerminal.component.Screen;
+import com.valkryst.VTerminal.component.Layer;
 import lombok.Data;
 import lombok.NonNull;
 
@@ -49,7 +49,7 @@ public class UpdateLOSAction extends Action {
             return;
         }
 
-        final Screen screen = map;
+        final Layer layer = map;
         final Tile[][] tiles = map.getTiles();
         final Creature creature = (Creature) entity;
 
@@ -70,7 +70,7 @@ public class UpdateLOSAction extends Action {
                 for (int y = startY ; y < endY ; y++) {
                     if (tiles[x][y].isVisible()) {
                         tiles[x][y].setVisible(false);
-                        tiles[x][y].placeOnScreen(screen, x, y);
+                        tiles[x][y].placeOnScreen(layer, x, y);
                     }
                 }
             }
@@ -81,7 +81,7 @@ public class UpdateLOSAction extends Action {
                     final Tile tile = tiles[point.x][point.y];
                     tile.setVisible(true);
                     tile.setVisited(true);
-                    tile.placeOnScreen(screen, point.x, point.y);
+                    tile.placeOnScreen(layer, point.x, point.y);
 
                     if (tile.isSolid()) {
                         break;
