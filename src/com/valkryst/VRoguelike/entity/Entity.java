@@ -6,16 +6,14 @@ import com.valkryst.VRoguelike.action.MoveAction;
 import com.valkryst.VRoguelike.action.ShowAction;
 import com.valkryst.VRoguelike.entity.builder.EntityBuilder;
 import com.valkryst.VRoguelike.enums.Sprite;
-import com.valkryst.VRoguelike.screen.GameScreen;
+import com.valkryst.VRoguelike.view.GameView;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.Tile;
-import com.valkryst.VTerminal.builder.LayerBuilder;
 import com.valkryst.VTerminal.component.Layer;
 import com.valkryst.VTerminal.printer.RectanglePrinter;
 import lombok.*;
 
-import java.awt.Color;
-import java.awt.Point;
+import java.awt.*;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -47,11 +45,8 @@ public class Entity {
         name = builder.getName();
         description = builder.getDescription();
 
-        final LayerBuilder layerBuilder = new LayerBuilder();
-        layerBuilder.setPosition(builder.getPosition());
-        layerBuilder.setWidth(1);
-        layerBuilder.setHeight(1);
-        layer = layerBuilder.build();
+        layer = new Layer(new Dimension(1, 1));
+        layer.getTiles().setPosition(builder.getPosition());
 
         setSprite(builder.getSprite());
     }
@@ -130,12 +125,8 @@ public class Entity {
         return true;
     }
 
-    public Layer getInformationPanel(final @NonNull GameScreen gameScreen) {
-        final LayerBuilder layerBuilder = new LayerBuilder();
-        layerBuilder.setWidth(39);
-        layerBuilder.setHeight(8);
-
-        final Layer layer = layerBuilder.build();
+    public Layer getInformationPanel(final @NonNull GameView gameView) {
+        final Layer layer = new Layer(new Dimension(39, 8));
 
         // Print border
         final RectanglePrinter rectanglePrinter = new RectanglePrinter();
