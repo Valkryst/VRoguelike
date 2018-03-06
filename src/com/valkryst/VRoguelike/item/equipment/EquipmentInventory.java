@@ -1,13 +1,12 @@
 package com.valkryst.VRoguelike.item.equipment;
 
-import com.valkryst.VTerminal.builder.component.LabelBuilder;
-import com.valkryst.VTerminal.builder.component.ScreenBuilder;
+import com.valkryst.VTerminal.builder.LabelBuilder;
 import com.valkryst.VTerminal.component.Label;
-import com.valkryst.VTerminal.component.Screen;
+import com.valkryst.VTerminal.component.Layer;
 import com.valkryst.VTerminal.printer.RectanglePrinter;
 import lombok.NonNull;
 
-import java.awt.Point;
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -48,69 +47,72 @@ public class EquipmentInventory {
         Objects.requireNonNull(slot);
 
         if (item.getSlot() != slot) {
-            throw new IllegalArgumentException("The slot to equip to, and the item's slot type, do not match.\n\t"
-                                               + item.toString().replace("\n\t", "\n\t\t"));
+            throw new IllegalArgumentException("The slot to equip to, and the item's slot type, do not match.\n\t" + item.toString().replace("\n\t", "\n\t\t"));
         }
 
         equipment.put(slot, item);
     }
 
-    public Screen getInformationPanel() {
-        final ScreenBuilder screenBuilder = new ScreenBuilder();
-        screenBuilder.setWidth(39);
-        screenBuilder.setHeight(14);
-
-        final Screen screen = screenBuilder.build();
+    public Layer getInformationPanel() {
+        final Layer layer = new Layer(new Dimension(39, 14));
 
         // Print border
         final RectanglePrinter rectanglePrinter = new RectanglePrinter();
         rectanglePrinter.setWidth(39);
         rectanglePrinter.setHeight(14);
         rectanglePrinter.setTitle("Equipment");
-        rectanglePrinter.print(screen, new Point(0, 0));
+        rectanglePrinter.print(layer.getTiles(), new Point(0, 0));
 
         // Add item labels:
         final Label label_head = getEquipmentLabel(EquipmentSlot.HEAD);
-        label_head.setPosition(new Point(6, 1));
+        label_head.getTiles().setPosition(6, 1);
+        layer.addComponent(label_head);
 
         final Label label_neck = getEquipmentLabel(EquipmentSlot.NECK);
-        label_neck.setPosition(new Point(6, 2));
+        label_neck.getTiles().setPosition(6, 2);
+        layer.addComponent(label_neck);
 
         final Label label_back = getEquipmentLabel(EquipmentSlot.BACK);
-        label_back.setPosition(new Point(6, 3));
+        label_back.getTiles().setPosition(6, 3);
+        layer.addComponent(label_back);
 
         final Label label_shoulders = getEquipmentLabel(EquipmentSlot.SHOULDERS);
-        label_shoulders.setPosition(new Point(1, 4));
+        label_shoulders.getTiles().setPosition(1, 4);
+        layer.addComponent(label_shoulders);
 
         final Label label_chest = getEquipmentLabel(EquipmentSlot.CHEST);
-        label_chest.setPosition(new Point(5, 5));
+        label_chest.getTiles().setPosition(5, 5);
+        layer.addComponent(label_chest);
 
         final Label label_wrists = getEquipmentLabel(EquipmentSlot.WRISTS);
-        label_wrists.setPosition(new Point(4, 6));
+        label_wrists.getTiles().setPosition(4, 6);
+        layer.addComponent(label_wrists);
 
         final Label label_hands = getEquipmentLabel(EquipmentSlot.HANDS);
-        label_hands.setPosition(new Point(5, 7));
+        label_hands.getTiles().setPosition(5, 7);
+        layer.addComponent(label_hands);
 
         final Label label_waist = getEquipmentLabel(EquipmentSlot.WAIST);
-        label_waist.setPosition(new Point(5, 8));
+        label_waist.getTiles().setPosition(5, 8);
+        layer.addComponent(label_waist);
 
         final Label label_legs = getEquipmentLabel(EquipmentSlot.LEGS);
-        label_legs.setPosition(new Point(6, 9));
+        label_legs.getTiles().setPosition(6, 9);
+        layer.addComponent(label_legs);
 
         final Label label_feet = getEquipmentLabel(EquipmentSlot.FEET);
-        label_feet.setPosition(new Point(6, 10));
+        label_feet.getTiles().setPosition(6, 10);
+        layer.addComponent(label_feet);
 
         final Label label_mainHand = getEquipmentLabel(EquipmentSlot.MAIN_HAND);
-        label_mainHand.setPosition(new Point(1, 11));
+        label_mainHand.getTiles().setPosition(1, 11);
+        layer.addComponent(label_mainHand);
 
         final Label label_offHand = getEquipmentLabel(EquipmentSlot.OFF_HAND);
-        label_offHand.setPosition(new Point(2, 12));
+        label_offHand.getTiles().setPosition(2, 12);
+        layer.addComponent(label_offHand);
 
-        screen.addComponents(label_head, label_neck, label_back, label_shoulders,
-                                label_chest, label_wrists, label_hands, label_waist,
-                                label_legs, label_feet, label_mainHand, label_offHand);
-
-        return screen;
+        return layer;
     }
 
     /**
