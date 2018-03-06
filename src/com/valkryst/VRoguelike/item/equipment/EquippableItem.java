@@ -2,9 +2,9 @@ package com.valkryst.VRoguelike.item.equipment;
 
 import com.valkryst.VRoguelike.item.Item;
 import com.valkryst.VRoguelike.item.builder.equipment.EquippableItemBuilder;
-import com.valkryst.VTerminal.builder.component.LabelBuilder;
+import com.valkryst.VTerminal.Tile;
+import com.valkryst.VTerminal.builder.LabelBuilder;
 import com.valkryst.VTerminal.component.Label;
-import com.valkryst.VTerminal.misc.IntRange;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
@@ -42,8 +42,10 @@ public class EquippableItem extends Item {
         final int nameLength = super.getName().length();
 
         final Color color = getSprite().getForegroundColor();
-        final IntRange nameRange = new IntRange(slotNameLength, slotNameLength + 1 + nameLength);
-        label.getString(0).setForegroundColor(color, nameRange);
+
+        for (final Tile tile : label.getTiles().getRowSubset(0, slotNameLength, slotNameLength + 1 + nameLength)) {
+            tile.setForegroundColor(color);
+        }
 
         return label;
     }
