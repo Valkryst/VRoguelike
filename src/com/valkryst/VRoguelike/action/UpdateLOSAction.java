@@ -5,7 +5,7 @@ import com.valkryst.VRoguelike.entity.Creature;
 import com.valkryst.VRoguelike.entity.Entity;
 import com.valkryst.VRoguelike.entity.Player;
 import com.valkryst.VRoguelike.world.Map;
-import com.valkryst.VRoguelike.world.Tile;
+import com.valkryst.VRoguelike.world.MapTile;
 import com.valkryst.VTerminal.component.Layer;
 import lombok.Data;
 import lombok.NonNull;
@@ -50,7 +50,7 @@ public class UpdateLOSAction extends Action {
         }
 
         final Layer layer = map;
-        final Tile[][] tiles = map.getTiles();
+        final MapTile[][] tiles = map.getTiles();
         final Creature creature = (Creature) entity;
 
         final LineOfSight lineOfSight = creature.getLineOfSight();
@@ -78,7 +78,7 @@ public class UpdateLOSAction extends Action {
             // Set visible tiles:
             lineOfSight.getLinePoints().forEach(line -> {
                 for (final Point point : line) {
-                    final Tile tile = tiles[point.x][point.y];
+                    final MapTile tile = tiles[point.x][point.y];
                     tile.setVisible(true);
                     tile.setVisited(true);
                     tile.placeOnScreen(layer, point.x, point.y);
