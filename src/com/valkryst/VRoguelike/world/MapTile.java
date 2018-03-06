@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Data
-public class Tile {
+public class MapTile {
     /** The sprite. */
     private Sprite sprite = Sprite.WALL;
 
@@ -23,16 +23,16 @@ public class Tile {
     /** Whether or not the tile is visible. */
     private boolean visible = false;
 
-    /** Constructs a new Tile. */
-    public Tile() {}
+    /** Constructs a new MapTile. */
+    public MapTile() {}
 
     /**
-     * Constructs a new Tile.
+     * Constructs a new MapTile.
      *
      * @param sprite
      *        The sprite.
      */
-    public Tile(final Sprite sprite) {
+    public MapTile(final Sprite sprite) {
         if (sprite == null) {
             throw new NullPointerException("The sprite cannot be null.");
         }
@@ -41,7 +41,7 @@ public class Tile {
     }
 
     /**
-     * Places the tile on a screen.
+     * Places the tile on a view.
      *
      * @param layer
      *        The layer.
@@ -54,7 +54,7 @@ public class Tile {
      */
     public void placeOnScreen(final Layer layer, final int x, final int y) {
         if (layer == null) {
-            throw new NullPointerException("The screen cannot be null.");
+            throw new NullPointerException("The view cannot be null.");
         }
 
         if (visited == false) {
