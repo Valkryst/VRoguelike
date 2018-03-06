@@ -36,7 +36,7 @@ public class GameView extends Layer implements KeyListener, MouseListener {
     /** The currently displayed target information. */
     private Layer targetInfoView;
 
-    public GameView(final Screen screen) {
+    public GameView(final @NonNull Screen screen) {
         super(new Dimension(screen.getWidth(), screen.getHeight()));
         screen.addListener((KeyListener) this);
         screen.addListener((MouseListener) this);
