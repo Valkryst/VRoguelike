@@ -18,10 +18,6 @@ public class Item {
 
     /** The health. */
     private final Statistic stat_health;
-    /** The strength. */
-    private final Statistic stat_strength;
-    /** The defense. */
-    private final Statistic stat_defense;
     /** The accuracy (Percent chance to land an attack). */
     private final Statistic stat_accuracy;
     /** The dodge (Percent chance to dodge an attack). */
@@ -40,8 +36,6 @@ public class Item {
         description = builder.getDescription();
 
         stat_health = new Statistic("Health", builder.getStat_health());
-        stat_strength = new Statistic("Strength", builder.getStat_strength());
-        stat_defense = new Statistic("Defense", builder.getStat_defense());
         stat_accuracy = new Statistic("Accuracy", builder.getStat_accuracy());
         stat_dodge = new Statistic("Dodge", builder.getStat_dodge());
     }
@@ -54,8 +48,6 @@ public class Item {
                 "\n\tDescription:\t" + description +
                 "\n\tStatistics:" +
                 "\n\t" + stat_health.toString().replace("\n\t", "\n\t\t") +
-                "\n\t" + stat_strength.toString().replace("\n\t", "\n\t\t") +
-                "\n\t" + stat_defense.toString().replace("\n\t", "\n\t\t") +
                 "\n\t" + stat_accuracy.toString().replace("\n\t", "\n\t\t") +
                 "\n\t" + stat_dodge.toString().replace("\n\t", "\n\t\t");
     }
