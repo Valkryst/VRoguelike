@@ -44,6 +44,6 @@ final class MovementNode {
             cost = 0;
         }
 
-        cost += cost = map.getTiles()[currentPosition.x][currentPosition.y].getMovementCost();
+        cost += cost = map.getMapTiles()[currentPosition.x][currentPosition.y].getMovementCost();
     }
 }
