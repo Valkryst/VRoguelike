@@ -50,7 +50,7 @@ public class UpdateLOSAction extends Action {
         }
 
         final Layer layer = map;
-        final MapTile[][] tiles = map.getTiles();
+        final MapTile[][] tiles = map.getMapTiles();
         final Creature creature = (Creature) entity;
 
         final LineOfSight lineOfSight = creature.getLineOfSight();
