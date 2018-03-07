@@ -6,7 +6,7 @@ import com.valkryst.VRoguelike.action.MoveAction;
 import com.valkryst.VRoguelike.action.ShowAction;
 import com.valkryst.VRoguelike.entity.builder.EntityBuilder;
 import com.valkryst.VRoguelike.enums.Sprite;
-import com.valkryst.VRoguelike.view.GameView;
+import com.valkryst.VRoguelike.gui.view.GameView;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.Tile;
 import com.valkryst.VTerminal.component.Layer;
