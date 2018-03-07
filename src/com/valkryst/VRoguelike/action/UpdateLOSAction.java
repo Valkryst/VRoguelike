@@ -49,7 +49,7 @@ public class UpdateLOSAction extends Action {
             return;
         }
 
-        final Layer layer = map;
+        final Layer mapLayer = map;
         final MapTile[][] tiles = map.getMapTiles();
         final Creature creature = (Creature) entity;
 
@@ -70,7 +70,7 @@ public class UpdateLOSAction extends Action {
                 for (int y = startY ; y < endY ; y++) {
                     if (tiles[x][y].isVisible()) {
                         tiles[x][y].setVisible(false);
-                        tiles[x][y].placeOnScreen(layer, x, y);
+                        tiles[x][y].placeOnScreen(mapLayer, x, y);
                     }
                 }
             }
@@ -81,7 +81,7 @@ public class UpdateLOSAction extends Action {
                     final MapTile tile = tiles[point.x][point.y];
                     tile.setVisible(true);
                     tile.setVisited(true);
-                    tile.placeOnScreen(layer, point.x, point.y);
+                    tile.placeOnScreen(mapLayer, point.x, point.y);
 
                     if (tile.isSolid()) {
                         break;
