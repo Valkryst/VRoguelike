@@ -1,22 +1,16 @@
 package com.valkryst.VRoguelike.gui.controller;
 
-import com.valkryst.VRoguelike.gui.model.Model;
 import com.valkryst.VRoguelike.gui.view.View;
 import com.valkryst.VTerminal.Screen;
 import lombok.Getter;
 import lombok.NonNull;
 
-public class Controller<M extends Model, V extends View> {
-    /** The model. */
-    protected final M model;
+public class Controller<V extends View> {
     /** The view. */
     @Getter protected final V view;
 
     /**
      * Constructs a new Controller.
-     *
-     * @param model
-     *          The model.
      *
      * @param view
      *          The view.
@@ -24,8 +18,7 @@ public class Controller<M extends Model, V extends View> {
      * @throws NullPointerException
      *          If the any of the params are null.
      */
-    public Controller(final @NonNull M model, final @NonNull V view) {
-        this.model = model;
+    public Controller(final @NonNull V view) {
         this.view = view;
     }
 
