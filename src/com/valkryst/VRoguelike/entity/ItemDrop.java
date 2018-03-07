@@ -5,7 +5,7 @@ import com.valkryst.VRoguelike.entity.builder.ItemDropBuilder;
 import com.valkryst.VRoguelike.item.Item;
 import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
 import com.valkryst.VRoguelike.item.equipment.EquippableItem;
-import com.valkryst.VRoguelike.view.GameView;
+import com.valkryst.VRoguelike.gui.view.GameView;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.builder.ButtonBuilder;
 import com.valkryst.VTerminal.component.Layer;
