@@ -4,10 +4,11 @@ import com.valkryst.VJSON.VJSONLoader;
 import com.valkryst.VRoguelike.action.UpdateLOSAction;
 import com.valkryst.VRoguelike.entity.Player;
 import com.valkryst.VRoguelike.entity.builder.PlayerBuilder;
+import com.valkryst.VRoguelike.gui.controller.GameController;
 import com.valkryst.VRoguelike.item.builder.equipment.WeaponBuilder;
 import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
-import com.valkryst.VRoguelike.view.GameView;
-import com.valkryst.VRoguelike.view.MainMenuView;
+import com.valkryst.VRoguelike.gui.view.GameView;
+import com.valkryst.VRoguelike.gui.view.MainMenuView;
 import com.valkryst.VRoguelike.world.MapTile;
 import com.valkryst.VTerminal.Screen;
 import com.valkryst.VTerminal.font.Font;
@@ -25,20 +26,20 @@ public class Driver {
 
 
         final MainMenuView mainMenuView = new MainMenuView(screen);
-        final GameView gameView = new GameView(screen);
+        final GameController gameController = new GameController(screen);
 
         screen.addComponent(mainMenuView);
 
         mainMenuView.getButton_new().setOnClickFunction(() -> {
             // Initialize map tiles:
             screen.removeComponent(mainMenuView);
-            screen.addComponent(gameView);
+            gameController.addViewToScreen(screen);
 
-            final MapTile[][] tiles = gameView.getMap().getMapTiles();
+            final MapTile[][] tiles = gameController.getView().getMap().getMapTiles();
 
             for (int x = 0 ; x < tiles.length ; x++) {
                 for (int y = 0 ; y < tiles[x].length ; y++) {
-                    tiles[x][y].placeOnScreen(gameView, x, y);
+                    tiles[x][y].placeOnScreen(gameController.getView().getLayer(), x, y);
                 }
             }
 
@@ -59,27 +60,21 @@ public class Driver {
             player.getActions().add(new UpdateLOSAction(new Point(25, 12), 0, 0));
 
 
-
-            /*
-            final Creature npc = creatureBuilder.build();
-            npc.getEquipment().setItemInSlot(EquipmentSlot.MAIN_HAND, weaponBuilder.build());
-            */
-
             try {
-                VJSONLoader.loadFromJSON(gameView.getMap(), System.getProperty("user.dir") + "/test_res/test_map.json");
+                VJSONLoader.loadFromJSON(gameController.getView().getMap(), System.getProperty("user.dir") + "/test_res/test_map.json");
             } catch (ParseException | IOException e) {
                 e.printStackTrace();
             }
 
-            gameView.getMap().addEntities(player);
+            gameController.getView().getMap().addEntities(player);
 
 
             // Add Player/Creature Screens to main panel
-            gameView.setPlayer(player);
+            gameController.getView().setPlayer(player);
 
 
             // Test movement
-            player.getMovementAI().findAndSetPath(gameView.getMap(), player.getPosition(), new Point(player.getPosition().x + 3, player.getPosition().y + 5));
+            player.getMovementAI().findAndSetPath(gameController.getView().getMap(), player.getPosition(), new Point(player.getPosition().x + 3, player.getPosition().y + 5));
         });
 
         mainMenuView.getButton_exit().setOnClickFunction(() -> System.exit(0));
@@ -88,7 +83,7 @@ public class Driver {
         screen.addCanvasToFrame();
 
         final Timer timer = new Timer(100, e -> {
-            gameView.getMap().update();
+            gameController.getView().getMap().update();
             screen.draw();
         });
 
