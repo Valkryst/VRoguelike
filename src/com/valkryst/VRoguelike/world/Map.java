@@ -7,23 +7,21 @@ import com.valkryst.VRoguelike.entity.Player;
 import com.valkryst.VRoguelike.entity.builder.CreatureBuilder;
 import com.valkryst.VRoguelike.loot.LootTable;
 import com.valkryst.VRoguelike.loot.builder.LootTableBuilder;
-import com.valkryst.VTerminal.builder.component.ScreenBuilder;
-import com.valkryst.VTerminal.component.Screen;
+import com.valkryst.VTerminal.component.Layer;
 import com.valkryst.VTerminal.component.TextArea;
 import lombok.Getter;
 import lombok.NonNull;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import java.awt.Color;
-import java.awt.Point;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Map extends Screen implements VJSONParser {
+public class Map extends Layer implements VJSONParser {
     /** The tiles. */
-    @Getter private Tile[][] tiles;
+    @Getter private MapTile[][] tiles;
 
     /** The player entity. */
     @Getter private Player player;
@@ -50,16 +48,21 @@ public class Map extends Screen implements VJSONParser {
      *         If the messageBox is null.
      */
     public Map(final @NonNull TextArea messageBox, final int width, final int height) {
-        super(new ScreenBuilder(width, height));
-        this.setBackgroundColor(Color.BLACK);
+        super(new Dimension(width, height));
+
+        for (int y = 0 ; y < super.tiles.getHeight() ; y++) {
+            for (int x = 0 ; x < super.tiles.getWidth() ; x++) {
+                super.tiles.getTileAt(x, y).setBackgroundColor(Color.BLACK);
+            }
+        }
 
         this.messageBox = messageBox;
 
-        tiles = new Tile[width][height];
+        tiles = new MapTile[width][height];
 
         for (int x = 0 ; x < width ; x++) {
             for (int y = 0 ; y < height ; y++) {
-                tiles[x][y] = new Tile();
+                tiles[x][y] = new MapTile();
             }
         }
     }
@@ -175,7 +178,8 @@ public class Map extends Screen implements VJSONParser {
 
             // Ensure player is drawn above everything else:
             if (player != null) {
-                this.changeDrawOrder(entity.getLayer(), player.getLayer());
+                this.removeComponent(player.getLayer());
+                this.addComponent(player.getLayer());
             }
         }
     }
@@ -196,12 +200,12 @@ public class Map extends Screen implements VJSONParser {
                 this.entities.remove(entity);
             }
 
-            // Set the Map Tile below the entity to redraw:
+            // Set the Map MapTile below the entity to redraw:
             final Point position = entity.getPosition();
             tiles[position.x][position.y].placeOnScreen(this, position.x, position.y);
         }
 
-        this.transmitDraw();
+        super.redrawFunction.run();
     }
 
     /**
