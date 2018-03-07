@@ -34,10 +34,6 @@ public class Creature extends Entity {
     @Getter private final BoundedStatistic stat_gold;
     /** The health. */
     @Getter private final BoundedStatistic stat_health;
-    /** The strength. */
-    @Getter private final BoundedStatistic stat_strength;
-    /** The defense. */
-    @Getter private final BoundedStatistic stat_defense;
 
     /** The equipment inventory. */
     @Getter private final EquipmentInventory equipment;
@@ -75,8 +71,6 @@ public class Creature extends Entity {
         stat_xp = builder.getStat_xp();
         stat_gold = builder.getStat_gold();
         stat_health = builder.getStat_health();
-        stat_strength = builder.getStat_strength();
-        stat_defense = builder.getStat_defense();
 
         equipment = builder.getEquipment();
 
@@ -170,32 +164,6 @@ public class Creature extends Entity {
 
         stat_health.getOnChangeFunctions().add(add_health);
         add_health.run();
-
-        // Add Strength label and set it to update on change.
-        final Runnable add_strength = () -> {
-            layer.getComponentsByID(stat_strength.getName()).forEach(layer::removeComponent);
-
-            final Label label = stat_strength.getLabelComponent();
-            label.getTiles().setPosition(1, 5);
-
-            layer.addComponent(label);
-        };
-
-        stat_strength.getOnChangeFunctions().add(add_strength);
-        add_strength.run();
-
-        // Add Defense label and set it to update on change.
-        final Runnable add_defense = () -> {
-            layer.getComponentsByID(stat_defense.getName()).forEach(layer::removeComponent);
-
-            final Label label = stat_defense.getLabelComponent();
-            label.getTiles().setPosition(2, 6);
-
-            layer.addComponent(label);
-        };
-
-        stat_defense.getOnChangeFunctions().add(add_defense);
-        add_defense.run();
 
         return layer;
     }

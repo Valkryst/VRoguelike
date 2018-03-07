@@ -114,8 +114,6 @@ public class AttackAction extends Action {
         int damage = 0;
         damage += getWeaponDamage(self, EquipmentSlot.MAIN_HAND);
         damage += getWeaponDamage(self, EquipmentSlot.OFF_HAND);
-        damage += self.getStat_strength().getValue();
-        damage -= target.getStat_defense().getValue();
 
         return damage;
     }
