@@ -1,4 +1,4 @@
-package com.valkryst.VRoguelike.view;
+package com.valkryst.VRoguelike.gui.view;
 
 import com.valkryst.VController.ControllerListener;
 import com.valkryst.VController.preset.ControllerPreset;
@@ -19,7 +19,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class GameView extends Layer implements KeyListener, MouseListener {
+public class GameView extends View {
     @Getter private final Map map;
 
     @Getter private TextArea messageBox;
@@ -37,15 +37,13 @@ public class GameView extends Layer implements KeyListener, MouseListener {
     private Layer targetInfoView;
 
     public GameView(final @NonNull Screen screen) {
-        super(new Dimension(screen.getWidth(), screen.getHeight()));
-        screen.addListener((KeyListener) this);
-        screen.addListener((MouseListener) this);
+        super(screen.getWidth(), screen.getHeight());
 
         addController();
 
         createMessageBox();
         map = new Map(getMessageBox(), 81, 30);
-        this.addComponent(map);
+        super.layer.addComponent(map);
     }
 
     private void addController() {
@@ -71,7 +69,7 @@ public class GameView extends Layer implements KeyListener, MouseListener {
         builder.setEditable(false);
 
         messageBox = builder.build();
-        this.addComponent(messageBox);
+        super.layer.addComponent(messageBox);
     }
 
     /**
@@ -87,22 +85,22 @@ public class GameView extends Layer implements KeyListener, MouseListener {
         layer.getTiles().setPosition(81, 0);
 
         if (playerInfoView != null) {
-            this.removeComponent(playerInfoView);
+            super.layer.removeComponent(playerInfoView);
         }
 
         playerInfoView = layer;
-        this.addComponent(playerInfoView);
+        super.layer.addComponent(playerInfoView);
 
         // Set the equipment panel.
         layer = player.getEquipment().getInformationPanel();
         layer.getTiles().setPosition(81, 16);
 
         if (playerEquipmentView != null) {
-            this.removeComponent(playerEquipmentView);
+            super.layer.removeComponent(playerEquipmentView);
         }
 
         playerEquipmentView = layer;
-        this.addComponent(playerEquipmentView);
+        super.layer.addComponent(playerEquipmentView);
     }
 
     /**
@@ -131,11 +129,11 @@ public class GameView extends Layer implements KeyListener, MouseListener {
         layer.getTiles().setPosition(81, 8);
 
         if (targetInfoView != null) {
-            this.removeComponent(targetInfoView);
+            super.layer.removeComponent(targetInfoView);
         }
 
         targetInfoView = layer;
-        this.addComponent(targetInfoView);
+        super.layer.addComponent(targetInfoView);
     }
 
     /*
@@ -162,59 +160,4 @@ public class GameView extends Layer implements KeyListener, MouseListener {
         }
     }
     */
-
-    @Override
-    public void mouseClicked(final @NonNull MouseEvent e) {}
-
-    @Override
-    public void mousePressed(final @NonNull MouseEvent e) {
-        // Check if a non-player Entity is being selected:
-        map.getEntities().forEach(entity -> {
-            if (entity.getLayer().intersects(e.getPoint())) {
-                setTarget(entity);
-                return;
-            }
-        });
-    }
-
-    @Override
-    public void mouseReleased(final @NonNull MouseEvent e) {}
-
-    @Override
-    public void mouseEntered(final @NonNull MouseEvent e) {}
-
-    @Override
-    public void mouseExited(final @NonNull MouseEvent e) {}
-
-    @Override
-    public void keyTyped(final @NonNull KeyEvent e) {}
-
-    @Override
-    public void keyPressed(final @NonNull KeyEvent e) {}
-
-    @Override
-    public void keyReleased(final @NonNull KeyEvent e) {
-        switch (e.getKeyCode()) {
-            case KeyEvent.VK_UP:
-            case KeyEvent.VK_W: {
-                map.getPlayer().move(0, -1);
-                break;
-            }
-            case KeyEvent.VK_DOWN:
-            case KeyEvent.VK_S: {
-                map.getPlayer().move(0, 1);
-                break;
-            }
-            case KeyEvent.VK_LEFT:
-            case KeyEvent.VK_A: {
-                map.getPlayer().move(-1, 0);
-                break;
-            }
-            case KeyEvent.VK_RIGHT:
-            case KeyEvent.VK_D: {
-                map.getPlayer().move(1, 0);
-                break;
-            }
-        }
-    }
 }
