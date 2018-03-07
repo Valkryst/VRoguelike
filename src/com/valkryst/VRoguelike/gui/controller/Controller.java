@@ -42,6 +42,7 @@ public class Controller<V extends View> {
 
         screen.removeAllComponents();
         screen.addComponent(view.getLayer());
+        addEventListenersTo(screen);
     }
 
     /**
