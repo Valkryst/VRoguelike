@@ -9,7 +9,7 @@ import com.valkryst.VRoguelike.enums.Race;
 import com.valkryst.VRoguelike.enums.State;
 import com.valkryst.VRoguelike.item.equipment.EquipmentInventory;
 import com.valkryst.VRoguelike.loot.LootTable;
-import com.valkryst.VRoguelike.view.GameView;
+import com.valkryst.VRoguelike.gui.view.GameView;
 import com.valkryst.VRoguelike.stat.BoundedStatistic;
 import com.valkryst.VRoguelike.world.Map;
 import com.valkryst.VTerminal.builder.LabelBuilder;
