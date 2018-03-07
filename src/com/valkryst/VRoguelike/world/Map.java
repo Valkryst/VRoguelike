@@ -20,8 +20,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Map extends Layer implements VJSONParser {
-    /** The tiles. */
-    @Getter private MapTile[][] tiles;
+    /** The mapTiles. */
+    @Getter private MapTile[][] mapTiles;
 
     /** The player entity. */
     @Getter private Player player;
@@ -58,11 +58,11 @@ public class Map extends Layer implements VJSONParser {
 
         this.messageBox = messageBox;
 
-        tiles = new MapTile[width][height];
+        mapTiles = new MapTile[width][height];
 
         for (int x = 0 ; x < width ; x++) {
             for (int y = 0 ; y < height ; y++) {
-                tiles[x][y] = new MapTile();
+                mapTiles[x][y] = new MapTile();
             }
         }
     }
@@ -131,11 +131,11 @@ public class Map extends Layer implements VJSONParser {
             return false;
         }
 
-        if (position.x >= tiles.length || position.y >= tiles[0].length) {
+        if (position.x >= mapTiles.length || position.y >= mapTiles[0].length) {
             return false;
         }
 
-        return tiles[position.x][position.y].isSolid() == false;
+        return mapTiles[position.x][position.y].isSolid() == false;
     }
 
     /**
@@ -174,12 +174,12 @@ public class Map extends Layer implements VJSONParser {
                 player = (Player) entity;
             } else {
                 this.entities.add(entity);
-            }
 
-            // Ensure player is drawn above everything else:
-            if (player != null) {
-                this.removeComponent(player.getLayer());
-                this.addComponent(player.getLayer());
+                // Ensure player is drawn above everything else:
+                if (player != null) {
+                    this.removeComponent(player.getLayer());
+                    this.addComponent(player.getLayer());
+                }
             }
         }
     }
@@ -202,7 +202,7 @@ public class Map extends Layer implements VJSONParser {
 
             // Set the Map MapTile below the entity to redraw:
             final Point position = entity.getPosition();
-            tiles[position.x][position.y].placeOnScreen(this, position.x, position.y);
+            mapTiles[position.x][position.y].placeOnScreen(this, position.x, position.y);
         }
 
         super.redrawFunction.run();
@@ -221,13 +221,13 @@ public class Map extends Layer implements VJSONParser {
         messageBox.appendText(message.getMessage());
     }
 
-    /** @return The width, in tiles, of the map. */
+    /** @return The width, in mapTiles, of the map. */
     public int getWidth() {
-        return tiles.length;
+        return mapTiles.length;
     }
 
-    /** @return The height, in tiles, of the map. */
+    /** @return The height, in mapTiles, of the map. */
     public int getHeight() {
-        return tiles[0].length;
+        return mapTiles[0].length;
     }
 }
