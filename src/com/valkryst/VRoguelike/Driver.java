@@ -34,7 +34,7 @@ public class Driver {
             screen.removeComponent(mainMenuView);
             screen.addComponent(gameView);
 
-            final MapTile[][] tiles = gameView.getMap().getTiles();
+            final MapTile[][] tiles = gameView.getMap().getMapTiles();
 
             for (int x = 0 ; x < tiles.length ; x++) {
                 for (int y = 0 ; y < tiles[x].length ; y++) {
@@ -85,6 +85,8 @@ public class Driver {
         mainMenuView.getButton_exit().setOnClickFunction(() -> System.exit(0));
 
         // Render loop:
+        screen.addCanvasToFrame();
+
         final Timer timer = new Timer(100, e -> {
             gameView.getMap().update();
             screen.draw();
