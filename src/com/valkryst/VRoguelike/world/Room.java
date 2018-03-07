@@ -42,7 +42,7 @@ public class Room implements VJSONParser {
      *          The map.
      */
     public void carve(final Map map) {
-        final MapTile[][] tiles = map.getTiles();
+        final MapTile[][] tiles = map.getMapTiles();
 
         for (int x = position.x ; x < position.x + dimensions.width ; x++) {
             for (int y = position.y ; y < position.y + dimensions.height ; y++) {
