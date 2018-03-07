@@ -1,8 +1,7 @@
 package com.valkryst.VRoguelike;
 
 import com.valkryst.VRoguelike.entity.Entity;
-import com.valkryst.VTerminal.AsciiCharacter;
-import com.valkryst.VTerminal.AsciiString;
+import com.valkryst.VTerminal.Tile;
 import lombok.Getter;
 import lombok.NonNull;
 
@@ -10,7 +9,7 @@ import java.awt.Color;
 
 public class Message {
     /** The message. */
-    @Getter private AsciiString message;
+    @Getter private Tile[] message;
 
     /** Constructs a new message. */
     public Message() {
@@ -29,8 +28,7 @@ public class Message {
 
 
     /**
-     * Prepares an AsciiString with the default message
-     * box colors.
+     * Prepares an array of Tiles with the default message box colors.
      *
      * @param length
      *           The length of the Asciistring.
@@ -38,11 +36,18 @@ public class Message {
      * @return
      *          The AsciiString.
      */
-    public static AsciiString prepareString(final int length) {
-        final AsciiString asciiString = new AsciiString(length);
-        asciiString.setBackgroundColor(new Color(0xFF8E999E, true));
-        asciiString.setForegroundColor(new Color(0xFF68D0FF, true));
-        return asciiString;
+    public static Tile[] prepareString(final int length) {
+        final Tile[] tiles = new Tile[length];
+        final Color backgroundColor = new Color(0xFF8E999E, true);
+        final Color foregroundColor = new Color(0xFF68D0FF, true);
+
+        for (int i = 0 ; i < tiles.length ; i++) {
+            tiles[i] = new Tile(' ');
+            tiles[i].setBackgroundColor(backgroundColor);
+            tiles[i].setForegroundColor(foregroundColor);
+        }
+
+        return tiles;
     }
 
     /**
@@ -55,11 +60,18 @@ public class Message {
      * @return
      *          The AsciiString.
      */
-    public static AsciiString prepareString(final @NonNull String text) {
-        final AsciiString asciiString = new AsciiString(text);
-        asciiString.setBackgroundColor(new Color(0xFF8E999E, true));
-        asciiString.setForegroundColor(new Color(0xFF68D0FF, true));
-        return asciiString;
+    public static Tile[] prepareString(final @NonNull String text) {
+        final Tile[] tiles = new Tile[text.length()];
+        final Color backgroundColor = new Color(0xFF8E999E, true);
+        final Color foregroundColor = new Color(0xFF68D0FF, true);
+
+        for (int x = 0 ; x < text.length() ; x++) {
+            tiles[x].setCharacter(text.charAt(x));
+            tiles[x].setBackgroundColor(backgroundColor);
+            tiles[x].setForegroundColor(foregroundColor);
+        }
+
+        return tiles;
     }
 
     /**
@@ -85,19 +97,15 @@ public class Message {
      * @return
      *          This.
      */
-    public Message append(final @NonNull AsciiString text) {
-        final AsciiString newMessage = prepareString(message.length() + text.length());
+    public Message append(final @NonNull Tile[] text) {
+        final Tile[] newMessage = new Tile[message.length + text.length];
 
-        final AsciiCharacter[] oldChars = message.getCharacters();
-        final AsciiCharacter[] textChars = text.getCharacters();
-        final AsciiCharacter[] newChars = newMessage.getCharacters();
-
-        for (int x = 0 ; x < message.length() ; x++) {
-            newChars[x].copy(oldChars[x]);
+        for (int x = 0 ; x < message.length ; x++) {
+            newMessage[x].copy(message[x]);
         }
 
-        for (int x = message.length() ; x < newMessage.length() ; x++) {
-            newChars[x].copy(textChars[x - message.length()]);
+        for (int x = message.length ; x < newMessage.length ; x++) {
+            newMessage[x].copy(text[x - message.length]);
         }
 
         message = newMessage;
@@ -121,8 +129,12 @@ public class Message {
         final String name = entity.getName();
         final Color color = entity.getSprite().getForegroundColor();
 
-        final AsciiString selfName = Message.prepareString(name);
-        selfName.setForegroundColor(color);
+        final Tile[] selfName = Message.prepareString(name);
+
+        for (final Tile tile : selfName) {
+            tile.setForegroundColor(color);
+        }
+
         append(selfName);
 
         return this;
