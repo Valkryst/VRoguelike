@@ -66,6 +66,7 @@ public class Message {
         final Color foregroundColor = new Color(0xFF68D0FF, true);
 
         for (int x = 0 ; x < text.length() ; x++) {
+            tiles[x] = new Tile(text.charAt(x));
             tiles[x].setCharacter(text.charAt(x));
             tiles[x].setBackgroundColor(backgroundColor);
             tiles[x].setForegroundColor(foregroundColor);
@@ -101,10 +102,12 @@ public class Message {
         final Tile[] newMessage = new Tile[message.length + text.length];
 
         for (int x = 0 ; x < message.length ; x++) {
+            newMessage[x] = new Tile(' ');
             newMessage[x].copy(message[x]);
         }
 
         for (int x = message.length ; x < newMessage.length ; x++) {
+            newMessage[x] = new Tile(' ');
             newMessage[x].copy(text[x - message.length]);
         }
 
