@@ -49,6 +49,10 @@ public class Entity {
         layer.getTiles().setPosition(builder.getPosition());
 
         setSprite(builder.getSprite());
+
+        if (name.isEmpty()) {
+            name = "Unknown";
+        }
     }
 
     /**
@@ -137,7 +141,7 @@ public class Entity {
 
         // Color name on the border
         final Color color = getSprite().getForegroundColor();
-        final Tile[] nameTiles = layer.getTiles().getRowSubset(0, 2, 2 + name.length());
+        final Tile[] nameTiles = layer.getTiles().getRowSubset(0, 2, name.length());
 
         for (final Tile tile : nameTiles) {
             tile.setForegroundColor(color);
