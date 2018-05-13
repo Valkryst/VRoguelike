@@ -1,4 +1,4 @@
-package com.valkryst.VRoguelike.view;
+package com.valkryst.VRoguelike.gui.view;
 
 import com.valkryst.VTerminal.Screen;
 import com.valkryst.VTerminal.builder.ButtonBuilder;
