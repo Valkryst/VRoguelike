@@ -7,7 +7,6 @@ import com.valkryst.VRoguelike.entity.builder.PlayerBuilder;
 import com.valkryst.VRoguelike.gui.controller.GameController;
 import com.valkryst.VRoguelike.item.builder.equipment.WeaponBuilder;
 import com.valkryst.VRoguelike.item.equipment.EquipmentSlot;
-import com.valkryst.VRoguelike.gui.view.GameView;
 import com.valkryst.VRoguelike.gui.view.MainMenuView;
 import com.valkryst.VRoguelike.world.MapTile;
 import com.valkryst.VTerminal.Screen;
