@@ -30,17 +30,8 @@ public class Driver {
         screen.addComponent(mainMenuView);
 
         mainMenuView.getButton_new().setOnClickFunction(() -> {
-            // Initialize map tiles:
             screen.removeComponent(mainMenuView);
             gameController.addViewToScreen(screen);
-
-            final MapTile[][] tiles = gameController.getView().getMap().getMapTiles();
-
-            for (int x = 0 ; x < tiles.length ; x++) {
-                for (int y = 0 ; y < tiles[x].length ; y++) {
-                    tiles[x][y].placeOnScreen(gameController.getView().getLayer(), x, y);
-                }
-            }
 
             // Initialize entities:
             final PlayerBuilder playerBuilder = new PlayerBuilder();
